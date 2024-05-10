@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +33,14 @@
 </style>
 </head>
 <body>
+	<%-- 사용자 정보가 있는 경우에만 출력 --%>
+   <%--  <c:if test="${not empty user}">
+        <h1>Welcome, ${user.user_name}!</h1>
+        <p>Your email address: ${user.user_email}</p>
+        <p>Your address: ${user.user_address}</p>
+        <!-- 기타 등등 필요한 정보를 출력하거나 활용 -->
+    </c:if> --%>
+    <!-- ---------------------------------- -->
 <%@include file="/WEB-INF/include/Header.jsp"%>
   <main>
 	<h2>강재영</h2>
