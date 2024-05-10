@@ -171,12 +171,8 @@ button {
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
-	<input type="hidden" name="nowpage" value="${nowpage}">
-	<input type="hidden" name="com_id" value="${com_id}">
-	<input type="hidden" name="nowpage" value="${user_id}">
-	<form action="/Resume">
 
-		<c:forEach var="detail" items="${detailList}">
+		<c:forEach var="posting" items="${detailList}" varStatus="status">
 			<div class="title">${posting.po_title}</div>
 			<div>&nbsp;</div>
 			<h3>채용정보</h3>
@@ -191,72 +187,21 @@ button {
 					<div>학력</div>
 					<div id="inside_title">${posting.po_grade}</div>
 					<div>스킬</div>
-				</div>
-				<div class="company">
-					<div class="sub_title1">기업 정보</div>
-					<div>&nbsp;</div>
-					<div>기업명</div>
-					<div id="inside_title">${company.com_name}</div>
-					<div>기업형태</div>
-					<div id="inside_title">${company.com_type}</div>
-					<div>마감기한</div>
-					<div id="inside_title">${posting.po_end_date}</div>
-					<div>회사주소</div>
-					<div id="inside_title">${company.com_address}</div>
+					<div id="inside_title">${posting.stack}</div>
+					<div>주소</div>
+					<div id="inside_title">${posting.com_address}</div>
 				</div>
 			</div>
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
+
 		</c:forEach>
 		
 		<div class="content">
-			<div>${map.posting_content}</div>
+			<div>${posting.po_content}</div>
 		</div>
 
-	</form>
-	<c:if test="${sessionScope.com_id != null || com_id != ''}">
-		<button id="goUpdate" onclick="goToUpdate()">지원하기</button>
-	</c:if>
 
-
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div class="sub_title">
-		<div class="td1">번호</div>
-		<div class="td2">제목</div>
-		<div class="td3">부서</div>
-		<div class="td4">마감기한</div>
-	</div>
-	<div class="content1">
-		<div class="td1">${co.row_number}</div>
-		<div class="td2">
-			<a href="/Company/PostingView?nowpage=${nowpage}">${co.posting_title}</a>
-		</div>
-		<div class="td3">${co.posting_hope_department}</div>
-		<div class="td4">${co.posting_enddate}</div>
-		<div class="td5">
-			<input type="submit" value="즉시지원">
-		</div>
-	</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<main></main>
-
-	<script>
-		function goToUpdate() {
-			location.href = '/Company/Posting/UpdateForm?Pno=';
-		}
-	</script>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
 	<%@include file="/WEB-INF/include/Footer.jsp"%>
+
 </body>
 </html>
 
