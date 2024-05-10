@@ -70,11 +70,11 @@
 												${posting.hope_department }
 											</span>
 											<span class ="pAddress">
-											  ${company.com_address }
+											  ${posting.com_address }
 											</span>
 										</div>
 										<div class ="pStackBox">
-											<span class ="tag tag-tack">${posting_stack.stack }</span>
+											<span class ="tag tag-tack">${posting.stack }</span>
 										</div>
 									</div>
 									<div class="listFoot">

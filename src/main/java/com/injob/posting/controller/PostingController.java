@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.injob.posting.domain.JoinVo;
 import com.injob.posting.domain.PostingVo;
 import com.injob.posting.mapper.PostingMapper;
 
@@ -19,8 +20,8 @@ public class PostingController {
 	
 	// http://localhost:9090
 	@RequestMapping("/PMain")
-	public  ModelAndView   pmain(PostingVo postingVo) {
-		List<PostingVo> postingList = postingMapper.getPostingList(postingVo);
+	public  ModelAndView   pmain(PostingVo postingVo, JoinVo joinVo) {
+		List<JoinVo> postingList = postingMapper.getPostingList();
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("postingList",postingList);
