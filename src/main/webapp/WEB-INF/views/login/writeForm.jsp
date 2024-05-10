@@ -205,7 +205,7 @@ color: white;
 	margin-top: 20px;
 	box-sizing: border-box;
 	display: block;
-	width: 296px;
+	width: 100%;
 	height: 48px;
 	line-height: 48px;
 	text-align: center;
@@ -225,19 +225,7 @@ color: white;
 	margin-top: 16px;
 	margin-bottom: 10px
 }
-.log-update{
- display: flex;
- font-size: 0.8rem;
- justify-content: space-between;
-}
-.log-update .left{
- color: #888;
- 
-}
-.log-update a{
-	text-decoration: none;
-	 color: inherit;
-}
+
 </style>
 </head>
 <body class="gradient-custom">
@@ -290,16 +278,6 @@ color: white;
 							<button class="submit" type="submit" class="btn btn-primary">기존 회원 로그인</button>
 						</form>
 						
-						<div class="log-update">
-							<div class="left">
-								<a class="dfd" href="/Loginform">아이디찾기 </a>
-					             <span class="separator">|</span>
-					            <a href = "#"> 비밀번호찾기</a>
-							</div>
-							<div class="right">
-								  <a href = "/signup">회원가입</a>
-							</div>
-						</div><!--<div class="log-update">  -->
 						
 						
 			            
