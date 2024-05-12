@@ -13,28 +13,23 @@ import com.injob.detail.mapper.DetailMapper;
 
 @Controller
 public class DetailController {
-	
+
 	@Autowired
 	DetailMapper detailMapper;
-	
+
 	@GetMapping("/Detail/Detail")
 	public ModelAndView getDetail(DetailVo detailVo, PostCompVo postCompVo) {
-		
+
 		List<PostCompVo> detailList = detailMapper.getDetailList();
-		
-		
-		System.out.println("~~~~~~~~~~~~~~~");
-		System.out.println("~~~~~~~~~~~~~~~");
-		System.out.println("~~~~~~~~~~~~~~~");
-		System.out.println("~~~~~~~~~~~~~~~");
+
 		// List<PostCompVo> postCompList = detailMapper.getPostCompList(postCompVo);
 		for (PostCompVo detailVo2 : detailList) {
-			
+
 			System.out.println(detailVo2.getPo_content());
 			System.out.println(detailVo2.getPo_content());
 			System.out.println(detailVo2.getPo_content());
 		}
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("detailList", detailList);
 		mv.setViewName("/detail/detail");

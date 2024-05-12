@@ -40,24 +40,65 @@ body {
 	text-align: center;
 }
 
-form {
-	
+.grid-container {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid black;
 }
 
-.ac {
+.grid-item {
+  text-align: left;
+  padding: 20px;
+  font-size: 20px;
+  border: 1px solid black;
+}
+
+.item1 {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  text-align: left;
+}
+
+.item2 {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  text-align: left;
+  font-size: 15px;
+	font-weight: bold;
+}
+
+.item3 {
+	font-size: 15px;
+}
+
+.item4 {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+
+.container {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
 	border: 2px solid black;
 	padding: 30px;
 }
 
-.person {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr;
-	border: 1px solid black;
-	padding: 30px;
+.section {
+    border: 1px solid #ccc;
+    padding: 20px;
 }
+
+.work-condition {
+    grid-column: span 1;
+}
+
+.company-info {
+    grid-column: span 1;
+}
+
 
 .sub_title1 {
 	font-weight: bold;
@@ -105,7 +146,7 @@ main {
 	font-weight: border;
 	text-align: center;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 2fr 2fr 1fr;
 	font-size: 20px;
 	font-weight: border;
 	padding: 10px;
@@ -118,86 +159,50 @@ main {
 	50px;
 }
 
-.td2 {
-	width: 650px;
-	margin-right: 50px;
-}
-
-.td3 {
-	width: 150px;
-	padding-right: 100px;
-}
-
-.td4 {
-	margin-right: 50px;
-	padding-right: 50px;
-	width: 200px;
-}
-
-}
-button {
-	margin-right: 50px;
-}
-
-.content1 {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	border: 1px solid #3f98f7;
-	padding: 10px;
-	border-radius: 5px;
-	margin: 10px; . td1 { width : 50px;
-	border-right: 1px solid rgba(63, 98, 247, 0.5);
-}
-
-.td2 {
-	width: 650px;
-	border-right: 1px solid rgba(63, 98, 247, 0.5);
-}
-
-.td3 {
-	width: 150px;
-	border-right: 1px solid rgba(63, 98, 247, 0.5);
-}
-
-.td4 {
-	width: 200px
-}
-
-.td5 {
-	width: 150px;
-}
-}
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 
 		<c:forEach var="posting" items="${detailList}" varStatus="status">
-			<div class="title">${posting.po_title}</div>
 			<div>&nbsp;</div>
 			<h3>채용정보</h3>
-
 			<div>&nbsp;</div>
-			<div class="ac">
-				<div class="apply">
-					<div class="sub_title1">지원자격</div>
+			
+			<div class="grid-container">
+			  <div class="grid-item item1">
+				  <span style="font-size: 20px;">${posting.com_name}</span>
+				  <br>
+				  <span style="font-weight:bold; font-size: 25px;">${posting.po_title}</span>
+			  </div>
+			  <div class="grid-item item2">기업정보</div>
+			  <div class="grid-item item3"><div class="sub_title1">지원자격</div>
 					<div>&nbsp;</div>
-					<div>경력</div>
-					<div id="inside_title">${posting.career}</div>
-					<div>학력</div>
-					<div id="inside_title">${posting.po_grade}</div>
-					<div>스킬</div>
-					<div id="inside_title">${posting.stack}</div>
-					<div>주소</div>
-					<div id="inside_title">${posting.com_address}</div>
-				</div>
+					<span>경력</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.career}</span>
+					<br><br>
+					<span>학력</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.po_grade}</span>
+					<br><br>
+					<span>스킬</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.stack}</span>
+					<br><br>
+					<span>주소</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.com_address}</span>
+				</div>  
+			  <div class="grid-item item4">근무조건</div>
 			</div>
-
+			
+			
 		</c:forEach>
 		
-		<div class="content">
-			<div>${posting.po_content}</div>
-		</div>
+<script>
+
+</script>
 
 
 	<%@include file="/WEB-INF/include/Footer.jsp"%>

@@ -3,18 +3,19 @@
 <mapper namespace="com.injob.detail.mapper.DetailMapper">
 
 <resultMap id="getPostComp" type="com.injob.detail.domain.PostCompVo">
-    <result property="com_id"        column="COM_ID"   />
-    <result property="po_id"        column="PO_ID"   />
-    <result property="po_grade"    column="PO_GRADE"   />
+    <result property="com_id"           column="COM_ID"   />
+    <result property="po_id"            column="PO_ID"   />
+    <result property="po_grade"         column="PO_GRADE"   />
     <result property="hope_department"  column="HOPE_DEPARTMENT" />
-    <result property="po_start_date"     column="PO_START_DATE"   />
-    <result property="po_end_date"       column="PO_END_DATE" />
-    <result property="po_profile"     column="PO_PROFILE"    />
-    <result property="po_title"      column="PO_TITLE"      />
-    <result property="po_content"   column="PO_CONTENT"  />
-    <result property="career"   column="CAREER"  />
-    <result property="stack"   column="STACK"  />
-    <result property="com_address"   column="COM_ADDRESS"  />
+    <result property="po_start_date"    column="PO_START_DATE"   />
+    <result property="po_end_date"      column="PO_END_DATE" />
+    <result property="po_profile"       column="PO_PROFILE"    />
+    <result property="po_title"         column="PO_TITLE"      />
+    <result property="po_content"       column="PO_CONTENT"  />
+    <result property="career"           column="CAREER"  />
+    <result property="stack"            column="STACK"  />
+    <result property="com_address"      column="COM_ADDRESS"  />
+    <result property="com_name"         column="COM_NAME"  />
     
 </resultMap>
 
@@ -33,10 +34,11 @@
 			,	P.CAREER AS CAREER
 			,	PS.STACK AS STACK
 			,	C.COM_ADDRESS AS COM_ADDRESS
+			, C.COM_NAME AS COM_NAME
 
 		FROM POSTING P
-			JOIN POSTING_STACK PS ON PS.PO_ID = P.PO_ID
-			JOIN COMPANY C ON P.COM_ID = C.COM_ID
+			JOIN POSTING_STACK PS   ON    PS.PO_ID = P.PO_ID
+			JOIN COMPANY C          ON    P.COM_ID = C.COM_ID
 	</select>
 
 

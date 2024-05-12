@@ -21,5 +21,6 @@ public class PostCompVo {
 	private String career;
 	private String stack;
 	private String com_address;
+	private String com_name;
 	
 }
