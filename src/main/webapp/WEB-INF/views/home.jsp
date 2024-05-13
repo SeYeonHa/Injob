@@ -31,19 +31,35 @@
 </style>
 </head>
 <body>
-   <%@include file="/WEB-INF/include/Header.jsp"%>
-   <main>
-      <div class="inner">
+
+<%@include file="/WEB-INF/include/Header.jsp"%>
+  <main>
+	<h2>Home</h2>
+	<div><a href="/Menus/WriteForm">새 메뉴 추가</a></div>
+	<div><a href="/Menus/WriteForm2">새 메뉴 추가2</a></div>
+	<div><a href="/Menus/List">메뉴 목록</a></div>	
+	<div>&nbsp;</div>
+	<div><a href="/Users/List">사용자 목록</a></div>
+	<div><a href="/Users/WriteForm">사용자 추가</a></div>
+	<div>&nbsp;</div>	
+	<div><a href="/Board/List?menu_id=MENU01">게시물 목록</a></div>
+	<div><a href="/Board/WriteForm?menu_id=MENU01">게시물 등록</a></div>
+		<div>&nbsp;</div>
+	<div><a href="/Mypage/Resume?user_id=1">마이페이지 이력서 메인</a></div>
+	<div><a href="/Mypage/Apply?user_id=1&po_id=1101">마이페이지 이력서 지원하기</a></div>
+    
+    <div class="inner">
          <h2>Home</h2>
          <div>
             <a href="/Detail/Detail?com_id=2">새 메뉴 추가</a>
          </div>
       </div>
-
-   </main>
-   <%@include file="/WEB-INF/include/Footer.jsp"%>
+    
+  </main>	
+  <%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
 </html>
+
 
 
 
