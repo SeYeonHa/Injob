@@ -38,9 +38,7 @@
 			<div>
 				<a href="/Posting/PMain">메인 공고</a>
 			</div>
-			<div>
-				<a href="/Menus/WriteForm2">새 메뉴 추가2</a>
-			</div>
+			
 			<div>
 				<a href="/Menus/List">메뉴 목록</a>
 			</div>

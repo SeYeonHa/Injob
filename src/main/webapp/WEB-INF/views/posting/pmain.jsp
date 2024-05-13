@@ -109,7 +109,7 @@ height: 150px;
 			</div>
 		
   </main>
-			<div id="timer">00:00:00</div>
+			
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -137,39 +137,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	   
 </script>
 
-<script>
-        // 시간 설정
-        // JS에서 월은 -1된 값을 넣어야함, ex) 2024년 5월 14일 2시 45분은 아래와 같음
-        const endTime = new Date(2024, 4, 14, 14, 45, 0); 
-
-        function updateTimer() {
-            const now = new Date(); // 현재 시간
-            const timeDiff = endTime - now; // 남은 시간
-
-            // 남은 시간 변환
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-            // 남은 시간 표시
-            document.getElementById('timer').textContent =
-              `${days}일 ` +
-              `${hours < 10 ? '0' + hours : hours}:` +
-              `${minutes < 10 ? '0' + minutes : minutes}:` +
-              `${seconds < 10 ? '0' + seconds : seconds}`;
-
-            // 타이머 종료 조건
-            if (timeDiff < 0) {
-                clearInterval(timerInterval);
-                document.getElementById('timer').textContent = "00일 00:00:00";
-                alert('마감이요~');
-            }
-        }
-
-        // 1초마다 업데이트
-        let timerInterval = setInterval(updateTimer, 1000);
-    </script>
 
 
 
