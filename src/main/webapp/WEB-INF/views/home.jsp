@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@   page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,21 +17,22 @@
    rel="stylesheet">
 
 <style>
-* {
-   font-family: "Nanum Gothic", sans-serif;
-   font-weight: 400;
-   font-style: normal;
+*{
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .nanum-gothic-extrabold {
-   font-family: "Nanum Gothic", sans-serif;
-   font-weight: 800;
-   font-style: normal;
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 800;
+  font-style: normal;
 }
 </style>
 </head>
 <body>
-	<%@include file="/WEB-INF/include/Header.jsp"%>
+	
+<%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
 		<div class="inner">
 			<h2>Home</h2>
@@ -57,6 +58,14 @@
 				<a href="/Board/WriteForm?menu_id=MENU01">게시물 등록</a>
 			</div>
 		</div>
+    
+    <div class="inner">
+         <h2>Home</h2>
+         <div>
+            <a href="/Detail/Detail?com_id=2">새 메뉴 추가</a>
+         </div>
+      </div>
+    
 	</main>
 	<%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
