@@ -36,8 +36,8 @@ where
 SELECT
     '강재영',
     #{user_passwd},
-    'wodud6967@naver.com',
-    #{user_address},
+    #{user_email},
+    '부산',
     '010-9498-9592',
     NVL(MAX(USER_ID), 0) + 1,  
     '941224-1121684',

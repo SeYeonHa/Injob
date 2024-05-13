@@ -248,7 +248,7 @@ color: white;
 					<div class="etcor"></div>
 
 					<div class="mb-2">
-						<form action="/login" method="POST">
+						<form action="/write" method="POST">
 							<div class="mb-3">
 								<label class="form-label">Email address</label> 
 								<input type="email" class="form-control" name="user_email">
@@ -257,23 +257,7 @@ color: white;
 								<label class="form-label ">Password</label> <input
 									type="password" class="form-control" name="user_passwd">
 							</div>
-							<div class="mb-3">
-								<label class="form-label ">이름</label> <input
-									type="text" class="form-control" name="user_name">
-							</div>
-							<div class="mb-3">
-								<label class="form-label ">주민등록번호</label> <input
-									type="text" class="form-control" name="user_num">
-							</div>
-							<div class="mb-3">
-								<label class="form-label ">전화번호</label> <input
-									type="text" class="form-control" name="user_phone">
-							</div>
-							<div class ="address"> 
-							  <input type="text" name="user_address" placeholder="상세주소">
-							  <input type="text" name="user_zipcode" placeholder="우편번호" readonly="readonly"/>
-                    		  <input type="button"  onclick="daumPost()" value="우편번호 찾기" />
-                            </div> 
+						
 							
 							<button class="submit" type="submit" class="btn btn-primary">기존 회원 로그인</button>
 						</form>

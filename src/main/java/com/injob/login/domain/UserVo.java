@@ -27,7 +27,7 @@ public class UserVo {
 
 	
 	public UserVo(String user_name, String user_passwd, String user_email, String user_address, String user_phone,
-			String user_social_num, String indate, String user_gender) {
+			String user_social_num, String indate, String user_gender, String role) {
 		
 		this.user_name = user_name;
 		this.user_passwd = user_passwd;
@@ -37,6 +37,7 @@ public class UserVo {
 		this.user_social_num = user_social_num;
 		this.indate = indate;
 		this.user_gender = user_gender;
+		this.role = role;
 	}
 	
 	
