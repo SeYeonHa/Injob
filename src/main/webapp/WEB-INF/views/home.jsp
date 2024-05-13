@@ -44,6 +44,9 @@
 	<div>&nbsp;</div>	
 	<div><a href="/Board/List?menu_id=MENU01">게시물 목록</a></div>
 	<div><a href="/Board/WriteForm?menu_id=MENU01">게시물 등록</a></div>
+		<div>&nbsp;</div>
+	<div><a href="/Mypage/Resume?user_id=1">마이페이지 이력서 메인</a></div>
+	<div><a href="/Mypage/Apply?user_id=1&po_id=1101">마이페이지 이력서 지원하기</a></div>
   </main>	
   <%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
