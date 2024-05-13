@@ -19,6 +19,64 @@
 	font-weight: 400;
 	font-style: normal;
 }
+button, input, select, textarea{
+	border-radius: 0;
+    border: none;
+    background: 0 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+body, html{
+	width: 100%;
+	height: 100%
+}
+body{
+background: #fff;
+
+}
+.container{
+	position: relative;
+	height: 100%;
+	
+}
+.inner{
+	width: 500px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	height: 100%;
+}
+ .logo {
+            text-align: center; /* 로고 이미지를 가운데 정렬 */
+          
+            
+        }
+
+        .logo a {
+    display: block;
+    width: 120px;
+    height: 80px; /* a 태그의 높이에 맞게 조절 */
+    margin: 0 auto; /* 수평 가운데 정렬 */
+    text-align: center; /* 로고 이미지를 수평 가운데 정렬 */
+    position: relative;
+}
+
+.logo img {
+    max-width: 100%; /* 이미지 최대 너비는 부모 요소에 맞게 설정 */
+   
+    width: auto; /* 이미지 너비 자동으로 조절 */
+    height: auto; /* 이미지 높이 자동으로 조절 */
+    display: inline-block; /* 이미지를 블록 요소가 아닌 인라인 블록 요소로 변경 */
+    vertical-align: middle; /* 이미지를 수직 가운데 정렬 */
+    position: absolute;
+    top: -18px;
+    left: 0;
+}
 
 .nanum-gothic-extrabold {
 	font-family: "Nanum Gothic", sans-serif;
@@ -84,75 +142,38 @@ ul li {
 	letter-spacing: 0;
 	line-height: 24px;
 }
+.form_list{
+	margin-top: 10px;
+	position: relative;
+	margin-bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid #c6c6c6;
 
-.section_kakao .btn_signup_kakao {
-	box-sizing: border-box;
-	display: block;
-	width: 296px;
-	height: 48px;
-	line-height: 48px;
-	text-align: center;
-	text-decoration: none;
-	cursor: pointer;
-	border: none;
-	border-radius: 8px;
-	background: #FEE500;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	word-wrap: normal;
-	font-size: 16px;
-	font-weight: bold;
-	color: #191919;
-	position: relative;
-	margin-top: 16px;
 }
-.section_naver .btn_signup_naver {
-	box-sizing: border-box;
-	display: block;
-	width: 296px;
-	height: 48px;
-	line-height: 48px;
-	text-align: center;
-	text-decoration: none;
-	cursor: pointer;
+.form_item{
+	display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 50px;
+    padding: 0 10px 0 45px;
+    border-bottom: 1px solid #dfdfdf;
+}
+.form_list .form_item:last-child{
 	border: none;
-	border-radius: 8px;
-	background: #02c659;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	word-wrap: normal;
+}
+.form_item input{
+  	flex: 1 1 auto;
+	width: 100%;
+	box-sizing:  border-box;
 	font-size: 16px;
-	font-weight: bold;
-	color: #191919;
-	position: relative;
-	margin-top: 16px;
+	line-height: 22px;
+	color: #222;
 }
 
-.section_google .btn_signup_google {
-	margin-top: 20px;
-	box-sizing: border-box;
-	display: block;
-	width: 296px;
-	height: 48px;
-	line-height: 48px;
-	text-align: center;
-	text-decoration: none;
-	cursor: pointer;
-	border: none;
-	border-radius: 8px;
-	background: #e8e8e8;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	word-wrap: normal;
-	font-size: 16px;
-	font-weight: bold;
-	color: #f6f7f9;
-	position: relative;
-	margin-top: 16px;
-}
+
+
 
 .etcor {
 	height: 1px;
@@ -225,13 +246,78 @@ color: white;
 	margin-top: 16px;
 	margin-bottom: 10px
 }
+.address input{
+	padding: .375rem .75rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da
+}
+.address input[type="button"] {
+    width: 120px;
+}
 
+.address input[type="text"]#address02 {
+    width: 100px;
+}
+
+.address input[type="text"]#fullAddr,
+.address input[type="text"]#address_detail {
+    width: 100%;
+}
+.failure-message{
+	display: block;
+	color: red;
+
+}
+.failure-message.hide{
+	font-size: 0
+}
+/* SECTION - BIRTH */
+#info_birth {
+  display: flex;
+}
+
+#info_birth select {
+ 
+  text-align: left;
+}
+
+#info_birth select:first-child {
+  margin-left : 0px;
+}
+#info_birth select::-webkit-scrollbar {
+  width: 10px;
+}
+
+#info_birth select::-webkit-scrollbar-thumb {
+  background-color: #b6b6b6;
+  border-radius: 3px;
+}
+
+.#info_birth select::-webkit-scrollbar-track {
+  background-color: #ebe9e9;
+  border-radius: 6px;
+}
+select:not(#birth-year){
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 10px;
+}
 </style>
 </head>
-<body class="gradient-custom">
-	<section class="d-flex vh-100">
-		<div
-			class="container-fluid row justify-content-center align-content-center">
+<body class="container">
+	<section class="inner">
+		<h1 class ="logo">
+			<a href="/">
+				<img src ="img/logo.png">
+			</a>
+		</h1>
+		<div class="content">
 			<div class="card bg-white" style="border-radius: 1rem;">
 				<section class="login-tab">
 					<ul id="devMemTab">
@@ -242,24 +328,88 @@ color: white;
 					</ul>
 				</section>
 				<div class="card-body p-5">
-				
-					
 
 					<div class="etcor"></div>
 
 					<div class="mb-2">
-						<form action="/write" method="POST">
-							<div class="mb-3">
-								<label class="form-label">Email address</label> 
-								<input type="email" class="form-control" name="user_email">
+						<form id="registerForm" action="/write" method="POST">
+							<div class="form_list">
+								<div class="form_item" >
+									<input class="input" type="email"  name="user_email" 
+									       placeholder="이메일"  autocomplete="off">
+									       
+								</div>
+								<div class="form_item" >
+									<input type="password" class="input" name="user_passwd" 
+									       placeholder="비밀번호"> 
+									       
+								</div>
+								<div class="form_item" >
+									<input class="password" type="email"  id="user_passwd_detail"
+									       placeholder="비밀번호 확인">
+								</div>
+									
 							</div>
-							<div class="mb-3">
-								<label class="form-label ">Password</label> <input
-									type="password" class="form-control" name="user_passwd">
-							</div>
-						
+							<div class="failure-message hide" id="emailMsg" style="">
+							이메일: 이메일 주소가 정확한지 확인해 주세요.</div>
 							
-							<button class="submit" type="submit" class="btn btn-primary">기존 회원 로그인</button>
+							<div class="failure-message hide" id="pswd1Msg" style="">
+							비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.
+							</div>
+							<div class="failure-message hide" id="pswd2Msg" style="">
+							두 개의 비밀번호가 서로 다릅니다 확인해 주세요.
+							</div>
+							
+							
+							<div class="form_list">
+								<div class="form_item" >
+									<input class="input" type="text"  name="user_name" 
+									       placeholder="이름">
+									       
+								</div>
+								<div class="form_item" id="info_birth">
+								  <select class="box" id="birth-year">
+								    <option disabled selected>출생 연도</option>
+								  </select>
+								  
+								  <select class="box" id="birth-month">
+								    <option disabled selected>월</option>
+								  </select>
+								  <select class="box" id="birth-day">
+								    <option disabled selected>일</option>
+								  </select>
+								</div>
+								<input type="hidden" name="user_social_num" id="user_social_num" value="">
+								<div class="form_item" >
+									<input class="input" type="text"  name="user_phone"
+									       placeholder="전화 번호">
+								</div>
+									
+							</div>
+							<div class="failure-message hide" id="nameMsg" style="">
+							이름은 한글만 입력가능합니다.</div>
+							
+							<div class="failure-message hide" id="birthdayMsg" style="">
+							● 생년월일: 필수 정보입니다.
+							</div>
+							<div class="failure-message hide" id="phoneMsg" style="">
+							● 휴대전화번호: 필수 정보입니다.
+							</div>
+								
+							
+							
+							
+							<div class ="address"> 
+							 
+							  
+							  <input type="text" id="address02"  placeholder="우편번호" readonly="readonly"/>
+							  <input type="button"  onclick="daumPost()" value="우편번호 찾기" />
+							  <input type="text" id="fullAddr"  placeholder="주소" readonly="readonly">
+							  <input type="text" id="address_detail" placeholder="상세주소" />
+                    		  <input type="hidden" name="user_address" id="user_address" value="">
+                            </div> 
+							
+							<button class="submit" type="button" class="btn btn-primary" id ="checkBtn">인증 요청</button>
 						</form>
 						
 						
@@ -272,17 +422,8 @@ color: white;
 			</div>
 		</div>
 	</section>
-	<script>
 	
-	         const logBtnEl = document.querySelector('#loginForm');
-	        logBtnEl.addEventListener('click', () => {
-	        	console.log("~~~~~~~~");
-	        	console.log("~~~~~~~~");
-	        	console.log("~~~~~~~~");
-	        	window.location.href = '/signup';
-	        })
-	</script>
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function daumPost() {
         new daum.Postcode({
@@ -316,15 +457,289 @@ color: white;
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 입력
-                document.getElementsByName('user_zipcode')[0].value = data.zonecode; // 우편번호
-                document.getElementsByName('user_address')[0].value = fullAddr; // 주소
+               
+                
+                document.querySelector('#fullAddr').value = fullAddr; // 주소
+                document.querySelector('#address02').value = data.zonecode; //  우편번호
+                //document.getElementsByName('user_address')[0].value = fullAddr; // 주소
+               // console.log(document.getElementsByName('user_zipcode')[0]);
+               // console.log(document.getElementsByName('user_zipcode')[0].value);
+                //console.log(document.querySelector('#address02').value);
 
                 // 커서를 상세주소 필드로 이동
                 document.getElementsByName('user_address')[0].focus();
             }
         }).open();
     }
+    
+    /*-----------------------focus----------------------------  */
+    document.addEventListener('DOMContentLoaded', function(){
+    	
+    	   // 이름 입력 필드 선택
+        let userEmailEl = document.querySelector('[name="user_email"]');
+        let emailFormItem = userEmailEl.closest('.form_item');
+        function checkEmail(){
+    		let email = userEmailEl.value;
+    		let exptext = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    		 if (!exptext.test(email)) {
+    	            // 이메일 형식이 올바르지 않을 경우
+    	            emailMsg.classList.remove('hide');
+    	            console.log("하이드제어")
+    	            // 이메일 입력 필드에 포커스를 맞춤
+    	            emailFormItem.style.border = '1px solid red';
+    	          
+    	            return false;
+    	        }else{
+    	        	 emailMsg.classList.add('hide'); // 메시지 숨김
+    	        	 emailFormItem.style.border = '';
+    	        	 
+    	        	
+    	             
+    	        	 fetch('/login/contrast', {
+    	                 method: 'POST',
+    	                 headers: {
+    	                     'Content-Type': 'application/json'
+    	                 },
+    	                 body: JSON.stringify({ email: email }) // 이메일 정보를 JSON 형식으로 전송
+    	             })
+    	            .then(response => {
+    	                if (response.ok) {
+    	                	console.log("응답잘옴");
+    	                    // 서버에서 성공적인 응답을 받았을 때
+    	                    return response; // JSON 형식으로 데이터를 읽음
+    	                } else {
+    	                    // 서버 오류 응답 처리
+    	                    throw new Error('서버 오류: ' + response.statusText);
+    	                }
+    	            })
+    	            .then(data => {
+    	                // 서버로부터 받은 JSON 데이터 처리
+    	                if (data.exists) {
+    	                    console.log('사용자가 이미 존재합니다.');
+    	                    // 기존 사용자가 존재하는 경우에 대한 처리
+    	                } else {
+    	                    console.log('사용자를 찾을 수 없습니다.');
+    	                    // 새로운 사용자를 만드는 경우에 대한 처리
+    	                }
+    	            })
+    	            .catch(error => {
+    	                // 서버로부터의 응답 오류를 처리
+    	                console.error('서버 응답 오류:', error);
+    	            });
+    	        	 
+    	             return true;
+    	        }
+    		
+    	}//checkIt
+        
+    	userEmailEl.addEventListener('blur', checkEmail);
+    	   
+    	
+    	
+    	function checkPassword1(){
+    		// 1. 비밀번호 입력창 정보 가져오기
+        	let PasswordEl = document.querySelector('[name="user_passwd"]'); 
+        	let password1 =PasswordEl.value;
+        	// 4. 실패 메시지 정보 가져오기 (8글자 이상, 영문, 숫자, 특수문자 미사용)
+        	let elStrongPasswordMessage = document.querySelector('#pswd1Msg'); 
+        	
+        	  if (!strongPassword(password1)) {
+  	            // 강력한 비밀번호가 아닐 경우
+  	            elStrongPasswordMessage.classList.remove('hide');
+  	            return false;
+  	        } else {
+  	            elStrongPasswordMessage.classList.add('hide'); // 메시지 숨김
+  	        }
+
+  	        return true;
+    	}
+    	
+    	function checkPassword2(){
+    		// 1. 비밀번호 입력창 정보 가져오기
+        	let PasswordEl = document.querySelector('[name="user_passwd"]'); 
+        	// 2. 비밀번호 확인 입력창 정보 가져오기
+        	let PasswordRetypeEl = document.querySelector('#user_passwd_detail'); 
+        	// 3. 실패 메시지 정보 가져오기 (비밀번호 불일치)
+        	let elMismatchMessage = document.querySelector('#pswd2Msg');
+        
+        	
+    		let password1 =PasswordEl.value;
+    		let password2 =PasswordRetypeEl.value;
+    		
+    		 if (!isMatch(password1, password2)) {
+    	            // 비밀번호가 일치하지 않을 경우
+    	            elMismatchMessage.classList.remove('hide');
+    	            return false;
+    	        } else {
+    	            elMismatchMessage.classList.add('hide'); // 메시지 숨김
+    	        }
+
+    	       
+    	        return true;
+    	}//checkPassword
+        
+    	// 비밀번호 입력창 blur 이벤트 리스너 등록
+    	 let passwordEl = document.querySelector('[name="user_passwd"]');
+        passwordEl.addEventListener('blur', checkPassword1);
+
+        // 비밀번호 확인 입력창 blur 이벤트 리스너 등록
+        let passwordRetypeEl = document.querySelector('#user_passwd_detail');
+        passwordRetypeEl.addEventListener('blur', checkPassword2);
+        
+        function strongPassword (str) {
+  		  return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(str);
+  		}
+  	
+		function isMatch (password1, password2) {
+		  return password1 === password2;
+		}
+		 let userNameEl = document.querySelector('[name="user_name"]');
+		    let nameFormItem = userNameEl.closest('.form_item');
+		    
+		    function checkName(){
+		        let name = userNameEl.value;
+		        let regex = /^[가-힣]+$/; // 한글만 허용하는 정규표현식
+		        
+		        if (!regex.test(name)) {
+		            // 이름이 한글이 아닐 경우
+		            alert("이름은 한글만 입력 가능합니다.");
+		            nameFormItem.style.border = '1px solid red';
+		            return false;
+		        } else {
+		            nameFormItem.style.border = '';
+		            return true;
+		        }
+		    }
+		    
+		    userNameEl.addEventListener('blur', checkName);
+		    
+		    /* 생년월일  */
+			/* 생년월일  */
+			/* 생년월일  */
+			
+		    const birthYearEl = document.querySelector('#birth-year')
+		 // option 목록 생성 여부 확인
+		 isYearOptionExisted = false;
+		 birthYearEl.addEventListener('focus', function () {
+		   // year 목록 생성되지 않았을 때 (최초 클릭 시)
+		   if(!isYearOptionExisted) {
+		     isYearOptionExisted = true
+		     for(var i = 1940; i <= 2022; i++) {
+		       // option element 생성
+		       const YearOption = document.createElement('option')
+		       YearOption.setAttribute('value', i)
+		       YearOption.innerText = i + '년'
+		       // birthYearEl의 자식 요소로 추가
+		       this.appendChild(YearOption);
+		     }
+		   }
+		 });
+		 
+		 const birthMonthEl = document.querySelector('#birth-month');
+
+		// 월 옵션 목록 생성 여부 확인
+		let isMonthOptionExisted = false;
+
+		// 월 선택 요소에 포커스가 가면 이벤트 리스너 등록
+		birthMonthEl.addEventListener('focus', function () {
+		    // 월 옵션 목록이 생성되지 않았을 때 (최초 클릭 시)
+		    if (!isMonthOptionExisted) {
+		        isMonthOptionExisted = true;
+		        // 1부터 12까지의 월에 대한 옵션 생성
+		        for (let i = 1; i <= 12; i++) {
+		            // option element 생성
+		            const monthOption = document.createElement('option');
+		            monthOption.setAttribute('value', i);
+		            monthOption.innerText = i + '월';
+		            // birthMonthEl의 자식 요소로 추가
+		            this.appendChild(monthOption);
+		        }
+		    }
+		});
+
+		// 일 선택 요소 가져오기
+		const birthDayEl = document.querySelector('#birth-day');
+
+		// 일 옵션 목록 생성 여부 확인
+		let isDayOptionExisted = false;
+
+		// 일 선택 요소에 포커스가 가면 이벤트 리스너 등록
+		birthDayEl.addEventListener('focus', function () {
+		    // 일 옵션 목록이 생성되지 않았을 때 (최초 클릭 시)
+		    if (!isDayOptionExisted) {
+		        isDayOptionExisted = true;
+		        // 1부터 31까지의 일에 대한 옵션 생성
+		        for (let i = 1; i <= 31; i++) {
+		            // option element 생성
+		            const dayOption = document.createElement('option');
+		            dayOption.setAttribute('value', i);
+		            dayOption.innerText = i + '일';
+		            // birthDayEl의 자식 요소로 추가
+		            this.appendChild(dayOption);
+		        }
+		    }
+		});
+		/* 생년월일  */
+		/* 생년월일  */
+		/* 생년월일  */
+         function combineDate(formData) {
+        const birthYear = document.querySelector('#birth-year').value;
+        const birthMonth = document.querySelector('#birth-month').value;
+        const birthDay = document.querySelector('#birth-day').value;
+        
+        // 연도, 월, 일을 합쳐서 날짜 형식으로 변환
+        const birthDate = birthYear + '-' + birthMonth + '-' + birthDay;
+
+        // 숨은 input 태그에 설정
+        document.querySelector('#user_social_num').value = birthDate;
+        
+        
+   	 }
+         /* 생년월일  */
+ 		/* 생년월일  */
+ 		/* 생년월일  */
+ 		
+ 		/* 주소  */
+         /* 주소  */
+         /* 주소  */
+ 		
+ 		function combineAddress(formData) {
+    const address = document.getElementById('fullAddr').value;
+    const addressDetail = document.getElementById('address_detail').value;
+    
+    // 주소와 상세 주소를 결합
+    const combinedAddress = address + ' ' + addressDetail;
+
+    // hidden input의 value로 설정
+    document.getElementById('user_address').value = combinedAddress;
+    
+    
+}
+         
+         /* 주소  */
+         /* 주소  */
+         /* 주소  */
+         document.querySelector('#checkBtn').addEventListener('click', function(){
+        	  combineDate();
+          	  combineAddress();
+         	const formData = new FormData(document.getElementById('registerForm'));
+         	
+         	  
+         	console.log(formData);
+         	console.dir(formData);
+         	
+         	 for (const pair of formData.entries()) {
+                 console.log(pair[0] + ', ' + pair[1]);
+             }
+         });
+ 		
+    });/*  document.addEventListener('DOMContentLoaded', */
+    
+    
+    
 </script>
+
 </body>
 </html>
 

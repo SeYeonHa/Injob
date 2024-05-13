@@ -45,7 +45,8 @@ public class WebSecurityConfig {
 		)  // csrf 해킹방지하는 기능 비활성 -> 실무는 활성화 필요
 		 // authorizeHttpRequests() 로 변경됨: security 6.1.0  
 		.authorizeHttpRequests((auth) -> {auth
-						.requestMatchers("/login", "/signup", "/user","/write").permitAll()
+						.requestMatchers("/login", "/signup", "/user","/write" ,"/login/contrast").permitAll()
+						
 						.anyRequest().authenticated(); // 나머지 요청은 인증 필요
 			System.out.println("222222222222");
 			System.out.println("222222222222");
@@ -58,7 +59,7 @@ public class WebSecurityConfig {
 						formLogin
 						.loginPage("/login")	   // 로그인 페이지 경로	
 						.failureHandler(customFailureHandler)
-						.defaultSuccessUrl("/");    // 로그인 성공시 경로
+						.defaultSuccessUrl("/", false);    // 로그인 성공시 경로
 		}) // 로그인처리
 		.logout((logout) ->{
 				logout.logoutSuccessUrl("/login")       // 로그아웃성공시 경로

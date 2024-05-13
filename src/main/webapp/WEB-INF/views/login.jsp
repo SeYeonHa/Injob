@@ -309,13 +309,13 @@ color: white;
 	</section>
 	<script>
 	
-	         const logBtnEl = document.querySelector('#loginForm');
+	      /*    const logBtnEl = document.querySelector('#loginForm');
 	        logBtnEl.addEventListener('click', () => {
 	        	console.log("~~~~~~~~");
 	        	console.log("~~~~~~~~");
 	        	console.log("~~~~~~~~");
 	        	window.location.href = '/signup';
-	        })
+	        }) */
 	</script>
 </body>
 </html>
