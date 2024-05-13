@@ -159,12 +159,26 @@ main {
 	50px;
 }
 
+.logoimg {
+	width: 70px;
+	height: 50px; 
+}
+
+#applyButton {
+	text-align: center;
+}
+
+.btn {
+	
+}
+
+
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 
-		<c:forEach var="posting" items="${detailList}" varStatus="status">
+		
 			<div>&nbsp;</div>
 			<h3>채용정보</h3>
 			<div>&nbsp;</div>
@@ -175,7 +189,21 @@ main {
 				  <br>
 				  <span style="font-weight:bold; font-size: 25px;">${posting.po_title}</span>
 			  </div>
-			  <div class="grid-item item2">기업정보</div>
+			  <div class="grid-item item2">
+			  <div class=logoimg><img src ="/img/${posting.com_logo}.gif" alt="프로필img"></div>
+			  기업정보
+			  <div>&nbsp;</div>
+					<span>설립년도</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.com_birth}</span>
+					<br><br>
+					<span>기업형태</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.com_type}</span>
+					<br><br>
+					
+			  </div>
+			  
 			  <div class="grid-item item3"><div class="sub_title1">지원자격</div>
 					<div>&nbsp;</div>
 					<span>경력</span>
@@ -190,18 +218,43 @@ main {
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<span id="inside_title">${posting.stack}</span>
 					<br><br>
-					<span>주소</span>
+				</div>  
+			  <div class="grid-item item4">근무조건
+			  <div>&nbsp;</div>
+					<span>급여</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span id="inside_title">${posting.com_salary}</span>
+					<br><br>
+					<span>지역</span>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<span id="inside_title">${posting.com_address}</span>
-				</div>  
-			  <div class="grid-item item4">근무조건</div>
+				</div>
 			</div>
-			
-			
-		</c:forEach>
+	
+		<div>
+				<button id="applyButton" type="button" class="btn">즉시지원</button>
+		</div>
+		
 		
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+	function immediateApply() {
+		function redirectToLoginPage() {
+			window.location.href = "/login/login"
+		}
+		
+		// 알림 창을 띄우고 확인 누를 시 redirectToLoginPage 함수 호출
+		if (confirm("로그인이 필요합니다. 로그인 페이지로 이동합니다")) {
+			redirectToLoginPage();	
+		}
+	}
 
+
+// 즉시 지원 버튼 클릭 시 Apply 함수 호출
+		document.getElementById("applyButton").addEventListener("click", immediateApply);
+		
+	});
+	
 </script>
 
 
@@ -209,7 +262,6 @@ main {
 
 </body>
 </html>
-
 
 
 

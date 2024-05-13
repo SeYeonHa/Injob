@@ -22,5 +22,9 @@ public class PostCompVo {
 	private String stack;
 	private String com_address;
 	private String com_name;
+	private String com_logo;
+	private String com_birth;
+	private int    com_salary;
+	private String com_type;
 	
 }

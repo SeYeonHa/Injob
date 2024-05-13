@@ -36,7 +36,7 @@
       <div class="inner">
          <h2>Home</h2>
          <div>
-            <a href="/Detail/Detail">새 메뉴 추가</a>
+            <a href="/Detail/Detail?com_id=2">새 메뉴 추가</a>
          </div>
       </div>
 

@@ -11,9 +11,9 @@ import com.injob.detail.domain.PostCompVo;
 @Mapper
 public interface DetailMapper {
 
+	PostCompVo getDetailList2(PostCompVo postCompVo);
 
-	List<DetailVo>   getDetailList(DetailVo detailVo);
-	List<PostCompVo> getPostCompList(PostCompVo postCompVo);
-	List<PostCompVo> getDetailList();
+
+
 
 }
