@@ -46,7 +46,13 @@
   grid-template-columns: repeat(4, 1fr); /* 4개의 열을 갖는 그리드 설정 */
   grid-gap: 20px; /* 각 요소 사이의 간격 설정 */
 }
+.like{
+width: 20px;
 
+}
+#pimg{
+height: 150px;
+}
 </style>
 </head>
 <body>
@@ -59,16 +65,18 @@
       <div id ="main" class ="main">
 						<ul data-totalcount = "4" data-pageno ="1">
 							<li>
-									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img"></div>
+					<!-- ******* -->		<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
+									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
 									<div class="listCont">
-										<div class="pCor">
-											<span class ="posId">${posting.po_id }</span>
-										</div>
+									<!--  	<div class="pCor">
+												<span class ="posId">${posting.po_id }</span>
+										</div>-->
 										<div class ="pTit">${posting.po_title }</div>
 										<div class ="pInfo">
 											<span class ="pPart">
 												${posting.hope_department }
 											</span>
+											<br>
 											<span class ="pAddress">
 											  ${posting.com_address }
 											</span>
@@ -79,19 +87,93 @@
 									</div>
 									<div class="listFoot">
 										<div class ="pAssist">
-											<span>🏆 합격축하금 100만원</span> <br>
 											<span class ="pPeriod">${posting.po_end_date }</span>
+										<br />
+										<br />	
+										<hr />
+											<span>🏆 합격축하금 100만원</span> <br>
 										</div>
+										<div>
 									</div>
-									<button class="bookmark"></button>
+									<br /><br>
+									</a>
 							</li>	
 						</ul>
 
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button id="likebtn" class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
+							
 				</div>
 			</c:forEach>
 			</div>
 			</div>
+		
   </main>
+			<div id="timer">00:00:00</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	   function immediateLike() {
+	      function redirectToLoginPage() {
+	         window.location.href = "/login/login"
+	      }
+	      
+	      // 알림 창을 띄우고 확인 누를 시 redirectToLoginPage 함수 호출
+	      if (confirm("로그인이 필요합니다. 로그인 페이지로 이동합니다")) {
+	         redirectToLoginPage();   
+	      }
+	   }
+
+
+	// 즉시 지원 버튼 클릭 시 Apply 함수 호출
+	      //document.getElementById("likebtn").addEventListener("click", immediateLike);
+	
+	   var buttons = document.querySelectorAll(".like");
+	    buttons.forEach(function(button) {
+	        button.addEventListener("click", immediateLike);
+	    });
+	
+	   });
+	   
+</script>
+
+<script>
+        // 시간 설정
+        // JS에서 월은 -1된 값을 넣어야함, ex) 2024년 5월 14일 2시 45분은 아래와 같음
+        const endTime = new Date(2024, 4, 14, 14, 45, 0); 
+
+        function updateTimer() {
+            const now = new Date(); // 현재 시간
+            const timeDiff = endTime - now; // 남은 시간
+
+            // 남은 시간 변환
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            // 남은 시간 표시
+            document.getElementById('timer').textContent =
+              `${days}일 ` +
+              `${hours < 10 ? '0' + hours : hours}:` +
+              `${minutes < 10 ? '0' + minutes : minutes}:` +
+              `${seconds < 10 ? '0' + seconds : seconds}`;
+
+            // 타이머 종료 조건
+            if (timeDiff < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('timer').textContent = "00일 00:00:00";
+                alert('마감이요~');
+            }
+        }
+
+        // 1초마다 업데이트
+        let timerInterval = setInterval(updateTimer, 1000);
+    </script>
+
+
+
  <%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
+
 </html>
