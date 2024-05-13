@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@   page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,28 +7,27 @@
 <title>Insert title here</title>
 <title>Insert title 수정수정</title>
 <link rel="icon" type="image/png" href="/img/logo.png" />
-<link rel="stylesheet"  href="/css/common.css" />
+<link rel="stylesheet" href="/css/common.css" />
 <link href="/css/start.css" rel="stylesheet" />
 <link href="/css/test.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<link
+   href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
+   rel="stylesheet">
 
 <style>
-*{
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+* {
+   font-family: "Nanum Gothic", sans-serif;
+   font-weight: 400;
+   font-style: normal;
 }
-
-
 
 .nanum-gothic-extrabold {
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 800;
-  font-style: normal;
+   font-family: "Nanum Gothic", sans-serif;
+   font-weight: 800;
+   font-style: normal;
 }
-   
 </style>
 </head>
 <body>
@@ -44,14 +43,10 @@
 	<div>&nbsp;</div>	
 	<div><a href="/Board/List?menu_id=MENU01">게시물 목록</a></div>
 	<div><a href="/Board/WriteForm?menu_id=MENU01">게시물 등록</a></div>
-		<div>&nbsp;</div>
-	<div><a href="/Mypage/Resume?user_id=1">마이페이지 이력서 메인</a></div>
-	<div><a href="/Mypage/Apply?user_id=1&po_id=1101">마이페이지 이력서 지원하기</a></div>
   </main>	
   <%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
 </html>
-
 
 
 
