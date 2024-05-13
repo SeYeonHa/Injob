@@ -6,7 +6,7 @@
         <div class="headerWrapper">
           <div id="gnb">
             <h1 id="logo">
-              <a href="/"><img src="/img/logo.png" /></a>
+              <a href="/Posting/PMain"><img src="/img/logo.png" /></a>
             </h1>
             <c:choose>
 			    <c:when test="${sessionScope.userLogin != null }">
@@ -29,9 +29,9 @@
 			    <c:otherwise>
 			        <!-- 로그인하지 않은 경우 -->
 			        <ul class="navbar" id="nologin">
-			            <li><a href="#">공채정보</a></li>
+			            <li><a href="/Posting/PMain">공채정보</a></li>
 			            <li><a href="#">취업톡톡</a></li>
-			            <li><a href="#">마이페이지</a></li>
+			            <li><a href="/Mypage/Resume">마이페이지</a></li>
 			            <li><a href="#">게시판</a></li>
 			        </ul>
 			    </c:otherwise>

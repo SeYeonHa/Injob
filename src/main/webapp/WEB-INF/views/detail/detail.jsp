@@ -230,7 +230,7 @@ main {
 					<span id="inside_title">${posting.com_address}</span>
 				</div>
 			</div>
-	
+		<div><a href="/Mypage/Apply?user_id=1&po_id=1101">이력서 지원하기</a></div>
 		<div>
 				<button id="applyButton" type="button" class="btn">즉시지원</button>
 		</div>
