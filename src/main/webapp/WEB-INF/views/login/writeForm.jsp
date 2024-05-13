@@ -506,6 +506,7 @@ select:not(#birth-year){
     	            .then(response => {
     	                if (response.ok) {
     	                	console.log("응답잘옴");
+    	                	console.log("dsd");
     	                    // 서버에서 성공적인 응답을 받았을 때
     	                    return response; // JSON 형식으로 데이터를 읽음
     	                } else {
