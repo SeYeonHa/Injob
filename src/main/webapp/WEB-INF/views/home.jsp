@@ -40,7 +40,7 @@
 			</div>
 			
 			<div>
-				<a href="/Menus/List">메뉴 목록</a>
+				<a href="/Posting/PMain2">메뉴 목록</a>
 			</div>
 			<div>&nbsp;</div>
 			<div>

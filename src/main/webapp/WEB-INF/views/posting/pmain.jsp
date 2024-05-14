@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="icon" type="image/png" href="/img/logo.png" />
 <link rel="stylesheet" href="/css/common.css" />
 <link href="/css/start.css" rel="stylesheet" />
@@ -29,7 +30,8 @@
 }
 #main:hover {
     transform: scale(1.05); /* 호버 효과 시 크기 확대 */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    box-shadow: 0px 0px 30px skyblue;
 }
 #main{
  border: 1px solid #ccc;
@@ -45,6 +47,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4개의 열을 갖는 그리드 설정 */
   grid-gap: 20px; /* 각 요소 사이의 간격 설정 */
+  transition: 0.3s ease-in-out;
 }
 .like{
 width: 20px;
@@ -52,7 +55,22 @@ width: 20px;
 }
 #pimg{
 height: 150px;
+   }
+#pimg:hover {visibility: visible;
+    opacity: 1;
+    margin-top: -80px;
+    transition-delay: 0.3s;
 }
+
+.card-footer{
+    opacity: 0; /* 초기에 버튼 투명하게 설정 */
+    transition: opacity 0.3s ease; /* 부드러운 전환 효과를 위한 transition 추가 */
+}
+
+.card-footer:hover{
+     opacity: 1; /* 마우스가 올라갈 때 버튼이 나타나도록 설정 */
+}
+
 </style>
 </head>
 <body>
@@ -71,7 +89,7 @@ height: 150px;
 									<!--  	<div class="pCor">
 												<span class ="posId">${posting.po_id }</span>
 										</div>-->
-										<div class ="pTit">${posting.po_title }</div>
+										<div class ="pTit" style="font-weight: bold;">${posting.po_title }</div>
 										<div class ="pInfo">
 											<span class ="pPart">
 												${posting.hope_department }
@@ -88,20 +106,20 @@ height: 150px;
 									<div class="listFoot">
 										<div class ="pAssist">
 											<span class ="pPeriod">${posting.po_end_date }</span>
-										<br />
 										<br />	
-										<hr />
+							
 											<span>🏆 합격축하금 100만원</span> <br>
 										</div>
 										<div>
 									</div>
-									<br /><br>
 									</a>
 							</li>	
 						</ul>
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button id="likebtn" class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
+						<div class="card-footer" style="background-color: white;">
+						<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
+						</div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					 <button id="likebtn" class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
 							
 				</div>
 			</c:forEach>
@@ -136,10 +154,27 @@ document.addEventListener("DOMContentLoaded", function() {
 	   });
 	   
 </script>
+<script >
+document.addEventListener("DOMContentLoaded", function() {
+    var cards = document.querySelectorAll('.main'); // 모든 카드 요소를 선택합니다.
+
+    cards.forEach(function(card) {
+        var image = card.querySelector('.pimg'); // 각 카드 내의 이미지를 선택합니다.
+        var footer = card.querySelector('.card-footer'); // 각 카드의 버튼을 선택합니다.
+        
+        card.addEventListener("mouseover", function() {
+            footer.style.opacity = '1'; // 마우스를 카드 위에 올리면 버튼이 나타납니다.
+        });
+
+        card.addEventListener("mouseout", function() {
+            footer.style.opacity = '0'; // 마우스가 카드를 벗어나면 버튼이 사라집니다.
+        });
+    });
+});
+</script>
 
 
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
  <%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
 
