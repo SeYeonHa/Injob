@@ -734,6 +734,7 @@ select:not(#birth-year){
          	 for (const pair of formData.entries()) {
                  console.log(pair[0] + ', ' + pair[1]);
              }
+         	document.getElementById('registerForm').submit();
          });
  		
     });/*  document.addEventListener('DOMContentLoaded', */
