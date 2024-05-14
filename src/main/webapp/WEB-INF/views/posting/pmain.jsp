@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	   });
 	   
 </script>
+
 <script >
 document.addEventListener("DOMContentLoaded", function() {
     var cards = document.querySelectorAll('.main'); // 모든 카드 요소를 선택합니다.
