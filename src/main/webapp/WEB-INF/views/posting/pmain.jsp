@@ -64,9 +64,13 @@
   grid-gap: 20px; /* 각 요소 사이의 간격 설정 */
   transition: 0.3s ease-in-out;
 }
-.like{
-width: 20px;
 
+.like {
+    width: 30px; /* 넓은 영역으로 만들기 위해 너비를 늘립니다. */
+    height: 30px; /* 높이도 같이 늘립니다. */
+    cursor: pointer; /* 마우스 커서를 변경하여 사용자가 클릭 가능한 요소임을 나타냅니다. */
+    background: url('/img/like_off.png') no-repeat; /* 배경 이미지로 사용합니다. */
+    background-size: cover; /* 배경 이미지를 버튼 크기에 맞게 조정합니다. */
 }
 #pimg{
 height: 150px;
@@ -103,7 +107,7 @@ transition: all 0.3s ease;
       <div id ="main" class ="main">
 						<ul data-totalcount = "4" data-pageno ="1">
 							<li>
-					<!-- ******* -->		<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
+					<!-- ******* --><a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
 									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
 									<div class="listCont">
 									<!--  	<div class="pCor">
@@ -126,21 +130,22 @@ transition: all 0.3s ease;
 										<div class ="pAssist">
 											<span class ="pPeriod">${posting.po_end_date }</span>
 										<br />	
+									</a>
 									<div class="listFoot">
-											<span style="font-size: small;">🏆 합격축하금 100만원</span>
+											<span style="font-size: smaller;">🏆 합격축하금 100만원</span>
 										</div>
 										<div>
 									</div>
-									</a>
 							</li>	
 						</ul>
+					
 						<div class="card-footer" style="background-color: white;">
 						<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
 						</div>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					 <button id="likebtn" class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
-					
-						
+						<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					 <button class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
+					 </div>
 				</div>
 			</c:forEach>
 			</div>
@@ -149,7 +154,24 @@ transition: all 0.3s ease;
   </main>
 			
 
-<script>
+<script >
+document.addEventListener("DOMContentLoaded", function() {
+    var cards = document.querySelectorAll('.main'); // 모든 카드 요소를 선택합니다.
+
+    cards.forEach(function(card) {
+        var image = card.querySelector('.pimg'); // 각 카드 내의 이미지를 선택합니다.
+        var footer = card.querySelector('.card-footer'); // 각 카드의 버튼을 선택합니다.
+        
+        card.addEventListener("mouseover", function() {
+            footer.style.opacity = '1'; // 마우스를 카드 위에 올리면 버튼이 나타납니다.
+        });
+
+        card.addEventListener("mouseout", function() {
+            footer.style.opacity = '0'; // 마우스가 카드를 벗어나면 버튼이 사라집니다.
+        });
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function() {
 	   function immediateLike() {
 	      function redirectToLoginPage() {
@@ -174,28 +196,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	   });
 	   
 </script>
-
-<script >
-document.addEventListener("DOMContentLoaded", function() {
-    var cards = document.querySelectorAll('.main'); // 모든 카드 요소를 선택합니다.
-
-    cards.forEach(function(card) {
-        var image = card.querySelector('.pimg'); // 각 카드 내의 이미지를 선택합니다.
-        var footer = card.querySelector('.card-footer'); // 각 카드의 버튼을 선택합니다.
-        
-        card.addEventListener("mouseover", function() {
-            footer.style.opacity = '1'; // 마우스를 카드 위에 올리면 버튼이 나타납니다.
-        });
-
-        card.addEventListener("mouseout", function() {
-            footer.style.opacity = '0'; // 마우스가 카드를 벗어나면 버튼이 사라집니다.
-        });
-    });
-});
-</script>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
  <%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
