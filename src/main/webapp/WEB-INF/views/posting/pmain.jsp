@@ -132,7 +132,7 @@ transition: all 0.3s ease;
 										<br />	
 									</a>
 									<div class="listFoot">
-											<span style="font-size: smaller;">🏆 합격축하금 100만원</span>
+											<span style="font-size: smaller;">💲합격축하금 100만원</span>
 										</div>
 										<div>
 									</div>
