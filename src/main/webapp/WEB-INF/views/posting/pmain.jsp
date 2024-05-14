@@ -42,6 +42,7 @@
     max-width: 300px;
     height: auto;
     transition: all 0.3s ease;
+ 
 }
 .pstyle{
   display: grid;
@@ -55,13 +56,16 @@ width: 20px;
 }
 #pimg{
 height: 150px;
+transition: all 0.3s ease;
    }
 #pimg:hover {visibility: visible;
     opacity: 1;
-    margin-top: -80px;
+    margin-top: 0px;
     transition-delay: 0.3s;
 }
-
+#main:hover #pimg {
+    height: 200px; /* 마우스 호버 시 이미지의 높이를 늘립니다. */
+}
 .card-footer{
     opacity: 0; /* 초기에 버튼 투명하게 설정 */
     transition: opacity 0.3s ease; /* 부드러운 전환 효과를 위한 transition 추가 */
@@ -70,6 +74,8 @@ height: 150px;
 .card-footer:hover{
      opacity: 1; /* 마우스가 올라갈 때 버튼이 나타나도록 설정 */
 }
+
+
 
 </style>
 </head>
@@ -172,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
