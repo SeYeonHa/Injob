@@ -36,14 +36,28 @@
 #main{
  border: 1px solid #ccc;
     border-radius: 15px;
-    margin: 10px;
-    padding: 15px 10px;
+        margin: 3px; /* 여백을 줄입니다. */
+    padding: 8px; /* 여백을 줄입니다. */
+    /*margin: 10px;
+    padding: 15px 10px;*/
     text-align: center;
     max-width: 300px;
     height: auto;
     transition: all 0.3s ease;
- 
+ position: relative; /* 부모 요소를 기준으로 자식 요소 위치를 조정하기 위해 position 속성 추가 */
 }
+
+.listFoot {
+    position: absolute; /* 부모 요소에 대해 절대 위치로 설정합니다. */
+    bottom: 0; /* 아래쪽으로부터 위치를 조정합니다. */
+    width: 100%; /* 부모 요소의 너비와 같게 설정합니다. */
+    opacity: 0; /* 초기에 버튼을 투명하게 설정합니다. */
+    transition: opacity 0.3s ease; /* 부드러운 전환 효과를 위한 transition 추가 */
+}
+#main:hover .listFoot {
+    opacity: 1; /* 마우스가 올라갈 때 버튼이 나타나도록 설정합니다. */
+}
+
 .pstyle{
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4개의 열을 갖는 그리드 설정 */
@@ -101,20 +115,19 @@ transition: all 0.3s ease;
 												${posting.hope_department }
 											</span>
 											<br>
+										<div class ="pStackBox">
+											<span class ="tag tag-tack">${posting.stack }</span>
+										</div>
 											<span class ="pAddress">
 											  ${posting.com_address }
 											</span>
 										</div>
-										<div class ="pStackBox">
-											<span class ="tag tag-tack">${posting.stack }</span>
-										</div>
 									</div>
-									<div class="listFoot">
 										<div class ="pAssist">
 											<span class ="pPeriod">${posting.po_end_date }</span>
 										<br />	
-							
-											<span>🏆 합격축하금 100만원</span> <br>
+									<div class="listFoot">
+											<span style="font-size: small;">🏆 합격축하금 100만원</span>
 										</div>
 										<div>
 									</div>
@@ -124,9 +137,10 @@ transition: all 0.3s ease;
 						<div class="card-footer" style="background-color: white;">
 						<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
 						</div>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					 <button id="likebtn" class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
-							
+					
+						
 				</div>
 			</c:forEach>
 			</div>
