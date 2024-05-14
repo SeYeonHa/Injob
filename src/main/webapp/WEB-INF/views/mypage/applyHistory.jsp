@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="icon" type="image/png" href="/img/logo.png" />
 <link rel="stylesheet" href="/css/common.css" />
-<link rel="stylesheet" href="/css/apply.css" />
+<link rel="stylesheet" href="/css/mypage.css" />
 <link href="/css/start.css" rel="stylesheet" />
 <link href="/css/test.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">

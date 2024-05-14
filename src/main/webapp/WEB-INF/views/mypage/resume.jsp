@@ -36,13 +36,13 @@
 							class="link" style="width: 150px;">회원 정보</a>
 						<hr>
 						<a
-							href="/Mypage/Resume?user_id=1"
+							href="/Mypage/Resume?user_id=${user_id}"
 							class="link">이력서 관리</a>
 						<hr>
 						<a href="/Mypage/Bookmark?user_id=1"
 							class="link">북마크</a>
 						<hr>
-						<a href="/Mypage/ApplyHistory?user_id=1"
+						<a href="/Mypage/ApplyHistory?user_id=${user_id}"
 							class="link">지원 이력</a>
 						<hr>
 					</div>
@@ -83,7 +83,7 @@
 									<c:forEach var="R" items="${Resumelist}">
 
 										<tr
-											onclick="location.href='/Mypage/ResumeView?user_id=1&re_id=${R.re_id}'">
+											onclick="location.href='/Mypage/ResumeView?user_id=${user_id}&re_id=${R.re_id}'">
 											<td>${R.re_id }</td>
 											<td>${R.re_title }</td>
 											<td>${R.license}</td>
@@ -94,7 +94,7 @@
 							</table>
 						</div>
 						<br>
-						<button type="button" onclick="location.href=`/Mypage/ResumeWrite?user_id=1`" class="btn btn-block btn-success" >작성</button>
+						<button type="button" onclick="location.href=`/Mypage/ResumeWrite?user_id=${user_id}`" class="btn btn-block btn-success" >작성</button>
 					</div>
 				</div>
 			</section>

@@ -110,8 +110,7 @@
 										수정하기</button>
 									<!-- 삭제 버튼 -->
 									<button type="button" class="btn btn-block btn-danger"
-										onclick="showDeleteConfirmation(${list.re_id})"
-										class="btn btn-danger">삭제</button>
+        onclick="showDeleteConfirmation()" data-reid="">삭제</button>
 									<!-- 삭제 확인 모달 창 -->
 									<div id="deleteConfirmationModal" class="modal"
 										style="display: none;">
@@ -136,7 +135,7 @@
 		<script>
 		
 		 // 모달 창을 보여주는 함수
-		  function showDeleteConfirmation(reId) {
+		  function showDeleteConfirmation() {
 		    var modal = document.getElementById("deleteConfirmationModal");
 		    modal.style.display = "block";
 		    // 삭제할 re_id 값을 저장합니다.
@@ -178,9 +177,3 @@
 		<%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
 </html>
-
-
-
-
-
-

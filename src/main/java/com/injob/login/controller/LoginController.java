@@ -19,7 +19,7 @@ public class LoginController {
 	public  String   login() {
 		System.out.println("허위");
 		
-		return "login";
+		return "login/login";
 	}
 	@PostMapping("/login")
 	public  String   loginA() {

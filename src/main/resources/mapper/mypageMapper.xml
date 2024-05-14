@@ -22,7 +22,7 @@
 		FROM RESUME RE INNER JOIN USERS UR
 		ON RE.USER_ID = UR.USER_ID
 
-		WHERE UR.USER_ID = 1
+		WHERE UR.USER_ID = #{ user_id }
 		
 		ORDER BY RE.RE_ID ASC
 
@@ -61,7 +61,7 @@
 
 		FROM USERS
 
-		WHERE USER_ID = 1
+		WHERE USER_ID = #{ user_id }
 
 	</select>
 	
@@ -82,7 +82,7 @@
 		  JOIN POSTING PO ON AP.PO_ID = PO.PO_ID
 		  JOIN COMPANY COM ON PO.COM_ID = COM.COM_ID
 
-		WHERE RE.USER_ID = 1
+		WHERE RE.USER_ID = #{ user_id }
 
 	</select>
 
