@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.injob.login.mapper.LoginMapper">  
+
+<select id ="login" resultType="com.injob.login.domain.UserVo" >
+	SELECT
+    user_name,
+    user_passwd,
+    user_email,
+    user_address,
+    user_phone,
+    user_id,
+    user_social_num,
+    indate,
+    user_gender,
+    role
+FROM
+    users
+where  
+    user_email =#{username}
+
+</select>
+ <select id="saveSignup" resultType="com.injob.login.domain.UserVo">
+ 	
+ 	INSERT INTO USERS (
+    USER_NAME,
+    USER_PASSWD,
+    USER_EMAIL,
+    USER_ADDRESS,
+    USER_PHONE,
+    USER_ID,
+    USER_SOCIAL_NUM,
+    USER_GENDER,
+    role
+)
+SELECT
+    #{user_name},
+    #{user_passwd},
+    #{user_email},
+    #{user_address},
+    #{user_phone},
+    NVL(MAX(USER_ID), 0) + 1,  
+    #{user_social_num},
+    'M',
+    'ROLE_USER'
+FROM USERS
+ </select>
+
+ 
+
+</mapper>
+

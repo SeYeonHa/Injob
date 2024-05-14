@@ -1,38 +1,37 @@
--- 메뉴 목록
-CREATE  TABLE   MENUS (
-     MENU_ID     VARCHAR2(6)   PRIMARY KEY
-    ,MENU_NAME   VARCHAR2(100)
-    ,MENU_SEQ    NUMBER(5)
+CREATE TABLE "USERS" (
+   "USER_NAME" varchar2(255) NOT NULL,
+   "USER_PASSWD" varchar2(255) NOT NULL,
+   "USER_EMAIL" varchar2(255) NOT NULL,
+   "USER_ADDRESS" varchar2(255) NOT NULL,
+   "USER_PHONE" varchar2(255) NOT NULL,
+   "USER_ID" number(10,0),
+   "USER_SOCIAL_NUM" varchar2(255) NOT NULL,
+   "INDATE" date DEFAULT SYSDATE NOT NULL ,
+   "USER_GENDER" varchar2(255) NOT NULL,
+   PRIMARY KEY ("USER_ID")
 );
+ALTER TABLE USERS
+ADD role VARCHAR2(10) DEFAULT 'ROLE_USER' NOT NULL;
 
-INSERT  INTO   MENUS  VALUES ('MENU01', 'JAVA', 1 );
-COMMIT;
-
--- 회원정보
-CREATE   TABLE   TUSER (
-     USERID      VARCHAR2(12)  PRIMARY KEY
-   , PASSWD      VARCHAR2(12)  NOT NULL
-   , USERNAME    VARCHAR2(30)  NOT NULL
-   , EMAIL       VARCHAR2(320)
-   , UPOINT      NUMBER(10)    DEFAULT 1000  
-   , INDATE      DATE          DEFAULT SYSDATE
-);
-
--- 멀티 게시판 - 구조변경
-DROP    TABLE  BOARD;
-CREATE  TABLE  BOARD (
-	  BNO	       NUMBER(8,0)           PRIMARY  KEY
-	, MENU_ID      VARCHAR2(6)
-	      REFERENCES   MENUS ( MENU_ID )   
-    , TITLE	       VARCHAR2(240 BYTE)    NOT NULL
-    , CONTENT	   VARCHAR2(4000 BYTE)
-    , WRITER	   VARCHAR2(12 BYTE)      
-    , REGDATE	   DATE                  DEFAULT  SYSDATE
-    , HIT	       NUMBER(9,0)           DEFAULT  0  
-);
-
-
-
-
-
-
+INSERT INTO USERS (
+    USER_NAME,
+    USER_PASSWD,
+    USER_EMAIL,
+    USER_ADDRESS,
+    USER_PHONE,
+    USER_ID,
+    USER_SOCIAL_NUM,
+    USER_GENDER,
+    role
+)
+SELECT
+    '강재영',
+    'shin1234',
+    'wodud6967@naver.com',
+    '부산시 금정구',
+    '010-9498-9592',
+    NVL(MAX(USER_ID), 0) + 1,  -- 기존 최대 USER_ID 값에 1을 더합니다.
+    '971224-1121684',
+    'M',
+    'ROLE_USER'
+FROM USERS;
