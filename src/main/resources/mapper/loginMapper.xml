@@ -34,13 +34,13 @@ where
     role
 )
 SELECT
-    '강재영',
+    #{user_name},
     #{user_passwd},
     #{user_email},
-    '부산',
-    '010-9498-9592',
+    #{user_address},
+    #{user_phone},
     NVL(MAX(USER_ID), 0) + 1,  
-    '941224-1121684',
+    #{user_social_num},
     'M',
     'ROLE_USER'
 FROM USERS

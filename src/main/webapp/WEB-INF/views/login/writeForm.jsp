@@ -308,6 +308,13 @@ select:not(#birth-year){
     appearance: none;
     padding: 10px;
 }
+#sucess_emailMsg{
+	color: blue;
+	
+}
+.Sucess-message.hide, .failure-message.hide{
+	font-size: 0
+} 
 </style>
 </head>
 <body class="container">
@@ -350,6 +357,10 @@ select:not(#birth-year){
 								</div>
 									
 							</div>
+							<div class="Sucess-message hide" id="sucess_emailMsg" style="">
+							이메일: 사용가능한 이메일 입니다.</div>
+							<div class="failure-message hide" id="fail_emailMsg" style="">
+							이메일: 중복되는 이메일 입니다.</div>
 							<div class="failure-message hide" id="emailMsg" style="">
 							이메일: 이메일 주소가 정확한지 확인해 주세요.</div>
 							
@@ -504,27 +515,35 @@ select:not(#birth-year){
     	                 body: JSON.stringify({ email: email }) // 이메일 정보를 JSON 형식으로 전송
     	             })
     	            .then(response => {
-    	                if (response.ok) {
-    	                	console.log("응답잘옴");
-    	                	console.log("dsd");
-    	                	console.log("dsd");
-    	                    // 서버에서 성공적인 응답을 받았을 때
-    	                    return response; // JSON 형식으로 데이터를 읽음
-    	                } else {
-    	                    // 서버 오류 응답 처리
-    	                    throw new Error('서버 오류: ' + response.statusText);
-    	                }
-    	            })
-    	            .then(data => {
-    	                // 서버로부터 받은 JSON 데이터 처리
-    	                if (data.exists) {
-    	                    console.log('사용자가 이미 존재합니다.');
-    	                    // 기존 사용자가 존재하는 경우에 대한 처리
-    	                } else {
-    	                    console.log('사용자를 찾을 수 없습니다.');
-    	                    // 새로운 사용자를 만드는 경우에 대한 처리
-    	                }
-    	            })
+					    if (response.ok) {
+					        console.log("응답잘옴");
+					        console.log("dsd");
+					        console.log("dsd");
+					        // 서버에서 성공적인 응답을 받았을 때
+					        return response.text(); // 텍스트로 데이터를 읽음
+					    } else {
+					        // 서버 오류 응답 처리
+					        throw new Error('서버 오류: ' + response.statusText);
+					    }
+					})
+					.then(data => {
+					    // 서버로부터 받은 데이터 처리
+					    console.log(data); // 텍스트 데이터 확인
+					    console.log("----------------");
+					    const failMsg = document.getElementById('fail_emailMsg');
+					    const successMsg = document.getElementById('sucess_emailMsg');
+					    if (data === "User not found") {
+					        successMsg.classList.remove('hide');
+					        failMsg.classList.add('hide');
+					        console.log("유저가 존재안함");
+					        emailFormItem.style.border = '';
+					    } else if (data === "User가 존재합니다") {
+					        failMsg.classList.remove('hide');
+					        successMsg.classList.add('hide');
+					        console.log("유저가 존재함");
+					        emailFormItem.style.border = '1px solid red';
+					    }
+					})
     	            .catch(error => {
     	                // 서버로부터의 응답 오류를 처리
     	                console.error('서버 응답 오류:', error);
@@ -542,6 +561,7 @@ select:not(#birth-year){
     	function checkPassword1(){
     		// 1. 비밀번호 입력창 정보 가져오기
         	let PasswordEl = document.querySelector('[name="user_passwd"]'); 
+        	let PasswordFormItem = PasswordEl.closest('.form_item');
         	let password1 =PasswordEl.value;
         	// 4. 실패 메시지 정보 가져오기 (8글자 이상, 영문, 숫자, 특수문자 미사용)
         	let elStrongPasswordMessage = document.querySelector('#pswd1Msg'); 
@@ -549,9 +569,12 @@ select:not(#birth-year){
         	  if (!strongPassword(password1)) {
   	            // 강력한 비밀번호가 아닐 경우
   	            elStrongPasswordMessage.classList.remove('hide');
+  	            PasswordFormItem.style.border = '1px solid red';
   	            return false;
   	        } else {
+  	        	PasswordFormItem.style.border = '';
   	            elStrongPasswordMessage.classList.add('hide'); // 메시지 숨김
+  	            
   	        }
 
   	        return true;
