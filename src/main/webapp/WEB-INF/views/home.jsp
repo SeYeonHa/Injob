@@ -45,6 +45,7 @@
 		<div class="inner">
 			<h2>강재영</h2>
 			<h2>강재영</h2>
+			<h2>강재영</h2>
 			<div>
 				<a href="/Posting/PMain">메인 공고</a>
 			</div>
