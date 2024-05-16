@@ -58,4 +58,16 @@ public class LoginController {
 
 	}
 	
+	@GetMapping("/signup/company")
+	public String comWriteForm() {
+		System.out.println("기업회원가입");
+		return "login/companywriteForm";
+	}
+	
+	@PostMapping("/signup/company")
+	public String comWriteForm1() {
+		System.out.println("기업회원가입");
+		return "login/companywriteForm";
+	}
+	
 }

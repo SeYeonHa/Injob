@@ -11,7 +11,8 @@
 <link href="css/test.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
 <style>
 * {
@@ -51,7 +52,7 @@ ul li {
 	width: 50%;
 }
 
-.login-tab li a {
+.login-tab li button {
 	text-decoration: none;
 	display: flex;
 	align-items: center;
@@ -60,17 +61,18 @@ ul li {
 	box-sizing: border-box;
 	border: 1px solid #e8e8e8;
 	border-bottom-color: #222;
+	width: 100%;
 }
 
-.login-tab li:first-child a {
+.login-tab li:first-child button {
 	border-top-left-radius: 10px;
 }
 
-.login-tab li:last-child a {
+.login-tab li:last-child button {
 	border-top-right-radius: 10px;
 }
 
-.login-tab .on a {
+.login-tab .on button {
 	background-color: #fff;
 	border: 1px solid;
 	border-color: #222 #222 #fff;
@@ -78,7 +80,7 @@ ul li {
 	font-weight: 600;
 }
 
-.login-tab .on a, .login-tab li a {
+.login-tab .on button, .login-tab li button {
 	text-align: center;
 	font-size: 16px;
 	letter-spacing: 0;
@@ -107,6 +109,7 @@ ul li {
 	position: relative;
 	margin-top: 16px;
 }
+
 .section_naver .btn_signup_naver {
 	box-sizing: border-box;
 	display: block;
@@ -169,39 +172,44 @@ ul li {
 
 /* 버튼의 부모 요소에 대한 스타일링 */
 .section_kakao, .section_naver, .section_google {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    position: relative;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	position: relative;
 }
 
 /* 이미지에 대한 스타일링 */
 .section_kakao img, .section_naver img, .section_google img {
-    width: 20px; /* 이미지의 너비 */
-    height: 20px; /* 이미지의 높이 */
-    margin-right: 8px; /* 이미지와 텍스트 사이의 간격 */
-    position: absolute;
+	width: 20px; /* 이미지의 너비 */
+	height: 20px; /* 이미지의 높이 */
+	margin-right: 8px; /* 이미지와 텍스트 사이의 간격 */
+	position: absolute;
 }
-.section_kakao img{
+
+.section_kakao img {
 	left: 15px;
-    top: 14px;
+	top: 14px;
 }
-.section_naver img{
+
+.section_naver img {
 	left: 15px;
-    top: 14px;
+	top: 14px;
 }
-.section_google img{
+
+.section_google img {
 	left: 15px;
-    top: 14px;
+	top: 14px;
 }
+
 .section_kakao span, .section_naver span, .section_google span {
-	
 	color: #222;
 }
-.section_naver span{
-color: white;
+
+.section_naver span {
+	color: white;
 }
-.submit{
+
+.submit {
 	margin-top: 20px;
 	box-sizing: border-box;
 	display: block;
@@ -225,18 +233,28 @@ color: white;
 	margin-top: 16px;
 	margin-bottom: 10px
 }
-.log-update{
- display: flex;
- font-size: 0.8rem;
- justify-content: space-between;
+
+.log-update {
+	display: flex;
+	font-size: 0.8rem;
+	justify-content: space-between;
 }
-.log-update .left{
- color: #888;
- 
+
+.log-update .left {
+	color: #888;
 }
-.log-update a{
+
+.log-update a {
 	text-decoration: none;
-	 color: inherit;
+	color: inherit;
+}
+
+.card .card-body {
+	display: none;
+}
+
+.card .card-body.active {
+	display: block;
 }
 </style>
 </head>
@@ -247,75 +265,154 @@ color: white;
 			<div class="card bg-white" style="border-radius: 1rem;">
 				<section class="login-tab">
 					<ul id="devMemTab">
-						<li class="on" role="tab" data-tab="tab1"><a href="#"
-							data-m-type="M">개인회원</a></li>
-						<li role="tab" data-tab="tab2" class=""><a href="#"
-							data-m-type="Co">기업회원</a></li>
+						<li class="on" role="tab" data-tab="tab1"><button data-m-type ="M">개인회원</a></li>
+						<li role="tab" data-tab="tab2" class=""><button data-m-type="Co">기업회원</a></li>
 					</ul>
 				</section>
-				<div class="card-body p-5">
+				<div class="card-body p-5 tab1 active">
 					<h2>로그인</h2>
 					<section class="section_kakao">
-						<a class="btn_signup_kakao" href="/users/oauth/kakao">
-							<img src="img/kakao.svg"><span>카카오 로그인</span>
+						<a class="btn_signup_kakao" href="/users/oauth/kakao"> <img
+							src="img/kakao.svg"><span>카카오 로그인</span>
 						</a>
 					</section>
 					<section class="section_naver">
-						<a class="btn_signup_naver" href="/users/oauth/google">
-							<img src="img/naver.svg"><span>네이버 로그인</span>
+						<a class="btn_signup_naver" href="/users/oauth/google"> <img
+							src="img/naver.svg"><span>네이버 로그인</span>
 						</a>
-					</section>	
+					</section>
 					<section class="section_google">
-						<a class="btn_signup_google" href="/users/oauth/google">
-							<img src="img/google.png"><span>구글   로그인</span>
-					 </a>
-					</section>	
+						<a class="btn_signup_google" href="/users/oauth/google"> <img
+							src="img/google.png"><span>구글 로그인</span>
+						</a>
+					</section>
 
 					<div class="etcor"></div>
 
 					<div class="mb-2">
 						<form action="/login" method="POST">
-							<input type="hidden"  />
+							<input type="hidden" />
 							<div class="mb-3">
-								<label class="form-label">Email address</label> 
-								<input type="email" class="form-control" name="username" value="wodud6967@naver.com">
+								<label class="form-label">Email address</label> <input
+									type="email" class="form-control" name="username"
+									value="wodud6967@naver.com">
 							</div>
 							<div class="mb-3">
 								<label class="form-label ">Password</label> <input
-									type="password" class="form-control" name="password" value="rosua112!!">
+									type="password" class="form-control" name="password"
+									value="rosua112!!">
 							</div>
-							<button class="submit" type="submit" class="btn btn-primary">기존 회원 로그인</button>
+							<button class="submit" type="submit" class="btn btn-primary">기존
+								회원 로그인</button>
 						</form>
-						
+
 						<div class="log-update">
 							<div class="left">
-								<a class="dfd" href="/Loginform">아이디찾기 </a>
-					             <span class="separator">|</span>
-					            <a href = "#"> 비밀번호찾기</a>
+								<a class="dfd" href="/Loginform">아이디찾기 </a> <span
+									class="separator">|</span> <a href="#"> 비밀번호찾기</a>
 							</div>
 							<div class="right">
-								  <a href = "/signup">회원가입</a>
+								<a href="/signup">회원가입</a>
 							</div>
-						</div><!--<div class="log-update">  -->
-						
-						
-			            
+						</div>
+						<!--<div class="log-update">  -->
+
+
+
 						<!-- <button type="button" id ="loginForm" class="btn btn-secondary mt-3"> 회원가입</button> -->
-						
+
 					</div>
 				</div>
+				<!-- tab1 -->
+				<div class="card-body p-5 tab2">
+					<h2>기업로그인</h2>
+					<section class="section_kakao">
+						<a class="btn_signup_kakao" href="/users/oauth/kakao"> <img
+							src="img/kakao.svg"><span>카카오 로그인</span>
+						</a>
+					</section>
+					<section class="section_naver">
+						<a class="btn_signup_naver" href="/users/oauth/google"> <img
+							src="img/naver.svg"><span>네이버 로그인</span>
+						</a>
+					</section>
+					<section class="section_google">
+						<a class="btn_signup_google" href="/users/oauth/google"> <img
+							src="img/google.png"><span>구글 로그인</span>
+						</a>
+					</section>
+
+					<div class="etcor"></div>
+
+					<div class="mb-2">
+						<form action="/login/company/write" method="POST">
+							<input type="hidden" />
+							<div class="mb-3">
+								<label class="form-label">Email address</label> <input
+									type="email" class="form-control" name="username"
+									value="wodud6967@naver.com">
+							</div>
+							<div class="mb-3">
+								<label class="form-label ">Password</label> <input
+									type="password" class="form-control" name="password"
+									value="rosua112!!">
+							</div>
+							<button class="submit" type="submit" class="btn btn-primary">기존
+								회원 로그인</button>
+						</form>
+
+						<div class="log-update">
+							<div class="left">
+								<a class="dfd" href="/Loginform">아이디찾기 </a> <span
+									class="separator">|</span> <a href="#"> 비밀번호찾기</a>
+							</div>
+							<div class="right">
+								<a href="/signup/company">회원가입</a>
+							</div>
+						</div>
+						<!--<div class="log-update">  -->
+
+
+
+						<!-- <button type="button" id ="loginForm" class="btn btn-secondary mt-3"> 회원가입</button> -->
+
+					</div>
+				</div>
+				<!-- tab2 -->
 			</div>
 		</div>
 	</section>
 	<script>
-	
-	      /*    const logBtnEl = document.querySelector('#loginForm');
-	        logBtnEl.addEventListener('click', () => {
-	        	console.log("~~~~~~~~");
-	        	console.log("~~~~~~~~");
-	        	console.log("~~~~~~~~");
-	        	window.location.href = '/signup';
-	        }) */
+		/*    const logBtnEl = document.querySelector('#loginForm');
+		  logBtnEl.addEventListener('click', () => {
+		  	console.log("~~~~~~~~");
+		  	console.log("~~~~~~~~");
+		  	console.log("~~~~~~~~");
+		  	window.location.href = '/signup';
+		  }) */
+
+		  document.addEventListener('DOMContentLoaded', function() {
+			    const tabs = document.querySelectorAll('#devMemTab li');
+			    tabs.forEach(function(tab) {
+			        tab.addEventListener('click', function() {
+			            console.log(tab); // 클릭한 탭에 대한 정보를 콘솔에 출력
+			            const activeTab = document.querySelector('#devMemTab li.on');
+			            if (activeTab) activeTab.classList.remove('on');
+			            
+			            tab.classList.add('on');
+			            
+			            const tabId = this.getAttribute('data-tab');
+			            console.log(tabId);
+			            
+			            document.querySelectorAll('.card-body').forEach(function(tabContent) {
+			                tabContent.classList.remove('active'); // 모든 탭 내용의 active 클래스 제거
+			            });
+			           const activeTabContent  =  document.querySelector('.card-body'+'.'+tabId);
+			           console.log(activeTabContent);
+			           activeTabContent.classList.add('active');
+			        });
+			    });
+			});
 	</script>
 </body>
 </html>

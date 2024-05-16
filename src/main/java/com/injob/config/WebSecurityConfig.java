@@ -27,8 +27,8 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
-        		.requestMatchers("/static/**") 
                 .requestMatchers("/css/**") 
+                .requestMatchers("/js/**") 
                 .requestMatchers("/img/**") // /static/**   : .html, .js, .css
                 .requestMatchers("/WEB-INF/**");    // /static/**   : .html, .js, .css
         //.requestMatchers("/static/**") 
@@ -45,7 +45,7 @@ public class WebSecurityConfig {
 		)  // csrf 해킹방지하는 기능 비활성 -> 실무는 활성화 필요
 		 // authorizeHttpRequests() 로 변경됨: security 6.1.0  
 		.authorizeHttpRequests((auth) -> {auth
-						.requestMatchers("/home","/login", "/signup", "/user","/write" ,"/login/contrast").permitAll()
+						.requestMatchers("/home","/login", "/signup","/signup/company", "/user","/write" ,"/login/contrast").permitAll()
 						.anyRequest().authenticated(); // 나머지 요청은 인증 필요
 					System.out.println(".authorizeHttpRequests");
 		
