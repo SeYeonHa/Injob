@@ -22,23 +22,33 @@ public class HomeController {
 	// http://localhost:9090
 	@GetMapping("/")
 	public  String   home(Model model) {
+	
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		if (authentication != null && authentication.isAuthenticated()) {
-			// 사용자가 인증되어 있는 경우 UserDetails 객체를 통해 세부 정보 가져오기
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			System.out.println("----------" + username);
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			
-			// 모델에 사용자 정보를 추가하여 홈 페이지로 전달
-			model.addAttribute("user", userVo);
-		}
-		
+            // 인증된 사용자의 principal 객체를 가져옴
+            Object principal = authentication.getPrincipal();
+            
+            if (principal instanceof UserDetails) {
+                // principal이 UserDetails의 인스턴스인 경우
+                UserDetails userDetails = (UserDetails) principal;
+                String username = userDetails.getUsername();
+                
+                System.out.println("----------" + username);
+                
+                // UserService를 사용하여 사용자 정보를 가져옴
+                UserVo userVo = loginMapper.login(username);
+                
+               
+                
+                // 모델에 사용자 정보를 추가하여 홈 페이지로 전달
+                model.addAttribute("user", userVo);
+            } else {
+                // principal이 UserDetails의 인스턴스가 아닌 경우
+                System.out.println("Principal is not an instance of UserDetails: " + principal);
+            }
+        }
 		return "home";
 	}
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.injob.mypage.domain.AiRecommend;
 import com.injob.mypage.domain.ResumeVo;
 
 @Mapper
@@ -24,5 +25,7 @@ public interface MypageMapper {
 	void insertApply(ResumeVo resumeVo);
 
 	List<ResumeVo> selectHistory(ResumeVo resumeVo);
+
+	List<AiRecommend> getAiList(Long userId);
 
 }
