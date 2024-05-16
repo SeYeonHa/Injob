@@ -17,6 +17,7 @@
 		    PO_ID = #{po_id}
 	
 	</select>
+	
 	<update id ="updateBookMark">
 		UPDATE user_bookmark
 		SET
@@ -46,7 +47,26 @@
 		WHERE
 		    ub_id = #{ub_id}
 	</update>
-
+	
+	<select id = "getBookMarks">
+		select
+        p.po_id,
+        p.po_title,
+        p.po_content,
+        p.po_grade,
+        p.career,
+        p.po_end_date,
+        c.com_name,
+        c.com_type,
+        c.com_address,
+        ub.user_id,
+        ub.ub_boolean
+	    from
+	        posting p
+	    INNER JOIN company c ON p.com_id = c.com_id
+	    INNER JOIN user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
+	    WHERE ub.ub_boolean = 1
+	</select>
 </mapper>
 
 

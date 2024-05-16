@@ -321,7 +321,7 @@ border-bottom: none;
 										<a href="#"
 											target="_blank" class="title">${item.po_title} Backend 개발자</a>
 										<c:choose>
-									        <c:when test="${not empty item.ub_boolean}">
+									        <c:when test="${not empty item.ub_boolean and item.ub_boolean == 1}">
 									            <button type="button" class="bookmark On"></button>
 									        </c:when>
 									        <c:otherwise>
@@ -449,6 +449,10 @@ border-bottom: none;
 				</div>
 				<div id ="bookmark_panel" class="tab_panel">
 					<h2>북마크</h2>
+					<div class="ai-recommendations-list">	
+						 <input type="hidden" id="PageFlag" value="BookMark">
+						<ul></ul>
+					</div>
 				</div>
 				<div id="recent_panel" class="tab_panel">
 					<h2>최근본 공고</h2>
@@ -493,6 +497,14 @@ border-bottom: none;
 
 			        // 클릭된 탭 버튼에 on 클래스 추가
 			        this.classList.add('on');
+			        
+			        // 스크랩 공고일 때 이벤트 발생
+		            if (flag === 'bookmark_panel') {
+		                // 여기에 스크랩 공고 클릭 시 실행할 코드를 추가합니다.
+		                console.log('스크랩 공고 버튼이 클릭되었습니다.');
+		                // 예: 스크랩 공고 데이터를 불러오는 함수 호출
+		                loadBookmarkData();
+		            }
 			  });
 			
 		});//tabs
@@ -511,22 +523,18 @@ border-bottom: none;
 	            // bookmarkOn 클래스가 존재하지 않을 경우 insert
 	                //필요한거 po_id
 	                //user_id  <-- 근데 이거는 시큐리티 세션이 가지고 있음
-	                const postingIdEl = document.querySelector('.posting_id');
-	                const postingId = document.querySelector('.posting_id').value; //보여주려고 나중에 고쳐야함 콘솔이랑 같이 보여주기
-	                console.log(postingIdEl); 
+	              
+	                const postingId = this.closest('li').querySelector('.posting_id').value;      
 	                console.log(postingId); 
 	                
 	            if (onebook.classList.contains('On')) {
 	                // bookmarkOn 클래스가 이미 존재할 경우 update
 	                onebook.classList.remove('On');
-	                alert('테스트 클래스가 제거됩니다.');
-	                console.log("북마크가 존재함");
+	                alert('테스트 클래스가 제거됩니다.');   
 	                deleteBookMark(postingId);
 	            } else {
 	                
-	                console.log("북마크가 존재안함");
-	                addBookMark(postingId);
-	                
+	                addBookMark(postingId);  
 	                onebook.classList.add('On');
 	                alert('테스트 클래스가 추가됩니다.');
 	            }
@@ -574,7 +582,67 @@ border-bottom: none;
 		    }).catch(error => console.error('Error toggling bookmark:', error));
 				
 		}
-		
+	    function loadBookmarkData() {
+	        // 스크랩 공고 데이터를 불러오는 로직을 여기에 추가합니다.
+	        console.log('스크랩 공고 데이터를 불러옵니다.');
+	        // 예: fetch 요청을 사용하여 데이터를 불러오기
+	        fetch('/Bookmarks/overall/load')
+	            .then(response => response.json())
+	            .then(data => {
+	                console.log('스크랩 공고 데이터:', data);
+	                // 데이터를 화면에 표시하는 로직 추가
+	                displayBookmarkData(data);
+	            })
+	            .catch(error => console.error('Error loading bookmark data:', error));
+	    }
+	    
+	    function displayBookmarkData(data) {
+	        const bookmarkPanel = document.querySelector('#bookmark_panel .ai-recommendations-list ul');
+	        console.log(bookmarkPanel);
+	        bookmarkPanel.innerHTML = ''; // 기존 내용을 초기화합니다.
+
+	        data.forEach(item => {
+	            const li = document.createElement('li');
+	            li.innerHTML = `
+	                <input type="hidden" class="posting_id" value="\${item.po_id}">
+	                <div class="recruit-content">
+	                    <div class="congratulations-passing">
+	                        <span>합격축하금 100만원</span>
+	                    </div>
+	                    <div class="company">
+	                        <a class="company" href="#" target="_blank">
+	                            <div class="name">${item.com_name}</div>
+	                        </a>
+	                    </div>
+	                    <div class="headers">
+	                        <a href="#" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
+	                        <button type="button" class="bookmark \${item.ub_boolean ? 'On' : ''}"></button>
+	                    </div>
+	                    <a class="devLinkRecruit" href="#" target="_blank">
+	                        <div class="recruitment">
+	                            <div class="item">\${item.po_grade} 초대졸↑</div>
+	                            <div class="item">\${item.career} 경력8년↑</div>
+	                            <div class="item">\${item.com_address} 서울 &gt; 강서구</div>
+	                        </div>
+	                        <div class="job">\${item.po_content} 백엔드개발자</div>
+	                    </a>
+	                </div>
+	                <div class="recruit-apply">
+	                    <div class="recruit-apply-wrap">
+	                        <button type="button" class="tplBtn tplBtn_1">
+	                            <span>즉시지원</span>
+	                        </button>
+	                        <div class="deadline">
+	                            <span></span>
+	                            
+	                        </div>
+	                    </div>
+	                </div>
+	            `;
+	            bookmarkPanel.appendChild(li);
+	        });
+	    }
+
 	});//DOMContentLoaded	
     </script>
 

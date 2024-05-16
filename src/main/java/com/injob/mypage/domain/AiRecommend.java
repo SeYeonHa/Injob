@@ -23,7 +23,7 @@ public class AiRecommend {
 	private String   com_type;
 	private String   com_address;
 	private Long  user_id;
-	private Boolean  ub_boolean;
+	private Long  ub_boolean;
 	
 	private String stringDay;
 	
