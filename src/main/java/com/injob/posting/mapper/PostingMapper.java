@@ -14,6 +14,8 @@ public interface PostingMapper {
 
 	List<JoinVo> getPostingList();
 
+	int getCount();
+
 
 
 

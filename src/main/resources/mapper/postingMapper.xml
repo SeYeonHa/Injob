@@ -39,5 +39,10 @@
          JOIN COMPANY C ON P.COM_ID = C.COM_ID
 
   </select>
+  
+  <select id="getCount">
+  SELECT COUNT(PO_ID) AS COUNT
+    FROM POSTING
+  </select>
 
 </mapper>

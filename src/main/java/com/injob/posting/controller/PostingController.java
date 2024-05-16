@@ -22,11 +22,13 @@ public class PostingController {
 	@RequestMapping("/PMain")
 	public  ModelAndView   pmain(PostingVo postingVo, JoinVo joinVo) {
 		List<JoinVo> postingList = postingMapper.getPostingList();
+		int count = postingMapper.getCount();
+		
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("postingList",postingList);
+		mv.addObject("count",count);
 		mv.setViewName("posting/pmain");
-		
 		return mv;
 	}
 	
