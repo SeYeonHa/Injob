@@ -50,7 +50,7 @@
 				                </div>
 				                <div class="lyRow">
 				                    <div class="btnRowWrap">
-				                        <a href="/Logout" class="btnLogOut">로그아웃</a>
+				                        <a href="/logout" class="btnLogOut">로그아웃</a>
 				                    </div>
 				                </div>
 				            </div>
