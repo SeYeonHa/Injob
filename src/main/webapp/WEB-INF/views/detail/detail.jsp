@@ -26,14 +26,6 @@ body {
 	width: 80%;
 	margin: 0 auto;
 }
-	
-.logoimg {
-	width: 180px;
-}	
-
-.nav {
-  margin-top: 20px; 
-}
 
 .btn {
 	background-color: #66C069;
@@ -49,51 +41,6 @@ body {
 	
 }
 
-.grid-container3 {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 10px;
-  padding: 10px;
-  border: solid 1px grey;
-}
-
-.item11 {
-	text-align: center;
-  padding: 20px 0;
-  font-size: 20px;
-  grid-row: 1 / 4;
-  border-right: 1px solid lightgrey;
-  width: 90%;
-}
-
-.item12 {
-	border-bottom: 1px solid lightgrey;
-	text-align: left;
-}
-
-.item13 {
-	border-bottom: 1px solid lightgrey;
-	text-align: left;
-}
-
-.item14 {
-	border-bottom: 1px solid lightgrey;
-	text-align: left;
-}
-
-.item15 {
-	border-bottom: 1px solid lightgrey;
-	text-align: left;
-}
-
-.item16 {
-	text-align: left;
-}
-
-.item17 {
-	text-align: left;
-}
-
 </style>
 </head>
 <body>
@@ -103,12 +50,8 @@ body {
 			<div>&nbsp;</div>
 			<h3>채용정보</h3>
 			<div>&nbsp;</div>
+		
 			
-			<c:if test="${not empty errorMessage}">
-        <div class="alert alert-danger">${errorMessage}</div>
-    	</c:if>
-			
-			<c:forEach var="posting" items="${postingList}" varStatus="status">
 			<div class="grid-container">
 			  <div class="grid-item item1">
 				  <span style="font-size: 20px;">${posting.com_name}</span>
@@ -132,6 +75,7 @@ body {
 					<br><br>
 			  </div>
 			  </div>
+			  
 			  <div class="grid-item item3"><div class="sub_title1">지원자격</div>
 					<div>&nbsp;</div>
 					<span>경력</span>
@@ -189,7 +133,7 @@ body {
 			  	<div id="remainingTime"></div>
 			  	<div style="font-size: 20px;">남은시간</div>
 			  		<div>&nbsp;</div>
-			  	<div style="color:green; font-size: 24px; font-weight: bold;">${posting.remainingTime}</div> 
+			  	<div id="remainingTime" style="color:green; font-size: 24px; font-weight: bold;"></div>
 			  	<br>
 			  	<div style="font-size: 20px;">시작일&nbsp;&nbsp;${posting.po_start_date}</div>
 	 		  	<div style="font-size: 20px;">마감일&nbsp;&nbsp;${posting.po_end_date}</div>
@@ -244,13 +188,68 @@ body {
 			</div>
 		</div>	
 	</div>
-	</c:forEach>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 
 
 <!-- ================Script======================= -->
 		
 <script>
-
+		
+		var stompClient = null;
+		
+		function updateTimer(element, remainingTimeJson) {
+		    var days = remainingTimeJson.days;
+		    var hours = remainingTimeJson.hours;
+		    var minutes = remainingTimeJson.minutes;
+		    var seconds = remainingTimeJson.seconds;
+		
+		    var remainingTimeString = days + "일" + hours + ":" + minutes + ":" + seconds;
+		    element.innerText = remainingTimeString;
+		}
+		
+		function connect() {
+		    var socket = new SockJS('/ws');
+		    stompClient = Stomp.over(socket);
+		
+		    stompClient.connect({}, function(frame) {
+		        stompClient.subscribe('/topic/remainingTime', function(message) {
+		            var remainingTimeJson = JSON.parse(message.body);
+		            var postings = document.querySelectorAll(".posting");
+		            postings.forEach(posting => {
+		                var endTimeStr = posting.getAttribute("data-end-time");
+		                var endTime = new Date(endTimeStr).getTime();
+		                updateTimer(posting.querySelector(".timer"), remainingTimeJson);
+		            });
+		        });
+		        forceUpdate();
+		    });
+		}
+		
+		function forceUpdate() {
+		        stompClient.send("/app/timer", {}, JSON.stringify({}));
+		    } 
+		    
+		
+		$(function() {
+		    connect();
+		    $("#update").click(function() {
+		        forceUpdate();
+		    });
+		})
+		
+		
+	    
+	    
+	    
+		// timer end =====================================================================
+	
+			
 		var triggerEl = document.querySelector('#myTab a[href="#profile"]')
 		bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
 		
@@ -288,10 +287,7 @@ body {
 			document.getElementById("applyButton").addEventListener("click", immediateApply);
 		});
 		
-		// --------------------------------------------------------------------------------------------
-	// 마감 시간(타이머) 부분
-	
-	
+		
 </script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -299,8 +295,4 @@ body {
 	<%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
 </html>
-
-
-
-
 

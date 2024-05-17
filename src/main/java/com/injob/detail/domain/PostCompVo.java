@@ -26,7 +26,13 @@ public class PostCompVo {
 	private String com_birth;
 	private int    com_salary;
 	private String com_type;
+	
+	// 남은 시간을 저장할 필드 추가
 	private String remainingTime;
+	
+	public String getRemainingTime() {
+		return remainingTime;
+	}
 	
 	public void setRemainingTime(String remainingTime) {
 		this.remainingTime = remainingTime;

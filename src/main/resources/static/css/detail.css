@@ -17,6 +17,10 @@ body {
 	margin: 0 auto;
 }
 
+.logoimg {
+	width: 180px;
+}	
+
 .title {
 	font-weight: bolder;
 	font-size: 30px;
@@ -93,13 +97,49 @@ body {
 	
 }
 
-.item3 {
-	font-size: 15px;
+.grid-container3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  padding: 10px;
+  border: solid 1px grey;
 }
 
-.item4 {
-	font-size: 15px;
-	font-weight: bold;
+.item11 {
+	text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+  grid-row: 1 / 4;
+  border-right: 1px solid lightgrey;
+  width: 90%;
+}
+
+.item12 {
+	border-bottom: 1px solid lightgrey;
+	text-align: left;
+}
+
+.item13 {
+	border-bottom: 1px solid lightgrey;
+	text-align: left;
+}
+
+.item14 {
+	border-bottom: 1px solid lightgrey;
+	text-align: left;
+}
+
+.item15 {
+	border-bottom: 1px solid lightgrey;
+	text-align: left;
+}
+
+.item16 {
+	text-align: left;
+}
+
+.item17 {
+	text-align: left;
 }
 
 
@@ -185,10 +225,6 @@ main {
 	50px;
 }
 
-.logoimg {
-	width: 70px;
-	height: 50px; 
-}
 
 .d-flex {
 	border: 1px solid grey;
@@ -199,7 +235,23 @@ main {
 	
 }
 
+.nav {
+  margin-top: 20px; 
+}
 
+.btn {
+	background-color: #66C069;
+	color: white;
+	font-size: 24px;
+	width: 18%;
+	padding: 15px;
+}
+
+#applyButton:hover {
+	color: green;
+	background-color: lightgreen;
+	
+}
 
 
 

@@ -57,8 +57,8 @@
 			,	P.PO_ID
 			,	P.PO_GRADE
 			,	P.HOPE_DEPARTMENT
-			,	PO_START_DATE
-			,	PO_END_DATE
+			,	P.PO_START_DATE
+			,	P.PO_END_DATE
 			,	P.PO_PROFILE
 			,	P.PO_TITLE
 			,	P.PO_CONTENT
