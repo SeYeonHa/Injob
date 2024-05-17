@@ -24,7 +24,6 @@ public class PostingController {
 	public  ModelAndView   pmain(PostingVo postingVo, JoinVo joinVo) {
 		List<JoinVo> postingList = postingMapper.getPostingList();
 		int count = postingMapper.getCount();
-		
 		/*
 		for(JoinVo dayReset : postingList) {
 		System.out.println(dayReset.getPo_end_date());

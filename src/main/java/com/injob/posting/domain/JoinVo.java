@@ -26,6 +26,9 @@ public class JoinVo {
 	   private String career;
 	   private String stack;
 	   private String com_address;
+	   private Long user_id;
+		private Long ub_boolean;
+		private Long ub_id;
 	   
 	   private String stringDay;
 	   

@@ -373,15 +373,26 @@ transition: all 0.3s ease;
 						<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
 						</div>
 						<div>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					 <button class="like" type="button"><img src="/img/like_off.png" alt="북마크"></button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<!--   <button class="like" type="button"><img src="/img/like_off.png" alt="북마크">
+					 <ul></ul></button>-->
+					 <!--<c:out value="${posting.ub_boolean}" />-->
+					 <c:choose>
+                       <c:when test="${posting.ub_boolean == 1}">
+                        <button class="like" type="button"  data-posting-id="${posting.po_id}"><img src="/img/like_on.png" alt="좋아요"></button>
+                       </c:when>
+                       <c:otherwise>
+                        <button class="like" type="button"  data-posting-id="${posting.po_id}"><img src="/img/like_off.png" alt="좋아요"></button>
+                       </c:otherwise>
+                     </c:choose>
 					 
 					 </div>
 				</div>
+				<input type="hidden" name="user_id" id="user_id"  data-user-id="${ posting.user_id }" />
+				<!--  <input type="hidden" name="ub_boolean" id="ubBoolean"  data-user-id="${ posting.ub_boolean }" /> -->
 			</c:forEach>
 			</div>
 			</div>
-		
   </main>
 			
 
@@ -402,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
+/*
 document.addEventListener("DOMContentLoaded", function() {
 	   function immediateLike() {
 	      function redirectToLoginPage() {
@@ -420,31 +431,171 @@ document.addEventListener("DOMContentLoaded", function() {
 	        button.addEventListener("click", immediateLike);
 	    });
 	
-	   });
+	   });*/
 	   
-	   // like 좋아요
-	   document.addEventListener("DOMContentLoaded", function() {
-    var buttons = document.querySelectorAll(".like"); // 좋아요 버튼 모두 선택
+// like 좋아요
+/*
+document.addEventListener("DOMContentLoaded", function() {
+    const likeButtons = document.querySelectorAll('.like');
 
-    buttons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            toggleLike(button); // 좋아요 버튼 클릭 시 toggleLike 함수 호출
-        });
-    });
+    function addLike(postingId) {
+    	
+    	//const userId = document.getElementById('.user_id').value;
+    	//console.log(userId)
+    	
+        fetch(`/Likes/addLike`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+            	po_id: postingId,
+            	//user_id: userId
+            	})
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to toggle like');
+            }
+            return response.text(); 
+        }).then(liketext => {
+            console.log('Server response:', liketext);
+        }).catch(error => console.error('Error toggling like:', error));
+    }
+    function deleteLike(postingId){
+		fetch(`/Likes/deleteLike`,{
+			method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({ po_id: postingId })
+			
+		}).then(response => {
+	        if (!response.ok) {
+	            throw new Error('Failed to toggle like');
+	        }
+	        return response.text(); 
+	        
+	    }).then(liketext => {
+	    	console.log(liketext);
+	    	
+	    }).catch(error => console.error('Error toggling like:', error));
+			
+	}
+    
+    function updateLike(postingId){
+		fetch(`/Likes/updateLike`,{
+			method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({ po_id: postingId })
+			
+		}).then(response => {
+	        if (!response.ok) {
+	            throw new Error('Failed to toggle like');
+	        }
+	        return response.text(); 
+	        
+	    }).then(liketext => {
+	    	console.log(liketext);
+	    	
+	    }).catch(error => console.error('Error toggling like:', error));
+			
+	}
+    
 
     function toggleLike(button) {
         var img = button.querySelector('img');
         var currentSrc = img.getAttribute('src');
-        
+
         if (currentSrc.includes('like_on.png')) {
             img.setAttribute('src', '/img/like_off.png');
+            console.log('스크랩이 해제되었습니다.');
         } else {
             img.setAttribute('src', '/img/like_on.png');
+            console.log('스크랩 공고 버튼이 클릭되었습니다.');
         }
     }
+
+    likeButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            toggleLike(button);
+            console.log('Button clicked');
+
+            var postingId = button.getAttribute('data-posting-id');
+            console.log('Posting ID:', postingId);
+
+            if (postingId) {
+                addLike(postingId);
+            }
+        });
+    });
 });
-	   
-	   
+*/
+document.addEventListener("DOMContentLoaded", function() {
+    const likeButtons = document.querySelectorAll('.like');
+function addLike(postingId) {
+    fetch(`/Likes/addLike`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ po_id: postingId })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to toggle like');
+        }
+        return response.text(); 
+    }).then(liketext => {
+        console.log('Server response:', liketext);
+    }).catch(error => console.error('Error toggling like:', error));
+}
+
+function deleteLike(postingId) {
+    fetch(`/Likes/deleteLike`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ po_id: postingId })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to toggle like');
+        }
+        return response.text(); 
+    }).then(liketext => {
+        console.log('Server response:', liketext);
+    }).catch(error => console.error('Error toggling like:', error));
+}
+
+function toggleLike(button) {
+    var img = button.querySelector('img');
+    var currentSrc = img.getAttribute('src');
+
+    if (currentSrc.includes('like_on.png')) {
+        img.setAttribute('src', '/img/like_off.png');
+        console.log('스크랩이 해제되었습니다.');
+        alert('스크랩이 해제되었습니다.');
+        // 이미 스크랩된 상태에서 스크랩 버튼을 클릭한 경우
+        var postingId = button.getAttribute('data-posting-id');
+        deleteLike(postingId);
+    } else {
+        img.setAttribute('src', '/img/like_on.png');
+        console.log('스크랩 공고 버튼이 클릭되었습니다.');
+        alert('스크랩 되었습니다.');
+        // 스크랩되지 않은 상태에서 스크랩 버튼을 클릭한 경우
+        var postingId = button.getAttribute('data-posting-id');
+        addLike(postingId);
+    }
+}
+
+likeButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        toggleLike(button);
+        console.log('Button clicked');
+    });
+});
+});	   
 //---------------------------------------------------------
 
 //-----
@@ -523,7 +674,6 @@ document.addEventListener('DOMContentLoaded', function() {
     jobButton.addEventListener('click', function() {
         areaBox.classList.toggle('show');
     });
-    console.log(areaBox)
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -611,6 +761,8 @@ document.addEventListener('DOMContentLoaded', function() {
     handleButtonClick(gradeButtons, allButtonGrade);
     handleResetClick(document.querySelector('.grade-box .search-reset'), '.grade-box .dev-button-item');
 });
+
+//--------------------------------------
 
 
 
