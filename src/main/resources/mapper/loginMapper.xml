@@ -9,6 +9,7 @@
     <result property="com_ceo"       column="com_ceo"    />
     <result property="com_passwd"       column="com_passwd"     />
     <result property="com_address"       column="com_address"     />
+   
     <result property="com_indate"       column="com_indate"   jdbcType="DATE" javaType="java.time.LocalDate"   />
     <result property="com_salary"       column="com_salary"     />
     <result property="com_birth"       column="com_birth"  jdbcType="DATE" javaType="java.time.LocalDate"    />

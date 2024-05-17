@@ -167,6 +167,7 @@
         c.com_name,
         c.com_type,
         c.com_address,
+        c.com_id,
         ub.user_id,
         ub.ub_boolean
 	    from

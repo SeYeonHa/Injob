@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.injob.login.service.LoginDetailService;
 
@@ -22,7 +23,7 @@ public class WebSecurityConfig {
 	
     private final LoginDetailService loginService;
     private final AuthenticationFailureHandler customFailureHandler;
-
+    private final AuthenticationSuccessHandler customAuthenticationSuccessHandler; // 성공 핸들러 주입
     // 1. 스프링 시큐리티 기능 비활성화 (제외 설정)
     @Bean
     public WebSecurityCustomizer configure() {
@@ -51,10 +52,11 @@ public class WebSecurityConfig {
 		
 		})  // "/login", "/signup", "user" 는 요청인가 없이 접근허용
 		.formLogin((formLogin) -> {
-						formLogin
-						.loginPage("/login")	   // 로그인 페이지 경로	
-						.failureHandler(customFailureHandler)
-						.defaultSuccessUrl("/");    // 로그인 성공시 경로
+						formLogin.loginPage("/login")
+						.defaultSuccessUrl("/")
+						.successHandler(customAuthenticationSuccessHandler)
+						.failureHandler(customFailureHandler);
+			    // 로그인 성공시 경로
 						System.out.println(".formLogin");
 		}) // 로그인처리
 		.logout((logout) ->{

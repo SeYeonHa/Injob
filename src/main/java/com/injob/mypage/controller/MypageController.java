@@ -32,21 +32,23 @@ public class MypageController {
 	public ModelAndView getReseume(ResumeVo resumeVo) {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("여기냐");
 		Long user_id =7l;
 	
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 			String username = userDetails.getUsername();
-			
+			System.out.println("여기냐냐아");
 			// UserService를 사용하여 사용자 정보를 가져옴
 			UserVo userVo = loginMapper.login(username);
 			 user_id = userVo.getUser_id();
 
-			 
+			 System.out.println("여기냐냐아아아");
 		// 모델에 사용자 정보를 추가하여 홈 페이지로 전달
 		
 		ModelAndView mv = new ModelAndView();
 
 		List<ResumeVo> Resumelist = mypageMapper.selectResumeList(resumeVo);
+		System.out.println("여기냐냐아아아~~");
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("Resumelist", Resumelist);
