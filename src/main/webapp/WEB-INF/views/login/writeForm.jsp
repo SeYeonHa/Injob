@@ -532,12 +532,12 @@ select:not(#birth-year){
 					    console.log("----------------");
 					    const failMsg = document.getElementById('fail_emailMsg');
 					    const successMsg = document.getElementById('sucess_emailMsg');
-					    if (data === "User not found") {
+					    if (data === "not found") {
 					        successMsg.classList.remove('hide');
 					        failMsg.classList.add('hide');
 					        console.log("유저가 존재안함");
 					        emailFormItem.style.border = '';
-					    } else if (data === "User가 존재합니다") {
+					    } else {
 					        failMsg.classList.remove('hide');
 					        successMsg.classList.add('hide');
 					        console.log("유저가 존재함");

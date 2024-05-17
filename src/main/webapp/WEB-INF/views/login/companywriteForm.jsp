@@ -338,7 +338,7 @@ color: white;
 					<div class="etcor"></div>
 
 					<div class="mb-2">
-						<form id="registerForm" action="/write" method="POST">
+						<form id="registerForm" action="/company/write" method="POST">
 							<div class="form_list">
 								<div class="form_item" >
 									<input class="input" type="email"  name="com_email" 
@@ -499,7 +499,7 @@ color: white;
     	        	 
     	        	
     	             
-    	        	 fetch('/login/company/contrast', {
+    	        	 fetch('/login/contrast', {
     	                 method: 'POST',
     	                 headers: {
     	                     'Content-Type': 'application/json'
@@ -524,12 +524,12 @@ color: white;
 					    console.log("----------------");
 					    const failMsg = document.getElementById('fail_emailMsg');
 					    const successMsg = document.getElementById('sucess_emailMsg');
-					    if (data === "User not found") {
+					    if (data === "not found") {
 					        successMsg.classList.remove('hide');
 					        failMsg.classList.add('hide');
 					        console.log("유저가 존재안함");
 					        emailFormItem.style.border = '';
-					    } else if (data === "User가 존재합니다") {
+					    } else{
 					        failMsg.classList.remove('hide');
 					        successMsg.classList.add('hide');
 					        console.log("유저가 존재함");
@@ -662,7 +662,7 @@ color: white;
          	 for (const pair of formData.entries()) {
                  console.log(pair[0] + ', ' + pair[1]);
              }
-         	/* document.getElementById('registerForm').submit(); */
+         	 document.getElementById('registerForm').submit();
          });
  		
     });/*  document.addEventListener('DOMContentLoaded', */

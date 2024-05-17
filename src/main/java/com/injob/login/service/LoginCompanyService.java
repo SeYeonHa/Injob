@@ -7,7 +7,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.injob.login.domain.UserVo;
+import com.injob.login.domain.CompanyVo;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +17,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LoginService implements CustomUserDetails {
+public class LoginCompanyService implements CustomUserDetails {
 
-	private UserVo user;
+	private CompanyVo company;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -28,7 +29,7 @@ public class LoginService implements CustomUserDetails {
 			@Override
 			public String getAuthority() {
 				
-				return user.getRole();
+				return company.getRole();
 			}
 		});
 		return roles;
@@ -37,13 +38,13 @@ public class LoginService implements CustomUserDetails {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return user.getUser_passwd();
+		return company.getCom_passwd();
 	}
 
 	@Override
 	public String getUsername() {
 		
-		return user.getUser_email();
+		return company.getCom_email();
 	}
 
 	@Override

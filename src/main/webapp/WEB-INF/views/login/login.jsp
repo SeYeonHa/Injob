@@ -345,7 +345,7 @@ ul li {
 					<div class="etcor"></div>
 
 					<div class="mb-2">
-						<form action="/login/company/write" method="POST">
+						<form action="/login" method="POST">
 							<input type="hidden" />
 							<div class="mb-3">
 								<label class="form-label">Email address</label> <input
