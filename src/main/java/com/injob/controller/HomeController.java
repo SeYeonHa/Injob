@@ -48,6 +48,7 @@ public class HomeController {
     
                 model.addAttribute("company", company);
                 model.addAttribute("user", null); // 사용자 정보는 null로 설정
+                //ㅊㄴㅁㄴㅁ
             } else {
                 System.out.println("유저 정보가 없음");
             }
