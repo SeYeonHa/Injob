@@ -336,7 +336,7 @@ transition: all 0.3s ease;
       <div id ="main" class ="main">
 						<ul data-totalcount = "4" data-pageno ="1">
 							<li>
-					<!-- ******* --><a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
+					                <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
 									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
 									<div class="listCont">
 									<!--  	<div class="pCor">
@@ -357,7 +357,8 @@ transition: all 0.3s ease;
 										</div>
 									</div>
 										<div class ="pAssist">
-											<span class ="pPeriod">${posting.po_end_date }</span>
+										<!--  <span class ="pPeriod">${posting.po_end_date }</span> -->	
+											<span class ="pPeriod">${posting.stringDay }</span>
 										<br />	
 									</a>
 									<div class="listFoot">
