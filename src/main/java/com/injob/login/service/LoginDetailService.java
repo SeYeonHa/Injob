@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.injob.login.domain.CompanyVo;
 import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
 
@@ -20,7 +21,7 @@ public class LoginDetailService implements UserDetailsService {
 	
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		UserVo user = loginMapper.login(username);
 		
@@ -33,9 +34,22 @@ public class LoginDetailService implements UserDetailsService {
 			return loginDetail;
 			
 		}else {
+			CompanyVo company = loginMapper.comlogin(username); // 새로운 메서드를 작성해서 회사 정보 가져오기
+			System.out.println("LoginDetail");
+			System.out.println(company);
+			System.out.println("LoginDetail");
+			System.out.println(company);
+			if (company != null) {
+				LoginCompanyService loginCompanyDetail = new LoginCompanyService();
+				loginCompanyDetail.setCompany(company);
+				System.out.println(loginCompanyDetail);
+				System.out.println(loginCompanyDetail);
+				return loginCompanyDetail;
+			}else {
 			throw new UsernameNotFoundException("유저없음");
 		}
 		
-	}
+	 }
 
+  }
 }

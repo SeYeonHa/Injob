@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.injob.login.mapper.LoginMapper">  
+<resultMap id="mathCompany" type="com.injob.login.domain.CompanyVo">
+    <result property="com_id"    column="com_id"   />
+    <result property="com_name"    column="com_name"   />
+    <result property="com_email"  column="com_email" />
+    <result property="com_type"     column="com_type"   />
+    <result property="com_ceo"       column="com_ceo"    />
+    <result property="com_passwd"       column="com_passwd"     />
+    <result property="com_address"       column="com_address"     />
+    <result property="com_indate"       column="com_indate"   jdbcType="DATE" javaType="java.time.LocalDate"   />
+    <result property="com_salary"       column="com_salary"     />
+    <result property="com_birth"       column="com_birth"  jdbcType="DATE" javaType="java.time.LocalDate"    />
+    <result property="com_logo"       column="com_logo"     />
+    <result property="role"       column="role"     />
+    
+</resultMap>
 
 <select id ="login" resultType="com.injob.login.domain.UserVo" >
 	SELECT
@@ -18,6 +33,26 @@ FROM
     users
 where  
     user_email =#{username}
+
+</select>
+<select id ="comlogin" resultMap="mathCompany">
+	SELECT
+	    com_id,
+	    com_name,
+	    com_email,    
+	    com_type,
+	    com_ceo,
+	    com_passwd,
+	    com_address,
+	    com_indate,
+	    com_salary,
+	    com_birth,
+	    com_logo,
+	    role
+	FROM
+	    company
+	where  
+    com_email =#{email}
 
 </select>
  <select id="saveSignup" resultType="com.injob.login.domain.UserVo">
@@ -44,6 +79,31 @@ SELECT
     'M',
     'ROLE_USER'
 FROM USERS
+ </select>
+ <select id ="saveComSignup" resultType="com.injob.login.domain.CompanyVo">
+ 
+		 	INSERT INTO company (
+		    com_id,
+		    com_name,
+		    com_email,
+		    com_type,
+		    com_ceo,
+		    com_passwd,
+		    com_address,
+		    com_phone,
+		    role
+		) SELECT
+		    NVL(MAX(com_id), 0) + 1,
+		    #{com_name},
+		    #{com_email},
+		    '대기업',
+		    #{com_ceo},
+		    #{com_passwd},
+		    #{com_address},
+		    #{com_phone},
+		    'ROLE_COMPANY'
+		  FROM
+		    company
  </select>
 
  

@@ -155,6 +155,25 @@
 		AND RE_ID = #{ re_id }
 
 	</delete>
+	
+	<select id ="getAiList">
+		select
+        p.po_id,
+        p.po_title,
+        p.po_content,
+        p.po_grade,
+        p.career,
+        p.po_end_date,
+        c.com_name,
+        c.com_type,
+        c.com_address,
+        ub.user_id,
+        ub.ub_boolean
+	    from
+	        posting p
+	    INNER JOIN company c ON p.com_id = c.com_id
+	    LEFT JOIN user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
+	</select>
 
 </mapper>
 

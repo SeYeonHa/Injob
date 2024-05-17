@@ -16,7 +16,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LoginService implements UserDetails {
+public class LoginService implements CustomUserDetails {
 
 	private UserVo user;
 
