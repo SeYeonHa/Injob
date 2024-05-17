@@ -33,30 +33,30 @@
 				<section class="secLnb">
 					<div class="lnbGroup">
 						<h2 class="lnbTit">
-							<a href="/Mypage/Resume?user_id=${user_id}">개인회원 홈</a>
+							<a href="/ComMypage/Post?com_id=${com_id}">기업회원 홈</a>
 						</h2>
 					</div>
 					<div class="lnbGroup">
-						<h2 class="lnbTit">이력서 관리</h2>
+						<h2 class="lnbTit">공고 관리</h2>
 						<ul>
-							<li><a href="/Mypage/ResumeWrite?user_id=${user_id}">이력서
+							<li><a href="/ComMypage/PostWrite?com_id=${com_id}">공고
 									등록</a></li>
-							<li><a href="/Mypage/Resume?user_id=${user_id}">이력서 현황</a></li>
+							<li><a href="/ComMypage/Post?com_id=${com_id}">공고 현황</a></li>
 						</ul>
 					</div>
 					<div class="lnbGroup">
-						<h2 class="lnbTit">입사지원 관리</h2>
+						<h2 class="lnbTit">지원현황 관리</h2>
 						<ul>
-							<li><a href="/Mypage/ApplyHistory?user_id=${user_id}">입사지원
+							<li><a href="/ComMypage/ApplyHistory?com_id=1">입사지원
 									현황</a></li>
 							<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
 						</ul>
 					</div>
 					<div class="lnbGroup">
-						<h2 class="lnbTit">스크랩/관심기업</h2>
+						<h2 class="lnbTit">스크랩/관심이력서</h2>
 						<ul>
-							<li><a href="/User/Scrap">스크랩 공고</a></li>
-							<li><a href="/User/FavorCo">관심기업/헤드헌터</a></li>
+							<li><a href="/User/Scrap">스크랩 이력서</a></li>
+							<li><a href="/User/FavorCo">관심이력서/헤드헌터</a></li>
 							<li><a href="/User/Alarm">MY 알림</a></li>
 						</ul>
 					</div>
@@ -78,7 +78,7 @@
 
 				
 						<div class="card-header">
-							<h3 class="card-title">이력서 목록</h3>
+							<h3 class="card-title">공고 목록</h3>
 
 						</div>
 						<!-- /.card-header -->
@@ -86,21 +86,25 @@
 							<table class="table table-hover text-nowrap">
 								<thead>
 									<tr>
-										<th>이력서 번호</th>
-										<th>자소서 제목</th>
-										<th>자격증</th>
-										<th>가입일</th>
+										<th>공고 번호</th>
+										<th>공고 제목</th>
+										<th>희망 부서</th>
+										<th>경력</th>
+										<th>시작날짜</th>
+										<th>마감날짜</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="R" items="${Resumelist}">
+									<c:forEach var="P" items="${Postlist}">
 
 										<tr
-											onclick="location.href='/Mypage/ResumeView?user_id=${user_id}&re_id=${R.re_id}'">
-											<td>${R.re_id }</td>
-											<td>${R.re_title }</td>
-											<td>${R.license}</td>
-											<td>${R.indate}</td>
+											onclick="location.href='/ComMypage/PostView?com_id=${com_id}&po_id=${P.po_id}'">
+											<td>${P.po_id }</td>
+											<td>${P.po_title }</td>
+											<td>${P.hope_department}</td>
+											<td>${P.career}</td>
+											<td>${P.po_start_date}</td>
+											<td>${P.po_end_date}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -109,7 +113,7 @@
 						<br>
 						<button type="button"
 						style="display: flex; justify-content: flex-end; margin: 10px 10px;"
-							onclick="location.href=`/Mypage/ResumeWrite?user_id=${user_id}`"
+							onclick="location.href=`/ComMypage/PostWrite?com_id=${com_id}`"
 							class="btn btn-block btn-success">작성</button>
 				</div>
 			</section>

@@ -157,13 +157,13 @@ sub {
 sup {
   top: -.5em;
 }
-
+/*
 a {
   color: #007bff;
   text-decoration: none;
   background-color: transparent;
 }
-
+*/
 a:hover {
   color: #0056b3;
   text-decoration: none;
@@ -3175,7 +3175,7 @@ fieldset:disabled a.btn {
 
 .btn-block {
   display: block;
-  width: 100%;
+  width: fit-content;
 }
 
 .btn-block + .btn-block {
@@ -4813,6 +4813,7 @@ input[type="button"].btn-block {
 }
 
 .card {
+  margin : 10px;
   position: relative;
   display: -ms-flexbox;
   display: flex;
