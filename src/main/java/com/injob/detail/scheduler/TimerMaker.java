@@ -2,7 +2,7 @@ package com.injob.detail.scheduler;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Timer;
 import java.util.function.Supplier;
@@ -12,10 +12,10 @@ public class TimerMaker {
 	
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm.ss");
     
-    Supplier<Date> dateSupplier = () -> new Date(0);
+    Supplier<Date> dateSupplier = () -> new Date();
     
-    public Timer makeTimer() {
-    	return new Timer(sdf.format(dateSupplier.get() ) );
+    public RemainingTimeMessage makeTimer() {
+    	return new RemainingTimeMessage("days, hours, minutes, seconds");
     }
 }
 

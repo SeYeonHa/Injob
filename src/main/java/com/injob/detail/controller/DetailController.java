@@ -31,6 +31,14 @@ public class DetailController {
     
     @Autowired
     TimerMaker timerMaker;
+    
+    /**
+     * Handles the detail page request.
+     * 
+     * @param postCompVo The post component value object.
+     * @return ModelAndView object for the detail page.
+     */
+    
 
     @GetMapping("/Detail/Detail")
     public ModelAndView getDetail(PostCompVo postCompVo) {
@@ -61,11 +69,20 @@ public class DetailController {
 
         return mv;
     }
+    
+    /**
+     * Message Mapping for "/app/remainingTime" endpoint.
+     * 
+     * N.B. "/app" comes from WebSocketConfig calling setApplicationDestinationPrefixes("/app")
+     * 
+     * @return Timer JSONified and broadcasted on @SendTo topic ("/topic/remainingTime")
+     */
         
      @MessageMapping("/remainingTime")
      @SendTo("/topic/remainingTime")
-     public Timer remainTime() {
-    	 return timerMaker.makeTimer();
+     public RemainingTimeMessage remainingTime() {
+    	 //rTimeMsg 객체 생성 후 반환
+    	 return new RemainingTimeMessage("days, hours, minutes, seconds");
      }
     
 }

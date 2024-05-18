@@ -200,17 +200,15 @@ body {
 <!-- ================Script======================= -->
 		
 <script>
-		
-		var stompClient = null;
-		
+
 		function updateTimer(element, remainingTimeJson) {
-		    var days = remainingTimeJson.days;
-		    var hours = remainingTimeJson.hours;
+		    var days 		= remainingTimeJson.days;
+		    var hours 	= remainingTimeJson.hours;
 		    var minutes = remainingTimeJson.minutes;
 		    var seconds = remainingTimeJson.seconds;
 		
 		    var remainingTimeString = days + "일" + hours + ":" + minutes + ":" + seconds;
-		    element.innerText = remainingTimeString;
+		    document.getElementById("remainingTime").innerText = remainingTimeString;
 		}
 		
 		function connect() {
@@ -219,6 +217,7 @@ body {
 		
 		    stompClient.connect({}, function(frame) {
 		        stompClient.subscribe('/topic/remainingTime', function(message) {
+		        		console.log('Message received: ' + message.body);
 		            var remainingTimeJson = JSON.parse(message.body);
 		            var postings = document.querySelectorAll(".posting");
 		            postings.forEach(posting => {
@@ -232,7 +231,7 @@ body {
 		}
 		
 		function forceUpdate() {
-		        stompClient.send("/app/timer", {}, JSON.stringify({}));
+		        stompClient.send("/app/remainingTime", {}, JSON.stringify({}));
 		    } 
 		    
 		
