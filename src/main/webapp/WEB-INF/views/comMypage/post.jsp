@@ -39,7 +39,7 @@
 					<div class="lnbGroup">
 						<h2 class="lnbTit">공고 관리</h2>
 						<ul>
-							<li><a href="/ComMypage/PostWrite?com_id=${com_id}">공고
+							<li><a href="/ComMypage/PostWrite?com_id=1">공고
 									등록</a></li>
 							<li><a href="/ComMypage/Post?com_id=${com_id}">공고 현황</a></li>
 						</ul>
@@ -84,7 +84,7 @@
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0">
 							<table class="table table-hover text-nowrap">
-								<thead>
+								<thead style="text-align: center;">
 									<tr>
 										<th>공고 번호</th>
 										<th>공고 제목</th>
@@ -94,7 +94,7 @@
 										<th>마감날짜</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody style="border-bottom: 1px solid #dee2e6;">
 									<c:forEach var="P" items="${Postlist}">
 
 										<tr
@@ -103,8 +103,12 @@
 											<td>${P.po_title }</td>
 											<td>${P.hope_department}</td>
 											<td>${P.career}</td>
-											<td>${P.po_start_date}</td>
-											<td>${P.po_end_date}</td>
+											<td>
+											<c:set var="partial1"
+														value="${fn:substring(P.po_start_date, 0, 10)}" />${partial1}</td>
+											<td>
+											<c:set var="partial2"
+														value="${fn:substring(P.po_end_date, 0, 10)}" />${partial2}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

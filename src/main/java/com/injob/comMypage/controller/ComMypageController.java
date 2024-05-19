@@ -31,6 +31,8 @@ public class ComMypageController {
 	private ComMypageMapper comMypageMapper;
 	@Autowired
 	private LoginMapper loginMapper;
+	@Autowired
+	private MypageMapper mypageMapper;
 
 	@RequestMapping("/Post")
 	public ModelAndView getPost(PostVo postVo) {
@@ -75,12 +77,12 @@ public class ComMypageController {
 			 user_id = userVo.getUser_id();
 		*/
 		ModelAndView mv = new ModelAndView();
-
-		List<ResumeVo> list = comMypageMapper.selectPostList2(postVo);
+		Long com_id = (long) 1;
+		List<PostVo> list = comMypageMapper.selectPostList2(postVo);
 
 		//mv.addObject("user",userVo);
 		mv.addObject("list", list);
-		//mv.addObject("user_id", user_id);
+		mv.addObject("com_id", com_id);
 		mv.setViewName("comMypage/postView");
 		return mv;
 	}
@@ -99,13 +101,14 @@ public class ComMypageController {
 			 user_id = userVo.getUser_id();
 */
 		ModelAndView mv = new ModelAndView();
-
-		PostVo pv = comMypageMapper.selectPostList3(postVo);
+		
+		Long com_id = (long) 1;
+		PostVo pv = comMypageMapper.selectCompany(postVo);
 
 
 		//mv.addObject("user",userVo);
 		mv.addObject("pv", pv);
-		//mv.addObject("user_id", user_id);
+		mv.addObject("com_id", com_id);
 		mv.setViewName("comMypage/postWrite");
 		return mv;
 	}
@@ -126,10 +129,10 @@ public class ComMypageController {
 		ModelAndView mv = new ModelAndView();
 		//com_id = postVo.getUser_id();
 
-		//comMypageMapper.insertPost(postVo);
+		comMypageMapper.insertPost(postVo);
 		//mv.addObject("user",userVo);
 		//mv.addObject("user_id", user_id);
-		mv.setViewName("redirect:Resume");
+		mv.setViewName("redirect:Post");
 
 		return mv;
 
@@ -150,7 +153,7 @@ public class ComMypageController {
 */
 		ModelAndView mv = new ModelAndView();
 
-		List<PostVo> list = comMypageMapper.selectPostList(postVo);
+		List<PostVo> list = comMypageMapper.selectPostList2(postVo);
 
 		//mv.addObject("user",userVo);
 		mv.addObject("list", list);
@@ -236,4 +239,34 @@ public class ComMypageController {
 		return mv;
 	}
 
+	@RequestMapping("/ComResumeView")
+	public ModelAndView getComResumeView(PostVo postVo, ResumeVo resumeVo) {
+		
+		/*
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Long user_id =7l;
+	
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			String username = userDetails.getUsername();
+			
+			// UserService를 사용하여 사용자 정보를 가져옴
+			UserVo userVo = loginMapper.login(username);
+			 user_id = userVo.getUser_id();
+		*/
+		ModelAndView mv = new ModelAndView();
+		PostVo result = comMypageMapper.selectResult(postVo);
+		
+		Long com_id = (long) 1;
+
+		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
+
+		// mv.addObject("user",userVo);
+		// mv.addObject("user_id", user_id);
+		mv.addObject("list", list);
+		mv.addObject("com_id",com_id);
+		mv.addObject("result",result.getResult());
+		mv.setViewName("comMypage/comResumeView");
+		return mv;
+	}
+	
 }

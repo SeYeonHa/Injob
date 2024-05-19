@@ -29,47 +29,47 @@
 		<div class="container-ha">
 			<section class="box align-right">
 				<!--  사이드바  -->
-				<aside class="container-123">
-					<section class="secLnb">
-						<div class="lnbGroup">
-							<h2 class="lnbTit">
-								<a href="/Mypage/Resume?user_id=${user_id}">개인회원 홈</a>
-							</h2>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">이력서 관리</h2>
-							<ul>
-								<li><a href="/Mypage/ResumeWrite?user_id=${user_id}">이력서
-										등록</a></li>
-								<li><a href="/Mypage/Resume?user_id=${user_id}">이력서 현황</a></li>
-							</ul>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">입사지원 관리</h2>
-							<ul>
-								<li><a href="/Mypage/ApplyHistory?user_id=${user_id}">입사지원
-										현황</a></li>
-								<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
-							</ul>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">스크랩/관심기업</h2>
-							<ul>
-								<li><a href="/User/Scrap">스크랩 공고</a></li>
-								<li><a href="/User/FavorCo">관심기업/헤드헌터</a></li>
-								<li><a href="/User/Alarm">MY 알림</a></li>
-							</ul>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">회원정보 관리</h2>
-							<ul>
-								<li><a href="/Text_User/User_Info_Mng.asp">회원정보 수정</a></li>
-								<li><a href="/Text_User/User_PWD_Mng.asp">비밀번호 변경</a></li>
-								<li><a href="/Text_User/User_Mailing_Mng.asp">메일·문자 설정</a></li>
-							</ul>
-						</div>
-					</section>
-				</aside>
+			<aside class="container-123">
+				<section class="secLnb">
+					<div class="lnbGroup">
+						<h2 class="lnbTit">
+							<a href="/ComMypage/Post?com_id=${com_id}">기업회원 홈</a>
+						</h2>
+					</div>
+					<div class="lnbGroup">
+						<h2 class="lnbTit">공고 관리</h2>
+						<ul>
+							<li><a href="/ComMypage/PostWrite?com_id=${com_id}">공고
+									등록</a></li>
+							<li><a href="/ComMypage/Post?com_id=${com_id}">공고 현황</a></li>
+						</ul>
+					</div>
+					<div class="lnbGroup">
+						<h2 class="lnbTit">지원현황 관리</h2>
+						<ul>
+							<li><a href="/ComMypage/ApplyHistory?com_id=${com_id}">입사지원
+									현황</a></li>
+							<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
+						</ul>
+					</div>
+					<div class="lnbGroup">
+						<h2 class="lnbTit">스크랩/관심이력서</h2>
+						<ul>
+							<li><a href="/User/Scrap">스크랩 이력서</a></li>
+							<li><a href="/User/FavorCo">관심이력서/헤드헌터</a></li>
+							<li><a href="/User/Alarm">MY 알림</a></li>
+						</ul>
+					</div>
+					<div class="lnbGroup">
+						<h2 class="lnbTit">회원정보 관리</h2>
+						<ul>
+							<li><a href="/Text_User/User_Info_Mng.asp">회원정보 수정</a></li>
+							<li><a href="/Text_User/User_PWD_Mng.asp">비밀번호 변경</a></li>
+							<li><a href="/Text_User/User_Mailing_Mng.asp">메일·문자 설정</a></li>
+						</ul>
+					</div>
+				</section>
+			</aside>
 
 
 				<div class="box-contents">
@@ -144,18 +144,21 @@
 
 								<!-- 수정 버튼과 삭제 버튼을 한 줄에 표시하고 오른쪽에 붙임 -->
 								<div
-									style="display: flex; justify-content: flex-end; margin-top: 10px;">
-									<!-- 수정 버튼 -->
-									<button type="button" class="btn btn-primary"
-										style="margin-right: 5px;"
-										onclick="location.href='/Mypage/ResumeUpdate?user_id=${user_id}&re_id=${list.re_id}'">
-										수정하기</button>
-									<!-- 삭제 버튼 -->
-									<button type="button" class="btn btn-danger" style="margin-right: 5px;"
-										onclick="location.href='/Mypage/ResumeDelete?user_id=${user_id}&re_id=${list.re_id}'">
-										삭제</button>
+									style="display: flex; justify-content: center; margin-top: 10px;">
+									<c:choose>
+													<c:when test="${result == '진행중'}">
+														<!-- 진행중인 경우 합격과 불합격 버튼 표시 -->
+														<button type="button" class="btn btn-success btn-sm result 1">합격</button>
+														<button type="button" class="btn btn-danger btn-sm result 0">불합격</button>
+													</c:when>
+													<c:otherwise>
+														<!-- 그 외의 경우에는 결과 값 표시 -->
+									                    <button type="button" class="btn btn-primary" style="margin-right: 5px;"
+									                    onclick="location.href='/ComMypage/ApplyHistory?com_id=${com_id}'">${result}</button>
+									                </c:otherwise>
+												</c:choose>
 									<button type="button" class="btn btn-secondary"
-										onclick="location.href='/Mypage/Resume?user_id=${user_id}&nowpage=1'">
+										onclick="location.href='/ComMypage/ApplyHistory?com_id=${com_id}'">
 										목록으로</button>
 										
 								</div>
@@ -170,42 +173,9 @@
 		</div>
 	</main>
 	<script>
-		// 모달 창을 보여주는 함수
-		function showDeleteConfirmation() {
-			var modal = document.getElementById("deleteConfirmationModal");
-			modal.style.display = "block";
-			// 삭제할 re_id 값을 저장합니다.
-			modal.dataset.reId = reId;
-		}
-
-		// 모달 창을 닫는 함수
-		function closeDeleteConfirmationModal() {
-			var modal = document.getElementById("deleteConfirmationModal");
-			modal.style.display = "none";
-		}
-
-		// 삭제 확인 버튼을 눌렀을 때의 동작을 처리하는 함수
-		function confirmDelete() {
-			var reId = document.getElementById("deleteConfirmationModal").dataset.reId;
-			// 삭제 작업을 수행하는 URL로 이동합니다.
-			if (reId) {
-				location.href = `/Mypage/ResumeDelete?re_id=${reId}`;
-			}
-			closeDeleteConfirmationModal();
-		}
-
-		//For Demo only
-		var links = document.getElementsByClassName('link')
-		for (var i = 0; i <= links.length; i++)
-			addClass(i)
-
-		function addClass(id) {
-			setTimeout(function() {
-				if (id > 0)
-					links[id - 1].classList.remove('hover')
-				links[id].classList.add('hover')
-			}, id * 750)
-		}
+		
+	
+	
 	</script>
 
 	<%@include file="/WEB-INF/include/Footer.jsp"%>

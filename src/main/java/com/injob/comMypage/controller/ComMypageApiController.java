@@ -2,8 +2,13 @@ package com.injob.comMypage.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,14 +84,30 @@ public class ComMypageApiController {
 		 if ("진행중".equals(result.getResult())) {
 		        System.out.println(result.getAp_id() + "번 지원서 불합격 처리완료");
 		        comMypageMapper.updateFailResult(result);
-		        return ResponseEntity.ok("불합격 처리완료");
+		        return ResponseEntity.ok("불합격 처리완료1111");
 		    } else {
 		        System.out.println(2 + "완료 처리된 지원 이력서");
 		        return ResponseEntity.ok("완료 처리된 지원 이력서");
 		    }
 		
 	}
-	/*
+	
+	@GetMapping("/comMypage/overall/load")
+	public ResponseEntity<List<PostVo>> LoadResult(){
+		/*
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    System.out.println(username);
+	    UserVo userVo = loginMapper.login(username);
+	    
+	    
+	    Long userId = userVo.getUser_id();
+		*/
+		Long com_id = (long) 1;
+		
+		List<PostVo> result = comMypageMapper.getResult(com_id);
+		
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 
-*/
 }
