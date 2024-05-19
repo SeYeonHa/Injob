@@ -96,7 +96,7 @@ public class BookMarkApiController {
 		
 	}
 	
-	@GetMapping("/Bookmarks/overall/load")
+	@GetMapping("/Mypage/Bookmarks/Load") // 이거는 나중에 mypage APIcontroller로 보내기
 	public ResponseEntity<List<AiRecommend>> LoadBookMake(){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String username = authentication.getName();

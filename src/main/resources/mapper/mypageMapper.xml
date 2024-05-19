@@ -175,6 +175,31 @@
 	    INNER JOIN company c ON p.com_id = c.com_id
 	    LEFT JOIN user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
 	</select>
+	
+	<select id="getPostingCookie" >
+    SELECT
+        p.po_id,
+        p.po_title,
+        p.po_content,
+        p.po_grade,
+        p.career,
+        p.po_end_date,
+        c.com_name,
+        c.com_type,
+        c.com_address,
+        c.com_id,
+        ub.user_id,
+        ub.ub_boolean
+    FROM
+        posting p
+    INNER JOIN company c ON p.com_id = c.com_id
+    LEFT JOIN user_bookmark ub ON p.po_id = ub.po_id
+    WHERE
+        c.com_id IN
+        <foreach item="comId" collection="list" open="(" separator="," close=")">
+            #{comId}
+        </foreach>
+</select>
 
 </mapper>
 

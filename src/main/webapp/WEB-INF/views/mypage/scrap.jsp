@@ -226,6 +226,10 @@
 									</div>
 									<div id="recent_panel" class="tab_panel">
 										<h2>최근본 공고</h2>
+										<div class="ai-recommendations-list">
+											<input type="hidden" id="PageFlag" value="Cookie">
+											<ul></ul>
+										</div>
 									</div>
 								</div>
 
@@ -275,6 +279,12 @@
 			                console.log('스크랩 공고 버튼이 클릭되었습니다.');
 			                // 예: 스크랩 공고 데이터를 불러오는 함수 호출
 			                loadBookmarkData();
+			            }
+			            if (flag === 'recent_panel') {
+			                // 여기에 스크랩 공고 클릭 시 실행할 코드를 추가합니다.
+			                console.log('최근 본 공고 버튼이 클릭되었습니다.');
+			                // 예: 스크랩 공고 데이터를 불러오는 함수 호출
+			                loadRecentCookData();
 			            }
 				  });
 				
@@ -357,7 +367,7 @@
 		        // 스크랩 공고 데이터를 불러오는 로직을 여기에 추가합니다.
 		        console.log('스크랩 공고 데이터를 불러옵니다.');
 		        // 예: fetch 요청을 사용하여 데이터를 불러오기
-		        fetch('/Bookmarks/overall/load')
+		        fetch('/Mypage/Bookmarks/Load')
 		            .then(response => response.json())
 		            .then(data => {
 		                console.log('스크랩 공고 데이터:', data);
@@ -365,8 +375,75 @@
 		                displayBookmarkData(data);
 		            })
 		            .catch(error => console.error('Error loading bookmark data:', error));
+		    }//loadBookmarkData fetch
+		    function loadRecentCookData(){
+		    	// 최근본 공고 텝 클릭시 비동기처리
+		    	console.log('최근본 공고 텝 클릭');
+		        // 예: fetch 요청을 사용하여 데이터를 불러오기
+		        fetch('/Mypage/CookDatas/Load')
+		            .then(response => {
+		            	if (!response.ok) {
+		                    throw new Error('Network response was not ok');
+		                }
+		                return response.json();
+		            	
+		            })
+		            .then(data => {
+		                console.log('최근 쿠키 공고 데이터:', data);
+		                // 데이터를 화면에 표시하는 로직 추가
+		                displayRecentCookData(data);
+		            })
+		            .catch(error => console.error('Error loading bookmark data:', error));
+		    	
+		    }//loadRecentCookData fetch
+		    function displayRecentCookData(data){
+		    	console.log('최근쿠키 공고 데이터:', data);
+		    	//recent_panel
+		    	 const cookiePanel = document.querySelector('#recent_panel .ai-recommendations-list ul');
+		    	 console.log(cookiePanel);
+		    	 cookiePanel.innerHTML = '';
+		    	 
+		    	 data.forEach(item => {
+			            const li = document.createElement('li');
+			            li.innerHTML = `
+			                <input type="hidden" class="posting_id" value="\${item.po_id}">
+			                <div class="recruit-content">
+			                    <div class="congratulations-passing">
+			                        <span>합격축하금 100만원</span>
+			                    </div>
+			                    <div class="company">
+			                        <a class="company" href="#" target="_blank">
+			                            <div class="name">${item.com_name}</div>
+			                        </a>
+			                    </div>
+			                    <div class="headers">
+			                        <a href="#" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
+			                        <button type="button" class="bookmark \${item.ub_boolean ? 'On' : ''}"></button>
+			                    </div>
+			                    <a class="devLinkRecruit" href="#" target="_blank">
+			                        <div class="recruitment">
+			                            <div class="item">\${item.po_grade} 초대졸↑</div>
+			                            <div class="item">\${item.career} 경력8년↑</div>
+			                            <div class="item">\${item.com_address} 서울 &gt; 강서구</div>
+			                        </div>
+			                        <div class="job">\${item.po_content} 백엔드개발자</div>
+			                    </a>
+			                </div>
+			                <div class="recruit-apply">
+			                    <div class="recruit-apply-wrap">
+			                        <button type="button" class="tplBtn tplBtn_1">
+			                            <span>즉시지원</span>
+			                        </button>
+			                        <div class="deadline">
+			                            <span></span>
+			                            
+			                        </div>
+			                    </div>
+			                </div>
+			            `;
+			            cookiePanel.appendChild(li);
+			        });
 		    }
-		    
 		    function displayBookmarkData(data) {
 		        const bookmarkPanel = document.querySelector('#bookmark_panel .ai-recommendations-list ul');
 		        console.log(bookmarkPanel);

@@ -4,7 +4,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,6 +29,7 @@ import com.injob.mypage.service.KoreanDayOfWeekConverter;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -90,7 +95,7 @@ public class Mypage2Controller {
 		
 		
 	}
-	@GetMapping("/User/Scrap")
+	@GetMapping("/User/Scrap") // 이거 나중에 합치고 /Mypage 압에 넣고 하기  jsp도 너무 따로따로임
 	public ModelAndView getScrap() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String username = authentication.getName();
@@ -132,34 +137,71 @@ public class Mypage2Controller {
 	}
 	
 	@GetMapping("/SaveCookie")
-	public String saveCookie(@RequestParam("com_id") int comId, HttpSession session, HttpServletResponse response) {
-		System.out.println(comId);
-		System.out.println(comId);
-		System.out.println(comId);
-		System.out.println(comId);
-		System.out.println("저장되고 있냐~");
-	    // 최근 본 상품 정보를 쿠키에 추가
-		List<Integer> recentlyViewedProducts = (List<Integer>) session.getAttribute("recentlyViewedProducts");
-	    if (recentlyViewedProducts == null) {
-	        recentlyViewedProducts = new ArrayList<>();
+	public String saveCookie(@RequestParam("com_id") Long comId, HttpServletRequest request, HttpServletResponse response) {
+	    List<Long> recentlyViewedPosting = new ArrayList<>();
+
+	    // 쿠키에서 recentlyViewedposting 값을 읽음
+	    Cookie[] cookies = request.getCookies();
+	    //이미 만들어진 쿠키가 있다면 그 쿠키를(쉼표문자열로 구분되어있는 자료를) 어레이리스트로 반환한다.
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if ("recentlyViewedposting".equals(cookie.getName())) {
+	                String cookieValue = cookie.getValue();
+	                if (!cookieValue.isEmpty()) {
+	                	//문자열을 , 기준으로 배열로 빼고 
+	                	//스트림으로 하나하나의 문자열을 파싱하고(int로)
+	                	// 다시 스트림을 Arraylist로 반환한다
+	                	recentlyViewedPosting = Arrays.stream(cookieValue.split(":"))
+	                                                   .map(Long::parseLong)                                                   
+	                                                   .collect(Collectors.toList());
+	                }
+	                break;
+	            }
+	        }
 	    }
-	    // 최근 본 상품 목록에 comId가 이미 있는지 확인
-	    if (!recentlyViewedProducts.contains(comId)) {
-	        recentlyViewedProducts.add(comId);
+	    System.out.println("어레이리스트에 저장된 comid값들");
+	    System.out.println(recentlyViewedPosting);
+	    System.out.println("어레이리스트에 저장된 comid값들");
+	    System.out.println(recentlyViewedPosting);
+
+
+	    // 최근 본 상품 목록에 comId가 이미 있는지 확인하고 추가
+	    if (!recentlyViewedPosting.contains(comId)) {
+	    	recentlyViewedPosting.add(comId);
 	    }
-	  
+	    System.out.println("어레이리스트에 null값이 추가되는곳 찾기");
+	    System.out.println(recentlyViewedPosting);
 	    
-	    //쉼표 구분
-	    Cookie cookie = new Cookie("recentlyViewedposting", StringUtils.collectionToCommaDelimitedString(recentlyViewedProducts));
+	    StringJoiner joiner = new StringJoiner(":");
+	    for (Long item : recentlyViewedPosting) {
+	        joiner.add(String.valueOf(item));
+	    }
+	    String commaSeparatedString = joiner.toString();
 	    
-	 // 쿠키의 유효 시간 설정 (예: 1주일)
+	    System.out.println("StringJoiner");
+	    System.out.println(commaSeparatedString);
+	    
+	
+	    
+	    // 쉼표로 구분된 문자열로 변환하여 쿠키에 저장
+	    Cookie cookie = new Cookie("recentlyViewedposting", commaSeparatedString);
+	    
+	    
+	    System.out.println("자지막으로 저장되는 쿠키값");
+	    System.out.println(cookie);
+	    System.out.println(cookie);
+	    System.out.println(cookie);
+
+	    // 쿠키의 유효 시간 설정 (예: 1주일)
 	    cookie.setMaxAge(30 * 60); // 초 단위로 설정
-	    
+
 	    // 쿠키의 경로 설정
 	    cookie.setPath("/");
-	    
-	    // 쿠키를 HTTP 응답 헤더에 추가합니다.
+
+	    // 쿠키를 HTTP 응답 헤더에 추가
 	    response.addCookie(cookie);
+
+	    System.out.println("쿠키에 저장된 값: " + cookie.getValue());
 
 	    // 다시 "/Detail/Detail"로 리디렉션
 	    return "redirect:/Detail/Detail?com_id=" + comId;
