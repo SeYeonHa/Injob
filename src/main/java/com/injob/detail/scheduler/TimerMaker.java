@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Timer;
 import java.util.function.Supplier;
 
 @Component
@@ -15,7 +14,6 @@ public class TimerMaker {
     Supplier<Date> dateSupplier = () -> new Date();
     
     public RemainingTimeMessage makeTimer() {
-    	return new RemainingTimeMessage("days, hours, minutes, seconds");
+    	return new RemainingTimeMessage( );
     }
 }
-

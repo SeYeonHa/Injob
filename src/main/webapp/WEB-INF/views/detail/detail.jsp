@@ -212,7 +212,7 @@ body {
 		}
 		
 		function connect() {
-		    var socket = new SockJS('/ws');
+		    var socket = new SockJS('/websocket-clock');
 		    stompClient = Stomp.over(socket);
 		
 		    stompClient.connect({}, function(frame) {
@@ -242,6 +242,10 @@ body {
 		    });
 		})
 		
+		// 개발자도구 WebSocket 연결 시도 디버그
+		stompClient.debug = function (str) {
+			console.log(str);
+		}
 		
 	    
 	    

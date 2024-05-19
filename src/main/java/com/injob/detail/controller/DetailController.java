@@ -3,7 +3,6 @@ package com.injob.detail.controller;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Timer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -82,7 +81,7 @@ public class DetailController {
      @SendTo("/topic/remainingTime")
      public RemainingTimeMessage remainingTime() {
     	 //rTimeMsg 객체 생성 후 반환
-    	 return new RemainingTimeMessage("days, hours, minutes, seconds");
+    	 return timerMaker.makeTimer();
      }
     
 }
