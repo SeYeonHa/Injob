@@ -12,11 +12,7 @@ public class RemainingTimeMessage {
 	private long hours;
 	private long minutes;
 	private long seconds;
-	private long remainingTime;
+	// private long remainingTime;
 	
-
-    public RemainingTimeMessage(long days, long hours, long minutes, long seconds) {
-
-	}
 
 }

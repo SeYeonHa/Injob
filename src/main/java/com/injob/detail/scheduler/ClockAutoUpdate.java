@@ -18,6 +18,9 @@ public class ClockAutoUpdate {
 	
 	@Scheduled(fixedDelay=1000)
 	public void TimeMaker() {
+		
+		// 채용공고 마감일 문자
+		
 		simpMessagingTemplate.convertAndSend("/topic/remainingTime", timerMaker.makeTimer() );
 	}
 }

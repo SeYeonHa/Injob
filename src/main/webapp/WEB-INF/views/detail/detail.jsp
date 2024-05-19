@@ -132,7 +132,7 @@ body {
 			  <div class="item11">
 			  	<div id="remainingTime"></div>
 			  	<div style="font-size: 20px;">남은시간</div>
-			  		<div>&nbsp;</div>
+			  		
 			  	<div id="remainingTime" style="color:green; font-size: 24px; font-weight: bold;"></div>
 			  	<br>
 			  	<div style="font-size: 20px;">시작일&nbsp;&nbsp;${posting.po_start_date}</div>
@@ -219,13 +219,15 @@ body {
 		        stompClient.subscribe('/topic/remainingTime', function(message) {
 		        		console.log('Message received: ' + message.body);
 		            var remainingTimeJson = JSON.parse(message.body);
+		            /*
 		            var postings = document.querySelectorAll(".posting");
 		            postings.forEach(posting => {
 		                var endTimeStr = posting.getAttribute("data-end-time");
 		                var endTime = new Date(endTimeStr).getTime();
 		                updateTimer(posting.querySelector(".timer"), remainingTimeJson);
+		                */
+		                updateTimer(document.getElementById("remainingTime"), remainingTimeJson);
 		            });
-		        });
 		        forceUpdate();
 		    });
 		}
@@ -242,14 +244,7 @@ body {
 		    });
 		})
 		
-		// 개발자도구 WebSocket 연결 시도 디버그
-		stompClient.debug = function (str) {
-			console.log(str);
-		}
-		
-	    
-	    
-	    
+
 		// timer end =====================================================================
 	
 			

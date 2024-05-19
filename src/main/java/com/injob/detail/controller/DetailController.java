@@ -42,7 +42,8 @@ public class DetailController {
     @GetMapping("/Detail/Detail")
     public ModelAndView getDetail(PostCompVo postCompVo) {
         PostCompVo detailList = detailMapper.getDetailList2(postCompVo);
-
+        
+        
         // 마감 날짜와 현재 시간 간 차이 계산
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime endDate = LocalDateTime.parse(detailList.getPo_end_date(),
@@ -51,8 +52,8 @@ public class DetailController {
         long secondsRemaining = duration.getSeconds();
 
         // 남은 시간 format
-        long days = secondsRemaining / (60 * 60 * 24);
-        long hours = (secondsRemaining % (60 * 60 * 24)) / (60 * 60);
+        long days 	 = secondsRemaining / (60 * 60 * 24);
+        long hours	 = (secondsRemaining % (60 * 60 * 24)) / (60 * 60);
         long minutes = (secondsRemaining % (60 * 60)) / 60;
         long seconds = secondsRemaining % 60;
 
@@ -81,6 +82,7 @@ public class DetailController {
      @SendTo("/topic/remainingTime")
      public RemainingTimeMessage remainingTime() {
     	 //rTimeMsg 객체 생성 후 반환
+    	 // TimeMaker 클래스 매소드 사용 안함
     	 return timerMaker.makeTimer();
      }
     
