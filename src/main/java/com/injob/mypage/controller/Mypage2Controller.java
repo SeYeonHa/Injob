@@ -207,4 +207,14 @@ public class Mypage2Controller {
 	    return "redirect:/Detail/Detail?com_id=" + comId;
 	}
 	
+	@GetMapping("/Text_User/User_Info")
+	public ModelAndView UserInfoUpdate() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("mypage/userInfoUpdate");
+		
+		return mv;
+		
+	}
+	
 }

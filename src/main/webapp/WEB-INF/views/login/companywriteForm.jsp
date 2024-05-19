@@ -327,9 +327,9 @@ color: white;
 			<div class="card bg-white" style="border-radius: 1rem;">
 				<section class="login-tab">
 					<ul id="devMemTab">
-						<li class="on" role="tab" data-tab="tab1"><a href="#"
+						<li class="" role="tab" data-tab="tab1"><a href="#"
 							data-m-type="M">개인회원</a></li>
-						<li role="tab" data-tab="tab2" class=""><a href="#"
+						<li role="tab" data-tab="tab2" class="on"><a href="#"
 							data-m-type="Co">기업회원</a></li>
 					</ul>
 				</section>

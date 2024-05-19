@@ -34,11 +34,9 @@ public class LoginDetailService implements UserDetailsService {
 			return loginDetail;
 			
 		}else {
+			System.out.println("로그인디테일서비스 기업");
 			CompanyVo company = loginMapper.comlogin(username); // 새로운 메서드를 작성해서 회사 정보 가져오기
-			System.out.println("LoginDetail");
-			System.out.println(company);
-			System.out.println("LoginDetail");
-			System.out.println(company);
+			System.out.println("로그인디테일서비스 기업 :  companyvo" + company);
 			if (company != null) {
 				LoginCompanyService loginCompanyDetail = new LoginCompanyService();
 				loginCompanyDetail.setCompany(company);

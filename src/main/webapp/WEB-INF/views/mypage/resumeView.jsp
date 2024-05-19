@@ -63,7 +63,7 @@
 						<div class="lnbGroup">
 							<h2 class="lnbTit">회원정보 관리</h2>
 							<ul>
-								<li><a href="/Text_User/User_Info_Mng.asp">회원정보 수정</a></li>
+								<li><a href="/Text_User/User_Info">회원정보 수정</a></li>
 								<li><a href="/Text_User/User_PWD_Mng.asp">비밀번호 변경</a></li>
 								<li><a href="/Text_User/User_Mailing_Mng.asp">메일·문자 설정</a></li>
 							</ul>

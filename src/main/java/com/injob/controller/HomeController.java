@@ -35,7 +35,7 @@ public class HomeController {
     // http://localhost:9090
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
-        
+    	 System.out.println("home 컨트롤러까지는");
     	 String role = (String) session.getAttribute("role");
          if ("ROLE_USER".equals(role)) {
              String userEmail = (String) session.getAttribute("username");
@@ -43,6 +43,7 @@ public class HomeController {
              model.addAttribute("user", user);
              model.addAttribute("company", null); // 기업 정보는 null로 설정
          } else if ("ROLE_COMPANY".equals(role)) {
+        	 System.out.println("home 컨트롤러까지는 오나 기업");
              String companyEmail = (String) session.getAttribute("comname");
              CompanyVo company = loginMapper.comlogin(companyEmail);
              model.addAttribute("company", company);
