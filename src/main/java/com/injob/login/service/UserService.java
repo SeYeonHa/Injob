@@ -29,4 +29,13 @@ public class UserService {
         //  dto 안에 있는 data 를 저장하고 
         //  저장된 id return
     }
+    public void update( UserVo dto) { //도메인 유저
+    	//String bCryPasswd = bCryptPasswordEncoder.encode(dto.getUser_passwd());
+    	//dto.setUser_passwd(bCryPasswd);
+    			
+    	loginMapper.updateSignup(dto);
+    
+        //  dto 안에 있는 data 를 저장하고 
+        //  저장된 id return
+    }
 }
