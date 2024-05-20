@@ -35,11 +35,12 @@ public class MypageController {
 	public ModelAndView getReseume(int nowpage, ResumeVo resumeVo) {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("여기냐");
 		Long user_id =7l;
 	
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 			String username = userDetails.getUsername();
-			
+			System.out.println("여기냐냐아");
 			// UserService를 사용하여 사용자 정보를 가져옴
 			UserVo userVo = loginMapper.login(username);
 			 user_id = userVo.getUser_id();
@@ -91,6 +92,7 @@ public class MypageController {
 		// mv.addObject()
 		
 		mv.addObject("searchVo", searchVo);
+		System.out.println("여기냐냐아아아~~");
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("Resumelist", Resumelist);

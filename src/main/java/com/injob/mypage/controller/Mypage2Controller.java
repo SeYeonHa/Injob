@@ -3,14 +3,21 @@ package com.injob.mypage.controller;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.injob.login.domain.UserVo;
@@ -21,6 +28,10 @@ import com.injob.mypage.mapper.MypageMapper;
 import com.injob.mypage.service.KoreanDayOfWeekConverter;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Mypage2Controller {
@@ -80,6 +91,130 @@ public class Mypage2Controller {
 		mv.setViewName("mypage/overall");
 		
 		return mv;
+		//User/Scrap
+		
 		
 	}
+	@GetMapping("/User/Scrap") // 이거 나중에 합치고 /Mypage 압에 넣고 하기  jsp도 너무 따로따로임
+	public ModelAndView getScrap() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    
+	    System.out.println(username);
+	  
+	    
+	    UserVo userVo = loginMapper.login(username);
+	    Long userId = userVo.getUser_id();
+	    
+	    List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+	    
+	    for (AiRecommend dayReset : aiList) {
+	    	System.out.println("-----------------");
+	    	System.out.println(dayReset.getPo_end_date()); //2024-06-05 LocalDate로 받으면 00:00:00빠짐
+	    	System.out.println(dayReset.getPo_end_date().getDayOfMonth());//5 날짜만 가지고 올수있음
+	    	
+
+	    	 // DateTimeFormatter를 사용하여 원하는 형식으로 날짜를 포맷합니다.
+	    	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd (E)");
+	    	    //위에 포멧형식으로 내 날짜 바꾸기
+	    	    String formattedDate = dayReset.getPo_end_date().format(formatter);
+	    	    dayReset.setStringDay(formattedDate); //06-05
+		    	   
+	    	    System.out.println(dayReset.getStringDay());//06.05 (수)
+	    	    
+	    	   
+	    	   
+		}
+	   
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("aiList", aiList);
+		mv.addObject("user", userVo);
+		
+		mv.setViewName("mypage/scrap");
+		
+		return mv;
+	}
+	
+	@GetMapping("/SaveCookie")
+	public String saveCookie(@RequestParam("com_id") Long comId, HttpServletRequest request, HttpServletResponse response) {
+	    List<Long> recentlyViewedPosting = new ArrayList<>();
+
+	    // 쿠키에서 recentlyViewedposting 값을 읽음
+	    Cookie[] cookies = request.getCookies();
+	    //이미 만들어진 쿠키가 있다면 그 쿠키를(쉼표문자열로 구분되어있는 자료를) 어레이리스트로 반환한다.
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if ("recentlyViewedposting".equals(cookie.getName())) {
+	                String cookieValue = cookie.getValue();
+	                if (!cookieValue.isEmpty()) {
+	                	//문자열을 , 기준으로 배열로 빼고 
+	                	//스트림으로 하나하나의 문자열을 파싱하고(int로)
+	                	// 다시 스트림을 Arraylist로 반환한다
+	                	recentlyViewedPosting = Arrays.stream(cookieValue.split(":"))
+	                                                   .map(Long::parseLong)                                                   
+	                                                   .collect(Collectors.toList());
+	                }
+	                break;
+	            }
+	        }
+	    }
+	    System.out.println("어레이리스트에 저장된 comid값들");
+	    System.out.println(recentlyViewedPosting);
+	    System.out.println("어레이리스트에 저장된 comid값들");
+	    System.out.println(recentlyViewedPosting);
+
+
+	    // 최근 본 상품 목록에 comId가 이미 있는지 확인하고 추가
+	    if (!recentlyViewedPosting.contains(comId)) {
+	    	recentlyViewedPosting.add(comId);
+	    }
+	    System.out.println("어레이리스트에 null값이 추가되는곳 찾기");
+	    System.out.println(recentlyViewedPosting);
+	    
+	    StringJoiner joiner = new StringJoiner(":");
+	    for (Long item : recentlyViewedPosting) {
+	        joiner.add(String.valueOf(item));
+	    }
+	    String commaSeparatedString = joiner.toString();
+	    
+	    System.out.println("StringJoiner");
+	    System.out.println(commaSeparatedString);
+	    
+	
+	    
+	    // 쉼표로 구분된 문자열로 변환하여 쿠키에 저장
+	    Cookie cookie = new Cookie("recentlyViewedposting", commaSeparatedString);
+	    
+	    
+	    System.out.println("자지막으로 저장되는 쿠키값");
+	    System.out.println(cookie);
+	    System.out.println(cookie);
+	    System.out.println(cookie);
+
+	    // 쿠키의 유효 시간 설정 (예: 1주일)
+	    cookie.setMaxAge(30 * 60); // 초 단위로 설정
+
+	    // 쿠키의 경로 설정
+	    cookie.setPath("/");
+
+	    // 쿠키를 HTTP 응답 헤더에 추가
+	    response.addCookie(cookie);
+
+	    System.out.println("쿠키에 저장된 값: " + cookie.getValue());
+
+	    // 다시 "/Detail/Detail"로 리디렉션
+	    return "redirect:/Detail/Detail?com_id=" + comId;
+	}
+	
+	@GetMapping("/Text_User/User_Info")
+	public ModelAndView UserInfoUpdate() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("mypage/userInfoUpdate");
+		
+		return mv;
+		
+	}
+	
 }

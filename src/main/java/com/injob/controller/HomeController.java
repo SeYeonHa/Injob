@@ -21,6 +21,8 @@ import com.injob.login.service.LoginCompanyService;
 import com.injob.login.service.LoginDetailService;
 import com.injob.login.service.LoginService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
     
@@ -32,27 +34,23 @@ public class HomeController {
     
     // http://localhost:9090
     @GetMapping("/")
-    public String home(Model model) {
-        
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof LoginService) {
-                UserVo user = ((LoginService) principal).getUser();
-
-                model.addAttribute("user", user);
-                model.addAttribute("company", null); // 기업 정보는 null로 설정
-            } else if (principal instanceof LoginCompanyService) {
-                CompanyVo company = ((LoginCompanyService) principal).getCompany();
-    
-                model.addAttribute("company", company);
-                model.addAttribute("user", null); // 사용자 정보는 null로 설정
-                //ㅊㄴㅁㄴㅁ
-            } else {
-                System.out.println("유저 정보가 없음");
-            }
-        }
+    public String home(Model model, HttpSession session) {
+    	 System.out.println("home 컨트롤러까지는");
+    	 String role = (String) session.getAttribute("role");
+         if ("ROLE_USER".equals(role)) {
+             String userEmail = (String) session.getAttribute("username");
+             UserVo user = loginMapper.login(userEmail);
+             model.addAttribute("user", user);
+             model.addAttribute("company", null); // 기업 정보는 null로 설정
+         } else if ("ROLE_COMPANY".equals(role)) {
+        	 System.out.println("home 컨트롤러까지는 오나 기업");
+             String companyEmail = (String) session.getAttribute("comname");
+             CompanyVo company = loginMapper.comlogin(companyEmail);
+             model.addAttribute("company", company);
+             model.addAttribute("user", null); // 사용자 정보는 null로 설정
+         } else {
+             System.out.println("유저 정보가 없음");
+         }
         return "home";
     }
     

@@ -28,4 +28,6 @@ public interface MypageMapper {
 
 	List<AiRecommend> getAiList(Long userId);
 
+	List<AiRecommend> getPostingCookie(List<Long> recentlyViewedPosting);
+
 }

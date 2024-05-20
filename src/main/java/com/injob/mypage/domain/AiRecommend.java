@@ -22,6 +22,7 @@ public class AiRecommend {
 	private String   com_name;
 	private String   com_type;
 	private String   com_address;
+	public Long com_id;
 	private Long  user_id;
 	private Long  ub_boolean;
 	

@@ -20,275 +20,11 @@
 <link rel="stylesheet" href="/css/adminlte.css">
 
 <style>
-.mtuHome{
- margin-top: 50px
-}
-.contWrap {
-	min-height: auto;
-	position: relative;
-	padding: 0 39px 39px;
-	background: #fff;
-	border: 1px solid #dce1eb;
-}
-
-.mtuTab {
-	margin: 0;
-	box-sizing: border-box;
-	margin-bottom: 30px;
-	
-}
-
-.mtuHome .mtuTab .tabs {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 0;
-	border-left: 1px solid #e6e6e6;
-	border-right: 1px solid #e6e6e6;
-}
-
-.mtuHome .mtuTab .tabs button.on {
-	z-index: 1;
-	
-	border:  1px solid #e6e6e6;
-border-bottom: none;
-}
-
-.mtuHome .mtuTab .tabs button {
-	width: 25%;
-	height: 46px;
-	flex-grow: 1;
-	border-bottom: 1px solid #000;
-}
-
-.mtuTab .tabs button.on {
-	background: #fff;
-	border-color: #000;
-	z-index: 2;
-}
-
-.mtuTab .tabs button {
-	position: relative;
-	float: left;
-	width: 236px;
-	height: 54px;
-	background: #f9fafb;
-	box-sizing: border-box;
-	border-top: 1px solid #e6e6e6;
-	border-right: 1px solid #e6e6e6;
-	border-left: 1px solid #e6e6e6;
-}
-
-
-
-
-
-.mtuTab .tabs button {
-	font-weight: 700;
-	color: #333;
-}
-
-.mtuTab .tabs button {
-	display: block;
-	
-	width: 100%;
-	height: 100%;
-	font-size: 15px;
-	letter-spacing: 0;
-	color: #666;
-	text-align: center;
-	box-sizing: border-box;
-}
-
-
-
-.ai-recommendations-list ul li {
-	border-bottom: 1px solid #e8e8e8;
-	display: flex;
-	width: 100%;
-	padding: 24px;
-	box-sizing: border-box;
-}
-
-.mtuHome .contWrap .ai-recommendations-list .recruit-content {
-	padding-left: 0;
-	border-left: 0;
-}
-
-.ai-recommendations-list .recruit-content {
-	overflow: hidden;
-	flex: 1 1 auto;
-	padding-left: 24px;
-	padding-right: 24px;
-	border-left: 1px solid #e8e8e8;
-}
-
-.ai-recommendations-list .recruit-apply {
-	display: flex;
-	align-items: center;
-	width: 94px;
-	flex: 0 0 auto;
-}
-
-.ai-recommendations-list .recruit-content .congratulations-passing {
-	display: inline-flex;
-	align-items: center;
-	border: 1px solid rgba(255, 195, 46, .3);
-	font-size: 13px;
-	line-height: 20px;
-	color: #333;
-	margin-bottom: 8px;
-	background-color: #fffcf5;
-	padding: 3px 8px;
-	border-radius: 2px;
-}
-
-.ai-recommendations-list .recruit-content .company {
-	display: flex;
-	align-items: center;
-	margin-bottom: 4px;
-}
-
-}
-.tplBtn, .bookmark {
-	position: relative;
-	overflow: hidden;
-	display: inline-block;
-	text-align: center;
-	vertical-align: middle;
-	line-height: normal;
-	white-space: nowrap;
-}
-
-.bookmark {
-	position: relative;
-	display: inline-block;
-	background-image: url(/img/bookmark-check.svg);
-	background-repeat: no-repeat;
-	vertical-align: middle;
-	width: 18px;
-	height: 18px;
-	background-position: 0px 0px;
-}
-
-.bookmark.On {
-	background-image: url(/img/bookmark-check-fill.svg);
-}
-
-.ai-recommendations-list .recruit-content .headers {
-	display: flex;
-	min-width: 0;
-	align-items: center;
-}
-
-.ai-recommendations-list .recruit-content .title {
-	display: -webkit-box;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	word-break: break-all;
-	font-size: 18px;
-	line-height: 26px;
-	color: #222;
-	font-weight: 700;
-}
-
-.ai-recommendations-list .recruit-content .recruitment .item {
-	display: flex;
-	align-items: center;
-	font-size: 13px;
-	line-height: 20px;
-	color: #6a6a6a;
-}
-
-.ai-recommendations-list .recruit-content .recruitment .item:not(:first-child):before
-	{
-	content: "";
-	display: block;
-	width: 1px;
-	height: 12px;
-	margin-left: 8px;
-	margin-right: 8px;
-	background-color: #e8e8e8;
-}
-
-.ai-recommendations-list .recruit-content .job {
-	margin-top: 16px;
-	font-size: 13px;
-	line-height: 20px;
-	color: #6a6a6a;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-.ai-recommendations-list .recruit-content .recruitment {
-	display: flex;
-	margin-top: 4px;
-}
-
-.ai-recommendations-list .recruit-apply .button.homepage {
-	background-color: #5288ff;
-}
-
-.ai-recommendations-list .recruit-apply button {
-	display: block;
-	width: 100%;
-	height: 32px;
-	font-size: 12px;
-	line-height: 18px;
-	font-weight: 600;
-	color: #fff;
-	border-radius: 4px;
-	background-color: #ff501b;
-}
-
-.tplBtnBlue {
-	background: #39f;
-}
-
-.tplBtn_1 {
-	font-weight: bold;
-	padding: 7px 10px 7px 10px;
-}
-
-.tplBtn_1 span {
-	color: #fff;
-}
-
-.tplBtn span, bookmark span {
-	position: relative;
-	white-space: nowrap;
-}
-
-.ai-recommendations-list .recruit-apply .deadline {
-	margin-top: 8px;
-	text-align: center;
-	font-size: 12px;
-	line-height: 18px;
-	color: #6a6a6a;
-}
-
-.ai-recommendations-list .recruit-apply {
-	display: flex;
-	align-items: center;
-	width: 94px;
-	flex: 0 0 auto;
-}
-
-.ai-recommendations-list .recruit-apply-wrap {
-	width: 100%;
-}
-
-.tab_content .tab_panel{
-	display: none;
-} 
-.tab_content .tab_panel.active{
-	display: block;
-} 
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
-	<main class="mtuHome">
+	<div class="mtuHome">
 		<div class="contWrap inner">
 			<div class="mtuTab devFixedTab">
 				<div class="tabs">
@@ -318,7 +54,7 @@ border-bottom: none;
 										</a>
 									</div>
 									<div class="headers">
-										<a href="#"
+										<a href="/Detail/Detail?com_id=${item.com_id}"
 											target="_blank" class="title">${item.po_title} Backend 개발자</a>
 										<c:choose>
 									        <c:when test="${not empty item.ub_boolean and item.ub_boolean == 1}">
@@ -460,7 +196,7 @@ border-bottom: none;
 			</div>
 			
 		</div>
-	</main>
+	</div>
 
 	<footer>
 		<%@include file="/WEB-INF/include/Footer.jsp"%>
@@ -513,7 +249,7 @@ border-bottom: none;
 		
 		
 		
-	    let	booksEl = document.querySelectorAll('.bookmark');
+	    let	booksEl = document.querySelectorAll('.mtuHome .bookmark');
 		//bookmark 
 		 // 북마크 요소에 클릭 이벤트 리스너 추가
 	    booksEl.forEach((onebook, index) => {
