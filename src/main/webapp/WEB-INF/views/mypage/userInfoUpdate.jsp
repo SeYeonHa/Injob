@@ -501,7 +501,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input
 	         	 for (const pair of formData.entries()) {
 	                 console.log(pair[0] + ', ' + pair[1]);
 	             }
-
+	         	document.getElementById('registerForm').submit(); 
 	         });
 	</script>
 
