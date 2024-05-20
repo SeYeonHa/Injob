@@ -23,6 +23,10 @@ public interface LoginMapper {
 
 	void saveComSignup(CompanyVo dto);
 
+	UserVo idLogin(Long userId);
+
+	void updateSignup(UserVo dto);
+
 	
 
 	

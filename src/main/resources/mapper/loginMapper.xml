@@ -107,7 +107,35 @@ FROM USERS
 		    company
  </select>
 
- 
+  <select id ="idLogin">
+  	SELECT
+    user_name,
+    user_passwd,
+    user_email,
+    user_address,
+    user_phone,
+    user_id,
+    user_social_num,
+    indate,
+    user_gender,
+    role
+FROM
+    users
+where  
+    user_id =#{userId}
+  
+  </select>
+  <update id="updateSignup">
+  		UPDATE users
+		SET
+		    user_address= #{user_address},
+		    user_phone =#{user_phone},
+		    user_social_num =#{user_social_num},
+		    user_gender =#{user_gender}
+		WHERE
+          user_id = #{user_id}
+  
+  </update>
 
 </mapper>
 

@@ -1,5 +1,6 @@
 package com.injob.mypage.controller;
 
+import java.io.Console;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,12 +17,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
+import com.injob.login.service.LoginService;
+import com.injob.login.service.UserService;
 import com.injob.mypage.domain.AiRecommend;
 import com.injob.mypage.domain.ResumeVo;
 import com.injob.mypage.mapper.MypageMapper;
@@ -40,6 +44,8 @@ public class Mypage2Controller {
 	private MypageMapper mypageMapper;
 	@Autowired
 	private LoginMapper loginMapper;
+	@Autowired
+	private UserService userService;
 
 	//http://localhost:9090/Mypage/Overall
 	@GetMapping("/Mypage/Overall")
@@ -189,8 +195,7 @@ public class Mypage2Controller {
 	    
 	    System.out.println("자지막으로 저장되는 쿠키값");
 	    System.out.println(cookie);
-	    System.out.println(cookie);
-	    System.out.println(cookie);
+	 
 
 	    // 쿠키의 유효 시간 설정 (예: 1주일)
 	    cookie.setMaxAge(30 * 60); // 초 단위로 설정
@@ -208,13 +213,31 @@ public class Mypage2Controller {
 	}
 	
 	@GetMapping("/Text_User/User_Info")
-	public ModelAndView UserInfoUpdate() {
+	public ModelAndView UserInfoUpdate(HttpSession session) {
 		
+		Long userId =  (Long) session.getAttribute("userId");
+		UserVo userVo = loginMapper.idLogin(userId);
+		System.out.println("세션연결");
+		System.out.println(userVo);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("mypage/userInfoUpdate");
+		mv.addObject("user", userVo);
 		
 		return mv;
 		
 	}
+	@PostMapping("/Text_User/User_Write")
+	public String UserInfoWrite(UserVo userVo, HttpSession session) {
+		System.out.println("세션연결");
+		System.out.println(userVo);
+		UserVo user = userVo;
+		user.setUser_id((Long)session.getAttribute("userId"));
+		System.out.println("변환된vo");
+		System.out.println(user);
+		userService.update(user);
+		
+        return "redirect:/logout";
+	}
+	
 	
 }

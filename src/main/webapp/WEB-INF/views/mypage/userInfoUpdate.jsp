@@ -211,7 +211,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input
 
 		<div class="box-contents">
 			<div class="content">
-			  <form id="registerForm" method="post" action="">	
+			  <form id="registerForm" method="post" action="/Text_User/User_Write">	
 				<fieldset>		
                     <h3>회원정보수정</h3>
                     <p class="subTitle">회원정보를 수정할 수 있습니다.</p>
@@ -540,7 +540,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input
 	         	 for (const pair of formData.entries()) {
 	                 console.log(pair[0] + ', ' + pair[1]);
 	             }
-	         	 /* document.getElementById('registerForm').submit(); */
+	         	  //document.getElementById('registerForm').submit(); 
 	         });
 	</script>
 
