@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<title>Insert title 수정수정</title>
+<title>Insert title 수정수정rr</title>
 <link rel="icon" type="image/png" href="/img/logo.png" />
 <link href="/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet"  />
 <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
