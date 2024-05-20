@@ -24,7 +24,7 @@
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
-
+		<%@include file="/WEB-INF/include/rightAside.jsp"%>
 		<div class="container-ha">
 		  <section class="box align-right">
 		<!--  사이드바  -->

@@ -3,6 +3,7 @@ package com.injob.mypage.controller;
 import java.io.Console;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.injob.bookmark.mapper.BookmarkMapper;
+import com.injob.bookmark.service.GetbookmarkService;
+
+import com.injob.cookie.service.GetcookieService;
 import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
 import com.injob.login.service.LoginService;
@@ -46,6 +51,11 @@ public class Mypage2Controller {
 	private LoginMapper loginMapper;
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private GetbookmarkService getbookmarkService;
+	@Autowired 
+	private GetcookieService getcookieService;
 
 	//http://localhost:9090/Mypage/Overall
 	@GetMapping("/Mypage/Overall")
@@ -102,40 +112,36 @@ public class Mypage2Controller {
 		
 	}
 	@GetMapping("/User/Scrap") // 이거 나중에 합치고 /Mypage 압에 넣고 하기  jsp도 너무 따로따로임
-	public ModelAndView getScrap() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    String username = authentication.getName();
-	    
-	    System.out.println(username);
-	  
-	    
-	    UserVo userVo = loginMapper.login(username);
-	    Long userId = userVo.getUser_id();
-	    
-	    List<AiRecommend> aiList = mypageMapper.getAiList(userId);
-	    
-	    for (AiRecommend dayReset : aiList) {
-	    	System.out.println("-----------------");
-	    	System.out.println(dayReset.getPo_end_date()); //2024-06-05 LocalDate로 받으면 00:00:00빠짐
-	    	System.out.println(dayReset.getPo_end_date().getDayOfMonth());//5 날짜만 가지고 올수있음
-	    	
-
-	    	 // DateTimeFormatter를 사용하여 원하는 형식으로 날짜를 포맷합니다.
-	    	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd (E)");
-	    	    //위에 포멧형식으로 내 날짜 바꾸기
-	    	    String formattedDate = dayReset.getPo_end_date().format(formatter);
-	    	    dayReset.setStringDay(formattedDate); //06-05
-		    	   
-	    	    System.out.println(dayReset.getStringDay());//06.05 (수)
+	public ModelAndView getScrap(HttpServletRequest request, HttpSession session) {
+		Long userId = (Long) session.getAttribute("userId");
+		UserVo userVo = loginMapper.idLogin(userId);
+		
+		List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+		
+		//사이드 북마크 추천 
+	    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
 	    	    
-	    	   
-	    	   
+	    
+	  //사이드 쿠키
+	     List<Long> recentlyViewedPosting = new ArrayList<>();
+		 
+		 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+		  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+		 if(recentlyViewedPosting == null) {
+			 System.out.println("쿠키가없어요~");
+			 System.out.println("쿠키가없어요~");
+		 }else {
+			  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
 		}
+		 
+	    //사이드 쿠키
 	   
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("aiList", aiList);
 		mv.addObject("user", userVo);
+		mv.addObject("recentCookies", recentCookies);
+		mv.addObject("bookList", bookList);
 		
 		mv.setViewName("mypage/scrap");
 		
@@ -175,8 +181,7 @@ public class Mypage2Controller {
 	    if (!recentlyViewedPosting.contains(comId)) {
 	    	recentlyViewedPosting.add(comId);
 	    }
-	    System.out.println("어레이리스트에 null값이 추가되는곳 찾기");
-	    System.out.println(recentlyViewedPosting);
+	  
 	    
 	    StringJoiner joiner = new StringJoiner(":");
 	    for (Long item : recentlyViewedPosting) {

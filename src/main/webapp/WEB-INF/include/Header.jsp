@@ -34,7 +34,7 @@
           <div class="login-link">
 			    <c:choose>	        
 			       <c:when test="${not empty user}">
-			            <a class="logout" href="/Mypage/Overall">${user.user_name}</a>
+			            <a class="logout" href="/Mypage/Resume?user_id=${user.user_id}&nowpage=1">${user.user_name}</a>
 			            <div class="lyMyArea">
 				            <div class="myInner">
 				                <div class="myLists">

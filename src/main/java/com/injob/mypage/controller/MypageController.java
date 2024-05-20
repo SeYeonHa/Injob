@@ -1,5 +1,6 @@
 package com.injob.mypage.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,14 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.injob.bookmark.service.GetbookmarkService;
+
+import com.injob.cookie.service.GetcookieService;
 import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
+import com.injob.mypage.domain.AiRecommend;
 import com.injob.mypage.domain.ResumeVo;
 import com.injob.mypage.mapper.MypageMapper;
 import com.injob.paging.MypagePagingMapper;
 import com.injob.paging.Pagination;
 import com.injob.paging.PagingResponse;
 import com.injob.paging.SearchVo;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/Mypage")
@@ -30,10 +38,43 @@ public class MypageController {
 	private MypageMapper mypageMapper;
 	@Autowired
 	private LoginMapper loginMapper;
+	
+	//------------------------------------
+	@Autowired
+	private GetbookmarkService getbookmarkService;
+	
+	@Autowired
+	private GetcookieService getcookieService;
+	
+	
+	//-------------------------------------
 
 	@RequestMapping("/Resume")
-	public ModelAndView getReseume(int nowpage, ResumeVo resumeVo) {
-
+	public ModelAndView getReseume(int nowpage, ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
+		
+		//--------------------------------------------------------------------------
+		Long userId = (Long) session.getAttribute("userId");
+		//UserVo userVo = loginMapper.idLogin(userId);
+		List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+		
+		//사이드 북마크 추천 
+	    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+	    	    
+	    
+	  //사이드 쿠키
+	     List<Long> recentlyViewedPosting = new ArrayList<>();
+		 
+		 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+		  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+		 if(recentlyViewedPosting == null) {
+			 System.out.println("쿠키가없어요~");
+			 System.out.println("쿠키가없어요~");
+		 }else {
+			  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+		}
+          //--------------------------------------------------------------------------
+		 
+		 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println("여기냐");
 		Long user_id =7l;
@@ -96,6 +137,11 @@ public class MypageController {
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("Resumelist", Resumelist);
+		//--------------------------------------------
+		mv.addObject("recentCookies", recentCookies);
+		mv.addObject("bookList", bookList);
+		//---------------------------------------
+		
 		mv.setViewName("mypage/resume");
 
 		return mv;

@@ -18,17 +18,18 @@
 	rel="stylesheet">
 
 <style>
-
+	
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
-
+    	  <%@include file="/WEB-INF/include/rightAside.jsp"%>
 		<div class="container-ha">
 			<section class="box align_right">
 				<!--  사이드바  -->
 				<%@include file="/WEB-INF/include/aside.jsp"%>
+
 
 				<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
@@ -464,3 +465,4 @@
 
 
 
+				
