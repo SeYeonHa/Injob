@@ -53,6 +53,7 @@
 				<a href="/Posting/PMain">메인 공고</a>
 			</div>
 			<div>
+				<a href="/Posting/PMain2">메뉴 목록</a>
 				<a href="/ComMypage/Post?com_id=1">기업 마이페이지</a>
 			</div>
     

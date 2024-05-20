@@ -1,5 +1,6 @@
 package com.injob.posting.controller;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,31 @@ public class PostingController {
 			 user_id = userVo.getUser_id();
 		
 		List<JoinVo> postingList = postingMapper.getPostingList();
+		int count = postingMapper.getCount();
+		/*
+		for(JoinVo dayReset : postingList) {
+		System.out.println(dayReset.getPo_end_date());
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd (E)");
+		String formattedDate = dayReset.getPo_end_date().format(formatter);
+		dayReset.setStringDay(formattedDate);
+		System.out.println(dayReset.getStringDay());
+		}*/
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd (E)");
+	        for (JoinVo dayReset : postingList) {
+	            System.out.println(dayReset.getPo_end_date());
+
+	            String formattedDate = dayReset.getPo_end_date().format(formatter);
+	            dayReset.setStringDay(formattedDate);
+	            System.out.println(dayReset.getStringDay());
+	        }
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("postingList",postingList);
+		mv.addObject("count",count);
 		mv.setViewName("posting/pmain");
-		
 		return mv;
 	}
 	

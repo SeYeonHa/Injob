@@ -15,7 +15,8 @@
     <result property="career"   column="CAREER"  />
     <result property="stack"   column="STACK"  />
     <result property="com_address"   column="COM_ADDRESS"  />
-    
+    <result property="user_id"   column="USER_ID"  /> 
+    <result property="ub_boolean"   column="UB_BOOLEAN"  /> 
 </resultMap>
 
 
@@ -33,11 +34,17 @@
          ,   P.CAREER AS CAREER
          ,   PS.STACK AS STACK
          ,   C.COM_ADDRESS AS COM_ADDRESS
-
+         ,   UB.USER_ID AS USER_ID
+	     ,   UB.UB_BOOLEAN AS UB_BOOLEAN
       FROM POSTING P
-         JOIN POSTING_STACK PS ON PS.PO_ID = P.PO_ID
-         JOIN COMPANY C ON P.COM_ID = C.COM_ID
-
+       INNER  JOIN POSTING_STACK PS ON PS.PO_ID = P.PO_ID
+       INNER  JOIN COMPANY C ON P.COM_ID = C.COM_ID
+       LEFT   JOIN USER_BOOKMARK UB ON UB.PO_ID = P.PO_ID
+  </select>
+  
+  <select id="getCount">
+  SELECT COUNT(PO_ID) AS COUNT
+    FROM POSTING
   </select>
 
 </mapper>
