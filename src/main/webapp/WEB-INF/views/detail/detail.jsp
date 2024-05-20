@@ -160,6 +160,7 @@ body {
 		  </div>
 		  
 		  
+		  
 				<!-- 비슷한 공고 리스트 -->
 		  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 		  <div>&nbsp;</div>
