@@ -75,22 +75,10 @@
 				<div class="box-contents">
 
 
-					<div class="card">
+				
 						<div class="card-header">
-							<h3 class="card-title">이력서 목록</h3>
+							<h2 class="card-title" style="font-weight: bold;">이력서 현황</h2>
 
-							<div class="card-tools">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<input type="text" name="table_search"
-										class="form-control float-right" placeholder="Search">
-
-									<div class="input-group-append">
-										<button type="submit" class="btn btn-default">
-											<i class="fas fa-search"></i>
-										</button>
-									</div>
-								</div>
-							</div>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0">
@@ -117,9 +105,22 @@
 								</tbody>
 							</table>
 						</div>
-						<br>
-						<button type="button" onclick="location.href=`/Mypage/ResumeWrite?user_id=${user_id}`" class="btn btn-block btn-success" >작성</button>
+
+					<div
+						style="display: flex; justify-content: center;">
+						<div style="display: flex; justify-content: left ;"></div>
+						<!-- 왼쪽 빈 공간 -->
+						<div style="margin: 0 auto; display: flex; justify-content: center;">
+							<%@include file="/WEB-INF/include/paging.jsp"%>
+						</div>
+						<div>
+							<button type="button" style="margin: 10px 10px; display: flex; justify-content: right;"
+								onclick="location.href='/Mypage/ResumeWrite?user_id=${user_id}'"
+								class="btn btn-block btn-success">작성</button>
+						</div>
 					</div>
+
+
 				</div>
 				
 
@@ -133,38 +134,9 @@
 
 	<script>
 	
-        function updateResumeForm(id) {
-            console.log(id);
-            $.ajax({
-                type: "GET",
-                url: "/person/updateResume/" + id
-            }).done((res) => {
-                location.href = "/person/updateResume/" + id;
-            }).fail((err) => {
-
-            });
-        }
-
-        //For Demo only
-        var links = document.getElementsByClassName('link')
-        for (var i = 0; i <= links.length; i++)
-            addClass(i)
-
-
-        function addClass(id) {
-            setTimeout(function () {
-                if (id > 0) links[id - 1].classList.remove('hover')
-                links[id].classList.add('hover')
-            }, id * 750)
-        }
+       
     </script>
 
 </body>
 
 </html>
-
-
-
-
-
-
