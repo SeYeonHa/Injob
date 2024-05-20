@@ -25,18 +25,18 @@
 }	
 .my-content-top .my-profile-wrap {
 	position: absolute;
-	left: 0;
-	top: 0;
+	left: 15px;
+	top: 30px;
 }
  .my-profile {
     position: relative;
 }
  .my-profile .pie-chart{
-	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 50%, rgb(244, 244, 244) 50%, rgb(244, 244, 244) 100%);
+	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%, rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%);
 	position: relative;
-	width: 90px;
-	height: 90px;
-	border-radius: 50%
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
 	transition: 0.3s;
 }
  .my-profile .profile-img {
@@ -44,8 +44,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 84px;
-    height: 84px;
+    width: 110px;
+    height:110px;
     border-radius: 50%;
     overflow: hidden;
     background: url(/img/man-profil.png) no-repeat center;
@@ -53,20 +53,20 @@
     border: 3px solid #fff;
     box-sizing: border-box;
 }
-.my-content .my-profile .profile-btn {
+ .my-profile .profile-btn {
     position: absolute;
     bottom: 3px;
     right: 2px;
     z-index: 1;
     width: 30px;
     height: 30px;
-    background: url(/img/camera.svg) no-repeat center;
+    background: url(/img/camera.png) no-repeat center;
     background-size: contain;
     border-radius: 50%;
     overflow: visible;
     cursor: pointer;
 }
-.my-content .my-career {
+ .my-career {
     display: block;
     font-size: 13px;
     letter-spacing: 0px;
@@ -137,7 +137,8 @@
     align-items: baseline;
     position: relative;
 }
-.my-status-wrap .my-status-list .list-title {
+
+.my-status-wrap .my-status-list h5 {
     min-width: 65px;
     font-size: 13px;
     letter-spacing: 0px;
@@ -159,6 +160,42 @@
     line-height: 20px;
     color: #002aff;
 }
+.my-status-wrap .my-status-box .status a {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #222222;
+    padding-right: 15px;
+}
+.mtuHome {
+    margin-top: 0;
+}
+.box-contents{
+ border: none;
+}
+.my-status-wrap .my-status-list .expand .expand-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.my-status-wrap .my-status-list .expand .skill-list li {
+    color: #3b65ff;
+    background-color: #f0f5ff;
+}
+.my-status-wrap .my-status-list .expand .expand-list li {
+    height: 30px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 30px;
+    width: auto;
+    padding: 0 12px;
+    border-radius: 99px;
+}
+
 </style>
 </head>
 <body>
@@ -185,7 +222,7 @@
 													</p>
 												</div>
 											</div>
-											<button class="pofile-btn" type="button"></button>
+											<button class="profile-btn" type="button"></button>
 										</div>
 									</div><!-- my-profile-wrap -->
 									<div class="my-info-wrap">
@@ -197,21 +234,85 @@
 									  		<h1><span>구덕고등학교</span>에서 공부했어요</h1>
 									  	</div>
 									  	<div class="my-status-box">
-									  		<p class="status"></p>
+									  		<p class="status">
+									  		  <a href="/User/Resume/Write" target="_blank" >
+                                               구덕고등학교  졸업 >
+                                              </a>
+									  		</p>
 									  	</div>
 									  	<div class="my-status-list">
-									  		<h5 class="list-title>">보유스킬</h5>
+									  		<h5 class="list-title">보유스킬</h5>
 									  		<div class="expand">
-									  		  <ul class="skill-list expand-list"></ul>
+									  		  <ul class="skill-list expand-list">
+                                    			  <li>JAVA</li>
+                                    			  <li>Spring Boot</li>
+                                    			  <li>JPA</li>
+                                    			  <li>ORM</li>
+                                    			  <li>MyBatis</li>
+				                                  <li>OracleDB</li>
+				                                  <li>RDBMS</li>
+				                                  <li>분석력</li> 
+                                              </ul>
 									  		</div>
 									  	</div>
 									  	<div class="my-status-list">
-									  	   <h5 class="list-title>">구직 선호도</h5>
+									  	   <h5 class="list-title">구직 선호도</h5>
 									  	   <a href="#" class="no-data">이직 시 연봉상승 vs 워라벨 당신의 선택은? </a>
 									  	</div>
 									  </div>
 									</div><!-- my-info-wrap -->
-								</section>>
+								</section>
+								<div class="my-content-bottom">
+						            <h2 class="skip">주요활동내역</h2>
+						            <ul class="my-active-list">
+						                <li class="list">
+					                      <a class="box-botton" href="/User/ApplyMng" >
+					                        <p class="title">
+					                            지원완료
+					                            <strong class="count">0</strong>
+					                        </p>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/user/PositionOffer#dev-tab-resume-read" >
+					                        <p class="title">
+					                            이력서 열람
+					                            <strong class="count">0</strong>
+					                        </p>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/User/PositionOffer?tabStat=1#dev-tab-position" >
+					                        <p class="title">
+					                            포지션 제안
+					                            <strong class="count">0</strong>
+					                        </p>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/User/Scrap/Index" onclick=>
+					                        <p class="title">
+					                            스크랩 공고
+					                            <strong class="count">4</strong>
+					                        </p>
+				                            <div class="tooltip mtuSpImgBefore mtuSpImgAfter">
+				                                <p>이번주 마감 <strong>1</strong>건</p>
+				                            </div>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/User/FavorCo" >
+					                        <p class="title">
+					                            관심기업공고
+					                            <strong class="count">22</strong>
+					                        </p>
+					                        <div class="tooltip mtuSpImgBefore mtuSpImgAfter">
+					                            <p>이번주 마감 <strong>8</strong>건</p>
+					                        </div>
+					                      </a>
+						                </li>
+						            </ul>
+						        </div>
 								<div class="mtuTab devFixedTab">
 									<div class="tabs">
 										<button class="on" data-flag="AI_panel">AI추천</button>

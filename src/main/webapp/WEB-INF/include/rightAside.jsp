@@ -15,7 +15,7 @@
 					                <a href="#" class="item">
 					                    <span class="info">
 					                        <c:choose>
-					                            <c:when test="${bookmark.daysRemaining <= 12}">
+					                            <c:when test="${bookmark.daysRemaining <= 10}">
 					                                <em class="day today">곧 마감</em>
 					                            </c:when>
 					                            <c:otherwise>

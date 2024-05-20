@@ -117,7 +117,20 @@ public class Mypage2Controller {
 		UserVo userVo = loginMapper.idLogin(userId);
 		
 		List<AiRecommend> aiList = mypageMapper.getAiList(userId);
-		
+		for (AiRecommend dayReset : aiList) {
+	    	System.out.println("-----------------");
+	    	System.out.println(dayReset.getPo_end_date()); //2024-06-05 LocalDate로 받으면 00:00:00빠짐
+	    	System.out.println(dayReset.getPo_end_date().getDayOfMonth());//5 날짜만 가지고 올수있음
+
+
+	    	 // DateTimeFormatter를 사용하여 원하는 형식으로 날짜를 포맷합니다.
+	    	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd (E)");
+	    	    //위에 포멧형식으로 내 날짜 바꾸기
+	    	    String formattedDate = dayReset.getPo_end_date().format(formatter);
+	    	    dayReset.setStringDay(formattedDate); //06-05
+
+	    	    System.out.println(dayReset.getStringDay());//06.05 (수)
+		}
 		//사이드 북마크 추천 
 	    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
 	    	    
