@@ -18,7 +18,147 @@
 	rel="stylesheet">
 
 <style>
-	
+ .my-content-top {
+    padding: 30px 30px 20px;
+    box-sizing: border-box;
+    position: relative;
+}	
+.my-content-top .my-profile-wrap {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+ .my-profile {
+    position: relative;
+}
+ .my-profile .pie-chart{
+	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 50%, rgb(244, 244, 244) 50%, rgb(244, 244, 244) 100%);
+	position: relative;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%
+	transition: 0.3s;
+}
+ .my-profile .profile-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: url(/img/man-profil.png) no-repeat center;
+    background-size: contain;
+    border: 3px solid #fff;
+    box-sizing: border-box;
+}
+.my-content .my-profile .profile-btn {
+    position: absolute;
+    bottom: 3px;
+    right: 2px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    background: url(/img/camera.svg) no-repeat center;
+    background-size: contain;
+    border-radius: 50%;
+    overflow: visible;
+    cursor: pointer;
+}
+.my-content .my-career {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #002aff;
+    margin-top: 10px;
+}
+.my-status-wrap{
+ padding-left: 130px;
+}
+.my-status-wrap .my-status-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.my-status-wrap .badge.status-incomplete {
+    color: rgba(255, 0, 0, 0.7);
+    border: 1px solid rgba(255, 0, 0, 0.7);
+}
+.my-status-wrap .badge {
+    position: relative;
+    width: auto;
+    height: 24px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 24px;
+    color: #222222;
+    padding: 0 12px;
+    border-radius: 28px;
+    border: 1px solid #222222;
+    background-color: #ffffff;
+    margin: 0;
+}
+.user-status-title {
+    display: flex;
+    align-items: baseline;
+}
+.user-status-title h1 {
+    display: flex;
+    align-items: baseline;
+    max-width: 90%;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    line-height: 30px;
+    color: #222222;
+    white-space: nowrap;
+}
+.my-status-wrap .my-status-box {
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 22px;
+    border: 1px solid #e8e8e8;
+    padding: 16px;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+.my-status-wrap .my-status-box .status a {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #222222;
+    padding-right: 15px;
+}
+.my-status-wrap .my-status-list {
+    display: flex;
+    align-items: baseline;
+    position: relative;
+}
+.my-status-wrap .my-status-list .list-title {
+    min-width: 65px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #222222;
+    margin-right: 8px;
+}
+.my-status-wrap .my-status-list .expand {
+    position: relative;
+    width: 100%;
+}
+.my-status-wrap .my-status-list ~ .my-status-list {
+    margin-top: 8px;
+}
+.my-status-wrap .no-data {
+    font-size: 13px;
+    letter-spacing: 0px;
+    line-height: 20px;
+    color: #002aff;
+}
 </style>
 </head>
 <body>
@@ -29,12 +169,49 @@
 			<section class="box align_right">
 				<!--  사이드바  -->
 				<%@include file="/WEB-INF/include/aside.jsp"%>
-
+					
 
 				<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
 						<div class="mtuHome">
 							<div class="contWrap">
+								<section class ="my-content-top">
+									<div class ="my-profile-wrap">
+										<div class ="my-profile">
+											<div class="pie-chart">
+												<div class ="profile-img">
+													<p class="img">
+														<img src="">
+													</p>
+												</div>
+											</div>
+											<button class="pofile-btn" type="button"></button>
+										</div>
+									</div><!-- my-profile-wrap -->
+									<div class="my-info-wrap">
+									  <div class="my-status-wrap">
+									  	<div class="my-status-top">
+									  	  <div class="badge status-incomplete">이력서 미완성</div>
+									  	</div><!-- my-status-top이력서posion -->
+									  	<div class="user-status-title">
+									  		<h1><span>구덕고등학교</span>에서 공부했어요</h1>
+									  	</div>
+									  	<div class="my-status-box">
+									  		<p class="status"></p>
+									  	</div>
+									  	<div class="my-status-list">
+									  		<h5 class="list-title>">보유스킬</h5>
+									  		<div class="expand">
+									  		  <ul class="skill-list expand-list"></ul>
+									  		</div>
+									  	</div>
+									  	<div class="my-status-list">
+									  	   <h5 class="list-title>">구직 선호도</h5>
+									  	   <a href="#" class="no-data">이직 시 연봉상승 vs 워라벨 당신의 선택은? </a>
+									  	</div>
+									  </div>
+									</div><!-- my-info-wrap -->
+								</section>>
 								<div class="mtuTab devFixedTab">
 									<div class="tabs">
 										<button class="on" data-flag="AI_panel">AI추천</button>

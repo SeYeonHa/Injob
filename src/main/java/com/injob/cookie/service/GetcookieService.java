@@ -38,7 +38,7 @@ public class GetcookieService {
 		 System.out.println("------------------");
 		 System.out.println(recentlyViewedPosting);
 		 System.out.println(recentlyViewedPosting);
-		return recentlyViewedPosting;
+		return recentlyViewedPosting.isEmpty() ? null :recentlyViewedPosting;
 		
 	}
 }
