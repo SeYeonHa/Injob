@@ -79,23 +79,12 @@
 						<div class="card-header">
 							<h3 class="card-title">지원 이력</h3>
 
-							<div class="card-tools">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<input type="text" name="table_search"
-										class="form-control float-right" placeholder="Search">
-
-									<div class="input-group-append">
-										<button type="submit" class="btn btn-default">
-											<i class="fas fa-search"></i>
-										</button>
-									</div>
-								</div>
-							</div>
+						
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0">
 							<table class="table table-hover text-nowrap">
-								<thead>
+								<thead style="text-align: center;">
 									<tr>
 										<th>회사명</th>
 										<th>공고 제목</th>
@@ -103,14 +92,14 @@
 										<th>결과</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody style="border-bottom: 1px solid #dee2e6;">
 									<c:forEach var="H" items="${Historylist}">
 										
 										<tr>
 											<td>${H.com_name }</td>
 											<td>${H.po_title }</td>
 											<td>${H.re_id}</td>
-											<td>${H.result}</td>
+											<td class="result">${H.result}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -128,32 +117,25 @@
 	</footer>
 
 	<script>
-	
-        function updateResumeForm(id) {
-            console.log(id);
-            $.ajax({
-                type: "GET",
-                url: "/person/updateResume/" + id
-            }).done((res) => {
-                location.href = "/person/updateResume/" + id;
-            }).fail((err) => {
+		function setColorForResult(resultElement) {
+			var resultText = resultElement.innerText.trim();
+			if (resultText === "합격") {
+				resultElement.style.color = "blue";
+			} else if (resultText === "불합격") {
+				resultElement.style.color = "red";
+			} else if (resultText === "진행중") {
+				resultElement.style.color = "black";
+			}
+		}
 
-            });
-        }
+		document.addEventListener("DOMContentLoaded", function() {
+			var resultElements = document.querySelectorAll(".result");
+			resultElements.forEach(function(element) {
+				setColorForResult(element);
+			});
+		});
+	</script>
 
-        //For Demo only
-        var links = document.getElementsByClassName('link')
-        for (var i = 0; i <= links.length; i++)
-            addClass(i)
-
-
-        function addClass(id) {
-            setTimeout(function () {
-                if (id > 0) links[id - 1].classList.remove('hover')
-                links[id].classList.add('hover')
-            }, id * 750)
-        }
-    </script>
 
 </body>
 

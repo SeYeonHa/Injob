@@ -29,18 +29,27 @@
 	<select id="selectPostList2">
 
 		SELECT
-		RE.USER_ID,
-		RE.RE_ID,
-		RE.RE_PROFILE,
-		RE.RE_TITLE,
-		RE.RE_INTTI,
-		RE.RE_INTCON,
-		RE.LICENSE,
-		RE.INDATE,
-		UR.USER_NAME,
-		UR.USER_SOCIAL_NUM,
-		UR.USER_PHONE,
-		UR.USER_EMAIL
+				COM.COM_ID,
+				COM.COM_NAME,
+				COM.COM_EMAIL,
+				COM.COM_TYPE,
+				COM.COM_CEO,
+				COM.COM_PASSWD,
+				COM.COM_ADDRESS,
+				COM.COM_PHONE,
+				COM.COM_INDATE,
+				COM.COM_SALARY,
+				COM.COM_BIRTH,
+				COM.COM_LOGO,
+				PO.PO_ID,
+				PO.PO_GRADE,
+				PO.HOPE_DEPARTMENT,
+				PO.PO_START_DATE,
+				PO.PO_END_DATE,
+				PO.PO_PROFILE,
+				PO.PO_TITLE,
+				PO.PO_CONTENT,
+				PO.CAREER
 
 		FROM POSTING PO INNER JOIN COMPANY COM
 		ON PO.COM_ID = COM.COM_ID
@@ -49,17 +58,25 @@
 
 	</select>
 
-	<select id="selectPostList3">
+	<select id="selectCompany">
 
 		SELECT
-		USER_NAME,
-		USER_SOCIAL_NUM,
-		USER_PHONE,
-		USER_EMAIL
+				COM_ID,
+				COM_NAME,
+				COM_EMAIL,
+				COM_TYPE,
+				COM_CEO,
+				COM_PASSWD,
+				COM_ADDRESS,
+				COM_PHONE,
+				COM_INDATE,
+				COM_SALARY,
+				COM_BIRTH,
+				COM_LOGO
 
-		FROM USERS
+		FROM  COMPANY
 
-		WHERE USER_ID = #{ user_id }
+		WHERE COM_ID = #{ com_id }
 
 	</select>
 	
@@ -67,6 +84,7 @@
 
 		SELECT
 				AP.AP_ID,
+				AP.RE_ID,
 				US.USER_NAME,
 				RE.RE_TITLE,
 				PO.PO_TITLE,
@@ -102,8 +120,31 @@
 		  JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
 		  JOIN USERS US ON RE.USER_ID = US.USER_ID
 
-		WHERE PO.COM_ID = #{ com_id }
+		WHERE PO.COM_ID = 1
 		  AND AP.AP_ID = #{ ap_id }
+		
+		ORDER BY AP.AP_ID ASC
+	
+	</select>
+	
+	<select id="getResult">
+	
+			SELECT
+				AP.AP_ID,
+				AP.RE_ID,
+				US.USER_NAME,
+				RE.RE_TITLE,
+				PO.PO_TITLE,
+				PO.PO_END_DATE,
+				AP.RESULT
+				
+		FROM COMPANY COM
+		  JOIN POSTING PO ON COM.COM_ID = PO.COM_ID
+		  JOIN APPLY AP ON PO.PO_ID = AP.PO_ID
+		  JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
+		  JOIN USERS US ON RE.USER_ID = US.USER_ID
+
+		WHERE AP.COM_ID = #{ com_id }
 		
 		ORDER BY AP.AP_ID ASC
 	
@@ -111,25 +152,29 @@
 	
 <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
 
-	<insert id="insertResume">
+	<insert id="insertPost">
 
-		INSERT INTO RESUME (
-		USER_ID,
-		RE_ID,
-		RE_PROFILE,
-		RE_TITLE,
-		RE_INTTI,
-		RE_INTCON,
-		LICENSE
-		)
+		INSERT INTO POSTING (
+								COM_ID,
+								PO_ID,
+								PO_GRADE,
+								HOPE_DEPARTMENT,
+								PO_END_DATE,
+								PO_PROFILE,
+								PO_TITLE,
+								PO_CONTENT,
+								CAREER
+							)
 		VALUES (
-		#{ user_id },
-		(SELECT NVL(MAX(RE_ID), 0) + 1 FROM RESUME),
-		#{ re_profile },
-		#{ re_title },
-		#{ re_intti },
-		#{ re_intcon },
-		#{ license }
+		#{ com_id },
+		(SELECT NVL(MAX(PO_ID), 0) + 1 FROM POSTING),
+		#{ po_grade },
+		#{ hope_department },
+		#{ po_end_date },
+		#{ po_profile },
+		#{ po_title },
+		#{ po_content },
+		#{ career }
 		)
 
 	</insert>

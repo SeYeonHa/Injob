@@ -12,7 +12,7 @@ public interface ComMypageMapper {
 
 	List<PostVo> selectPostList(PostVo postVo);
 
-	List<ResumeVo> selectPostList2(PostVo postVo);
+	List<PostVo> selectPostList2(PostVo postVo);
 
 	List<PostVo> selectHistory(PostVo postVo);
 
@@ -20,12 +20,16 @@ public interface ComMypageMapper {
 
 	void updatePost(PostVo postVo);
 
-	PostVo selectPostList3(PostVo postVo);
+	PostVo selectCompany(PostVo postVo);
 
 	PostVo selectResult(PostVo postVo);
 
 	void updatePassResult(PostVo result);
 	
 	void updateFailResult(PostVo result);
+
+	List<PostVo> getResult(Long com_id);
+
+	void insertPost(PostVo postVo);
 
 }

@@ -77,12 +77,12 @@
 
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">지원 이력</h3>
+							<h3 class="card-title" data-flag="result_panel">지원 이력</h3>
 							<div class="mtuTab devFixedTab">
-								<div class="tabs">
+							<!--	<div class="tabs">
 									<button class="on" data-flag="result_panel">진행중</button>
 									<button data-flag="resultOn_panel">완료</button>
-								</div>
+								</div> -->
 							</div>
 
 						
@@ -91,7 +91,7 @@
 						<div class="card-body table-responsive p-0 tab-content">
 						  <div id="result_panel" class="tab_panel active">
 							<table class="table table-hover text-nowrap">
-								<thead>
+								<thead style="text-align: center;">
 									<tr>
 										<th>지원 번호</th>
 										<th>지원자 이름</th>
@@ -101,11 +101,11 @@
 										<th>결과</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody class="ha-result" style="border-bottom: 1px solid #dee2e6;">
 									<ul>
-									<c:forEach var="H" items="${Historylist}">
+									<c:forEach var="H" items="${Historylist}" >
 										<li>
-										<tr>
+										<tr onclick="location.href=`/ComMypage/ComResumeView?re_id=${H.re_id}&ap_id=${H.ap_id}`">
 											<input type="hidden" class="ap_id" value="${H.ap_id }">
 											<td >${H.ap_id }</td>
 											<td>${H.user_name }</td>
@@ -181,7 +181,7 @@
 			                // 여기에 스크랩 공고 클릭 시 실행할 코드를 추가합니다.
 			                console.log('지원 현황 완료 버튼이 클릭되었습니다.');
 			                // 예: 스크랩 공고 데이터를 불러오는 함수 호출
-			                loadResultOnData();
+			                loadResultData();
 			            }
 				  });
 				
@@ -212,39 +212,92 @@
 		        });
 		    });
 			
-		    function passResult(apId){
-				fetch(`/ComMypage/PassResult`,{
-					method: 'POST',
-			        headers: {
-			            'Content-Type': 'application/json'
-			        },
-			        body: JSON.stringify({ ap_id : apId })
-					
-				}).then(response => {
-			        if (!response.ok) {
-			            throw new Error('Failed to toggle result');
-			        }
-			        return response.text(); 
-			        
-			    }).then(booktext => {
-			    	console.log(booktext);
-			    	
-			    }).catch(error => console.error('Error toggling result:', error));
-					
-			}
+		    function passResult(apId) {
+		        fetch(`/ComMypage/PassResult`, {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ ap_id: apId })
+		        }).then(response => {
+		            if (!response.ok) {
+		                throw new Error('Failed to toggle result');
+		            }
+		            return response.text();
+		        }).then(result => {
+		            console.log(result);
+		            window.location.reload();
+		        }).catch(error => console.error('Error toggling result:', error));
+		    }
+
+		    function failResult(apId) {
+		        fetch(`/ComMypage/FailResult`, {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ ap_id: apId })
+		        }).then(response => {
+		            if (!response.ok) {
+		                throw new Error('Failed to toggle result');
+		            }
+		            return response.text();
+		        }).then(result => {
+		            console.log(result);
+		            window.location.reload();
+		        }).catch(error => console.error('Error toggling result:', error));
+		    }
+
+		    function updateResultMessage(result) {
+		        // 결과를 처리하여 화면에 업데이트하는 로직을 작성합니다.
+		        // 예를 들어, 결과를 어떤 HTML 요소에 삽입하거나 업데이트합니다.
+		        const resultElement = document.querySelector('#resultMessage');
+		        resultElement.textContent = result; // 결과를 포함하는 HTML 요소에 결과를 설정합니다.
+
+		        // 창을 새로 고침하여 변경된 결과를 표시합니다.
+		        window.location.reload();
+		    }
+
 			
-		    function loadResultOnData() {
+		    function loadResultData() {
 		        // 스크랩 공고 데이터를 불러오는 로직을 여기에 추가합니다.
-		        console.log('스크랩 공고 데이터를 불러옵니다.');
+		        console.log('지원현황 결과를 불러옵니다.');
 		        // 예: fetch 요청을 사용하여 데이터를 불러오기
-		        fetch('/ComMypage/ResultOn')
+		        fetch('/comMypage/overall/load')
 		            .then(response => response.json())
 		            .then(data => {
-		                console.log('스크랩 공고 데이터:', data);
+		                console.log('지원결과 데이터:', data);
 		                // 데이터를 화면에 표시하는 로직 추가
-		                displayBookmarkData(data);
+		                displayResultData(data);
 		            })
 		            .catch(error => console.error('Error loading bookmark data:', error));
+		    }
+		    
+		    function displayResultData(data) {
+		        const resultPanel = document.querySelector('#resultOn_panel .ha-result ul');
+		        console.log(resultPanel);
+		        resultPanel.innerHTML = ''; // 기존 내용을 초기화합니다.
+
+		        data.forEach(item => {
+		            const li = document.createElement('li');
+		            li.innerHTML = `
+		                <tr>
+		                    <input type="hidden" class="ap_id" value="${item.ap_id}">
+		                    <td>${item.ap_id}</td>
+		                    <td>${item.user_name}</td>
+		                    <td>${item.re_title}</td>
+		                    <td>${item.po_title}</td>
+		                    <td>${item.stringDay}</td>
+		                    <td>
+		                        \${item.result === '진행중' ? 
+		                            '<button type="button" class="btn btn-success btn-sm result 1">합격</button>' +
+		                            '<button type="button" class="btn btn-danger btn-sm result 0">불합격</button>'
+		                            : item.result}
+		                    </td>
+		                </tr>
+		            `;
+		            resultPanel.appendChild(li);
+		        });
 		    }
 			
 			

@@ -106,7 +106,7 @@
 											<th>가입일</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody style="border-bottom: 1px solid #dee2e6;">
 										<c:forEach var="R" items="${Resumelist}">
 											<tr>
 												<td><input type="radio" name="re_id" value="${R.re_id}"></td>

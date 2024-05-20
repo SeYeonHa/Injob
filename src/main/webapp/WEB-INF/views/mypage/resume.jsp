@@ -18,7 +18,6 @@
 	rel="stylesheet">
 <!-- Theme style -->
 <link rel="stylesheet" href="/css/adminlte.css">
-
 <style>
 </style>
 </head>
@@ -76,15 +75,27 @@
 				<div class="box-contents">
 
 
-				
+					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">이력서 목록</h3>
 
+							<div class="card-tools">
+								<div class="input-group input-group-sm" style="width: 150px;">
+									<input type="text" name="table_search"
+										class="form-control float-right" placeholder="Search">
+
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-default">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0">
 							<table class="table table-hover text-nowrap">
-								<thead>
+								<thead style="text-align: center;">
 									<tr>
 										<th>이력서 번호</th>
 										<th>자소서 제목</th>
@@ -92,8 +103,8 @@
 										<th>가입일</th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach var="R" items="${Resumelist}">
+								<tbody style="border-bottom: 1px solid #dee2e6;">
+									<c:forEach var="R" items="${response.list}">
 
 										<tr
 											onclick="location.href='/Mypage/ResumeView?user_id=${user_id}&re_id=${R.re_id}'">
@@ -107,11 +118,11 @@
 							</table>
 						</div>
 						<br>
-						<button type="button"
-						style="display: flex; justify-content: flex-end; margin: 10px 10px;"
-							onclick="location.href=`/Mypage/ResumeWrite?user_id=${user_id}`"
-							class="btn btn-block btn-success">작성</button>
+						<button type="button" onclick="location.href=`/Mypage/ResumeWrite?user_id=${user_id}`" class="btn btn-block btn-success" >작성</button>
+					</div>
 				</div>
+				
+
 			</section>
 		</div>
 	</main>
