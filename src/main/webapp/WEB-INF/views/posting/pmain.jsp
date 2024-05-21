@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -229,6 +230,7 @@ transition: all 0.3s ease;
   border-color: #007bff; 
   color: #007bff; 
 }
+/*-----------*/
 
 </style>
 </head>
@@ -336,37 +338,30 @@ transition: all 0.3s ease;
 </div>
 </div>
 <hr />  
-
      <h2>공고</h2>
+<div class="sort-select-all">
        <span> 총  <em id="getCount">${count}</em>건의 공고</span>  
+</div>
+<div class="ul-container">
     <div class="pstyle" id="plist">
    <c:forEach var="posting" items="${postingList}" varStatus="status">
       <div id ="main" class ="main">
 						<ul data-totalcount = "4" data-pageno ="1">
 							<li>
 					                <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
+					                <a href ="/Posting/Pmain?po_id=${posting.po_id }&nowpage=1" class ="listCell">
 									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
 									<div class="listCont">
-									<!--  	<div class="pCor">
-												<span class ="posId">${posting.po_id }</span>
-										</div>-->
 										<div class ="pTit" style="font-weight: bold;">${posting.po_title }</div>
-										<div class ="pInfo">
-											<span class ="pPart">
-												${posting.hope_department }
-											</span>
-											<br>
-										<div class ="pStackBox">
-											<span class ="tag tag-tack">${posting.stack }</span>
-										</div>
-											<span class ="pAddress">
-											  ${posting.com_address }
-											</span>
+										<div class ="pInfo"><span class ="pPart">${posting.hope_department }</span><br>
+										<div class ="pStackBox"><span class ="tag tag-tack">${posting.stack }</span></div>
+											<span class ="pAddress"> ${posting.com_address }</span>
 										</div>
 									</div>
 										<div class ="pAssist">
 										<!--  <span class ="pPeriod">${posting.po_end_date }</span> -->	
 											<span class ="pPeriod">${posting.stringDay }</span>
+									
 										<br />	
 									</a>
 									<div class="listFoot">
@@ -374,6 +369,7 @@ transition: all 0.3s ease;
 										</div>
 										<div>
 									</div>
+									</a>
 							</li>	
 						</ul>
 					
@@ -399,6 +395,7 @@ transition: all 0.3s ease;
 				<input type="hidden" name="user_id" id="user_id"  data-user-id="${ posting.user_id }" />
 				<!--  <input type="hidden" name="ub_boolean" id="ubBoolean"  data-user-id="${ posting.ub_boolean }" /> -->
 			</c:forEach>
+			</div>
 			</div>
 			</div>
   </main>
@@ -701,130 +698,6 @@ document.addEventListener('DOMContentLoaded', function() {
     handleResetClick(document.querySelector('.grade-box .search-reset'), '.grade-box .dev-button-item');
 });
 
-
-/*
-//--------------------------------------
-document.addEventListener("DOMContentLoaded", function() {
-		    
-		    var psearchVo ={
-				department: "전체",
-				local: "전체",
-				career: "경력무관",
-				grade: "학력무관"
-				
-		}
-		var psearchIndex = 0; 
-		
-		function changePsearchIndex(index, value){
-			switch (index){
-			case 0:
-				psearchVo.department = value;
-				break;
-			case 1:
-				psearchVo.local = value;
-				break;
-			case 2:
-				psearchVo.career =value;
-				break;
-			case 3:
-				psearchVo.grade = value;
-				break;
-			default:
-				console.log("서치버튼클릭중 인데슥에서 오류남");
-				break;
-			}	
-		}
-		function fetchData() {
-			console.log("fdsfds");
-		    fetch("/Posting/Search", {
-		        method: 'POST',
-		        headers: {
-		            'Content-Type': 'application/json'
-		        },
-		        body: JSON.stringify(psearchVo)
-		    })
-		    .then(response => {
-		        if (!response.ok) {
-		            throw new Error('서버 응답 오류');
-		        }
-		        return response.json();
-		    })
-		    .then(data => {
-		        // 서버로부터 받은 데이터를 처리하는 로직
-		        console.log(data); // 예시: 받은 데이터를 콘솔에 출력
-		    })
-		    .catch(error => {
-		        console.error('문제 발생:', error);
-
-		    });
-		    
-		 // 모든 버튼 요소를 선택합니다.
-		    var btnBoxes = document.querySelectorAll('.btn_filter');
-
-		    // 각 버튼 요소에 대해 클릭 이벤트를 추가합니다.
-		    btnBoxes.forEach(function(btnBox) {
-		        btnBox.addEventListener('click', function() {
-		        	// 현재 클릭된 버튼의 부모 요소에서 모든 버튼을 찾습니다.
-		            var parentClass = btnBox.parentElement.classList;
-		     	
-		            // 클릭된 버튼 요소의 클래스를 확인하여 이벤트를 처리합니다.
-		            var btnClass = parentClass.contains('dev_wrap-department') ? 'department' :
-		                           parentClass.contains('dev_wrap-local') ? 'local' :
-	                               parentClass.contains('dev_wrap-grade') ? 'grade' :
-		                           parentClass.contains('dev_wrap-career') ? 'career' : '';
-		            var filterBox = btnBox.nextElementSibling;
-
-		            var siblingFilterBoxes = document.querySelectorAll('.filter-box');
-		            siblingFilterBoxes.forEach(function(siblingFilterBox) {
-		                if (siblingFilterBox !== filterBox) {
-		                    siblingFilterBox.classList.remove('open');
-		                }
-		            });
-		            
-		         // 각 버튼에 대한 처리
-		            switch (btnClass) {
-		                case 'department':
-		                	filterBox.classList.toggle('open');
-		                	psearchIndex = 0;
-		                	break;
-		                case 'local':
-		                   filterBox.classList.toggle('open');
-		                   psearchIndex = 1;
-		                    break;
-		                case 'career':
-		                    filterBox.classList.toggle('open');
-		                    psearchIndex = 2;
-		                    break;
-		                case 'grade':
-		                    filterBox.classList.toggle('open');
-		                    psearchIndex = 3;
-		                    break;
-		                default:
-		                    break;
-		            }
-		            var buttons = filterBox.querySelectorAll('ul li button');
-		            
-		            buttons.forEach(function(button) {
-		                button.addEventListener('click', function() {
-		                    // 현재 클릭된 버튼을 제외한 다른 버튼들의 active 클래스를 제거합니다.
-		                    buttons.forEach(function(otherButton) {
-		                        if (otherButton !== button) {
-		                            otherButton.classList.remove('active');
-		                        }
-		                    });
-		                    // 현재 클릭된 버튼에 active 클래스를 추가합니다.
-		                    button.classList.add('active');
-		                    
-		                });
-		            });//buttons.forEach
-		            
-		    })
-
-		    })
-		
-		}
-})
-*/
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.search-button').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -862,6 +735,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
+        	console.log("22222222222");
             if (data.jobListings) {
                 updateJobListings(data.jobListings);
             } else {
@@ -869,7 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const totalCountElement = document.getElementById('total-count');
             if (totalCountElement) {
-                totalCountElement.textContent = `총 ${data.totalCount}개의 공고가 있습니다.`;
+                totalCountElement.textContent = `총 \${data.totalCount}개의 공고가 있습니다.`;
                 console.log('totalCount:', data.totalCount);
             } else {
                 console.error('total-count element not found');
@@ -884,33 +758,113 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateJobListings(jobListings) {
     	 console.log('updateJobListings 함수 호출됨');
         const jobListingsContainer = document.getElementById('job-listings');
+        console.log(jobListingsContainer);
+        console.log(jobListingsContainer);
         if (!jobListingsContainer) {
             console.error('job-listings container not found');
             return;
         }
-
+        console.log("111111111111111111");
+        
         jobListingsContainer.innerHTML = '';
 
         if (jobListings.length === 0) {
             jobListingsContainer.innerHTML = '<p>조건에 맞는 공고가 없습니다.</p>';
             return;
         }
+       
+       const oldUlEls = document.querySelectorAll('#main ul');
+       oldUlEls.forEach(oldUlEl => {
+           oldUlEl.remove();
+       });
+       /*
+       const oldUlEls = document.querySelectorAll('.main');
+       oldUlEls.forEach(oldUlEl => {
+           oldUlEl.remove();
+       });*/
 
-        jobListings.forEach(job => {
-            const jobElement = document.createElement('div');
-            jobElement.className = 'job-listings';
-            jobElement.innerHTML = `
-                <h3>${job.po_title}</h3>
-                <p>직무: ${job.hope_department}</p>
-                <p>경력: ${job.career}</p>
-                <p>지역: ${job.com_address}</p>
-                <p>학력: ${job.po_grade}</p>
-            `;
-          //  plist.appendChild(jobElement);
-           jobListingsContainer.appendChild(jobElement);
+        
+        const newUlEl = document.createElement('ul');
+        jobListingsContainer.appendChild(newUlEl);
+
+        jobListings.forEach(posting => {
+            const liEl = document.createElement('li');
+            const aEl = document.createElement('a');
+            aEl.href = `/Detail/Detail?com_id=\${posting.com_id}`;
+            aEl.style.textDecorationLine = 'none';
+            aEl.classList.add('listCell');
+            liEl.appendChild(aEl);
+
+            const clogoEl = document.createElement('div');
+            clogoEl.classList.add('clogo');
+            aEl.appendChild(clogoEl);
+
+           
+            const clogoImgEl = document.createElement('img');
+            clogoImgEl.src = "/img/" + posting.po_profile + ".jpg";
+            clogoImgEl.alt = '프로필img';
+            clogoImgEl.id = 'pimg';
+            clogoEl.appendChild(clogoImgEl);
+
+            const listContEl = document.createElement('div');
+            listContEl.classList.add('listCont');
+            aEl.appendChild(listContEl);
+
+            const pTitEl = document.createElement('div');
+            pTitEl.classList.add('pTit');
+            pTitEl.style.fontWeight = 'bold';
+            pTitEl.textContent = posting.po_title;
+            listContEl.appendChild(pTitEl);
+
+            const pInfoEl = document.createElement('div');
+            pInfoEl.classList.add('pInfo');
+            listContEl.appendChild(pInfoEl);
+
+            const pPartSpan = document.createElement('span');
+            pPartSpan.classList.add('pPart');
+            pPartSpan.textContent = posting.hope_department;
+            pInfoEl.appendChild(pPartSpan);
+            
+            pInfoEl.appendChild(document.createElement('br'));
+
+            const pStackBoxEl = document.createElement('div');
+            pStackBoxEl.classList.add('pStackBox');
+            pInfoEl.appendChild(pStackBoxEl);
+
+            const tagSpan = document.createElement('span');
+            tagSpan.classList.add('tag', 'tag-tack');
+            tagSpan.textContent = posting.stack;
+            pStackBoxEl.appendChild(tagSpan);
+
+            const pAddressSpan = document.createElement('span');
+            pAddressSpan.classList.add('pAddress');
+            pAddressSpan.textContent = posting.com_address;
+            pInfoEl.appendChild(pAddressSpan);
+
+            const pAssistEl = document.createElement('div');
+            pAssistEl.classList.add('pAssist');
+            listContEl.appendChild(pAssistEl);
+
+            const pPeriodSpan = document.createElement('span');
+            pPeriodSpan.classList.add('pPeriod');
+            pPeriodSpan.textContent = posting.posting_enddate;
+            pAssistEl.appendChild(pPeriodSpan);
+
+            const listFootEl = document.createElement('div');
+            listFootEl.classList.add('listFoot');
+            aEl.appendChild(listFootEl);
+
+            const congratSpan = document.createElement('span');
+            congratSpan.style.fontSize = 'smaller';
+            congratSpan.textContent = '💲합격축하금 100만원';
+            listFootEl.appendChild(congratSpan);
+            
+            newUlEl.appendChild(liEl);
         });
-    }
+        document.querySelector('#main').appendChild(newUlEl);
 
+    }
+/*jsp 자바 스크립트 안에 백팃 안에 문자를 넣을때에는 $앞에 \를 붙여야함*/
 });
 
 
