@@ -242,18 +242,19 @@ transition: all 0.3s ease;
     <div class="topBox">
       <div class="dropdown">
       <button class="btn_filter job dev-toggle-filter dev-part-ctgr open">
-      <span class="top_tit dev-select-text">직무</span>
+    <!--   <span class="top_tit dev-select-text">직무</span>-->
+      <span class="box_top dev_wrap-department">직무</span>
       </button>
       </div>
       
-      <div class="department-box">
+      <div class="filter-box department-box">
        <ul>
-         <li><button class="dev-button-all active">전체</button></li>
-         <li><button class="dev-button-item">백엔드</button></li>
-         <li><button class="dev-button-item">프론트엔드</button></li>
-         <li><button class="dev-button-item">디자인</button></li>
-         <li><button class="dev-button-item">엔지니어링</button></li>
-         <li><button class="dev-button-item">개발</button></li>
+         <li><button class="dev-button-all active" data-department="전체">전체</button></li>
+         <li><button class="dev-button-item" data-department="백엔드">백엔드</button></li>
+         <li><button class="dev-button-item" data-department="프론트엔드">프론트엔드</button></li>
+         <li><button class="dev-button-item" data-department="디자인">디자인</button></li>
+         <li><button class="dev-button-item" data-department="엔지니어링">엔지니어링</button></li>
+         <li><button class="dev-button-item" data-department="개발">개발</button></li>
        </ul>
        <div class ="button-box">
 		<button class ="search-reset">초기화</button>
@@ -263,15 +264,15 @@ transition: all 0.3s ease;
       
       <div class="dropdown">
         <button class="btn_filter area dev-toggle-filter dev-part-ctgr open">
-          <span>지역</span>
+          <span class="btn_box dev_wrap-local">지역</span>
         </button>
-     <div class="area-box">
+     <div class="filter-box area-box">
        <ul>
-         <li><button class ="dev-button-all active">전체</button></li>
-         <li><button class ="dev-button-item ">서울</button></li>
-         <li><button class ="dev-button-item ">경기</button></li>
-         <li><button class ="dev-button-item ">인천</button></li>
-         <li><button class ="dev-button-item ">대전</button></li>
+         <li><button class ="dev-button-all active" data-local="전체">전체</button></li>
+         <li><button class ="dev-button-item " data-local="서울">서울</button></li>
+         <li><button class ="dev-button-item " data-local="경기">경기</button></li>
+         <li><button class ="dev-button-item " data-local="인천">인천</button></li>
+         <li><button class ="dev-button-item " data-local="대전">대전</button></li>
        </ul>
        <div class ="button-box">
          <button class="search-reset">초기화</button>
@@ -281,14 +282,16 @@ transition: all 0.3s ease;
 </div>
 
       <div class="dropdown">
-        <button class="btn_filter career dev-toggle-filter dev-part-ctgr open">
-          <span>경력</span>
+       <!--   <button class="btn_filter career dev-toggle-filter dev-part-ctgr open"> -->
+        <button class="btn_filter career dev-toggle-filter dev-part-ctgr open career-button">
+          <span class="btn_box dev_wrap-career">경력</span>
         </button>
-     <div class="career-box">
+     <div class="filter-box career-box">
        <ul>
-         <li><button class ="dev-button-item ">경력무관</button></li>
-         <li><button class ="dev-button-item ">신입</button></li>
-         <li><button class ="dev-button-item ">경력</button></li>
+         <li><button class ="dev-button-item" data-career="경력무관">경력무관</button></li>
+         <li><button class ="dev-button-item" data-career="신입">신입</button></li>
+        <!--   <li><button class ="dev-button-item ">경력</button></li>-->
+         <li><button class ="dev-button-item" data-career="경력">경력</button></li>
        </ul>
        <div class ="button-box">
          <button class="search-reset">초기화</button>
@@ -299,20 +302,25 @@ transition: all 0.3s ease;
 
       <div class="dropdown">
         <button class="btn_filter grade dev-toggle-filter dev-part-ctgr open">
-          <span>학력</span>
+          <span class="btn_box dev_wrap-grade">학력</span>
         </button>
-     <div class="grade-box">
+     <div class="filter-box grade-box">
        <ul>
-         <li><button class ="dev-button-item">학력무관</button></li>
-         <li><button class ="dev-button-item ">고등학교졸업</button></li>
-         <li><button class ="dev-button-item ">대학졸업</button></li>
+         <li><button class ="dev-button-item" data-career="학력무관">학력무관</button></li>
+         <li><button class ="dev-button-item " data-career="고졸">고졸</button></li>
+         <li><button class ="dev-button-item " data-career="대졸">대졸</button></li>
        </ul>
        <div class ="button-box">
          <button class="search-reset">초기화</button>
          <button class="search-button">적용하기</button>
        </div>
+       <!-- 필터링된 공고를 표시할 요소 -->
     </div> 
 </div>
+    <div id="job-listings">
+      <!-- 필터링된 결과 -->
+    </div>
+    <p id="total-count"> 총 <em id="getSearchCount">${total_count}</em>건의 공고</p>
 
 
 
@@ -433,105 +441,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	   });*/
 	   
-// like 좋아요
-/*
-document.addEventListener("DOMContentLoaded", function() {
-    const likeButtons = document.querySelectorAll('.like');
-
-    function addLike(postingId) {
-    	
-    	//const userId = document.getElementById('.user_id').value;
-    	//console.log(userId)
-    	
-        fetch(`/Likes/addLike`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 
-            	po_id: postingId,
-            	//user_id: userId
-            	})
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to toggle like');
-            }
-            return response.text(); 
-        }).then(liketext => {
-            console.log('Server response:', liketext);
-        }).catch(error => console.error('Error toggling like:', error));
-    }
-    function deleteLike(postingId){
-		fetch(`/Likes/deleteLike`,{
-			method: 'POST',
-	        headers: {
-	            'Content-Type': 'application/json'
-	        },
-	        body: JSON.stringify({ po_id: postingId })
-			
-		}).then(response => {
-	        if (!response.ok) {
-	            throw new Error('Failed to toggle like');
-	        }
-	        return response.text(); 
-	        
-	    }).then(liketext => {
-	    	console.log(liketext);
-	    	
-	    }).catch(error => console.error('Error toggling like:', error));
-			
-	}
-    
-    function updateLike(postingId){
-		fetch(`/Likes/updateLike`,{
-			method: 'POST',
-	        headers: {
-	            'Content-Type': 'application/json'
-	        },
-	        body: JSON.stringify({ po_id: postingId })
-			
-		}).then(response => {
-	        if (!response.ok) {
-	            throw new Error('Failed to toggle like');
-	        }
-	        return response.text(); 
-	        
-	    }).then(liketext => {
-	    	console.log(liketext);
-	    	
-	    }).catch(error => console.error('Error toggling like:', error));
-			
-	}
-    
-
-    function toggleLike(button) {
-        var img = button.querySelector('img');
-        var currentSrc = img.getAttribute('src');
-
-        if (currentSrc.includes('like_on.png')) {
-            img.setAttribute('src', '/img/like_off.png');
-            console.log('스크랩이 해제되었습니다.');
-        } else {
-            img.setAttribute('src', '/img/like_on.png');
-            console.log('스크랩 공고 버튼이 클릭되었습니다.');
-        }
-    }
-
-    likeButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            toggleLike(button);
-            console.log('Button clicked');
-
-            var postingId = button.getAttribute('data-posting-id');
-            console.log('Posting ID:', postingId);
-
-            if (postingId) {
-                addLike(postingId);
-            }
-        });
-    });
-});
-*/
 document.addEventListener("DOMContentLoaded", function() {
     const likeButtons = document.querySelectorAll('.like');
 function addLike(postingId) {
@@ -597,8 +506,13 @@ likeButtons.forEach(function(button) {
 });
 });	   
 //---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
 
-//-----
+
 document.addEventListener('DOMContentLoaded', function() {
     var jobButton = document.querySelector('.job.dev-toggle-filter');
     var departmentBox = document.querySelector('.department-box');
@@ -607,6 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
         departmentBox.classList.toggle('show');
     });
 });
+
 //----- 직무
 
 		document.addEventListener("DOMContentLoaded", function() {
@@ -615,7 +530,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			  var resetButton = document.querySelector('.search-reset');
 
 			  buttons.forEach(function(button) {
-			    button.addEventListener('click', function() {
+			    button.addEventListener('click', function(event) {
+			    	var clickedButton = event.target;
+			        var department = clickedButton.getAttribute('data-department');
+                  console.log(department);
+	        
 			      var isActive = button.classList.contains('active');
 
 			      if (button !== allButton) {
@@ -628,6 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			      } else {
 			        if (!isActive) {
 			          allButton.classList.add('active');
+			          
 			          buttons.forEach(function(btn) {
 			            if (btn !== allButton) {
 			              btn.classList.remove('active');
@@ -681,7 +601,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var allButtonArea = document.querySelector('.area-box .dev-button-all');
 
     areaButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(event) {
+            var clickedButton = event.target; 
+            var local = clickedButton.getAttribute('data-local');
+            console.log(local);
+
             if (button !== allButtonArea) {
                 allButtonArea.classList.remove('active');
             }
@@ -700,6 +624,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
     // 지역 박스 내의 초기화 버튼 처리
     var resetButtonArea = document.querySelector('.area-box .search-reset');
@@ -713,6 +638,7 @@ document.addEventListener('DOMContentLoaded', function() {
         allButtonArea.classList.remove('active');
     });
 });
+
 //----경력, 학력
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -722,6 +648,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         button.addEventListener('click', function() {
             box.classList.toggle('show');
+        });
+        
+        var buttons = document.querySelectorAll('.dev-button-item');
+
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                var clickedButton = event.target;
+                var career = clickedButton.getAttribute('data-career');
+                var grade = clickedButton.getAttribute('data-grade');
+                console.log(career);
+                console.log(grade);
+            });
         });
     }
 
@@ -746,6 +684,7 @@ document.addEventListener('DOMContentLoaded', function() {
             allButton.classList.remove('active');
         });
     }
+    
 
     // 경력 
     toggleBox('.career.dev-toggle-filter', '.career-box');
@@ -762,7 +701,218 @@ document.addEventListener('DOMContentLoaded', function() {
     handleResetClick(document.querySelector('.grade-box .search-reset'), '.grade-box .dev-button-item');
 });
 
+
+/*
 //--------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+		    
+		    var psearchVo ={
+				department: "전체",
+				local: "전체",
+				career: "경력무관",
+				grade: "학력무관"
+				
+		}
+		var psearchIndex = 0; 
+		
+		function changePsearchIndex(index, value){
+			switch (index){
+			case 0:
+				psearchVo.department = value;
+				break;
+			case 1:
+				psearchVo.local = value;
+				break;
+			case 2:
+				psearchVo.career =value;
+				break;
+			case 3:
+				psearchVo.grade = value;
+				break;
+			default:
+				console.log("서치버튼클릭중 인데슥에서 오류남");
+				break;
+			}	
+		}
+		function fetchData() {
+			console.log("fdsfds");
+		    fetch("/Posting/Search", {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify(psearchVo)
+		    })
+		    .then(response => {
+		        if (!response.ok) {
+		            throw new Error('서버 응답 오류');
+		        }
+		        return response.json();
+		    })
+		    .then(data => {
+		        // 서버로부터 받은 데이터를 처리하는 로직
+		        console.log(data); // 예시: 받은 데이터를 콘솔에 출력
+		    })
+		    .catch(error => {
+		        console.error('문제 발생:', error);
+
+		    });
+		    
+		 // 모든 버튼 요소를 선택합니다.
+		    var btnBoxes = document.querySelectorAll('.btn_filter');
+
+		    // 각 버튼 요소에 대해 클릭 이벤트를 추가합니다.
+		    btnBoxes.forEach(function(btnBox) {
+		        btnBox.addEventListener('click', function() {
+		        	// 현재 클릭된 버튼의 부모 요소에서 모든 버튼을 찾습니다.
+		            var parentClass = btnBox.parentElement.classList;
+		     	
+		            // 클릭된 버튼 요소의 클래스를 확인하여 이벤트를 처리합니다.
+		            var btnClass = parentClass.contains('dev_wrap-department') ? 'department' :
+		                           parentClass.contains('dev_wrap-local') ? 'local' :
+	                               parentClass.contains('dev_wrap-grade') ? 'grade' :
+		                           parentClass.contains('dev_wrap-career') ? 'career' : '';
+		            var filterBox = btnBox.nextElementSibling;
+
+		            var siblingFilterBoxes = document.querySelectorAll('.filter-box');
+		            siblingFilterBoxes.forEach(function(siblingFilterBox) {
+		                if (siblingFilterBox !== filterBox) {
+		                    siblingFilterBox.classList.remove('open');
+		                }
+		            });
+		            
+		         // 각 버튼에 대한 처리
+		            switch (btnClass) {
+		                case 'department':
+		                	filterBox.classList.toggle('open');
+		                	psearchIndex = 0;
+		                	break;
+		                case 'local':
+		                   filterBox.classList.toggle('open');
+		                   psearchIndex = 1;
+		                    break;
+		                case 'career':
+		                    filterBox.classList.toggle('open');
+		                    psearchIndex = 2;
+		                    break;
+		                case 'grade':
+		                    filterBox.classList.toggle('open');
+		                    psearchIndex = 3;
+		                    break;
+		                default:
+		                    break;
+		            }
+		            var buttons = filterBox.querySelectorAll('ul li button');
+		            
+		            buttons.forEach(function(button) {
+		                button.addEventListener('click', function() {
+		                    // 현재 클릭된 버튼을 제외한 다른 버튼들의 active 클래스를 제거합니다.
+		                    buttons.forEach(function(otherButton) {
+		                        if (otherButton !== button) {
+		                            otherButton.classList.remove('active');
+		                        }
+		                    });
+		                    // 현재 클릭된 버튼에 active 클래스를 추가합니다.
+		                    button.classList.add('active');
+		                    
+		                });
+		            });//buttons.forEach
+		            
+		    })
+
+		    })
+		
+		}
+})
+*/
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.search-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+        	console.log('search-button 클릭됨');
+            const activeDepartment = document.querySelector('.department-box .dev-button-item.active');
+            const activeLocal = document.querySelector('.area-box .dev-button-item.active');
+            const activeCareer = document.querySelector('.career-box .dev-button-item.active');
+            const activeGrade = document.querySelector('.grade-box .dev-button-item.active');
+
+            const department = activeDepartment ? activeDepartment.getAttribute('data-department') : null;
+            const local = activeLocal ? activeLocal.getAttribute('data-local') : null;
+            const career = activeCareer ? activeCareer.getAttribute('data-career') : null;
+            const grade = activeGrade ? activeGrade.getAttribute('data-grade') : null;
+
+            fetchJobListings(department, local, career, grade);
+            
+        });
+    });
+
+    function fetchJobListings(department, local, career, grade) {
+        const requestData = {
+            department: department === '전체' ? null : department,
+            local: local === '전체' ? null : local,
+            career: career === '경력무관' ? null : career,
+            grade: grade === '학력무관' ? null : grade
+        };
+    	console.log('requestData:', requestData);
+
+        fetch('/Posting/Search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.jobListings) {
+                updateJobListings(data.jobListings);
+            } else {
+                updateJobListings([]);
+            }
+            const totalCountElement = document.getElementById('total-count');
+            if (totalCountElement) {
+                totalCountElement.textContent = `총 ${data.totalCount}개의 공고가 있습니다.`;
+                console.log('totalCount:', data.totalCount);
+            } else {
+                console.error('total-count element not found');
+            }
+
+        })
+        .catch(error => {
+            console.error('Error fetching job listings:', error);
+        });
+    }
+
+    function updateJobListings(jobListings) {
+    	 console.log('updateJobListings 함수 호출됨');
+        const jobListingsContainer = document.getElementById('job-listings');
+        if (!jobListingsContainer) {
+            console.error('job-listings container not found');
+            return;
+        }
+
+        jobListingsContainer.innerHTML = '';
+
+        if (jobListings.length === 0) {
+            jobListingsContainer.innerHTML = '<p>조건에 맞는 공고가 없습니다.</p>';
+            return;
+        }
+
+        jobListings.forEach(job => {
+            const jobElement = document.createElement('div');
+            jobElement.className = 'job-listings';
+            jobElement.innerHTML = `
+                <h3>${job.po_title}</h3>
+                <p>직무: ${job.hope_department}</p>
+                <p>경력: ${job.career}</p>
+                <p>지역: ${job.com_address}</p>
+                <p>학력: ${job.po_grade}</p>
+            `;
+          //  plist.appendChild(jobElement);
+           jobListingsContainer.appendChild(jobElement);
+        });
+    }
+
+});
+
 
 
 
