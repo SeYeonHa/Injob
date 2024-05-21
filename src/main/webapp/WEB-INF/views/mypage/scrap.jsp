@@ -34,8 +34,8 @@
  .my-profile .pie-chart{
 	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%, rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%);
 	position: relative;
-	width: 120px;
-	height: 120px;
+	width: 110px;
+	height: 110px;
 	border-radius: 50%;
 	transition: 0.3s;
 }
@@ -44,8 +44,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 110px;
-    height:110px;
+    width: 100px;
+    height:100px;
     border-radius: 50%;
     overflow: hidden;
     background: url(/img/man-profil.png) no-repeat center;
@@ -195,7 +195,43 @@
     padding: 0 12px;
     border-radius: 99px;
 }
-
+.my-content-bottom .my-active-list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-top: 1px solid #ebebee;
+}
+.my-content-bottom .my-active-list .list {
+    position: relative;
+    width: calc(100% / 5);
+}
+.my-content-bottom .my-active-list .list a {
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    padding: 21px 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+.my-content-bottom .my-active-list .list a .title {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+.my-content-bottom .my-active-list .list a .tooltip p {
+    color: #fff;
+    white-space: nowrap;
+}
+.my-content-bottom .my-active-list .list:nth-child(n + 2) {
+    border-left: 1px solid #ebebee;
+}
+.my-content{
+border: 1px solid #ebebee;
+margin-bottom: 20px;
+}
+.mtuHome .contWrap{
+ border: none;
+}
 </style>
 </head>
 <body>
@@ -212,6 +248,7 @@
 					<div class=" mx-2 pb-4 w-80">
 						<div class="mtuHome">
 							<div class="contWrap">
+							  <div class="my-content">
 								<section class ="my-content-top">
 									<div class ="my-profile-wrap">
 										<div class ="my-profile">
@@ -312,6 +349,7 @@
 					                      </a>
 						                </li>
 						            </ul>
+						          </div>
 						        </div>
 								<div class="mtuTab devFixedTab">
 									<div class="tabs">
