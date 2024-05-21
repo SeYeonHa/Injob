@@ -125,6 +125,27 @@ where
     user_id =#{userId}
   
   </select>
+  <select id ="idComLogin" resultMap="mathCompany">
+  	SELECT
+	    com_id,
+	    com_name,
+	    com_email,    
+	    com_type,
+	    com_ceo,
+	    com_passwd,
+	    com_address,
+	    com_phone,
+	    com_indate,
+	    com_salary,
+	    com_birth,
+	    com_logo,
+	    role
+	FROM
+	    company
+	where  
+    com_id =#{com_id}
+  
+  </select>
   <update id="updateSignup">
   		UPDATE users
 		SET

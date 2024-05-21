@@ -23,9 +23,10 @@
 			        <!-- 회사 사용자일겨우 -->
 			        <ul class="navbar" id="nologin">
 			            <li><a href="/Posting/PMain">공채정보(로그인 안함)</a></li>
-			            <li><a href="#">취업톡톡</a></li>
-			            <li><a href="/Mypage/Resume">마이페이지22</a></li>
-			            <li><a href="#">게시판</a></li>
+			            <li><a href="/ComMypage/Post?com_id=${company.com_id}"><span class="tx">공고관리</span></a></li>
+				        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">지원현황 관리</span></a></li>
+				        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">회원정보관리</span></a></li>	
+				        <li><a href="#">게시판</a></li>		
 			        </ul>
 			    </c:otherwise>
 			</c:choose>
@@ -62,12 +63,10 @@
 				            <div class="myInner">
 				                <div class="myLists">
 				                    <ul>
-				                        <li><a href="/Mypage/Resume?user_id=${user.user_id}"><span class="tx">개인회원 홈</span></a></li>
-				                        <li><a href="/Mypage/ResumeWrite?user_id=${user.user_id}" ><span class="tx">이력서 관리</span></a></li>
-				                        <li><a href="/Mypage/ApplyHistory?user_id=${user.user_id}" ><span class="tx">입사지원 현황</span></a></li>
-				                        <li><a href="/User/Scrap" ><span class="tx">AI추천</span></a></li>
-				                        <li><a href="/User/Scrap" ><span class="tx">스크랩 공고</span></a></li>
-				                        <li><a href="/Text_User/User_Info" >개인정보 수정</span></a></li>
+				                        <li><a href="/ComMypage/Post?com_id=${company.com_id}"><span class="tx">공고관리</span></a></li>
+				                        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">지원현황 관리</span></a></li>
+				                        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">회원정보관리</span></a></li>				                
+				                        
 				                    </ul>
 				                </div>
 				                <div class="lyRow">
