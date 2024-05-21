@@ -1,27 +1,23 @@
 package com.injob.comMypage.controller;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import java.time.LocalDate;
 
 import com.injob.comMypage.domain.PostVo;
 import com.injob.comMypage.mapper.ComMypageMapper;
-import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
 import com.injob.mypage.domain.ResumeVo;
 import com.injob.mypage.mapper.MypageMapper;
-import com.injob.mypage.service.MypageService;
+import com.injob.paging.Pagination;
+import com.injob.paging.PagingMapper;
+import com.injob.paging.PagingResponse;
+import com.injob.paging.SearchVo;
 
 @Controller
 @RequestMapping("/ComMypage")
@@ -33,6 +29,8 @@ public class ComMypageController {
 	private LoginMapper loginMapper;
 	@Autowired
 	private MypageMapper mypageMapper;
+	@Autowired
+	private PagingMapper pagingMapper;
 
 	@RequestMapping("/Post")
 	public ModelAndView getPost(PostVo postVo) {
@@ -211,7 +209,7 @@ public class ComMypageController {
 
 
 	@RequestMapping("/ApplyHistory")
-	public ModelAndView getApplyHistory(PostVo postVo) {
+	public ModelAndView getApplyHistory(int nowpage, PostVo postVo) {
 		/*
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -222,7 +220,34 @@ public class ComMypageController {
 			// UserService를 사용하여 사용자 정보를 가져옴
 			UserVo userVo = loginMapper.login(username);
 			 user_id = userVo.getUser_id();
-*/
+		 */
+		// 페이징
+				int count = pagingMapper.countApplyHistory2( postVo );
+				PagingResponse<PostVo> response = null;
+				if( count<1 ) {
+					response = new PagingResponse<>(Collections.emptyList(), null);
+				}
+				
+				// 페이징을 위한 초기설정값
+				SearchVo searchVo = new SearchVo();
+				searchVo.setPage(nowpage);
+				searchVo.setPageSize(10); // 기본10개 -> 20개
+				
+				//Pagination 객체를 생성해서 페이지 정보 계산 후 SearchDto 타입의 객체인 params에 계산된 페이지 정보 저장
+				Pagination pagination = new Pagination(count, searchVo);
+				searchVo.setPagination(pagination);
+				String ap_id     = postVo.getAp_id();
+				String user_name = postVo.getUser_name();
+				String re_title  = postVo.getRe_title();
+				String po_title  = postVo.getPo_title();
+				int    offset    = pagination.getLimitStart();
+				int    pageSize  = searchVo.getRecordSize();
+				String result    = postVo.getResult();
+				int com_id    = 1;
+				// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
+				List<PostVo> list = pagingMapper.getApplyHistoryPagingList2(ap_id, user_name, re_title, po_title, offset, pageSize, result, com_id);
+				response = new PagingResponse<>(list, pagination);
+	
 		ModelAndView mv = new ModelAndView();
 
 		List<PostVo> Historylist = comMypageMapper.selectHistory(postVo);
@@ -233,6 +258,9 @@ public class ComMypageController {
 		    dayReset.setStringDay(formattedDate);
 		}
 		
+		mv.addObject("response",response);
+		mv.addObject("nowpage", nowpage);
+		mv.addObject("searchVo", searchVo);
 		
 		mv.addObject("Historylist", Historylist);
 		mv.setViewName("comMypage/applyHistory");

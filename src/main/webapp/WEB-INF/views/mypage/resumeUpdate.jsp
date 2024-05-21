@@ -32,106 +32,106 @@
 
 				<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
-						<form action="/Mypage/ResumeUpdateSubmit" method="post" var="list"
-							items="${list}">
-							
+						<form
+							action="/Mypage/ResumeUpdateSubmit?user_id=${user_id}&nowpage=${nowpage}"
+							method="post" var="list" items="${list}">
+
+
 							<c:forEach var="list" items="${list}">
-							
+
 								<input type="hidden" name="user_id" value="${ user_id }" />
 								<input type="hidden" name="re_id" value="${ list.re_id }" />
-								
-							<div style="display: flex; flex-direction: column;">
-								<div style="margin-bottom: 20px;">
-									<h2 class="mar-10">이력서 제목 :
-									 <input type="text" name="re_title"
-											value="${ list.re_title }" required
-											style="display: inline-block; width: auto; height: 50px;" />
-									</h2>
-									<hr>
-								</div>
-								<div
-									style="display: flex; flex-direction: row; align-items: flex-start;">
-									<div style="margin-right: 20px;">
-										<input type="file" name="re_profile" class="img-box"
-													value="${ list.re_profile }"
-													style="width: 220px; height: 230px;">
+
+								<div style="display: flex; flex-direction: column;">
+									<div style="margin-bottom: 20px;">
+										<h2 class="mar-10">
+											이력서 제목 : <input type="text" name="re_title"
+												value="${ list.re_title }" required
+												style="display: inline-block; width: auto; height: 50px;" />
+										</h2>
+										<hr>
 									</div>
-									<div>
-										<table class="jh_resume_table"
-											style="width: auto; height: 230px; table-layout: fixed;">
-											<colgroup>
-												<col style="width: 25%;">
-												<col style="width: 75%;">
-											</colgroup>
-											<tr>
-												<td>이름</td>
-												<td>${list.user_name}</td>
-											</tr>
-											<tr>
-												<td>생년월일</td>
-												<td><c:set var="partial"
-														value="${fn:substring(list.user_social_num, 0, 6)}" />${partial}</td>
-											</tr>
-											<tr>
-												<td>연락처</td>
-												<td>${list.user_phone}</td>
-											</tr>
-											<tr>
-												<td>이메일</td>
-												<td>${list.user_email}</td>
-											</tr>
-										</table>
+									<div
+										style="display: flex; flex-direction: row; align-items: flex-start;">
+										<div style="margin-right: 20px;">
+											<input type="file" name="re_profile" class="img-box"
+												value="${ list.re_profile }"
+												style="width: 220px; height: 230px;">
+										</div>
+										<div>
+											<table class="jh_resume_table"
+												style="width: auto; height: 230px; table-layout: fixed;">
+												<colgroup>
+													<col style="width: 25%;">
+													<col style="width: 75%;">
+												</colgroup>
+												<tr>
+													<td>이름</td>
+													<td>${list.user_name}</td>
+												</tr>
+												<tr>
+													<td>생년월일</td>
+													<td><c:set var="partial"
+															value="${fn:substring(list.user_social_num, 0, 6)}" />${partial}</td>
+												</tr>
+												<tr>
+													<td>연락처</td>
+													<td>${list.user_phone}</td>
+												</tr>
+												<tr>
+													<td>이메일</td>
+													<td>${list.user_email}</td>
+												</tr>
+											</table>
+										</div>
 									</div>
-								</div>
-								<!-- 기술 스택 및 자격증 -->
-								<div class="mar-10">
-									<br> <span>기술스택 &nbsp | &nbsp </span><select
-										value="rv.skill" disabled>
-										<option value="Java">Java</option>
-										<option value="Springboot">Springboot</option>
-										<option value="C">C</option>
-										<option value="CSS">CSS</option>
-										<option value="html">Html</option>
-										<option value="Flutter">Flutter</option>
-										<option value="JavaScript">JavaScript</option>
-									</select> <span>&ensp;&ensp;</span> 
-									<span>자격증 &nbsp | &nbsp <input type="text"
-											name="license" value="${list.license }"></span>
+									<!-- 기술 스택 및 자격증 -->
+									<div class="mar-10">
+										<br> <span>기술스택 &nbsp | &nbsp </span><select
+											value="rv.skill" disabled>
+											<option value="Java">Java</option>
+											<option value="Springboot">Springboot</option>
+											<option value="C">C</option>
+											<option value="CSS">CSS</option>
+											<option value="html">Html</option>
+											<option value="Flutter">Flutter</option>
+											<option value="JavaScript">JavaScript</option>
+										</select> <span>&ensp;&ensp;</span> <span>자격증 &nbsp | &nbsp <input
+											type="text" name="license" value="${list.license }"></span>
+
+									</div>
+									<!-- 자기소개서 제목 -->
+									<div class="mt-5">
+										<h3 class="mar-10">자기소개 제목</h3>
+										<input type="text" class="form-control mt-2" name="re_intti"
+											id="floatingInput" placeholder="제목을 입력하세요"
+											value="${ list.re_intti }">
+									</div>
+									<!-- 자기 소개 -->
+									<div class="mt-5 w-100">
+										<h3 class="mar-10">자기소개</h3>
+
+										<textarea value="${list.re_intcon}" class="w-100 opacity-50"
+											name="re_intcon" rows="20"
+											style="height: 300px; width: 100%;">${list.re_intcon}</textarea>
+
+									</div>
+
+									<!-- 수정 버튼과 삭제 버튼을 한 줄에 표시하고 오른쪽에 붙임 -->
+									<div
+										style="display: flex; justify-content: flex-end; margin: 10px 10px;">
+										<!-- 수정 버튼 -->
+										<button type="submit" class="btn btn-primary"
+											style="margin-right: 5px;">수정완료</button>
+										<!-- 삭제 버튼 -->
+										<button type="button" class="btn btn-secondary"
+											onclick="location.href='/Mypage/Resume?user_id=${user_id}&nowpage=1'">
+											목록으로</button>
+									</div>
 
 								</div>
-								<!-- 자기소개서 제목 -->
-								<div class="mt-5">
-									<h3 class="mar-10">자기소개 제목</h3>
-									<input type="text" class="form-control mt-2" name="re_intti"
-												id="floatingInput" placeholder="제목을 입력하세요"
-												value="${ list.re_intti }">
-								</div>
-								<!-- 자기 소개 -->
-								<div class="mt-5 w-100">
-									<h3 class="mar-10">자기소개</h3>
+							</c:forEach>
 
-									<textarea value="${list.re_intcon}" class="w-100 opacity-50"
-												name="re_intcon" rows="20"
-												style="height: 300px; width: 100%;">${list.re_intcon}</textarea>
-
-								</div>
-
-								<!-- 수정 버튼과 삭제 버튼을 한 줄에 표시하고 오른쪽에 붙임 -->
-								<div
-									style="display: flex; justify-content: flex-end; margin: 10px 10px;">
-									<!-- 수정 버튼 -->
-									<button type="submit" class="btn btn-primary"
-										style="margin-right: 5px;">
-										수정완료</button>
-									<!-- 삭제 버튼 -->
-									<button type="button" class="btn btn-secondary"
-										onclick="location.href='/Mypage/Resume?user_id=${user_id}'">
-										목록으로</button>
-								</div>
-
-							</div>
-						</c:forEach>
-							
 						</form>
 					</div>
 				</div>

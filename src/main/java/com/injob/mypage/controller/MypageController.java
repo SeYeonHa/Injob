@@ -9,13 +9,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
 import com.injob.mypage.domain.ResumeVo;
 import com.injob.mypage.mapper.MypageMapper;
-import com.injob.paging.MypagePagingMapper;
+import com.injob.paging.PagingMapper;
 import com.injob.paging.Pagination;
 import com.injob.paging.PagingResponse;
 import com.injob.paging.SearchVo;
@@ -25,14 +26,17 @@ import com.injob.paging.SearchVo;
 public class MypageController {
 
 	@Autowired
-	private MypagePagingMapper mypagePagingMapper;
+	private PagingMapper pagingMapper;
 	@Autowired
 	private MypageMapper mypageMapper;
 	@Autowired
 	private LoginMapper loginMapper;
 
 	@RequestMapping("/Resume")
-	public ModelAndView getReseume(int nowpage, ResumeVo resumeVo) {
+	public ModelAndView getReseume(@RequestParam(value = "nowpage", required = false) Integer nowpage, ResumeVo resumeVo) {
+	    if (nowpage == null) {
+	        nowpage = 1; // 기본 페이지 번호 설정
+	    }
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println("여기냐");
@@ -40,15 +44,14 @@ public class MypageController {
 	
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 			String username = userDetails.getUsername();
-			System.out.println("여기냐냐아");
 			// UserService를 사용하여 사용자 정보를 가져옴
 			UserVo userVo = loginMapper.login(username);
 			 user_id = userVo.getUser_id();
 			 
-		List<ResumeVo> Resumelist = mypageMapper.selectResumeList(resumeVo);
+		List<ResumeVo> Resumelist = mypageMapper.selectResumeList(user_id);
 			 
 		// 페이징
-		int count = mypagePagingMapper.count( resumeVo );
+		int count = pagingMapper.count( user_id );
 		PagingResponse<ResumeVo> response = null;
 		if( count<1 ) {
 			response = new PagingResponse<>(Collections.emptyList(), null);
@@ -62,11 +65,6 @@ public class MypageController {
 		//Pagination 객체를 생성해서 페이지 정보 계산 후 SearchDto 타입의 객체인 params에 계산된 페이지 정보 저장
 		Pagination pagination = new Pagination(count, searchVo);
 		searchVo.setPagination(pagination);
-		System.out.println("===================================");
-		System.out.println(pagination.getTotalRecordCount());
-		System.out.println(pagination.getStartPage());
-		System.out.println(pagination.getLimitStart());
-		System.out.println("===================================");
 		Long   re_id    = resumeVo.getRe_id();
 		String re_title = resumeVo.getRe_title();
 		String license  = resumeVo.getLicense();
@@ -74,25 +72,19 @@ public class MypageController {
 		int    pageSize = searchVo.getRecordSize();
 		
 		// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
-		List<ResumeVo> list = mypagePagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize);
+		List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, user_id);
+		
+		
 		response = new PagingResponse<>(list, pagination);
-		System.out.println(list);
-		System.out.println("===================================");
-		System.out.println(response);
-		System.out.println("===================================");
 			 
 		// 모델에 사용자 정보를 추가하여 홈 페이지로 전달
 		
 		ModelAndView mv = new ModelAndView();
-
-
 		
 		mv.addObject("response",response);
 		mv.addObject("nowpage", nowpage);
-		// mv.addObject()
 		
 		mv.addObject("searchVo", searchVo);
-		System.out.println("여기냐냐아아아~~");
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("Resumelist", Resumelist);
@@ -142,8 +134,6 @@ public class MypageController {
 
 		ResumeVo rv = mypageMapper.selectResumeList3(resumeVo);
 
-		System.out.println(rv);
-
 		mv.addObject("user",userVo);
 		mv.addObject("rv", rv);
 		mv.addObject("user_id", user_id);
@@ -177,7 +167,10 @@ public class MypageController {
 	}
 
 	@RequestMapping("/ResumeUpdate")
-	public ModelAndView getResumeUpdate(ResumeVo resumeVo) {
+	public ModelAndView getResumeUpdate(@RequestParam(value = "nowpage", required = false) Integer nowpage, ResumeVo resumeVo) {
+	    if (nowpage == null) {
+	        nowpage = 1; // 기본 페이지 번호 설정
+	    }
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -202,7 +195,11 @@ public class MypageController {
 	}
 
 	@RequestMapping("/ResumeUpdateSubmit")
-	public ModelAndView getResumeUpdateSubmit(ResumeVo resumeVo) {
+	public String submitResumeUpdate(@RequestParam(value = "nowpage", required = false) Integer nowpage, ResumeVo resumeVo) {
+		System.out.println(nowpage +"-----------------------------------");
+	    if (nowpage == null) {
+	        nowpage = 1; // 기본 페이지 번호 설정
+	    }
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -219,8 +216,7 @@ public class MypageController {
 		mypageMapper.updateResume(resumeVo);
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
-		mv.setViewName("redirect:Resume");
-		return mv;
+	    return "redirect:/Mypage/Resume";
 
 	}
 
@@ -248,7 +244,7 @@ public class MypageController {
 	}
 
 	@RequestMapping("/Apply")
-	public ModelAndView getApply(ResumeVo resumeVo) {
+	public ModelAndView getApply(int nowpage, ResumeVo resumeVo) {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -259,10 +255,41 @@ public class MypageController {
 			// UserService를 사용하여 사용자 정보를 가져옴
 			UserVo userVo = loginMapper.login(username);
 			 user_id = userVo.getUser_id();
+			 
+			 List<ResumeVo> Resumelist = mypageMapper.selectResumeList(user_id);
+			 
+			// 페이징
+				int count = pagingMapper.count( user_id );
+				PagingResponse<ResumeVo> response = null;
+				if( count<1 ) {
+					response = new PagingResponse<>(Collections.emptyList(), null);
+				}
+				
+				// 페이징을 위한 초기설정값
+				SearchVo searchVo = new SearchVo();
+				searchVo.setPage(nowpage);
+				searchVo.setPageSize(10); // 기본10개 -> 20개
+				
+				//Pagination 객체를 생성해서 페이지 정보 계산 후 SearchDto 타입의 객체인 params에 계산된 페이지 정보 저장
+				Pagination pagination = new Pagination(count, searchVo);
+				searchVo.setPagination(pagination);
+				Long   re_id    = resumeVo.getRe_id();
+				String re_title = resumeVo.getRe_title();
+				String license  = resumeVo.getLicense();
+				int    offset   = pagination.getLimitStart();
+				int    pageSize = searchVo.getRecordSize();
+				
+				// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
+				List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, user_id);
+				response = new PagingResponse<>(list, pagination);
 
 		ModelAndView mv = new ModelAndView();
+		
 
-		List<ResumeVo> Resumelist = mypageMapper.selectResumeList(resumeVo);
+		mv.addObject("response",response);
+		mv.addObject("nowpage", nowpage);
+		mv.addObject("searchVo", searchVo);
+		
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("Resumelist", Resumelist);
@@ -296,7 +323,7 @@ public class MypageController {
 	}
 
 	@RequestMapping("/ApplyHistory")
-	public ModelAndView getApplyHistory(ResumeVo resumeVo) {
+	public ModelAndView getApplyHistory(int nowpage, ResumeVo resumeVo) {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -307,10 +334,41 @@ public class MypageController {
 			// UserService를 사용하여 사용자 정보를 가져옴
 			UserVo userVo = loginMapper.login(username);
 			 user_id = userVo.getUser_id();
+			 
+			 List<ResumeVo> Historylist = mypageMapper.selectHistory(resumeVo);
+			 
+			// 페이징
+				int count = pagingMapper.countApplyHistory( resumeVo );
+				PagingResponse<ResumeVo> response = null;
+				if( count<1 ) {
+					response = new PagingResponse<>(Collections.emptyList(), null);
+				}
+				
+				// 페이징을 위한 초기설정값
+				SearchVo searchVo = new SearchVo();
+				searchVo.setPage(nowpage);
+				searchVo.setPageSize(10); // 기본10개 -> 20개
+				
+				//Pagination 객체를 생성해서 페이지 정보 계산 후 SearchDto 타입의 객체인 params에 계산된 페이지 정보 저장
+				Pagination pagination = new Pagination(count, searchVo);
+				searchVo.setPagination(pagination);
+				String com_name  = resumeVo.getCom_name();
+				String po_title  = resumeVo.getRe_title();
+				Long   re_id     = resumeVo.getRe_id();
+				int    offset    = pagination.getLimitStart();
+				int    pageSize  = searchVo.getRecordSize();
+				String result    = resumeVo.getResult();
+				
+				// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
+				List<ResumeVo> list = pagingMapper.getApplyHistoryPagingList(com_name, po_title, re_id, offset, pageSize, result, user_id);
+				response = new PagingResponse<>(list, pagination);
 
 		ModelAndView mv = new ModelAndView();
 
-		List<ResumeVo> Historylist = mypageMapper.selectHistory(resumeVo);
+		mv.addObject("response",response);
+		mv.addObject("nowpage", nowpage);
+		mv.addObject("searchVo", searchVo);
+		
 		mv.addObject("user",userVo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("Historylist", Historylist);

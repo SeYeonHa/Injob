@@ -30,47 +30,7 @@
 		<div class="container-ha">
 			<section class="box align_right">
 				<!--  사이드바  -->
-				<aside class="container-123">
-					<section class="secLnb">
-						<div class="lnbGroup">
-							<h2 class="lnbTit">
-								<a href="/Mypage/Resume?user_id=${user_id}">개인회원 홈</a>
-							</h2>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">이력서 관리</h2>
-							<ul>
-								<li><a href="/Mypage/ResumeWrite?user_id=${user_id}">이력서
-										등록</a></li>
-								<li><a href="/Mypage/Resume?user_id=${user_id}">이력서 현황</a></li>
-							</ul>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">입사지원 관리</h2>
-							<ul>
-								<li><a href="/Mypage/ApplyHistory?user_id=${user_id}">입사지원
-										현황</a></li>
-								<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
-							</ul>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">스크랩/관심기업</h2>
-							<ul>
-								<li><a href="/User/Scrap">스크랩 공고</a></li>
-								<li><a href="/User/FavorCo">관심기업/헤드헌터</a></li>
-								<li><a href="/User/Alarm">MY 알림</a></li>
-							</ul>
-						</div>
-						<div class="lnbGroup">
-							<h2 class="lnbTit">회원정보 관리</h2>
-							<ul>
-								<li><a href="/Text_User/User_Info_Mng.asp">회원정보 수정</a></li>
-								<li><a href="/Text_User/User_PWD_Mng.asp">비밀번호 변경</a></li>
-								<li><a href="/Text_User/User_Mailing_Mng.asp">메일·문자 설정</a></li>
-							</ul>
-						</div>
-					</section>
-				</aside>
+				<%@include file="/WEB-INF/include/aside.jsp"%>
 
 				<div class="box-contents">
 					<input type="hidden" name="po_id" value="1101" /> <input
@@ -80,18 +40,6 @@
 						<div class="card-header">
 							<h3 class="card-title">이력서 목록</h3>
 
-							<div class="card-tools">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<input type="text" name="table_search"
-										class="form-control float-right" placeholder="Search">
-
-									<div class="input-group-append">
-										<button type="submit" class="btn btn-default">
-											<i class="fas fa-search"></i>
-										</button>
-									</div>
-								</div>
-							</div>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0">
@@ -107,7 +55,7 @@
 										</tr>
 									</thead>
 									<tbody style="border-bottom: 1px solid #dee2e6;">
-										<c:forEach var="R" items="${Resumelist}">
+										<c:forEach var="R" items="${response.list}">
 											<tr>
 												<td><input type="radio" name="re_id" value="${R.re_id}"></td>
 												<td>${R.re_id}</td>
@@ -118,6 +66,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								<%@include file="/WEB-INF/include/applyPaging.jsp"%>
 								<!-- 수정: 버튼 타입을 submit으로 변경 -->
 								<input type="submit" value="지원하기">
 							</form>

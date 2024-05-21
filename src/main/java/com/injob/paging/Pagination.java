@@ -59,7 +59,8 @@ public class Pagination {
 		existPrevPage = startPage != 1;
 		
 		// 다음 페이지 존재 여부 확인
-		existNextPage = (endPage * params.getRecordSize()) < totalRecordCount;
+		// (endPage * params.getRecordSize()) < totalRecordCount 이 조건 대신 (params.getPage() * params.getRecordSize()) < totalRecordCount 를 사용하여 실제 레코드 범위를 확인
+		existNextPage = (params.getPage() * params.getRecordSize()) < totalRecordCount;
 	}
 	
 }

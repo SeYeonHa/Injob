@@ -47,7 +47,7 @@
 					<div class="lnbGroup">
 						<h2 class="lnbTit">지원현황 관리</h2>
 						<ul>
-							<li><a href="/ComMypage/ApplyHistory?com_id=1">입사지원
+							<li><a href="/ComMypage/ApplyHistory?com_id=1&nowpage=1">입사지원
 									현황</a></li>
 							<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
 						</ul>

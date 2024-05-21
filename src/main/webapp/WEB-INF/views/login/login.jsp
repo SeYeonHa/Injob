@@ -295,12 +295,12 @@ ul li {
 							<div class="mb-3">
 								<label class="form-label">Email address</label> <input
 									type="email" class="form-control" name="username"
-									value="wodud6967@naver.com">
+									value="shin@naver.com">
 							</div>
 							<div class="mb-3">
 								<label class="form-label ">Password</label> <input
 									type="password" class="form-control" name="password"
-									value="rosua112!!">
+									value="aa1234@@">
 							</div>
 							<button class="submit" type="submit" class="btn btn-primary">기존
 								회원 로그인</button>

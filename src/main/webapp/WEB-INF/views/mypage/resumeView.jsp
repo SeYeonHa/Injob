@@ -75,46 +75,7 @@
 										</table>
 									</div>
 								</div>
-								<!-- 기술 스택 및 자격증 -->
-								<div class="mar-10">
-							<div style="display: flex; flex-direction: column;">
-								<div style="margin-bottom: 20px;">
-									<h2 class="mar-10">이력서 제목 : ${ list.re_title }</h2>
-									<hr>
-								</div>
-								<div
-									style="display: flex; flex-direction: row; align-items: flex-start;">
-									<div style="margin-right: 20px;">
-										<img src="/img/${list.re_profile}" class="img-box"
-											style="width: 220px; height: 230px;">
-									</div>
-									<div>
-										<table class="jh_resume_table"
-											style="width: auto; height: 230px; table-layout: fixed;">
-											<colgroup>
-												<col style="width: 25%;">
-												<col style="width: 75%;">
-											</colgroup>
-											<tr>
-												<td>이름</td>
-												<td>${list.user_name}</td>
-											</tr>
-											<tr>
-												<td>생년월일</td>
-												<td><c:set var="partial"
-														value="${fn:substring(list.user_social_num, 0, 6)}" />${partial}</td>
-											</tr>
-											<tr>
-												<td>연락처</td>
-												<td>${list.user_phone}</td>
-											</tr>
-											<tr>
-												<td>이메일</td>
-												<td>${list.user_email}</td>
-											</tr>
-										</table>
-									</div>
-								</div>
+								
 								<!-- 기술 스택 및 자격증 -->
 								<div class="mar-10">
 									<br> <span>기술스택 &nbsp | &nbsp </span><select
@@ -139,31 +100,14 @@
 								<div class="mt-5 w-100">
 									<h3 class="mar-10">자기소개</h3>
 								</div>
-								<!-- 자기소개서 제목 -->
-								<div class="mt-5">
-									<h3 class="mar-10">자기소개서 제목</h3>
-									<input type="text" class="form-control mt-2" id="floatingInput"
-										placeholder="제목을 입력하세요" value="${ list.re_intti }" readonly>
-								</div>
-								<!-- 자기 소개 -->
-								<div class="mt-5 w-100">
-									<h3 class="mar-10">자기소개</h3>
-
-									<textarea value="${list.re_intcon}" class="w-100 opacity-50"
-										rows="20" style="height: 300px; width: 100%;" readonly>${list.re_intcon}</textarea>
 									<textarea value="${list.re_intcon}" class="w-100 opacity-50"
 										rows="20" style="height: 300px; width: 100%;" readonly>${list.re_intcon}</textarea>
 
 								</div>
 
-								<!-- 수정 버튼과 삭제 버튼을 한 줄에 표시하고 오른쪽에 붙임 -->
-								<div
-									style="display: flex; justify-content: flex-end; margin-top: 10px;">
-								</div>
 
 								<!-- 수정 버튼과 삭제 버튼을 한 줄에 표시하고 오른쪽에 붙임 -->
-								<div
-									style="display: flex; justify-content: flex-end; margin-top: 10px;">
+								<div style="display: flex; justify-content: flex-end; margin-top: 10px;">
 									<!-- 수정 버튼 -->
 									<button type="button" class="btn btn-primary"
 										style="margin-right: 5px;"
@@ -179,91 +123,16 @@
 										
 								</div>
 
-
 							</div>
 						</c:forEach>
 					</div>
+					</section>
 				</div>
 
-
-
-
-			</section>
-		</div>
 	</main>
 	<script>
-		// 모달 창을 보여주는 함수
-		function showDeleteConfirmation() {
-			var modal = document.getElementById("deleteConfirmationModal");
-			modal.style.display = "block";
-			// 삭제할 re_id 값을 저장합니다.
-			modal.dataset.reId = reId;
-		}
-	</main>
-	<script>
-		// 모달 창을 보여주는 함수
-		function showDeleteConfirmation() {
-			var modal = document.getElementById("deleteConfirmationModal");
-			modal.style.display = "block";
-			// 삭제할 re_id 값을 저장합니다.
-			modal.dataset.reId = reId;
-		}
-
-		// 모달 창을 닫는 함수
-		function closeDeleteConfirmationModal() {
-			var modal = document.getElementById("deleteConfirmationModal");
-			modal.style.display = "none";
-		}
-		// 모달 창을 닫는 함수
-		function closeDeleteConfirmationModal() {
-			var modal = document.getElementById("deleteConfirmationModal");
-			modal.style.display = "none";
-		}
-
-		// 삭제 확인 버튼을 눌렀을 때의 동작을 처리하는 함수
-		function confirmDelete() {
-			var reId = document.getElementById("deleteConfirmationModal").dataset.reId;
-			// 삭제 작업을 수행하는 URL로 이동합니다.
-			if (reId) {
-				location.href = `/Mypage/ResumeDelete?re_id=${reId}`;
-			}
-			closeDeleteConfirmationModal();
-		}
-
-		//For Demo only
-		var links = document.getElementsByClassName('link')
-		for (var i = 0; i <= links.length; i++)
-			addClass(i)
-		// 삭제 확인 버튼을 눌렀을 때의 동작을 처리하는 함수
-		function confirmDelete() {
-			var reId = document.getElementById("deleteConfirmationModal").dataset.reId;
-			// 삭제 작업을 수행하는 URL로 이동합니다.
-			if (reId) {
-				location.href = `/Mypage/ResumeDelete?re_id=${reId}`;
-			}
-			closeDeleteConfirmationModal();
-		}
-
-		//For Demo only
-		var links = document.getElementsByClassName('link')
-		for (var i = 0; i <= links.length; i++)
-			addClass(i)
-
-		function addClass(id) {
-			setTimeout(function() {
-				if (id > 0)
-					links[id - 1].classList.remove('hover')
-				links[id].classList.add('hover')
-			}, id * 750)
-		}
-	</script>
-		function addClass(id) {
-			setTimeout(function() {
-				if (id > 0)
-					links[id - 1].classList.remove('hover')
-				links[id].classList.add('hover')
-			}, id * 750)
-		}
+		
+	
 	</script>
 
 	<%@include file="/WEB-INF/include/Footer.jsp"%>

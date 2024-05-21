@@ -71,7 +71,7 @@
 						<div style="display: flex; justify-content: left ;"></div>
 						<!-- 왼쪽 빈 공간 -->
 						<div style="margin: 0 auto; display: flex; justify-content: center;">
-							<%@include file="/WEB-INF/include/paging.jsp"%>
+							<%@include file="/WEB-INF/include/resumePaging.jsp"%>
 						</div>
 						<div>
 							<button type="button" style="margin: 10px 10px; display: flex; justify-content: right;"
