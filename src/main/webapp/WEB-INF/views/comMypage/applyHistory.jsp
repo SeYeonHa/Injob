@@ -29,12 +29,15 @@
 
 		<div class="container-ha">
 			<section class="box align_right">
-		<!--  사이드바  -->
-			 <%@include file="/WEB-INF/include/comAside.jsp"%>
+		
 				<div class="box-contents">
+					<div class="mtuHome">
+						 
+		                  	<!--  사이드바  -->
+	               	<%@include file="/WEB-INF/include/comAside.jsp"%>
+					<div class="contWrap">
 
-
-					<div class="card">
+					  <div class="card">
 						<div class="card-header">
 							<h3 class="card-title" data-flag="result_panel">지원 이력</h3>
 							<div class="mtuTab devFixedTab">
@@ -91,7 +94,8 @@
 							<%@include file="/WEB-INF/include/applyHistoryPaging2.jsp"%>
 						  </div>
 						  
-						  
+						  </div>
+						  </div>
 						</div>
 						
 					</div>

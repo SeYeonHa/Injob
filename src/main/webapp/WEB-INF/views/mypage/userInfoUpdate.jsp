@@ -166,10 +166,14 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input
 		<div class="container-ha">
 			<section class="box align-right">
 				<!--  사이드바  -->
-				<%@include file="/WEB-INF/include/aside.jsp"%>
+			
 
 
 		<div class="box-contents">
+		 <div class="mtuHome">
+						 
+		                  	<%@include file="/WEB-INF/include/aside.jsp"%>
+							<div class="contWrap">
 			<div class="content">
 			  <form id="registerForm" method="post" action="/Text_User/User_Write">	
 				<fieldset>		
@@ -307,7 +311,8 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input
 				</div>
 			  </form>		
 			</div><!-- content -->
-		
+		  </div>
+		  </div>
 
 	    </div><!-- box-contents -->
 

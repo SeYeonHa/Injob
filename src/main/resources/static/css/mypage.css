@@ -103,14 +103,16 @@ td:not([colspan]):first-child {
 }
 
 .container-123 {
-    float: left;
-    width: 15%;
-    padding: 0px 0px 20px 0px;
-    border-radius: 4px;
-    box-sizing: border-box; /* 컨테이너 크기에 패딩과 테두리를 포함시키도록 함 */
-    min-height: 100vh;
+	 
+            
+        flex: 0 0 20%;
+   
     line-height: 1.5;
     
+}
+#right_postion{
+	
+	flex: 0 0 20%;
 }
 .container-123 h2{
 	margin-bottom: 8px;
@@ -119,20 +121,11 @@ td:not([colspan]):first-child {
 
 
 .box {
-	padding: var(--gap);
-	display: flex;
-	gap: var(--gap);
-	min-height: 400px;
-	flex-direction: row;
+	
 }
 
 .box-contents {
-    margin-left: 2%; /* 컨테이너 사이 간격 조정 */
-    width: 78%; /* 나머지 공간을 차지하도록 너비 설정 */
-    box-sizing: border-box; /* 컨텐츠의 패딩과 테두리를 너비에 포함시킴 */
-    float : right;
-    height : auto;
-    border: 1px solid #dce1eb
+   
 }
 
 /* 사이드바 css */
@@ -185,20 +178,26 @@ section {
 
 
 .mtuHome{
- margin-top: 50px
+ margin-top: 50px;
+ display: flex;
+ justify-content: center;
 }
 .mtuHome .contWrap {
 	min-height: auto;
 	position: relative;
-	padding: 0 39px 39px;
+	margin: 0 39px 39px;
 	background: #fff;
 	border: 1px solid #dce1eb;
+	
+	    width: 94%;
+    max-width: 1200px;
 }
+
 
 .mtuHome .mtuTab {
 	margin: 0;
 	box-sizing: border-box;
-	margin-bottom: 30px;
+	
 	
 }
 

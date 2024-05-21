@@ -162,6 +162,7 @@
         p.po_title,
         p.po_content,
         p.po_grade,
+        p.po_profile,
         p.career,
         p.po_end_date,
         c.com_name,

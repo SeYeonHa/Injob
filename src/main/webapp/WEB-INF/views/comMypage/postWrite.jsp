@@ -28,11 +28,16 @@
 		<div class="container-ha">
 			<section class="box align_right">
 		<!--  사이드바  -->
-			<%@include file="/WEB-INF/include/comAside.jsp"%>
+			
 
 				<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
-						<form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">
+					<div class="mtuHome">
+				
+					
+						 
+		                <%@include file="/WEB-INF/include/comAside.jsp"%> 
+						<div class="contWrap">
+						 <form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">
 							<input type="hidden" name="com_id" value="1" />
 
 							<div style="display: flex; flex-direction: column;">
@@ -142,6 +147,7 @@
 
 							<button type="submit" class="btn btn-block btn-success" >등록</button>
 						</form>
+					  </div>	
 					</div>
 				</div>
 			</section>

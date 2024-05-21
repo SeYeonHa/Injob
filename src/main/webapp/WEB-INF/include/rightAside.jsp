@@ -3,7 +3,7 @@
      <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 
        
-   <div id ="right_wrap">
+ 
 			<div id ="right_postion">
 				<div id ="side_area">
 				  <div id="sideScrap">
@@ -50,4 +50,4 @@
 				</div>
 			</div>
 		
-		</div><!-- right_wrap -->
+	

@@ -24,24 +24,22 @@
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
-		<%@include file="/WEB-INF/include/rightAside.jsp"%>
 		<div class="container-ha">
 		  <section class="box align-right">
 		<!--  사이드바  -->
-			<%@include file="/WEB-INF/include/aside.jsp"%>
+			
 			
 		<!--  메인  -->
 
 				<div class="box-contents">
-
-
-				
-						<div class="card-header">
+                   <div class="mtuHome">
+					  <%@include file="/WEB-INF/include/aside.jsp"%>
+				       <div class="contWrap">
+				       		<div class="card-header">
 							<h2 class="card-title" style="font-weight: bold;">이력서 현황</h2>
 
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body table-responsive p-0">
+						    </div>
+				       		<div class="card-body table-responsive p-0">
 							<table class="table table-hover text-nowrap">
 								<thead style="text-align: center;">
 									<tr>
@@ -64,23 +62,28 @@
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
+						  </div>
+						  <div
+								style="display: flex; justify-content: center;">
+								<div style="display: flex; justify-content: left ;"></div>
+								<!-- 왼쪽 빈 공간 -->
+								<div style="margin: 0 auto; display: flex; justify-content: center;">
+									<%@include file="/WEB-INF/include/resumePaging.jsp"%>
+								</div>
+								<div>
+									<button type="button" style="margin: 10px 10px; display: flex; justify-content: right;"
+										onclick="location.href='/Mypage/ResumeWrite?user_id=${user_id}'"
+										class="btn btn-block btn-success">작성</button>
+								</div>
+					    </div>
+				       </div>
+						
+						<!-- /.card-header -->
+						
 
-					<div
-						style="display: flex; justify-content: center;">
-						<div style="display: flex; justify-content: left ;"></div>
-						<!-- 왼쪽 빈 공간 -->
-						<div style="margin: 0 auto; display: flex; justify-content: center;">
-							<%@include file="/WEB-INF/include/resumePaging.jsp"%>
-						</div>
-						<div>
-							<button type="button" style="margin: 10px 10px; display: flex; justify-content: right;"
-								onclick="location.href='/Mypage/ResumeWrite?user_id=${user_id}'"
-								class="btn btn-block btn-success">작성</button>
-						</div>
-					</div>
-
-
+					
+                    <%@include file="/WEB-INF/include/rightAside.jsp"%>
+                  </div>
 				</div>
 				
 

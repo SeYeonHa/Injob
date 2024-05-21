@@ -130,7 +130,14 @@ public class Mypage2Controller {
 	    	    dayReset.setStringDay(formattedDate); //06-05
 
 	    	    System.out.println(dayReset.getStringDay());//06.05 (수)
+	    	    
+	    	    //남은날짜 
+	    	    LocalDate today = LocalDate.now();
+		        Period period = Period.between(today, dayReset.getPo_end_date());
+		    	int daysRemaining = period.getDays();
+		    	dayReset.setDaysRemaining(daysRemaining);
 		}
+		
 		//사이드 북마크 추천 
 	    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
 	    	    
@@ -239,8 +246,8 @@ public class Mypage2Controller {
 		System.out.println(userVo);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("mypage/userInfoUpdate");
+		mv.addObject("user_id", userVo);
 		mv.addObject("user", userVo);
-		
 		return mv;
 		
 	}
@@ -253,6 +260,7 @@ public class Mypage2Controller {
 		System.out.println("변환된vo");
 		System.out.println(user);
 		userService.update(user);
+		
 		
         return "redirect:/logout";
 	}
