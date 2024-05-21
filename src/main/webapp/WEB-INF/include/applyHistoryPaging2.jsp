@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <c:set  var="user_id"            value="${ user_id           }" /> 
+  <c:set  var="com_id"            value="${ com_id           }" /> 
   <c:set  var="startnum"           value="${ searchVo.pagination.startPage         }" /> 
   <c:set  var="endnum"             value="${ searchVo.pagination.endPage           }" /> 
   <c:set  var="totalpagecount"     value="${ searchVo.pagination.totalPageCount  }" /> 
@@ -14,8 +14,8 @@
      
      <!-- 처음/ 이전 -->     
      <c:if test="${ startnum gt 1 }">
-       <a href="/ComMypage/ApplyHistory?com_id=${ com_id }&nowpage=1">⏮</a>
-       <a href="/ComMypage/ApplyHistory?com_id=${ com_id }&nowpage=${ startnum - 1 }">
+       <a href="/ComMypage/ApplyHistory?nowpage=1">⏮</a>
+       <a href="/ComMypage/ApplyHistory?nowpage=${ startnum - 1 }">
        ⏪
        </a>
      </c:if>
@@ -24,12 +24,12 @@
      <c:forEach var="pagenum" begin="${startnum}" end="${endnum}" step="1">
     <c:choose>
         <c:when test="${pagenum eq searchVo.pagination.currentPage}">
-            <a href="/ComMypage/ApplyHistory?com_id=${com_id}&nowpage=${pagenum}" style="font-weight: bold; color: blue; text-decoration: underline;">
+            <a href="/ComMypage/ApplyHistory?nowpage=${pagenum}" style="font-weight: bold; color: blue; text-decoration: underline;">
                 ${pagenum}
             </a>
         </c:when>
         <c:otherwise>
-            <a href="/ComMypage/ApplyHistory?com_id=${com_id}&nowpage=${pagenum}">
+            <a href="/ComMypage/ApplyHistory?nowpage=${pagenum}">
                 ${pagenum}
             </a>
         </c:otherwise>
@@ -39,10 +39,10 @@
      
      <!-- 다음 / 마지막 -->
      <c:if test="${ totalpagecount != endnum }">
-       <a href="/ComMypage/ApplyHistory?com_id=${ user_id }&nowpage=${ endnum + 1 }">
+       <a href="/ComMypage/ApplyHistory?nowpage=${ endnum + 1 }">
        ⏩
        </a>
-       <a href="/ComMypage/ApplyHistory?com_id=${ com_id }&nowpage=${ totalpagecount }">⏭</a>
+       <a href="/ComMypage/ApplyHistory?nowpage=${ totalpagecount }">⏭</a>
      </c:if>    
      
       </td>

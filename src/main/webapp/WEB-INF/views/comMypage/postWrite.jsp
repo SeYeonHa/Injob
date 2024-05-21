@@ -33,7 +33,7 @@
 				<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
 						<form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">
-							<input type="hidden" name="com_id" value="1" />
+							<input type="hidden" name="com_id" value="${ com_id }" />
 
 							<div style="display: flex; flex-direction: column;">
 								<div style="margin-bottom: 20px;">

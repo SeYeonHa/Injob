@@ -33,7 +33,7 @@
 				<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
 						<form action="/Mypage/ResumeSubmit" method="post" var="list" items="${list}">
-							<input type="hidden" name="user_id" value="1" />
+							<input type="hidden" name="user_id" value="${user_id}" />
 
 							<div style="display: flex; flex-direction: column;">
 								<div style="margin-bottom: 20px;">
@@ -119,30 +119,7 @@
 			</section>
 		</div>
 		<script>
-            function updateResumeForm(id) {
-                console.log(id);
-                $.ajax({
-                    type: "GET",
-                    url: "/person/updateResume/" + id
-                }).done((res) => {
-                    location.href = "/person/updateResume/" + id;
-                }).fail((err) => {
-
-                });
-            }
             
-          //For Demo only
-            var links = document.getElementsByClassName('link')
-            for(var i = 0; i <= links.length; i++)
-               addClass(i)
-
-
-            function addClass(id){
-               setTimeout(function(){
-                  if(id > 0) links[id-1].classList.remove('hover')
-                  links[id].classList.add('hover')
-               }, id*750) 
-            }
             
         </script>
 

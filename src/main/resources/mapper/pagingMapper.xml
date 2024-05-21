@@ -11,7 +11,7 @@
 
 		SELECT COUNT(*) AS CNT
 		FROM RESUME
-		WHERE USER_ID = #{ user_id }
+		WHERE USER_ID = #{ userId }
 
 	</select>
 
@@ -48,7 +48,7 @@
             JOIN APPLY AP ON RE.RE_ID = AP.RE_ID
             JOIN POSTING PO ON AP.PO_ID = PO.PO_ID
             JOIN COMPANY COM ON PO.COM_ID = COM.COM_ID
-		WHERE USER_ID = #{ user_id }
+		WHERE USER_ID = #{ userId }
 
 	</select>
 

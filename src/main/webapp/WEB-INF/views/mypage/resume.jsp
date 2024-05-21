@@ -55,7 +55,7 @@
 									<c:forEach var="R" items="${response.list}">
 
 										<tr
-											onclick="location.href='/Mypage/ResumeView?user_id=${user_id}&re_id=${R.re_id}'">
+											onclick="location.href='/Mypage/ResumeView?re_id=${R.re_id}'">
 											<td>${R.re_id }</td>
 											<td>${R.re_title }</td>
 											<td>${R.license}</td>
@@ -75,7 +75,7 @@
 						</div>
 						<div>
 							<button type="button" style="margin: 10px 10px; display: flex; justify-content: right;"
-								onclick="location.href='/Mypage/ResumeWrite?user_id=${user_id}'"
+								onclick="location.href='/Mypage/ResumeWrite'"
 								class="btn btn-block btn-success">작성</button>
 						</div>
 					</div>

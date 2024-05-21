@@ -34,7 +34,9 @@
 					<div class=" mx-2 pb-4 w-80">
 						<form action="/ComMypage/PostUpdateSubmit" method="post" var="list" items="${list}">
 						  <c:forEach var="list" items="${list}">
-							<input type="hidden" name="com_id" value="1" />
+							<input type="hidden" name="com_id" value="${com_id}" />
+							<input type="hidden" name="po_id" value="${list.po_id}" />
+							<input type="hidden" name="po_start_date" value="${list.po_start_date}" />
 
 							<div style="display: flex; flex-direction: column;">
 								<div style="margin-bottom: 20px;">
@@ -136,7 +138,7 @@
 
 									<textarea class="w-100 opacity-50"
 												name="po_content" rows="10"
-												style="height: 300px; width: 100%;" value="${list.po_content}" required></textarea>
+												style="height: 300px; width: 100%;" required>${list.po_content}</textarea>
 
 								</div>
 
@@ -144,7 +146,7 @@
 
 							<button type="submit" class="btn btn-block btn-success" style="margin-right: 5px;">등록</button>
 							<button type="button" class="btn btn-secondary"
-										onclick="location.href='/ComMypage/Post?com_id=${com_id}'">
+										onclick="location.href='/ComMypage/Post'">
 										취소</button>
 						  </c:forEach>
 						</form>

@@ -31,6 +31,7 @@ public class ResumeVo {
 	// apply
 	private Long   po_id;
 	private String result;
+	private Long   ap_id;
 	
 	// posting
 	private Long   com_id;

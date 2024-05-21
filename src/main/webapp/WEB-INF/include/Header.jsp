@@ -15,7 +15,7 @@
 			        <ul class="navbar" id="on_user_login">
 			            <li><a href="/Posting/PMain">공채정보</a></li>
 			            <li><a href="/Resume/List">취업톡톡</a></li>
-			            <li><a href="/Mypage/Resume?user_id=${ user.user_id }&nowpage=1">마이페이지</a></li>
+			            <li><a href="/Mypage/Resume?&nowpage=1">마이페이지</a></li>
 			            <li><a href="/Board">게시판</a></li>
 			            <li><a href="/ComMypage/Post?com_id=1">기업 마이페이지</a></li>
 			        </ul>
@@ -24,9 +24,9 @@
 			        <!-- 회사 사용자일겨우 -->
 			        <ul class="navbar" id="nologin">
 			            <li><a href="/Posting/PMain">공채정보(로그인 안함)</a></li>
-			            <li><a href="/ComMypage/Post?com_id=${company.com_id}"><span class="tx">공고관리</span></a></li>
-				        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">지원현황 관리</span></a></li>
-				        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">회원정보관리</span></a></li>	
+			            <li><a href="/ComMypage/Post"><span class="tx">공고관리</span></a></li>
+				        <li><a href="/ComMypage/ApplyHistory?nowpage=1" ><span class="tx">지원현황 관리</span></a></li>
+				        <li><a href="/ComMypage/ApplyHistory?nowpage=1" ><span class="tx">회원정보관리</span></a></li>	
 				        <li><a href="#">게시판</a></li>		
 			        </ul>
 			    </c:otherwise>
@@ -64,9 +64,9 @@
 				            <div class="myInner">
 				                <div class="myLists">
 				                    <ul>
-				                        <li><a href="/ComMypage/Post?com_id=${company.com_id}"><span class="tx">공고관리</span></a></li>
-				                        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">지원현황 관리</span></a></li>
-				                        <li><a href="/ComMypage/ApplyHistory?com_id=${company.com_id}" ><span class="tx">회원정보관리</span></a></li>				                
+				                        <li><a href="/ComMypage/Post"><span class="tx">공고관리</span></a></li>
+				                        <li><a href="/ComMypage/ApplyHistory?nowpage=1" ><span class="tx">지원현황 관리</span></a></li>
+				                        <li><a href="/ComMypage/ApplyHistory?nowpage=1" ><span class="tx">회원정보관리</span></a></li>				                
 				                        
 				                    </ul>
 				                </div>

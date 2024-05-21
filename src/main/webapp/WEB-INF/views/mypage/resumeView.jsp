@@ -111,14 +111,14 @@
 									<!-- 수정 버튼 -->
 									<button type="button" class="btn btn-primary"
 										style="margin-right: 5px;"
-										onclick="location.href='/Mypage/ResumeUpdate?user_id=${user_id}&re_id=${list.re_id}'">
+										onclick="location.href='/Mypage/ResumeUpdate?re_id=${list.re_id}'">
 										수정하기</button>
 									<!-- 삭제 버튼 -->
 									<button type="button" class="btn btn-danger" style="margin-right: 5px;"
-										onclick="location.href='/Mypage/ResumeDelete?user_id=${user_id}&re_id=${list.re_id}'">
+										onclick="location.href='/Mypage/ResumeDelete?re_id=${list.re_id}'">
 										삭제</button>
 									<button type="button" class="btn btn-secondary"
-										onclick="location.href='/Mypage/Resume?user_id=${user_id}&nowpage=1'">
+										onclick="location.href='/Mypage/Resume?nowpage=1'">
 										목록으로</button>
 										
 								</div>

@@ -20,7 +20,7 @@
 		FROM POSTING PO INNER JOIN COMPANY COM
 		ON PO.COM_ID = COM.COM_ID
 
-		WHERE PO.COM_ID = 1
+		WHERE PO.COM_ID = #{ com_id }
 		
 		ORDER BY PO.PO_ID ASC
 
@@ -199,18 +199,19 @@
 
 	<update id="updatePost">
 
-		UPDATE
-		RESUME
+		UPDATE	POSTING
 		SET
-		USER_ID = #{ user_id },
-		RE_ID = #{ re_id },
-		RE_PROFILE = #{ re_profile },
-		RE_TITLE = #{ re_title },
-		RE_INTTI = #{ re_intti },
-		RE_INTCON = #{ re_intcon },
-		LICENSE = #{ license }
-		WHERE USER_ID = #{ user_id }
-		AND RE_ID = #{ re_id }
+			COM_ID = #{ com_id },
+			PO_ID = #{ po_id },
+			PO_GRADE = #{ po_grade },
+			HOPE_DEPARTMENT = #{ hope_department },
+			PO_END_DATE = TO_DATE(#{po_end_date}, 'YYYY-MM-DD'),
+			PO_PROFILE = #{ po_profile },
+			PO_TITLE = #{ po_title },
+			PO_CONTENT = #{ po_content },
+			CAREER = #{ career }
+	WHERE PO_ID = #{ po_id }
+		
 
 	</update>
 	

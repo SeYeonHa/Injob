@@ -22,7 +22,7 @@
 		FROM RESUME RE INNER JOIN USERS UR
 		ON RE.USER_ID = UR.USER_ID
 
-		WHERE UR.USER_ID = #{ user_id }
+		WHERE UR.USER_ID = #{ userId }
 		
 		ORDER BY RE.RE_ID ASC
 
@@ -61,8 +61,32 @@
 
 		FROM USERS
 
-		WHERE USER_ID = #{ user_id }
+		WHERE USER_ID = #{ userId }
 
+	</select>
+	
+	<select id="selectResumeList4">
+	
+	SELECT
+		RE.USER_ID,
+		RE.RE_ID,
+		RE.RE_PROFILE,
+		RE.RE_TITLE,
+		RE.RE_INTTI,
+		RE.RE_INTCON,
+		RE.LICENSE,
+		RE.INDATE,
+		UR.USER_NAME,
+		UR.USER_SOCIAL_NUM,
+		UR.USER_PHONE,
+		UR.USER_EMAIL
+
+		FROM APPLY AP
+		JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
+		JOIN USERS UR  ON RE.USER_ID = UR.USER_ID
+
+		WHERE AP.AP_ID = #{ ap_id }
+	
 	</select>
 	
 	<select id="selectHistory">
@@ -82,7 +106,7 @@
 		  JOIN POSTING PO ON AP.PO_ID = PO.PO_ID
 		  JOIN COMPANY COM ON PO.COM_ID = COM.COM_ID
 
-		WHERE RE.USER_ID = #{ user_id }
+		WHERE RE.USER_ID = #{ userId }
 
 	</select>
 
@@ -151,8 +175,7 @@
 	<delete id="deleteResume">
 
 		DELETE FROM RESUME
-		WHERE USER_ID = #{ user_id }
-		AND RE_ID = #{ re_id }
+		WHERE RE_ID = #{ re_id }
 
 	</delete>
 	

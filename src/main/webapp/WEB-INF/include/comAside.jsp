@@ -13,16 +13,15 @@
 					<div class="lnbGroup">
 						<h2 class="lnbTit">공고 관리</h2>
 						<ul>
-							<li><a href="/ComMypage/PostWrite?com_id=${com_id }">공고
+							<li><a href="/ComMypage/PostWrite">공고
 									등록</a></li>
-							<li><a href="/ComMypage/Post?com_id=${com_id}">공고 현황</a></li>
+							<li><a href="/ComMypage/Post">공고 현황</a></li>
 						</ul>
 					</div>
 					<div class="lnbGroup">
 						<h2 class="lnbTit">지원현황 관리</h2>
 						<ul>
-							<li><a href="/ComMypage/ApplyHistory?com_id=${com_id} ">입사지원
-									현황</a></li>
+							<li><a href="/ComMypage/ApplyHistory?nowpage=1 ">입사지원 현황</a></li>
 							<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
 						</ul>
 					</div>

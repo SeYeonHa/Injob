@@ -7,22 +7,21 @@
 				<section class="secLnb">
 					<div class="lnbGroup">
 						<h2 class="lnbTit">
-							<a href="/Mypage/Resume?user_id=${user.user_id}">개인회원 홈</a>
+							<a href="/Mypage/Resume?nowpage=1">개인회원 홈</a>
 						</h2>
 					</div>
 					<div class="lnbGroup">
 						<h2 class="lnbTit">이력서 관리</h2>
 						<ul>
-							<li><a href="/Mypage/ResumeWrite?user_id=${user_id}">이력서
+							<li><a href="/Mypage/ResumeWrite">이력서
 									등록</a></li>
-							<li><a href="/Mypage/Resume?user_id=${user.user_id}&nowpage=1">이력서 현황</a></li>
+							<li><a href="/Mypage/Resume?nowpage=1">이력서 현황</a></li>
 						</ul>
 					</div>
 					<div class="lnbGroup">
 						<h2 class="lnbTit">입사지원 관리</h2>
 						<ul>
-							<li><a href="/Mypage/ApplyHistory?user_id=${user.user_id}&nowpage=1">입사지원
-									현황</a></li>
+							<li><a href="/Mypage/ApplyHistory?nowpage=1">입사지원 현황</a></li>
 							<li><a href="/user/consulting">헤드헌팅 채용상담</a></li>
 						</ul>
 					</div>

@@ -113,11 +113,11 @@
 													<c:otherwise>
 														<!-- 그 외의 경우에는 결과 값 표시 -->
 									                    <button type="button" class="btn btn-primary" style="margin-right: 5px;"
-									                    onclick="location.href='/ComMypage/ApplyHistory?com_id=${com_id}'">${result}</button>
+									                    onclick="location.href='/ComMypage/ApplyHistory?nowpage=1'">${result}</button>
 									                </c:otherwise>
 												</c:choose>
 									<button type="button" class="btn btn-secondary"
-										onclick="location.href='/ComMypage/ApplyHistory?com_id=${com_id}'">
+										onclick="location.href='/ComMypage/ApplyHistory?nowpage=1'">
 										목록으로</button>
 										
 								</div>
