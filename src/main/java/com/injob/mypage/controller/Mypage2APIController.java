@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.injob.cookie.service.GetcookieService;
 import com.injob.mypage.domain.AiRecommend;
 import com.injob.mypage.mapper.MypageMapper;
 
@@ -20,29 +21,15 @@ import jakarta.servlet.http.HttpServletRequest;
 public class Mypage2APIController {
 	@Autowired
 	private MypageMapper mypageMapper;
+	
+	@Autowired 
+	private GetcookieService getcookieService;
 
 	@GetMapping("/Mypage/CookDatas/Load")
 	public ResponseEntity<List<AiRecommend>> CookLoad(HttpServletRequest request){
 		 List<Long> recentlyViewedPosting = new ArrayList<>();
 		 
-		 Cookie[] cookies = request.getCookies();
-		 if (cookies != null) {
-			 for (Cookie cookie : cookies) {
-				if("recentlyViewedposting".equals(cookie.getName())) {
-					System.out.println("실행되나?");
-					System.out.println("실행되나?");
-					String[] values = cookie.getValue().split(":");
-					for (String value : values) {
-						recentlyViewedPosting.add(Long.parseLong(value.trim()));
-					}
-					break;	
-				}
-			}		 
-		 }//cookies != null
-		 System.out.println("------------------");
-		 System.out.println("------------------");
-		 System.out.println(recentlyViewedPosting);
-		 System.out.println(recentlyViewedPosting);
+		 recentlyViewedPosting = getcookieService.getRecentCookie(request);
 		 
 		 List<AiRecommend> mypagePostingCookie = mypageMapper.getPostingCookie(recentlyViewedPosting);
 		 for (AiRecommend aiRecommend : mypagePostingCookie) {

@@ -11,6 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.injob.comMypage.domain.PostVo;
 import com.injob.comMypage.mapper.ComMypageMapper;
+
+import com.injob.login.domain.CompanyVo;
+import com.injob.login.domain.UserVo;
+
 import com.injob.login.mapper.LoginMapper;
 import com.injob.mypage.domain.ResumeVo;
 import com.injob.mypage.mapper.MypageMapper;
@@ -18,6 +22,8 @@ import com.injob.paging.Pagination;
 import com.injob.paging.PagingMapper;
 import com.injob.paging.PagingResponse;
 import com.injob.paging.SearchVo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/ComMypage")
@@ -33,8 +39,17 @@ public class ComMypageController {
 	private PagingMapper pagingMapper;
 
 	@RequestMapping("/Post")
-	public ModelAndView getPost(PostVo postVo) {
+	public ModelAndView getPost(PostVo postVo, HttpSession session) {
 
+		Long com_id = (Long) session.getAttribute("companyId");
+		System.out.println("컴아이뒤 가지고오기");
+		System.out.println(com_id);
+		System.out.println(com_id);
+		System.out.println(com_id);
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		System.out.println(companyVo);
+		System.out.println(companyVo);
+		System.out.println(companyVo);
 		/*
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -55,6 +70,7 @@ public class ComMypageController {
 		//mv.addObject("user",userVo);
 		//mv.addObject("user_id", user_id);
 		mv.addObject("Postlist", Postlist);
+		mv.addObject("com_id", com_id);
 		System.out.println(Postlist);
 		mv.setViewName("comMypage/post");
 
@@ -62,7 +78,8 @@ public class ComMypageController {
 	}
 
 	@RequestMapping("/PostView")
-	public ModelAndView getPostView(PostVo postVo) {
+	public ModelAndView getPostView(PostVo postVo, HttpSession session) {
+		Long com_id = (Long) session.getAttribute("companyId");
 		/*
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
@@ -75,7 +92,7 @@ public class ComMypageController {
 			 user_id = userVo.getUser_id();
 		*/
 		ModelAndView mv = new ModelAndView();
-		Long com_id = (long) 1;
+		
 		List<PostVo> list = comMypageMapper.selectPostList2(postVo);
 
 		//mv.addObject("user",userVo);
@@ -209,7 +226,9 @@ public class ComMypageController {
 
 
 	@RequestMapping("/ApplyHistory")
-	public ModelAndView getApplyHistory(int nowpage, PostVo postVo) {
+
+	public ModelAndView getApplyHistory(int nowpage, PostVo postVo ,HttpSession session) {
+
 		/*
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;

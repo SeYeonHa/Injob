@@ -25,9 +25,18 @@ public class AiRecommend {
 	public Long com_id;
 	private Long  user_id;
 	private Long  ub_boolean;
-	
+	private int total_count;
 	private String stringDay;
-	
+	private int daysRemaining;
+
+    // Getters and setters for daysRemaining
+    public int getDaysRemaining() {
+        return daysRemaining;
+    }
+
+    public void setDaysRemaining(int daysRemaining) {
+        this.daysRemaining = daysRemaining;
+    }
 	
 	public String getStringDay() {
 		return stringDay;

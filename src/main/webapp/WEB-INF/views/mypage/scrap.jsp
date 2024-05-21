@@ -18,22 +18,339 @@
 	rel="stylesheet">
 
 <style>
+ .my-content-top {
+    padding: 30px 30px 20px;
+    box-sizing: border-box;
+    position: relative;
+}	
+.my-content-top .my-profile-wrap {
+	position: absolute;
+	left: 15px;
+	top: 30px;
+}
+ .my-profile {
+    position: relative;
+}
+ .my-profile .pie-chart{
+	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%, rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%);
+	position: relative;
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	transition: 0.3s;
+}
+ .my-profile .profile-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height:100px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: url(/img/man-profil.png) no-repeat center;
+    background-size: contain;
+    border: 3px solid #fff;
+    box-sizing: border-box;
+}
+ .my-profile .profile-btn {
+    position: absolute;
+    bottom: 3px;
+    right: 2px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    background: url(/img/camera.png) no-repeat center;
+    background-size: contain;
+    border-radius: 50%;
+    overflow: visible;
+    cursor: pointer;
+}
+ .my-career {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #002aff;
+    margin-top: 10px;
+}
+.my-status-wrap{
+ padding-left: 130px;
+}
+.my-status-wrap .my-status-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.my-status-wrap .badge.status-incomplete {
+    color: rgba(255, 0, 0, 0.7);
+    border: 1px solid rgba(255, 0, 0, 0.7);
+}
+.my-status-wrap .badge {
+    position: relative;
+    width: auto;
+    height: 24px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 24px;
+    color: #222222;
+    padding: 0 12px;
+    border-radius: 28px;
+    border: 1px solid #222222;
+    background-color: #ffffff;
+    margin: 0;
+}
+.user-status-title {
+    display: flex;
+    align-items: baseline;
+}
+.user-status-title h1 {
+    display: flex;
+    align-items: baseline;
+    max-width: 90%;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    line-height: 30px;
+    color: #222222;
+    white-space: nowrap;
+}
+.my-status-wrap .my-status-box {
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 22px;
+    border: 1px solid #e8e8e8;
+    padding: 16px;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+.my-status-wrap .my-status-box .status a {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #222222;
+    padding-right: 15px;
+}
+.my-status-wrap .my-status-list {
+    display: flex;
+    align-items: baseline;
+    position: relative;
+}
 
+.my-status-wrap .my-status-list h5 {
+    min-width: 65px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #222222;
+    margin-right: 8px;
+}
+.my-status-wrap .my-status-list .expand {
+    position: relative;
+    width: 100%;
+}
+.my-status-wrap .my-status-list ~ .my-status-list {
+    margin-top: 8px;
+}
+.my-status-wrap .no-data {
+    font-size: 13px;
+    letter-spacing: 0px;
+    line-height: 20px;
+    color: #002aff;
+}
+.my-status-wrap .my-status-box .status a {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #222222;
+    padding-right: 15px;
+}
+.mtuHome {
+    margin-top: 0;
+}
+.box-contents{
+ border: none;
+}
+.my-status-wrap .my-status-list .expand .expand-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+}
+.my-status-wrap .my-status-list .expand .skill-list li {
+    color: #3b65ff;
+    background-color: #f0f5ff;
+}
+.my-status-wrap .my-status-list .expand .expand-list li {
+    height: 30px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 30px;
+    width: auto;
+    padding: 0 12px;
+    border-radius: 99px;
+}
+.my-content-bottom .my-active-list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-top: 1px solid #ebebee;
+}
+.my-content-bottom .my-active-list .list {
+    position: relative;
+    width: calc(100% / 5);
+}
+.my-content-bottom .my-active-list .list a {
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    padding: 21px 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+.my-content-bottom .my-active-list .list a .title {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #333333;
+}
+.my-content-bottom .my-active-list .list a .tooltip p {
+    color: #fff;
+    white-space: nowrap;
+}
+.my-content-bottom .my-active-list .list:nth-child(n + 2) {
+    border-left: 1px solid #ebebee;
+}
+.my-content{
+border: 1px solid #ebebee;
+margin-bottom: 20px;
+}
+.mtuHome .contWrap{
+ border: none;
+}
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
-
+    	  <%@include file="/WEB-INF/include/rightAside.jsp"%>
 		<div class="container-ha">
 			<section class="box align_right">
 				<!--  사이드바  -->
 				<%@include file="/WEB-INF/include/aside.jsp"%>
+					
 
 				<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
 						<div class="mtuHome">
 							<div class="contWrap">
+							  <div class="my-content">
+								<section class ="my-content-top">
+									<div class ="my-profile-wrap">
+										<div class ="my-profile">
+											<div class="pie-chart">
+												<div class ="profile-img">
+													<p class="img">
+														<img src="">
+													</p>
+												</div>
+											</div>
+											<button class="profile-btn" type="button"></button>
+										</div>
+									</div><!-- my-profile-wrap -->
+									<div class="my-info-wrap">
+									  <div class="my-status-wrap">
+									  	<div class="my-status-top">
+									  	  <div class="badge status-incomplete">이력서 미완성</div>
+									  	</div><!-- my-status-top이력서posion -->
+									  	<div class="user-status-title">
+									  		<h1><span>구덕고등학교</span>에서 공부했어요</h1>
+									  	</div>
+									  	<div class="my-status-box">
+									  		<p class="status">
+									  		  <a href="/User/Resume/Write" target="_blank" >
+                                               구덕고등학교  졸업 >
+                                              </a>
+									  		</p>
+									  	</div>
+									  	<div class="my-status-list">
+									  		<h5 class="list-title">보유스킬</h5>
+									  		<div class="expand">
+									  		  <ul class="skill-list expand-list">
+                                    			  <li>JAVA</li>
+                                    			  <li>Spring Boot</li>
+                                    			  <li>JPA</li>
+                                    			  <li>ORM</li>
+                                    			  <li>MyBatis</li>
+				                                  <li>OracleDB</li>
+				                                  <li>RDBMS</li>
+				                                  <li>분석력</li> 
+                                              </ul>
+									  		</div>
+									  	</div>
+									  	<div class="my-status-list">
+									  	   <h5 class="list-title">구직 선호도</h5>
+									  	   <a href="#" class="no-data">이직 시 연봉상승 vs 워라벨 당신의 선택은? </a>
+									  	</div>
+									  </div>
+									</div><!-- my-info-wrap -->
+								</section>
+								<div class="my-content-bottom">
+						            <h2 class="skip">주요활동내역</h2>
+						            <ul class="my-active-list">
+						                <li class="list">
+					                      <a class="box-botton" href="/User/ApplyMng" >
+					                        <p class="title">
+					                            지원완료
+					                            <strong class="count">0</strong>
+					                        </p>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/user/PositionOffer#dev-tab-resume-read" >
+					                        <p class="title">
+					                            이력서 열람
+					                            <strong class="count">0</strong>
+					                        </p>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/User/PositionOffer?tabStat=1#dev-tab-position" >
+					                        <p class="title">
+					                            포지션 제안
+					                            <strong class="count">0</strong>
+					                        </p>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/User/Scrap/Index" onclick=>
+					                        <p class="title">
+					                            스크랩 공고
+					                            <strong class="count">4</strong>
+					                        </p>
+				                            <div class="tooltip mtuSpImgBefore mtuSpImgAfter">
+				                                <p>이번주 마감 <strong>1</strong>건</p>
+				                            </div>
+					                      </a>
+						                </li>
+						                <li class="list">
+					                      <a class="box-botton" href="/User/FavorCo" >
+					                        <p class="title">
+					                            관심기업공고
+					                            <strong class="count">22</strong>
+					                        </p>
+					                        <div class="tooltip mtuSpImgBefore mtuSpImgAfter">
+					                            <p>이번주 마감 <strong>8</strong>건</p>
+					                        </div>
+					                      </a>
+						                </li>
+						            </ul>
+						          </div>
+						        </div>
 								<div class="mtuTab devFixedTab">
 									<div class="tabs">
 										<button class="on" data-flag="AI_panel">AI추천</button>
@@ -464,3 +781,4 @@
 
 
 
+				

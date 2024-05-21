@@ -18,7 +18,7 @@ import lombok.Setter;
 @Data
 public class CompanyVo {
 	
-	 private Long com_id;
+	   private Long com_id;
 	    private String com_name;
 	    private String com_email;
 	    private String com_type;
