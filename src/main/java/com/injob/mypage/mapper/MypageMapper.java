@@ -10,7 +10,7 @@ import com.injob.mypage.domain.ResumeVo;
 @Mapper
 public interface MypageMapper {
 
-	List<ResumeVo> selectResumeList(ResumeVo resumeVo);
+	List<ResumeVo> selectResumeList(Long user_id);
 
 	List<ResumeVo> selectResumeList2(ResumeVo resumeVo);
 

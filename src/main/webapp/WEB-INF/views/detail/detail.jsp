@@ -92,7 +92,7 @@ body {
                <span id="inside_title">${posting.com_address}</span>
             </div>
          </div>
-      <div><a href="/Mypage/Apply?user_id=${user_id }&po_id=${posting.po_id}" id="applyButton"
+      <div><a href="/Mypage/Apply?user_id=${user_id }&nowpage=1" id="applyButton"
       class="btn btn-success" style="text-decoration-line: none"
       >✅지원하기</a></div>
 

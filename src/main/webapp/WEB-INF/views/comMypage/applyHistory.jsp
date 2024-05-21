@@ -62,7 +62,7 @@
 								</thead>
 								<tbody class="ha-result" style="border-bottom: 1px solid #dee2e6;">
 									<ul>
-									<c:forEach var="H" items="${Historylist}" >
+									<c:forEach var="H" items="${response.list}" >
 										<li>
 										<tr onclick="location.href=`/ComMypage/ComResumeView?re_id=${H.re_id}&ap_id=${H.ap_id}`">
 											<input type="hidden" class="ap_id" value="${H.ap_id }">
@@ -88,6 +88,7 @@
 									</ul>
 								</tbody>
 							</table>
+							<%@include file="/WEB-INF/include/applyHistoryPaging2.jsp"%>
 						  </div>
 						  
 						  

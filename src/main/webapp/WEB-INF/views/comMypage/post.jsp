@@ -29,7 +29,9 @@
 		<div class="container-ha">
 		  <section class="box align-right">
 		<!--  사이드바  -->
+
 			<%@include file="/WEB-INF/include/comAside.jsp"%>
+
 			
 		<!--  메인  -->
 

@@ -17,6 +17,7 @@
 			            <li><a href="/Resume/List">취업톡톡</a></li>
 			            <li><a href="/Mypage/Resume?user_id=${ user.user_id }&nowpage=1">마이페이지</a></li>
 			            <li><a href="/Board">게시판</a></li>
+			            <li><a href="/ComMypage/Post?com_id=1">기업 마이페이지</a></li>
 			        </ul>
 			    </c:when>
 			    <c:otherwise>
