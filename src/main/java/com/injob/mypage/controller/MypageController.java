@@ -53,6 +53,7 @@ public class MypageController {
 	public ModelAndView getReseume(int nowpage, ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 		
 		//--------------------------------------------------------------------------
+		//ㅇㄴㄹㅇㄴㄹ
 		Long userId = (Long) session.getAttribute("userId");
 		//UserVo userVo = loginMapper.idLogin(userId);
 		List<AiRecommend> aiList = mypageMapper.getAiList(userId);
