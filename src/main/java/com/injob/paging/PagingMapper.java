@@ -18,7 +18,7 @@ public interface PagingMapper {
 	        @Param("license")   String license,
 	        @Param("offset")    int offset,
 	        @Param("pageSize")  int pageSize,
-	        @Param("user_id")   Long user_id);
+	        @Param("user_id")   Long userId);
 
 	List<ResumeVo> getApplyHistoryPagingList(
 			@Param("com_name")  String com_name,
@@ -27,14 +27,14 @@ public interface PagingMapper {
 			@Param("offset")    int offset,
 			@Param("pageSize")  int pageSize,
 			@Param("result")    String result,
-			@Param("user_id")   Long user_id);
+			@Param("user_id")   Long userId);
 
-	int countApplyHistory(ResumeVo resumeVo);
+	int countApplyHistory(Long userId);
 
-	int count(Long user_id);
+	int count(Long userId);
 	
 	// comMypage
-	int countApplyHistory2(PostVo postVo);
+	int countApplyHistory2(Long com_id);
 
 	List<PostVo> getApplyHistoryPagingList2(
 			@Param("ap_id")     String ap_id,
@@ -44,7 +44,7 @@ public interface PagingMapper {
 			@Param("offset")    int offset,
 			@Param("pageSize")  int pageSize,
 			@Param("result")    String result,
-			@Param("com_id")    int com_id);
+			@Param("com_id")    Long com_id);
 
 	
 

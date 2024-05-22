@@ -1,6 +1,7 @@
 package com.injob.comMypage.controller;
 
 import java.time.format.DateTimeFormatter;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -42,36 +43,18 @@ public class ComMypageController {
 	public ModelAndView getPost(PostVo postVo, HttpSession session) {
 
 		Long com_id = (Long) session.getAttribute("companyId");
-		System.out.println("컴아이뒤 가지고오기");
-		System.out.println(com_id);
-		System.out.println(com_id);
-		System.out.println(com_id);
 		CompanyVo companyVo = loginMapper.idComLogin(com_id);
-		System.out.println(companyVo);
-		System.out.println(companyVo);
-		System.out.println(companyVo);
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-		*/
 			 
 		// 모델에 사용자 정보를 추가하여 홈 페이지로 전달
 		
 		ModelAndView mv = new ModelAndView();
 
-		List<PostVo> Postlist = comMypageMapper.selectPostList(postVo);
+		List<PostVo> Postlist = comMypageMapper.selectPostList(com_id);
 		//mv.addObject("user",userVo);
 		//mv.addObject("user_id", user_id);
 		mv.addObject("Postlist", Postlist);
 		mv.addObject("com_id", com_id);
-		System.out.println(Postlist);
+		mv.addObject("company", companyVo);
 		mv.setViewName("comMypage/post");
 
 		return mv;
@@ -79,72 +62,52 @@ public class ComMypageController {
 
 	@RequestMapping("/PostView")
 	public ModelAndView getPostView(PostVo postVo, HttpSession session) {
+		
 		Long com_id = (Long) session.getAttribute("companyId");
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-		*/
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 		
 		List<PostVo> list = comMypageMapper.selectPostList2(postVo);
 
-		//mv.addObject("user",userVo);
 		mv.addObject("list", list);
 		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		mv.setViewName("comMypage/postView");
 		return mv;
 	}
 
 	@RequestMapping("/PostWrite")
-	public ModelAndView getPostWrite(PostVo postVo) {
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-*/
+	public ModelAndView getPostWrite(PostVo postVo, HttpSession session) {
+		
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 		
-		Long com_id = (long) 1;
-		PostVo pv = comMypageMapper.selectCompany(postVo);
+		PostVo pv = comMypageMapper.selectCompany(com_id);
 
 
 		//mv.addObject("user",userVo);
 		mv.addObject("pv", pv);
 		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		mv.setViewName("comMypage/postWrite");
 		return mv;
 	}
 
 	@RequestMapping("/PostSubmit")
-	public ModelAndView getPostSubmit(PostVo postVo) {
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long com_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-*/
+	public ModelAndView getPostSubmit(PostVo postVo, HttpSession session) {
+		
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 		//com_id = postVo.getUser_id();
 
 		comMypageMapper.insertPost(postVo);
+		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		//mv.addObject("user",userVo);
 		//mv.addObject("user_id", user_id);
 		mv.setViewName("redirect:Post");
@@ -154,24 +117,19 @@ public class ComMypageController {
 	}
 
 	@RequestMapping("/PostUpdate")
-	public ModelAndView getPostUpdate(PostVo postVo) {
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-*/
+	public ModelAndView getPostUpdate(PostVo postVo, HttpSession session) {
+
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 
 		List<PostVo> list = comMypageMapper.selectPostList2(postVo);
 
 		//mv.addObject("user",userVo);
 		mv.addObject("list", list);
+		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		//mv.addObject("user_id", user_id);
 		mv.setViewName("comMypage/postUpdate");
 		return mv;
@@ -179,21 +137,16 @@ public class ComMypageController {
 	}
 
 	@RequestMapping("/PostUpdateSubmit")
-	public ModelAndView getPostUpdateSubmit(PostVo postVo) {
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-*/
+	public ModelAndView getPostUpdateSubmit(PostVo postVo, HttpSession session) {
+		
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 
 		comMypageMapper.updatePost(postVo);
+		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		//mv.addObject("user",userVo);
 		//mv.addObject("user_id", user_id);
 		mv.setViewName("redirect:Post");
@@ -202,21 +155,16 @@ public class ComMypageController {
 	}
 
 	@RequestMapping("/PostDelete")
-	public ModelAndView getPostDelete(PostVo postVo) {
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-*/
+	public ModelAndView getPostDelete(PostVo postVo, HttpSession session) {
+		
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 
 		comMypageMapper.deletePost(postVo);
+		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		//mv.addObject("user",userVo);
 		//mv.addObject("user_id", user_id);
 		mv.setViewName("redirect:Post");
@@ -228,20 +176,14 @@ public class ComMypageController {
 	@RequestMapping("/ApplyHistory")
 
 	public ModelAndView getApplyHistory(int nowpage, PostVo postVo ,HttpSession session) {
-
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-		 */
+		
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
+		List<PostVo> Historylist = comMypageMapper.selectHistory(com_id);
+		
 		// 페이징
-				int count = pagingMapper.countApplyHistory2( postVo );
+				int count = pagingMapper.countApplyHistory2( com_id );
 				PagingResponse<PostVo> response = null;
 				if( count<1 ) {
 					response = new PagingResponse<>(Collections.emptyList(), null);
@@ -262,14 +204,13 @@ public class ComMypageController {
 				int    offset    = pagination.getLimitStart();
 				int    pageSize  = searchVo.getRecordSize();
 				String result    = postVo.getResult();
-				int com_id    = 1;
 				// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
 				List<PostVo> list = pagingMapper.getApplyHistoryPagingList2(ap_id, user_name, re_title, po_title, offset, pageSize, result, com_id);
 				response = new PagingResponse<>(list, pagination);
 	
 		ModelAndView mv = new ModelAndView();
 
-		List<PostVo> Historylist = comMypageMapper.selectHistory(postVo);
+		
 
 		for (PostVo dayReset : Historylist) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.dd (E)");
@@ -281,36 +222,30 @@ public class ComMypageController {
 		mv.addObject("nowpage", nowpage);
 		mv.addObject("searchVo", searchVo);
 		
+		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
+		
 		mv.addObject("Historylist", Historylist);
 		mv.setViewName("comMypage/applyHistory");
 		return mv;
 	}
 
 	@RequestMapping("/ComResumeView")
-	public ModelAndView getComResumeView(PostVo postVo, ResumeVo resumeVo) {
+	public ModelAndView getComResumeView(PostVo postVo, ResumeVo resumeVo, HttpSession session) {
 		
-		/*
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
-		*/
+		Long com_id = (Long) session.getAttribute("companyId");
+		CompanyVo companyVo = loginMapper.idComLogin(com_id);
+		
 		ModelAndView mv = new ModelAndView();
 		PostVo result = comMypageMapper.selectResult(postVo);
-		
-		Long com_id = (long) 1;
 
-		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
+		List<ResumeVo> list = mypageMapper.selectResumeList4(resumeVo);
 
 		// mv.addObject("user",userVo);
 		// mv.addObject("user_id", user_id);
 		mv.addObject("list", list);
-		mv.addObject("com_id",com_id);
+		mv.addObject("com_id", com_id);
+		mv.addObject("company", companyVo);
 		mv.addObject("result",result.getResult());
 		mv.setViewName("comMypage/comResumeView");
 		return mv;

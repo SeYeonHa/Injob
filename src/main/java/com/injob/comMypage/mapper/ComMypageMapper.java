@@ -10,17 +10,17 @@ import com.injob.mypage.domain.ResumeVo;
 @Mapper
 public interface ComMypageMapper {
 
-	List<PostVo> selectPostList(PostVo postVo);
+	List<PostVo> selectPostList(Long com_id);
 
 	List<PostVo> selectPostList2(PostVo postVo);
 
-	List<PostVo> selectHistory(PostVo postVo);
+	List<PostVo> selectHistory(Long com_id);
 
 	void deletePost(PostVo postVo);
 
 	void updatePost(PostVo postVo);
 
-	PostVo selectCompany(PostVo postVo);
+	PostVo selectCompany(Long com_id);
 
 	PostVo selectResult(PostVo postVo);
 

@@ -67,7 +67,7 @@
 									<ul>
 									<c:forEach var="H" items="${response.list}" >
 										<li>
-										<tr onclick="location.href=`/ComMypage/ComResumeView?re_id=${H.re_id}&ap_id=${H.ap_id}`">
+										<tr onclick="location.href=`/ComMypage/ComResumeView?ap_id=${H.ap_id}`">
 											<input type="hidden" class="ap_id" value="${H.ap_id }">
 											<td >${H.ap_id }</td>
 											<td>${H.user_name }</td>

@@ -13,12 +13,37 @@
 <link href="/css/test.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
 	rel="stylesheet">
 
 <style>
-
+	.skill-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px; /* 버튼 사이 간격 조정 */
+	}
+	.skill-button {
+		flex: 1 1 calc(25% - 20px);
+		height: 3em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #f0f0f0;
+		border: 1px solid #ccc;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+	.skill-button:hover {
+		background-color: #e0e0e0;
+	}
+	.skill-button.active {
+		background-color: #3CC35E;
+		color : white;
+		font-weight: bold;
+	}
+	.input-group {
+		margin-bottom: 10px;
+	}
 </style>
 </head>
 <body>
@@ -35,9 +60,9 @@
 				    <%@include file="/WEB-INF/include/aside.jsp"%>
 					<div class="contWrap">
 						<form action="/Mypage/ResumeSubmit" method="post" var="list" items="${list}">
-							<input type="hidden" name="user_id" value="1" />
+							<input type="hidden" name="user_id" value="${user_id}" />
 
-							<div style="display: flex; flex-direction: column;">
+							<div style="display: flex; flex-direction: column; margin:10px;">
 								<div style="margin-bottom: 20px;">
 									<h2 class="mar-10">이력서 제목 :
 									 <input type="text" name="re_title"
@@ -80,22 +105,49 @@
 										</table>
 									</div>
 								</div>
-								<!-- 기술 스택 및 자격증 -->
+								<!-- 자격증 -->
 								<div class="mar-10">
-									<br> <span>기술스택 &nbsp | &nbsp </span><select
-										value="rv.skill" disabled>
-										<option value="Java">Java</option>
-										<option value="Springboot">Springboot</option>
-										<option value="C">C</option>
-										<option value="CSS">CSS</option>
-										<option value="html">Html</option>
-										<option value="Flutter">Flutter</option>
-										<option value="JavaScript">JavaScript</option>
-									</select> <span>&ensp;&ensp;</span> 
 									<span>자격증 &nbsp | &nbsp <input type="text"
 											name="license" placeholder="보유 자격증을 입력하세요"></span>
 
 								</div>
+								<!--  학력 세부사항  -->
+								<div class="mt-5">
+									<h3 class="mar-10">
+										학력 세부사항
+										<button type="button" class="btn btn-block btn-primary"
+											onclick="addInputFields()">
+											<h5>+</h5>
+										</button>
+									</h3>
+									<div id="inputContainer">
+										<!-- 기본 학력 입력 필드 -->
+										<div class="input-group">
+											<input type="text" name="school_name" placeholder="학교 이름 입력" style="width: 33%; height: 1.5em; margin-right: 10px;">
+											<select name="school_type" style="height: 1.5em; margin-right: 10px;">
+												<option value="대학교">대학교</option>
+												<option value="고등학교">고등학교</option>
+												<option value="중학교">중학교</option>
+												<option value="기타">기타</option>
+											</select>
+											<button type="button" onclick="removeInputField(this)">X</button>
+										</div>
+									</div>
+								</div>
+								<!-- 스킬  -->
+								<div class="mt-5">
+									<h3 class="mar-10">기술 스택</h3>
+									<div class="skill-container">
+										<c:forEach var="skill"
+											items="${fn:split('JAVA,CSS,JAVASCRIPT,HTML,PYTHON,C++,DJANGO,GIT', ',')}"
+											varStatus="status">
+											<div class="skill-button" onclick="toggleSkill(this)">
+												${skill} 
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+
 								<!-- 자기소개서 제목 -->
 								<div class="mt-5">
 									<h3 class="mar-10">자기소개 제목</h3>
@@ -121,40 +173,104 @@
 				</div>
 			</section>
 		</div>
-		<script>
-            function updateResumeForm(id) {
-                console.log(id);
-                $.ajax({
-                    type: "GET",
-                    url: "/person/updateResume/" + id
-                }).done((res) => {
-                    location.href = "/person/updateResume/" + id;
-                }).fail((err) => {
+		<script type="text/javascript">
+		
+		var selectedSkills = [];
 
-                });
-            }
-            
-          //For Demo only
-            var links = document.getElementsByClassName('link')
-            for(var i = 0; i <= links.length; i++)
-               addClass(i)
+		function toggleSkill(button) {
+			var skill = button.innerText.trim();
+			var index = selectedSkills.indexOf(skill);
 
+			if (index === -1) {
+				selectedSkills.push(skill);
+				button.classList.add("active");
+			} else {
+				selectedSkills.splice(index, 1);
+				button.classList.remove("active");
+			}
+		}
 
-            function addClass(id){
-               setTimeout(function(){
-                  if(id > 0) links[id-1].classList.remove('hover')
-                  links[id].classList.add('hover')
-               }, id*750) 
-            }
-            
-        </script>
+		function removeInputField(button) {
+			button.parentElement.remove();
+		}
+
+		function addInputFields() {
+			// 새로운 div 요소 생성
+			var newDiv = document.createElement("div");
+			newDiv.setAttribute("class", "input-group");
+
+			// 첫 번째 상자: 텍스트 입력 필드
+			var inputField = document.createElement("input");
+			inputField.setAttribute("type", "text");
+			inputField.setAttribute("name", "school_name");
+			inputField.setAttribute("placeholder", "학교 이름 입력");
+			inputField.style.width = "33%";
+			inputField.style.height = "1.5em";
+			inputField.style.marginRight = "10px"; // 간격 추가
+
+			// 두 번째 상자: 옵션 선택 필드
+			var selectField = document.createElement("select");
+			selectField.setAttribute("name", "school_type");
+			selectField.style.height = "1.5em";
+			selectField.style.marginRight = "10px"; // 간격 추가
+
+			var options = ["대학교", "고등학교", "중학교", "기타"];
+			options.forEach(function(option) {
+				var optionElem = document.createElement("option");
+				optionElem.value = option;
+				optionElem.text = option;
+				selectField.appendChild(optionElem);
+			});
+
+			// 세 번째 상자: 삭제 버튼
+			var deleteButton = document.createElement("button");
+			deleteButton.setAttribute("type", "button");
+			deleteButton.innerHTML = "X";
+			deleteButton.onclick = function() {
+				newDiv.remove();
+			};
+
+			// 생성된 필드를 div에 추가
+			newDiv.appendChild(inputField);
+			newDiv.appendChild(selectField);
+			newDiv.appendChild(deleteButton);
+
+			// 새로운 div를 컨테이너에 추가
+			document.getElementById("inputContainer").appendChild(newDiv);
+		}
+
+		function submitForm(event) {
+			// 선택된 스킬 버튼들 가져오기
+			var selectedSkillButtons = document.querySelectorAll(".skill-button.active");
+
+			// 선택된 스킬 정보만 제출하기 위해 기존 hidden input 제거
+			var existingInputs = document.querySelectorAll('input[name="stack_name"]');
+			existingInputs.forEach(function(input) {
+				input.remove();
+			});
+
+			// 선택된 스킬 이름들을 배열에 저장
+			selectedSkills = [];
+			selectedSkillButtons.forEach(function(button) {
+				selectedSkills.push(button.innerText.trim());
+			});
+
+			// 선택된 스킬 정보만 hidden input으로 추가
+			selectedSkills.forEach(function(skill) {
+				var input = document.createElement("input");
+				input.type = "hidden";
+				input.name = "stack_name";
+				input.value = skill;
+				event.target.appendChild(input);
+			});
+
+			// 폼을 제출
+			event.target.submit();
+		}
+
+		document.querySelector("form").addEventListener("submit", submitForm);
+		</script>
 
 		<%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>
 </html>
-
-
-
-
-
-

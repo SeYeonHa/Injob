@@ -14,8 +14,8 @@
      
      <!-- 처음/ 이전 -->     
      <c:if test="${ startnum gt 1 }">
-       <a href="/Mypage/ApplyHistory?user_id=${ user_id }&nowpage=1">⏮</a>
-       <a href="/Mypage/ApplyHistory?user_id=${ user_id }&nowpage=${ startnum - 1 }">
+       <a href="/Mypage/ApplyHistory?nowpage=1">⏮</a>
+       <a href="/Mypage/ApplyHistory?nowpage=${ startnum - 1 }">
        ⏪
        </a>
      </c:if>
@@ -24,12 +24,12 @@
      <c:forEach var="pagenum" begin="${startnum}" end="${endnum}" step="1">
     <c:choose>
         <c:when test="${pagenum eq searchVo.pagination.currentPage}">
-            <a href="/Mypage/ApplyHistory?user_id=${user_id}&nowpage=${pagenum}" style="font-weight: bold; color: blue; text-decoration: underline;">
+            <a href="/Mypage/ApplyHistory?nowpage=${pagenum}" style="font-weight: bold; color: blue; text-decoration: underline;">
                 ${pagenum}
             </a>
         </c:when>
         <c:otherwise>
-            <a href="/Mypage/ApplyHistory?user_id=${user_id}&nowpage=${pagenum}">
+            <a href="/Mypage/ApplyHistory?nowpage=${pagenum}">
                 ${pagenum}
             </a>
         </c:otherwise>
@@ -39,10 +39,10 @@
      
      <!-- 다음 / 마지막 -->
      <c:if test="${ totalpagecount != endnum }">
-       <a href="/Mypage/ApplyHistory?user_id=${ user_id }&nowpage=${ endnum + 1 }">
+       <a href="/Mypage/ApplyHistory?nowpage=${ endnum + 1 }">
        ⏩
        </a>
-       <a href="/Mypage/ApplyHistory?user_id=${ user_id }&nowpage=${ totalpagecount }">⏭</a>
+       <a href="/Mypage/ApplyHistory?nowpage=${ totalpagecount }">⏭</a>
      </c:if>    
      
       </td>

@@ -3,6 +3,7 @@ package com.injob.mypage.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.LogManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -57,7 +58,8 @@ public class MypageController {
 		//--------------------------------------------------------------------------
 		//ㅇㄴㄹㅇㄴㄹ
 		Long userId = (Long) session.getAttribute("userId");
-		//UserVo userVo = loginMapper.idLogin(userId);
+		
+		UserVo userVo = loginMapper.idLogin(userId);
 		List<AiRecommend> aiList = mypageMapper.getAiList(userId);
 		
 		//사이드 북마크 추천 
@@ -71,28 +73,17 @@ public class MypageController {
 		  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
 		 if(recentlyViewedPosting == null) {
 			 System.out.println("쿠키가없어요~");
-			 System.out.println("쿠키가없어요~");
+			 System.out.println("쿠키가없어요22~");
 		 }else {
 			  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
 		}
           //--------------------------------------------------------------------------
-		 
-		 
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("여기냐");
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
 			 
-		List<ResumeVo> Resumelist = mypageMapper.selectResumeList(user_id);
+		List<ResumeVo> Resumelist = mypageMapper.selectResumeList(userId);
 			 
 		// 페이징
-		int count = pagingMapper.count( user_id );
+		int count = pagingMapper.count( userId );
 		PagingResponse<ResumeVo> response = null;
 		if( count<1 ) {
 			response = new PagingResponse<>(Collections.emptyList(), null);
@@ -113,9 +104,12 @@ public class MypageController {
 		int    pageSize = searchVo.getRecordSize();
 		
 		// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
-		List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, user_id);
-		
-		
+		List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, userId);
+		System.out.println("-----------------------");
+		System.out.println(pagination.getStartPage());
+		System.out.println(pagination.getEndPage());
+		System.out.println(pagination.getTotalPageCount());
+		System.out.println("-----------------------");
 		response = new PagingResponse<>(list, pagination);
 			 
 		// 모델에 사용자 정보를 추가하여 홈 페이지로 전달
@@ -124,10 +118,10 @@ public class MypageController {
 		
 		mv.addObject("response",response);
 		mv.addObject("nowpage", nowpage);
-		
 		mv.addObject("searchVo", searchVo);
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
+
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.addObject("Resumelist", Resumelist);
 		//--------------------------------------------
 		mv.addObject("recentCookies", recentCookies);
@@ -140,72 +134,155 @@ public class MypageController {
 	}
 
 	@RequestMapping("/ResumeView")
-	public ModelAndView getResumeView(ResumeVo resumeVo) {
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+	public ModelAndView getResumeView(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
+		
 		ModelAndView mv = new ModelAndView();
 
-		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
+		List<ResumeVo> list   = mypageMapper.selectResumeList2(resumeVo);
+		List<ResumeVo> school = mypageMapper.selectSchool(resumeVo);
+		List<ResumeVo> skill  = mypageMapper.selectSkill(resumeVo);
 
-		mv.addObject("user",userVo);
+		System.out.println(skill);
+		
 		mv.addObject("list", list);
-		mv.addObject("user_id", user_id);
+		mv.addObject("school", school);
+		mv.addObject("skill", skill);
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.setViewName("mypage/resumeView");
 		return mv;
 	}
 
 	@RequestMapping("/ResumeWrite")
-	public ModelAndView getResumeWrite(ResumeVo resumeVo) {
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+	public ModelAndView getResumeWrite(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
+
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 
 		ModelAndView mv = new ModelAndView();
 
-		ResumeVo rv = mypageMapper.selectResumeList3(resumeVo);
+		ResumeVo rv = mypageMapper.selectResumeList3(userId);
 
-		mv.addObject("user",userVo);
 		mv.addObject("rv", rv);
-		mv.addObject("user_id", user_id);
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.setViewName("mypage/resumeWrite");
 		return mv;
 	}
 
 	@RequestMapping("/ResumeSubmit")
-	public ModelAndView getResumeSubmit(ResumeVo resumeVo) {
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+	public ModelAndView getResumeSubmit(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+			System.out.println(resumeVo);
+			System.out.println("-------------11111111111-----------------");
+			
+			
+			
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
+			
 		ModelAndView mv = new ModelAndView();
-		user_id = resumeVo.getUser_id();
 
 		mypageMapper.insertResume(resumeVo);
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
+		Long selectLast = mypageMapper.selectMaxRe(resumeVo);
+		
+		String[] splitSchoolName = resumeVo.getSchool_name().split(",");
+		String[] splitSchoolType = resumeVo.getSchool_type().split(",");
+		
+		
+		
+		for(int i=0; i<splitSchoolName.length;i++) {
+			resumeVo.setSchool_name(splitSchoolName[i]);
+			resumeVo.setSchool_type(splitSchoolType[i]);
+			resumeVo.setRe_id(selectLast);
+			mypageMapper.insertSchool(resumeVo);
+		}
+		
+		
+		String[] splitStack = resumeVo.getStack_name().split(",");
+		
+		
+		for(String skill : splitStack) {
+			resumeVo.setStack_name(skill);
+			resumeVo.setRe_id(selectLast);
+		    
+			mypageMapper.insertSkill(resumeVo);
+		}
+		
+		
+		int nowpage =1;
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
+		mv.addObject("nowpage",nowpage);
 		mv.setViewName("redirect:Resume");
 
 		return mv;
@@ -213,99 +290,146 @@ public class MypageController {
 	}
 
 	@RequestMapping("/ResumeUpdate")
-	public ModelAndView getResumeUpdate(@RequestParam(value = "nowpage", required = false) Integer nowpage, ResumeVo resumeVo) {
-	    if (nowpage == null) {
-	        nowpage = 1; // 기본 페이지 번호 설정
-	    }
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+	public ModelAndView getResumeUpdate( HttpSession session, HttpServletRequest request, ResumeVo resumeVo) {
+
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 
 		ModelAndView mv = new ModelAndView();
 
 		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
 
-		mv.addObject("user",userVo);
 		mv.addObject("list", list);
-		mv.addObject("user_id", user_id);
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.setViewName("mypage/resumeUpdate");
 		return mv;
 
 	}
 
 	@RequestMapping("/ResumeUpdateSubmit")
-	public String submitResumeUpdate(@RequestParam(value = "nowpage", required = false) Integer nowpage, ResumeVo resumeVo) {
-		System.out.println(nowpage +"-----------------------------------");
-	    if (nowpage == null) {
-	        nowpage = 1; // 기본 페이지 번호 설정
-	    }
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
+	public String submitResumeUpdate(int nowpage,
+			HttpSession session, HttpServletRequest request, ResumeVo resumeVo) {
 	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 
 		ModelAndView mv = new ModelAndView();
 
 		mypageMapper.updateResume(resumeVo);
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
-	    return "redirect:/Mypage/Resume";
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
+	    return "redirect:/Mypage/Resume?nowpage=1";
 
 	}
 
 	@RequestMapping("/ResumeDelete")
-	public ModelAndView getResumeDelete(ResumeVo resumeVo) {
+	public ModelAndView getResumeDelete(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 
 		ModelAndView mv = new ModelAndView();
 
 		mypageMapper.deleteResume(resumeVo);
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
-		mv.setViewName("redirect:Resume");
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
+		mv.setViewName("redirect:Resume?nowpage=1");
 		return mv;
 
 	}
 
 	@RequestMapping("/Apply")
-	public ModelAndView getApply(int nowpage, ResumeVo resumeVo) {
+	public ModelAndView getApply(int nowpage, ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 			 
-			 List<ResumeVo> Resumelist = mypageMapper.selectResumeList(user_id);
+			 List<ResumeVo> Resumelist = mypageMapper.selectResumeList(userId);
 			 
 			// 페이징
-				int count = pagingMapper.count( user_id );
+				int count = pagingMapper.count( userId );
 				PagingResponse<ResumeVo> response = null;
 				if( count<1 ) {
 					response = new PagingResponse<>(Collections.emptyList(), null);
@@ -326,7 +450,7 @@ public class MypageController {
 				int    pageSize = searchVo.getRecordSize();
 				
 				// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
-				List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, user_id);
+				List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, userId);
 				response = new PagingResponse<>(list, pagination);
 
 		ModelAndView mv = new ModelAndView();
@@ -336,8 +460,8 @@ public class MypageController {
 		mv.addObject("nowpage", nowpage);
 		mv.addObject("searchVo", searchVo);
 		
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.addObject("Resumelist", Resumelist);
 		mv.setViewName("mypage/apply");
 
@@ -345,46 +469,72 @@ public class MypageController {
 	}
 
 	@RequestMapping("/ApplyResume")
-	public ModelAndView getApplyResume(ResumeVo resumeVo) {
+	public ModelAndView getApplyResume(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 
 		ModelAndView mv = new ModelAndView();
 
 		mypageMapper.insertApply(resumeVo);
 		
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.setViewName("redirect:ApplyHistory");
 
 		return mv;
 	}
 
 	@RequestMapping("/ApplyHistory")
-	public ModelAndView getApplyHistory(int nowpage, ResumeVo resumeVo) {
+	public ModelAndView getApplyHistory(int nowpage, ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Long user_id =7l;
-	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
-			
-			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+		//--------------------------------------------------------------------------
+				//ㅇㄴㄹㅇㄴㄹ
+				Long userId = (Long) session.getAttribute("userId");
+				UserVo userVo = loginMapper.idLogin(userId);
+				List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+				
+				//사이드 북마크 추천 
+			    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+			    	    
+			    
+			  //사이드 쿠키
+			     List<Long> recentlyViewedPosting = new ArrayList<>();
+				 
+				 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+				  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+				 if(recentlyViewedPosting == null) {
+					 System.out.println("쿠키가없어요~");
+					 System.out.println("쿠키가없어요~");
+				 }else {
+					  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+				}
+		          //--------------------------------------------------------------------------
 			 
-			 List<ResumeVo> Historylist = mypageMapper.selectHistory(resumeVo);
+			 List<ResumeVo> Historylist = mypageMapper.selectHistory(userId);
 			 
 			// 페이징
-				int count = pagingMapper.countApplyHistory( resumeVo );
+				int count = pagingMapper.countApplyHistory( userId );
 				PagingResponse<ResumeVo> response = null;
 				if( count<1 ) {
 					response = new PagingResponse<>(Collections.emptyList(), null);
@@ -406,7 +556,7 @@ public class MypageController {
 				String result    = resumeVo.getResult();
 				
 				// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
-				List<ResumeVo> list = pagingMapper.getApplyHistoryPagingList(com_name, po_title, re_id, offset, pageSize, result, user_id);
+				List<ResumeVo> list = pagingMapper.getApplyHistoryPagingList(com_name, po_title, re_id, offset, pageSize, result, userId);
 				response = new PagingResponse<>(list, pagination);
 
 		ModelAndView mv = new ModelAndView();
@@ -415,8 +565,8 @@ public class MypageController {
 		mv.addObject("nowpage", nowpage);
 		mv.addObject("searchVo", searchVo);
 		
-		mv.addObject("user",userVo);
-		mv.addObject("user_id", user_id);
+		mv.addObject("user_id", userId);
+		mv.addObject("user", userVo);
 		mv.addObject("Historylist", Historylist);
 		mv.setViewName("mypage/applyHistory");
 		return mv;

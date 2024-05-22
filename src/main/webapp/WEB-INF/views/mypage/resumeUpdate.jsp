@@ -35,7 +35,7 @@
 				    <%@include file="/WEB-INF/include/aside.jsp"%>
 					<div class="contWrap">
 						<form
-							action="/Mypage/ResumeUpdateSubmit?user_id=${user_id}&nowpage=${nowpage}"
+							action="/Mypage/ResumeUpdateSubmit?nowpage=1"
 							method="post" var="list" items="${list}">
 
 
@@ -127,7 +127,7 @@
 											style="margin-right: 5px;">수정완료</button>
 										<!-- 삭제 버튼 -->
 										<button type="button" class="btn btn-secondary"
-											onclick="location.href='/Mypage/Resume?user_id=${user_id}&nowpage=1'">
+											onclick="location.href='/Mypage/Resume?nowpage=1'">
 											목록으로</button>
 									</div>
 

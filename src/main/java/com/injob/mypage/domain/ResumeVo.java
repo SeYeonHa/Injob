@@ -31,6 +31,7 @@ public class ResumeVo {
 	// apply
 	private Long   po_id;
 	private String result;
+	private Long   ap_id;
 	
 	// posting
 	private Long   com_id;
@@ -41,5 +42,18 @@ public class ResumeVo {
 	
 	// company
 	private String com_name;
+	
+	// school
+	private Long   school_id;
+	private String school_name;
+	private String school_type;
+	
+	// resume_stack
+	private String stack_name;
+	private Long   re_stack_id;
+	public String getSkills() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

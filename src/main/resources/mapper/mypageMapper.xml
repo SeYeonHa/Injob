@@ -22,7 +22,7 @@
 		FROM RESUME RE INNER JOIN USERS UR
 		ON RE.USER_ID = UR.USER_ID
 
-		WHERE UR.USER_ID = #{ user_id }
+		WHERE UR.USER_ID = #{ userId }
 		
 		ORDER BY RE.RE_ID ASC
 
@@ -50,6 +50,27 @@
 		WHERE RE.RE_ID = #{ re_id }
 
 	</select>
+	<select id="selectSchool">
+
+		SELECT
+			SCHOOL_NAME,
+			SCHOOL_TYPE
+
+		FROM SCHOOL
+
+		WHERE RE_ID = #{ re_id }
+
+	</select>
+	<select id="selectSkill">
+
+		SELECT
+			STACK_NAME
+
+		FROM RESUME_STACK
+
+		WHERE RE_ID = #{ re_id }
+
+	</select>
 
 	<select id="selectResumeList3">
 
@@ -61,8 +82,32 @@
 
 		FROM USERS
 
-		WHERE USER_ID = #{ user_id }
+		WHERE USER_ID = #{ userId }
 
+	</select>
+	
+	<select id="selectResumeList4">
+	
+	SELECT
+		RE.USER_ID,
+		RE.RE_ID,
+		RE.RE_PROFILE,
+		RE.RE_TITLE,
+		RE.RE_INTTI,
+		RE.RE_INTCON,
+		RE.LICENSE,
+		RE.INDATE,
+		UR.USER_NAME,
+		UR.USER_SOCIAL_NUM,
+		UR.USER_PHONE,
+		UR.USER_EMAIL
+
+		FROM APPLY AP
+		JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
+		JOIN USERS UR  ON RE.USER_ID = UR.USER_ID
+
+		WHERE AP.AP_ID = #{ ap_id }
+	
 	</select>
 	
 	<select id="selectHistory">
@@ -82,8 +127,15 @@
 		  JOIN POSTING PO ON AP.PO_ID = PO.PO_ID
 		  JOIN COMPANY COM ON PO.COM_ID = COM.COM_ID
 
-		WHERE RE.USER_ID = #{ user_id }
+		WHERE RE.USER_ID = #{ userId }
 
+	</select>
+
+	<select id="selectMaxRe">
+	
+	SELECT MAX(RE_ID)
+	FROM   RESUME
+	
 	</select>
 
 <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
@@ -109,6 +161,41 @@
 		#{ license }
 		)
 
+	</insert>
+	
+	<insert id="insertSchool">
+
+	INSERT INTO SCHOOL (
+		SCHOOL_ID,
+		RE_ID,
+		SCHOOL_NAME,
+		SCHOOL_TYPE
+	)
+	VALUES (
+		(SELECT NVL(MAX(SCHOOL_ID), 0) + 1 FROM SCHOOL),
+		(SELECT MAX(RE_ID) FROM RESUME),
+		#{ school_name },
+		#{ school_type }
+	)
+
+	</insert>
+	
+	
+	<!--  -->
+	
+	<insert id="insertSkill">
+		
+		INSERT INTO RESUME_STACK (
+			RE_ID,
+			STACK_NAME,
+			RE_STACK_ID
+	)
+	VALUES (
+	(SELECT MAX(RE_ID) FROM RESUME),
+	#{ stack_name },
+	(SELECT NVL(MAX(RE_STACK_ID), 0) + 1 FROM RESUME_STACK)
+	)
+		
 	</insert>
 	
 	<insert id="insertApply">
@@ -151,8 +238,7 @@
 	<delete id="deleteResume">
 
 		DELETE FROM RESUME
-		WHERE USER_ID = #{ user_id }
-		AND RE_ID = #{ re_id }
+		WHERE RE_ID = #{ re_id }
 
 	</delete>
 	
