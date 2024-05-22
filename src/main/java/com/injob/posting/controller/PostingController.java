@@ -17,6 +17,8 @@ import com.injob.posting.domain.JoinVo;
 import com.injob.posting.domain.PostingVo;
 import com.injob.posting.mapper.PostingMapper;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/Posting")
 public class PostingController {
@@ -28,17 +30,19 @@ public class PostingController {
 	
 	// http://localhost:9090
 	@RequestMapping("/PMain")
-	public  ModelAndView   pmain(PostingVo postingVo, JoinVo joinVo) {
+	public  ModelAndView   pmain(JoinVo joinVo) {
+		
+		//Long userid2 = (Long) session.getAttribute("userId");
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Long user_id =7l;
 	
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String username = userDetails.getUsername();
+	    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String username = userDetails.getUsername();
 			
 			// UserService를 사용하여 사용자 정보를 가져옴
-			UserVo userVo = loginMapper.login(username);
-			 user_id = userVo.getUser_id();
+		UserVo userVo = loginMapper.login(username);
+	    user_id = userVo.getUser_id();
 		
 		List<JoinVo> postingList = postingMapper.getPostingList();
 		int count = postingMapper.getCount();

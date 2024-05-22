@@ -29,11 +29,11 @@
 	font-weight: 800;
 	font-style: normal;
 }
-#main:hover {
+#main-list:hover {
     transform: scale(1.05); 
     box-shadow: 0px 0px 30px skyblue;
 }
-#main{
+#main-list{
  border: 1px solid #ccc;
     border-radius: 15px;
         margin: 3px; 
@@ -52,7 +52,7 @@
     opacity: 0; 
     transition: opacity 0.3s ease; 
 }
-#main:hover .listFoot {
+#main-list:hover .listFoot {
     opacity: 1; 
 }
 
@@ -79,7 +79,7 @@ transition: all 0.3s ease;
     margin-top: 0px;
     transition-delay: 0.3s;
 }
-#main:hover #pimg {
+#main-list:hover #pimg {
     height: 200px; 
 }
 .card-footer{
@@ -325,8 +325,8 @@ transition: all 0.3s ease;
 
 <nav class="navbar navbar-light">
   <div class="container-fluid justify-content-end">
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="d-flex" id="search-form">
+      <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
@@ -341,12 +341,13 @@ transition: all 0.3s ease;
 </div>
 <div class="ul-container">
     <div class="pstyle" id="plist">
+    
    <c:forEach var="posting" items="${postingList}" varStatus="status">
-      <div id ="main" class ="main">
+      <div id ="main-list" class ="main-list">
 						<ul data-totalcount = "4" data-pageno ="1">
 							<li>
-					                <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;">
-					                <a href ="/Posting/Pmain?po_id=${posting.po_id }&nowpage=1" class ="listCell">
+					                <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;" class ="listCell">
+					              <!--   <a href ="/Posting/Pmain?po_id=${posting.po_id }&nowpage=1" class ="listCell">-->
 									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
 									<div class="listCont">
 										<div class ="pTit" style="font-weight: bold;">${posting.po_title }</div>
@@ -366,7 +367,7 @@ transition: all 0.3s ease;
 										</div>
 										<div>
 									</div>
-									</a>
+								<!-- </a>-->
 							</li>	
 						</ul>
 					
@@ -390,7 +391,6 @@ transition: all 0.3s ease;
 					 </div>
 				</div>
 				<input type="hidden" name="user_id" id="user_id"  data-user-id="${ posting.user_id }" />
-				<!--  <input type="hidden" name="ub_boolean" id="ubBoolean"  data-user-id="${ posting.ub_boolean }" /> -->
 			</c:forEach>
 			</div>
 			</div>
@@ -400,7 +400,7 @@ transition: all 0.3s ease;
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    var cards = document.querySelectorAll('.main'); 
+    var cards = document.querySelectorAll('.main-list'); 
 
     cards.forEach(function(card) {
         var image = card.querySelector('.pimg'); 
@@ -415,25 +415,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-/*
-document.addEventListener("DOMContentLoaded", function() {
-	   function immediateLike() {
-	      function redirectToLoginPage() {
-	         window.location.href = "/login/login"
-	      }
 
-	      if (confirm("로그인이 필요합니다. 로그인 페이지로 이동합니다")) {
-	         redirectToLoginPage();   
-	      }
-	   }
-
-	
-	   var buttons = document.querySelectorAll(".like");
-	    buttons.forEach(function(button) {
-	        button.addEventListener("click", immediateLike);
-	    });
-	
-	   });*/
 	   
 document.addEventListener("DOMContentLoaded", function() {
     const likeButtons = document.querySelectorAll('.like');
@@ -516,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-//----- 직무
+//----- 직무 
 
 		document.addEventListener("DOMContentLoaded", function() {
 			  var buttons = document.querySelectorAll('.dev-button-item');
@@ -619,6 +601,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
     // 지역 박스 내의 초기화 버튼 처리
     var resetButtonArea = document.querySelector('.area-box .search-reset');
@@ -694,7 +677,7 @@ document.addEventListener('DOMContentLoaded', function() {
     handleButtonClick(gradeButtons, allButtonGrade);
     handleResetClick(document.querySelector('.grade-box .search-reset'), '.grade-box .dev-button-item');
 });
-
+//--------------------
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.search-button').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -713,13 +696,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
         });
     });
+    
 
     function fetchJobListings(department, local, career, grade) {
         const requestData = {
             department: department === '전체' ? null : department,
             local: local === '전체' ? null : local,
             career: career === '경력무관' ? null : career,
-            grade: grade === '학력무관' ? null : grade
+            grade: grade === '학력무관' ? null : grade,
+            
         };
     	console.log('requestData:', requestData);
 
@@ -770,15 +755,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
        
-       const oldUlEls = document.querySelectorAll('#main ul');
+       const oldUlEls = document.querySelectorAll('#main-list ul');
        oldUlEls.forEach(oldUlEl => {
            oldUlEl.remove();
        });
-       /*
-       const oldUlEls = document.querySelectorAll('.main');
-       oldUlEls.forEach(oldUlEl => {
-           oldUlEl.remove();
-       });*/
+     
 
        const pstyleEl = document.querySelector('.pstyle');
        while (pstyleEl.firstChild) {
@@ -789,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function() {
        pstyleEls.forEach(pstyleEl => {
            jobListings.forEach(posting => {
                const divEl = document.createElement('div');
-               divEl.classList.add('main');
+               divEl.classList.add('main-list');
 
                const UlEl = document.createElement('ul');
                divEl.appendChild(UlEl);
