@@ -29,14 +29,15 @@
 
 		<div class="container-ha">
 			<section class="box align_right">
-				<!--  사이드바  -->
-				<%@include file="/WEB-INF/include/aside.jsp"%>
+				
 
 				<div class="box-contents">
-
-
-					<div class="card">
-						<div class="card-header">
+                   <div class="mtuHome">
+                   <!--  사이드바  -->
+			     	<%@include file="/WEB-INF/include/aside.jsp"%>
+                     <div class="contWrap">
+					   <div class="card">
+						 <div class="card-header">
 							<h3 class="card-title">지원 이력</h3>
 
 						
@@ -69,7 +70,9 @@
 						</div>
 						
 					</div>
+					</div>
 				</div>
+			   </div>	
 			</section>
 		</div>
 	</main>

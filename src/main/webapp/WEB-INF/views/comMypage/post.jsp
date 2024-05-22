@@ -28,16 +28,20 @@
 
 		<div class="container-ha">
 		  <section class="box align-right">
-		<!--  사이드바  -->
-
-			<%@include file="/WEB-INF/include/comAside.jsp"%>
-
+		
 			
 		<!--  메인  -->
 
 				<div class="box-contents">
+                    <div class=" mtuHome">
+					
+						 
+		                 <!--  사이드바  -->
 
+		            	<%@include file="/WEB-INF/include/comAside.jsp"%>
 
+						<div class="contWrap">
+         
 				
 						<div class="card-header">
 							<h3 class="card-title">공고 목록</h3>
@@ -81,6 +85,7 @@
 						style="display: flex; justify-content: flex-end; margin: 10px 10px;"
 							onclick="location.href=`/ComMypage/PostWrite?com_id=${com_id}`"
 							class="btn btn-block btn-success">작성</button>
+					</div>		
 				</div>
 			</section>
 		</div>

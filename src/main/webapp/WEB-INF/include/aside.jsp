@@ -13,7 +13,11 @@
 					<div class="lnbGroup">
 						<h2 class="lnbTit">이력서 관리</h2>
 						<ul>
+<<<<<<< HEAD
+							<li><a href="/Mypage/ResumeWrite?user_id=${user.user_id}">이력서
+=======
 							<li><a href="/Mypage/ResumeWrite">이력서
+>>>>>>> 1a7e4c9f78492294775e59d472cb2b0c952599c2
 									등록</a></li>
 							<li><a href="/Mypage/Resume?nowpage=1">이력서 현황</a></li>
 						</ul>

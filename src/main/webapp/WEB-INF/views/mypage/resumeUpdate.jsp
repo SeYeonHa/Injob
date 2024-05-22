@@ -28,10 +28,12 @@
 		<div class="container-ha">
 			<section class="box align_right">
 				<!--  사이드바  -->
-				<%@include file="/WEB-INF/include/aside.jsp"%>
+				
 
 				<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
+				   <div class="mtuHome"> 
+				    <%@include file="/WEB-INF/include/aside.jsp"%>
+					<div class="contWrap">
 						<form
 							action="/Mypage/ResumeUpdateSubmit?nowpage=1"
 							method="post" var="list" items="${list}">
@@ -133,6 +135,7 @@
 							</c:forEach>
 
 						</form>
+					</div>
 					</div>
 				</div>
 			</section>

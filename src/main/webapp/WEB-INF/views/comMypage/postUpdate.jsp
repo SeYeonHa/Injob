@@ -27,12 +27,17 @@
 
 		<div class="container-ha">
 			<section class="box align_right">
-		<!--  사이드바  -->
-			<%@include file="/WEB-INF/include/comAside.jsp"%>
+		
 
 				<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
-						<form action="/ComMypage/PostUpdateSubmit" method="post" var="list" items="${list}">
+					<div class="mtuHome">
+					
+					
+						 <!--  사이드바  -->
+		            	<%@include file="/WEB-INF/include/comAside.jsp"%>
+		                  	
+						<div class="contWrap">
+						 <form action="/ComMypage/PostUpdateSubmit" method="post" var="list" items="${list}">
 						  <c:forEach var="list" items="${list}">
 							<input type="hidden" name="com_id" value="${com_id}" />
 							<input type="hidden" name="po_id" value="${list.po_id}" />
@@ -150,6 +155,7 @@
 										취소</button>
 						  </c:forEach>
 						</form>
+					  </div>	
 					</div>
 				</div>
 			</section>

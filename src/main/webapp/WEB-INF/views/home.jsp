@@ -25,6 +25,7 @@
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 400;
   font-style: normal;
+  
 }
 
 .nanum-gothic-extrabold {
@@ -46,6 +47,8 @@
 <%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
 		<div class="inner">
+			<h2>강재영</h2>
+			<h2>강재영</h2>
 			<h2>강재영</h2>
 			<h2>강재영</h2>
 			<h2>강재영</h2>

@@ -18,6 +18,7 @@ public class AiRecommend {
 	private String   po_content;
 	private String   po_grade;
 	private String   career;
+	private String po_profile;
 	private LocalDate po_end_date;
 	private String   com_name;
 	private String   com_type;
@@ -25,6 +26,8 @@ public class AiRecommend {
 	public Long com_id;
 	private Long  user_id;
 	private Long  ub_boolean;
+	
+	
 	private int total_count;
 	private String stringDay;
 	private int daysRemaining;

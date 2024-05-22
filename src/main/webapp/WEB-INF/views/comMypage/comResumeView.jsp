@@ -28,11 +28,14 @@
 
 		<div class="container-ha">
 			<section class="box align-right">
-				<!--  사이드바  -->
-			<%@include file="/WEB-INF/include/comAside.jsp"%>
+				
 
 				<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
+					<div class=" mtuHome">
+					
+						 <!--  사이드바  -->
+			            <%@include file="/WEB-INF/include/comAside.jsp"%>
+						<div class="contWrap">
 						<c:forEach var="list" items="${list}">
 							<div style="display: flex; flex-direction: column;">
 								<div style="margin-bottom: 20px;">
@@ -124,6 +127,7 @@
 
 							</div>
 						</c:forEach>
+						</div>
 					</div>
 				</div>
 

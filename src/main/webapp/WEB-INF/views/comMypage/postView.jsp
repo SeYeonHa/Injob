@@ -27,11 +27,13 @@
 
 		<div class="container-ha">
 			<section class="box align_right">
-		<!--  사이드바  -->
-			 <%@include file="/WEB-INF/include/comAside.jsp"%>
+		
 				<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
-						<c:forEach var="list" items="${list}">
+					<div class="mtuHome">
+					    <!--  사이드바  -->
+			           <%@include file="/WEB-INF/include/comAside.jsp"%>
+						<div class="contWrap">
+						 <c:forEach var="list" items="${list}">
 							<input type="hidden" name="com_id" value="${list.com_id}" />
 
 							<div style="display: flex; flex-direction: column;">
@@ -139,6 +141,7 @@
 								</div>
 							</div>
 						</c:forEach>
+					 </div>	
 					</div>
 				</div>
 			</section>

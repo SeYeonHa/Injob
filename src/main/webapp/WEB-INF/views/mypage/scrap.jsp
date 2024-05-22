@@ -16,353 +16,840 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 
 <style>
- .my-content-top {
-    padding: 30px 30px 20px;
-    box-sizing: border-box;
-    position: relative;
-}	
+
+body{
+ background-color: #f2f4f7;
+}
+.my-content-top {
+	padding: 30px 30px 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+
 .my-content-top .my-profile-wrap {
 	position: absolute;
 	left: 15px;
 	top: 30px;
 }
- .my-profile {
-    position: relative;
+
+.my-profile {
+	position: relative;
 }
- .my-profile .pie-chart{
-	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%, rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%);
+
+.my-profile .pie-chart {
+	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%,
+		rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%);
 	position: relative;
 	width: 110px;
 	height: 110px;
 	border-radius: 50%;
 	transition: 0.3s;
 }
- .my-profile .profile-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height:100px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: url(/img/man-profil.png) no-repeat center;
-    background-size: contain;
-    border: 3px solid #fff;
-    box-sizing: border-box;
+
+.my-profile .profile-img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;
+	background: url(/img/man-profil.png) no-repeat center;
+	background-size: contain;
+	border: 3px solid #fff;
+	box-sizing: border-box;
 }
- .my-profile .profile-btn {
-    position: absolute;
-    bottom: 3px;
-    right: 2px;
-    z-index: 1;
-    width: 30px;
-    height: 30px;
-    background: url(/img/camera.png) no-repeat center;
-    background-size: contain;
-    border-radius: 50%;
-    overflow: visible;
-    cursor: pointer;
+
+.my-profile .profile-btn {
+	position: absolute;
+	bottom: 3px;
+	right: 2px;
+	z-index: 1;
+	width: 30px;
+	height: 30px;
+	background: url(/img/camera.png) no-repeat center;
+	background-size: contain;
+	border-radius: 50%;
+	overflow: visible;
+	cursor: pointer;
 }
- .my-career {
-    display: block;
-    font-size: 13px;
-    letter-spacing: 0px;
-    color: #002aff;
-    margin-top: 10px;
+
+.my-career {
+	display: block;
+	font-size: 13px;
+	letter-spacing: 0px;
+	color: #002aff;
+	margin-top: 10px;
 }
-.my-status-wrap{
- padding-left: 130px;
+
+.my-status-wrap {
+	padding-left: 130px;
 }
+
 .my-status-wrap .my-status-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
 }
+
 .my-status-wrap .badge.status-incomplete {
-    color: rgba(255, 0, 0, 0.7);
-    border: 1px solid rgba(255, 0, 0, 0.7);
+	color: rgba(255, 0, 0, 0.7);
+	border: 1px solid rgba(255, 0, 0, 0.7);
 }
+
 .my-status-wrap .badge {
-    position: relative;
-    width: auto;
-    height: 24px;
-    font-size: 12px;
-    letter-spacing: 0px;
-    line-height: 24px;
-    color: #222222;
-    padding: 0 12px;
-    border-radius: 28px;
-    border: 1px solid #222222;
-    background-color: #ffffff;
-    margin: 0;
+	position: relative;
+	width: auto;
+	height: 24px;
+	font-size: 12px;
+	letter-spacing: 0px;
+	line-height: 24px;
+	color: #222222;
+	padding: 0 12px;
+	border-radius: 28px;
+	border: 1px solid #222222;
+	background-color: #ffffff;
+	margin: 0;
 }
+
 .user-status-title {
-    display: flex;
-    align-items: baseline;
+	display: flex;
+	align-items: baseline;
 }
+
 .user-status-title h1 {
-    display: flex;
-    align-items: baseline;
-    max-width: 90%;
-    font-size: 24px;
-    letter-spacing: -0.5px;
-    line-height: 30px;
-    color: #222222;
-    white-space: nowrap;
+	display: flex;
+	align-items: baseline;
+	max-width: 90%;
+	font-size: 24px;
+	letter-spacing: -0.5px;
+	line-height: 30px;
+	color: #222222;
+	white-space: nowrap;
 }
+
 .my-status-wrap .my-status-box {
-    display: inline-block;
-    width: 100%;
-    font-size: 14px;
-    letter-spacing: 0px;
-    line-height: 22px;
-    border: 1px solid #e8e8e8;
-    padding: 16px;
-    margin: 20px 0;
-    box-sizing: border-box;
+	display: inline-block;
+	width: 100%;
+	font-size: 14px;
+	letter-spacing: 0px;
+	line-height: 22px;
+	border: 1px solid #e8e8e8;
+	padding: 16px;
+	margin: 20px 0;
+	box-sizing: border-box;
 }
+
 .my-status-wrap .my-status-box .status a {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    color: #222222;
-    padding-right: 15px;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	color: #222222;
+	padding-right: 15px;
 }
+
 .my-status-wrap .my-status-list {
-    display: flex;
-    align-items: baseline;
-    position: relative;
+	display: flex;
+	align-items: baseline;
+	position: relative;
 }
 
 .my-status-wrap .my-status-list h5 {
-    min-width: 65px;
-    font-size: 13px;
-    letter-spacing: 0px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #222222;
-    margin-right: 8px;
+	min-width: 65px;
+	font-size: 13px;
+	letter-spacing: 0px;
+	font-weight: 500;
+	line-height: 20px;
+	color: #222222;
+	margin-right: 8px;
 }
+
 .my-status-wrap .my-status-list .expand {
-    position: relative;
-    width: 100%;
+	position: relative;
+	width: 100%;
 }
+
 .my-status-wrap .my-status-list ~ .my-status-list {
-    margin-top: 8px;
+	margin-top: 8px;
 }
+
 .my-status-wrap .no-data {
+	font-size: 13px;
+	letter-spacing: 0px;
+	line-height: 20px;
+	color: #002aff;
+}
+
+.my-status-wrap .my-status-box .status a {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	color: #222222;
+	padding-right: 15px;
+}
+
+.mtuHome {
+	margin-top: 0;
+}
+
+.box-contents {
+	border: none;
+}
+
+.my-status-wrap .my-status-list .expand .expand-list {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 8px;
+	max-height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+}
+
+.my-status-wrap .my-status-list .expand .skill-list li {
+	color: #3b65ff;
+	background-color: #f0f5ff;
+}
+
+.my-status-wrap .my-status-list .expand .expand-list li {
+	height: 30px;
+	font-size: 12px;
+	letter-spacing: 0px;
+	line-height: 30px;
+	width: auto;
+	padding: 0 12px;
+	border-radius: 99px;
+}
+
+.my-content-bottom .my-active-list {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	border-top: 1px solid #ebebee;
+}
+
+.my-content-bottom .my-active-list .list {
+	position: relative;
+	width: calc(100%/ 5);
+}
+
+.my-content-bottom .my-active-list .list a {
+	display: inline-block;
+	width: 100%;
+	height: 60px;
+	padding: 21px 0;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.my-content-bottom .my-active-list .list a .title {
+	font-size: 14px;
+	letter-spacing: 0px;
+	color: #333333;
+}
+
+.my-content-bottom .my-active-list .list a .tooltip p {
+	color: #fff;
+	white-space: nowrap;
+}
+
+.my-content-bottom .my-active-list .list:nth-child(n+2) {
+	border-left: 1px solid #ebebee;
+}
+
+.my-content {
+	
+	margin-bottom: 20px;
+}
+
+.mtuHome .contWrap {
+	border: none;
+	background: none;
+}
+.my-content-bottom h2{
+	font-size: 22px;
+    letter-spacing: -.5px;
+    line-height: 30px;
+    margin-bottom: 24px;
+    margin-left: 10px
+}
+.activity{
+ background-color : #fff;
+ border: 1px solid #dce1eb;
+}
+.tab_content{
+background-color : #fff;
+}
+/*  */
+/*  */
+/*  */
+/*  */
+
+.mtuTab{
+ margin-bottom: 0;
+}
+
+
+.aislide  .listCell {
+	display: block;
+	cursor: pointer;
+	border: 1px solid #e8e8e8;
+	box-sizing: border-box;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, .05);
+	border-radius: 8px;
+	width: 80%;
+	height: 280px;
+	position: relative;
+	transition: .3s;
+	color: #333;
+	padding: 5px;
+}
+
+
+
+.aislide  .listCell .pLogo {
+	position: relative;
+	height: 130px;
+	overflow: hidden;
+	border-radius: 8px 8px 0 0;
+	z-index: -1;
+}
+
+.aislide  .listCell .pLogo img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	display: block;
+	border: 0;
+	vertical-align: top;
+	padding: 0;
+	margin: 0
+}
+
+.aislide  .listCell .listCont {
+	padding: 25px 24px 16px;
+	margin: -1px;
+	border-top: 1px solid rgba(0, 0, 0, .05);
+	position: relative;
+}
+/* posNm */
+.aislide  .listCell .listCont .pCor {
+	display: flex;
+	align-items: center;
+}
+
+.aislide  .listCell .listCont .pCor .posNm {
+	max-width: calc(100% - 23px);
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0;
+	line-height: 22px;
+	color: #171717;
+	display: inline-block;
+	margin: 0 7px 0 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.aislide  .listCell .listCont pTit {
+	margin: 12px 0 0;
+	font-size: 16px;
+	letter-spacing: 0;
+	color: #171717;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.aislide  .listCell .listCont .pInfo {
+	margin: 4px 0 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.aislide  .listCell .listCont .pInfo span {
+	color: #6a6a6a;
+	font-size: 13px;
+	letter-spacing: 0;
+	line-height: 22px;
+	padding: 0 8px 0 0;
+	position: relative;
+}
+
+.aislide  .listCell .listCont .pInfo .pPart:after {
+	content: "";
+	display: inline-block;
+	width: 1px;
+	height: 10px;
+	background-color: #d2d2d2;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.aislide  .listCell .listCont .pInfo .pAddress {
+	padding: 0 0 0 8px;
+}
+
+.aislide  .listCell .listCont .pStackBox {
+	margin: 12px 0 0;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	height: 16px;
+	overflow: hidden;
+}
+
+.aislide  .listCell .listCont .pStackBox span {
+	color: #9e9e9e;
+	font-size: 12px;
+	letter-spacing: 0;
+	line-height: 16px;
+	position: relative;
+	display: inline-block;
+}
+
+.aislide  .listCell .listCont .pStackBox pStack {
+	max-width: 236px;
+	display: inline-block;
+	font-size: 0;
+}
+
+.aislide  .listCell .listCont .pStackBox .pStack tag
+	{
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.aislide  .listCell .listFoot {
+	padding: 16px 0 24px;
+	margin: 0 24px;
+	border-top: 1px solid #e8e8e8;
+}
+
+.aislide  .listCell .listFoot .pAssist {
+	font-size: 14px;
+	letter-spacing: 0;
+	line-height: 22px;
+	color: #171717;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.recruitList_tit {
+    font-size: 22px;
+    letter-spacing: -.5px;
+    line-height: 30px;
+    margin-bottom: 24px;
+    position: absolute;
+    left: 10px;
+    top: 10px
+}
+ .swiper {
+      width: 100%; /* 예를 들어 전체 화면의 80%로 설정 */
+      height: 377px; /* 슬라이더의 높이 설정 */
+      margin: auto; /* 슬라이더를 가운데 정렬 */
+      padding: 62px 50px;
+      background-color: #fff;
+      border: 1px solid #dce1eb;
+      margin-bottom: 20px;
+    }
+    .swiper-slide{
+	box-sizing: border-box;
+	padding-right:  6px;
+}
+.swiper-button-next{
+	right: 10px;
+}
+
+    /* 개별 슬라이드의 넓이를 조정합니다 */
+    
+    /* 내비게이션 버튼 스타일 */
+    .swiper-button-prev, .swiper-button-next {
+      color: #000; /* 버튼 색상 설정 */
+    }
+    .swiper-scrollbar{
+    display: none;
+    }
+    .swiper-wrapper{
+     margin-left: 30px;
+    }
+    .listCont div span, .listCont div{
+      width: 100%; /* 원하는 너비 설정 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+    }
+    .listCont .last_date{
+    	position: absolute;
+    	top: 27px;
+    	right: 25px;
+    	width: 50px;
+    	height: 30px;
+    	line-height:28px;
+    	text-align:center;
+    	background-color: orange;
+    	color: #fff;
+    }
+    .listCont .pTit{
+     width: 150px;
+    }
+    
+    /* Modal Background */
+        .modal-background {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            overflow-y: auto; /* 높이가 초과되면 세로 스크롤 추가 */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* High z-index to ensure it is on top */
+            /*  dsds*/
+        }
+
+        /* Modal Container */
+        .modal-container {
+            width: 880px;
+            height: 557px;
+            background: white;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10000; /* Ensure it is above the background */
+            overflow-y: auto; /* 높이가 초과되면 세로 스크롤 추가 */
+            
+        }
+
+        /* Close Button */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+       /* Prevent background interaction when modal is open */
+      body.modal-open {
+          overflow: hidden;
+      }
+      .popup-section{
+      margin: 0 auto;
+      }
+      .popup-section .step{
+        width: 100px;
+        height: 30px;
+        background: url('/img/question1.png') no-repeat center center;
+        background-size: contain; 
+        margin: 30px auto;
+       
+      }
+      .popup-header{
+       width: 80%;
+       margin: 0 auto;
+       text-align: center;
+      }
+      .popup-header h2{
+         width: 100%;
+         margin: 5px 0;
+      }
+      .popup-header .text{
+       width: 100%;
+       margin: 5px 0;
+      }
+      .category-list {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       margin-top: 20px;
+      }
+       .category-list .category-list-item {
+          margin: 0 6px 13px 6px;
+      }
+      .category-list .category-list-item.on{
+       border: 1px solid black;
+      }
+       .category-list li {
+          display: inline-block;
+      }
+      li {
+          list-style: none;
+      }
+       .category-list .category-list-item input {
+          display: none;
+      }
+      input, select, button {
+          vertical-align: middle;
+      }
+      select, input, option, textarea {
+          vertical-align: middle;
+          font-size: 12px;
+          letter-spacing: 0px;
+          color: #666;
+}
+ .category-list .category-list-item label {
+    display: inline-block;
+    height: 42px;
+    padding: 12px 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
     font-size: 13px;
     letter-spacing: 0px;
-    line-height: 20px;
-    color: #002aff;
-}
-.my-status-wrap .my-status-box .status a {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    color: #222222;
-    padding-right: 15px;
-}
-.mtuHome {
-    margin-top: 0;
-}
-.box-contents{
- border: none;
-}
-.my-status-wrap .my-status-list .expand .expand-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-    max-height: 30px;
-    line-height: 30px;
-    overflow: hidden;
-}
-.my-status-wrap .my-status-list .expand .skill-list li {
-    color: #3b65ff;
-    background-color: #f0f5ff;
-}
-.my-status-wrap .my-status-list .expand .expand-list li {
-    height: 30px;
-    font-size: 12px;
-    letter-spacing: 0px;
-    line-height: 30px;
-    width: auto;
-    padding: 0 12px;
-    border-radius: 99px;
-}
-.my-content-bottom .my-active-list {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    border-top: 1px solid #ebebee;
-}
-.my-content-bottom .my-active-list .list {
-    position: relative;
-    width: calc(100% / 5);
-}
-.my-content-bottom .my-active-list .list a {
-    display: inline-block;
-    width: 100%;
-    height: 60px;
-    padding: 21px 0;
-    text-align: center;
+    color: #333;
+    transition: all 0.2s ease-in-out;
     box-sizing: border-box;
 }
-.my-content-bottom .my-active-list .list a .title {
-    font-size: 14px;
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+.rank-selection {
+    margin-bottom: 20px;
+}
+
+.rank-label {
+   
+}
+.rankpup{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+  margin: 20px 0;
+}
+
+.priority-select {
+    width: 89px;  /* 넓이 설정 */
+    height: 36px; /* 높이 설정 */
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+ .popup-footer {
+    
+    width: calc(100% - 15px);
+    height: 135px;
+    margin: 20px auto;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+ .popup-footer .button {
+   
+    bottom: 30px;
+    width: 180px;
+    height: 57px;
+    background: green;
+    font-size: 18px;
     letter-spacing: 0px;
-    color: #333333;
-}
-.my-content-bottom .my-active-list .list a .tooltip p {
     color: #fff;
-    white-space: nowrap;
-}
-.my-content-bottom .my-active-list .list:nth-child(n + 2) {
-    border-left: 1px solid #ebebee;
-}
-.my-content{
-border: 1px solid #ebebee;
-margin-bottom: 20px;
-}
-.mtuHome .contWrap{
- border: none;
 }
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
 	<main>
-    	  <%@include file="/WEB-INF/include/rightAside.jsp"%>
+		
+		  
+		   
+		 <!-- <div id ="right_wrap"> </div>right_wrap -->
+	
 		<div class="container-ha">
 			<section class="box align_right">
 				<!--  사이드바  -->
-				<%@include file="/WEB-INF/include/aside.jsp"%>
-					
+				
+				
 
 				<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
+					 
 						<div class="mtuHome">
+						 
+		                  	<%@include file="/WEB-INF/include/aside.jsp"%>
 							<div class="contWrap">
-							  <div class="my-content">
-								<section class ="my-content-top">
-									<div class ="my-profile-wrap">
-										<div class ="my-profile">
-											<div class="pie-chart">
-												<div class ="profile-img">
-													<p class="img">
-														<img src="">
+							 
+								<div class="my-content">
+								
+									<!-- Slider main container -->
+				<div class="swiper aislide">
+				<p class="recruitList_tit"><strong>강재영님</strong>의 활동 기반 맞춤공고</p>
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+						<!-- Slides -->
+						<c:forEach var="item" items="${aiList}" begin="0" end="4">
+			                <div class="swiper-slide">
+			                    <a href="/Detail/Detail?com_id=${item.com_id} " class="listCell">
+			                        <div class="pLogo"><img src="/img/${item.po_profile}.jpg" alt="Company Logo"></div>
+			                        <div class="listCont">
+			                            <p class ="last_date">D-${item.daysRemaining}</p>
+			                            <div class="pCor">
+			                                <span class="posNm">${item.com_name}</span>
+			                            </div>
+			                            <div class="pTit">${item.po_title}</div>
+			                            <div class="pInfo">
+			                                <span class="pPart">${item.com_address}</span>
+			                                <span class="pAddress"> ${item.career}</span>
+			                            </div>
+			                            <div class="pStackBox">
+			                                <span class="tag tag-tack">${item.po_content}</span>
+			                                <!-- <span class="tag tag-tack">java</span>
+			                                <span class="tag tag-tack">html</span> -->
+			                            </div>
+			                        </div><!-- listCount -->
+			                    </a>
+			                </div>
+			            </c:forEach>		
+						
+						
+						
+						
+					</div>
+					
+					<!-- If we need pagination -->
+					<div class="swiper-pagination"></div>
+
+					<!-- If we need navigation buttons -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+
+					<!-- If we need scrollbar -->
+					<div class="swiper-scrollbar"></div>
+				</div>
+				                  <div class ="activity">
+									<section class="my-content-top">
+										<div class="my-profile-wrap">
+											<div class="my-profile">
+												<div class="pie-chart">
+													<div class="profile-img">
+														<p class="img">
+															<img src="">
+														</p>
+													</div>
+												</div>
+												<button class="profile-btn" type="button"></button>
+											</div>
+										</div>
+										<!-- my-profile-wrap -->
+										<div class="my-info-wrap">
+											<div class="my-status-wrap">
+												<div class="my-status-top">
+													<div class="badge status-incomplete">이력서 미완성</div>
+												</div>
+												<!-- my-status-top이력서posion -->
+												<div class="user-status-title">
+													<h1>
+														<span>구덕고등학교</span>에서 공부했어요
+													</h1>
+												</div>
+												<div class="my-status-box">
+													<p class="status">
+														<a href="/User/Resume/Write" target="_blank"> 구덕고등학교
+															졸업 > </a>
 													</p>
 												</div>
+												<div class="my-status-list">
+													<h5 class="list-title">보유스킬</h5>
+													<div class="expand">
+														<ul class="skill-list expand-list">
+															<li>JAVA</li>
+															<li>Spring Boot</li>
+															<li>JPA</li>
+															<li>ORM</li>
+															<li>MyBatis</li>
+															<li>OracleDB</li>
+															<li>RDBMS</li>
+															<li>분석력</li>
+														</ul>
+													</div>
+												</div>
+												<div class="my-status-list">
+													<h5 class="list-title">구직 선호도</h5>
+													<a href="#" class="no-data" id="openModal">이직 시 연봉상승 vs 워라벨 당신의 선택은? </a>
+												</div>
 											</div>
-											<button class="profile-btn" type="button"></button>
 										</div>
-									</div><!-- my-profile-wrap -->
-									<div class="my-info-wrap">
-									  <div class="my-status-wrap">
-									  	<div class="my-status-top">
-									  	  <div class="badge status-incomplete">이력서 미완성</div>
-									  	</div><!-- my-status-top이력서posion -->
-									  	<div class="user-status-title">
-									  		<h1><span>구덕고등학교</span>에서 공부했어요</h1>
-									  	</div>
-									  	<div class="my-status-box">
-									  		<p class="status">
-									  		  <a href="/User/Resume/Write" target="_blank" >
-                                               구덕고등학교  졸업 >
-                                              </a>
-									  		</p>
-									  	</div>
-									  	<div class="my-status-list">
-									  		<h5 class="list-title">보유스킬</h5>
-									  		<div class="expand">
-									  		  <ul class="skill-list expand-list">
-                                    			  <li>JAVA</li>
-                                    			  <li>Spring Boot</li>
-                                    			  <li>JPA</li>
-                                    			  <li>ORM</li>
-                                    			  <li>MyBatis</li>
-				                                  <li>OracleDB</li>
-				                                  <li>RDBMS</li>
-				                                  <li>분석력</li> 
-                                              </ul>
-									  		</div>
-									  	</div>
-									  	<div class="my-status-list">
-									  	   <h5 class="list-title">구직 선호도</h5>
-									  	   <a href="#" class="no-data">이직 시 연봉상승 vs 워라벨 당신의 선택은? </a>
-									  	</div>
-									  </div>
-									</div><!-- my-info-wrap -->
-								</section>
-								<div class="my-content-bottom">
-						            <h2 class="skip">주요활동내역</h2>
-						            <ul class="my-active-list">
-						                <li class="list">
-					                      <a class="box-botton" href="/User/ApplyMng" >
-					                        <p class="title">
-					                            지원완료
-					                            <strong class="count">0</strong>
-					                        </p>
-					                      </a>
-						                </li>
-						                <li class="list">
-					                      <a class="box-botton" href="/user/PositionOffer#dev-tab-resume-read" >
-					                        <p class="title">
-					                            이력서 열람
-					                            <strong class="count">0</strong>
-					                        </p>
-					                      </a>
-						                </li>
-						                <li class="list">
-					                      <a class="box-botton" href="/User/PositionOffer?tabStat=1#dev-tab-position" >
-					                        <p class="title">
-					                            포지션 제안
-					                            <strong class="count">0</strong>
-					                        </p>
-					                      </a>
-						                </li>
-						                <li class="list">
-					                      <a class="box-botton" href="/User/Scrap/Index" onclick=>
-					                        <p class="title">
-					                            스크랩 공고
-					                            <strong class="count">4</strong>
-					                        </p>
-				                            <div class="tooltip mtuSpImgBefore mtuSpImgAfter">
-				                                <p>이번주 마감 <strong>1</strong>건</p>
-				                            </div>
-					                      </a>
-						                </li>
-						                <li class="list">
-					                      <a class="box-botton" href="/User/FavorCo" >
-					                        <p class="title">
-					                            관심기업공고
-					                            <strong class="count">22</strong>
-					                        </p>
-					                        <div class="tooltip mtuSpImgBefore mtuSpImgAfter">
-					                            <p>이번주 마감 <strong>8</strong>건</p>
-					                        </div>
-					                      </a>
-						                </li>
-						            </ul>
-						          </div>
-						        </div>
-								<div class="mtuTab devFixedTab">
-									<div class="tabs">
-										<button class="on" data-flag="AI_panel">AI추천</button>
-										<button data-flag="bookmark_panel">스크랩 공고</button>
-										<button data-flag="recent_panel">최근 본 공고</button>
+										<!-- my-info-wrap -->
+									</section>
+									<div class="my-content-bottom">
+										<h2 class="skip">주요활동내역</h2>
+										<ul class="my-active-list">
+											<li class="list"><a class="box-botton"
+												href="/User/ApplyMng">
+													<p class="title">
+														지원완료 <strong class="count">0</strong>
+													</p>
+											</a></li>
+											<li class="list"><a class="box-botton"
+												href="/user/PositionOffer#dev-tab-resume-read">
+													<p class="title">
+														이력서 열람 <strong class="count">0</strong>
+													</p>
+											</a></li>
+											<li class="list"><a class="box-botton"
+												href="/User/PositionOffer?tabStat=1#dev-tab-position">
+													<p class="title">
+														포지션 제안 <strong class="count">0</strong>
+													</p>
+											</a></li>
+											<li class="list"><a class="box-botton"
+												href="/User/Scrap/Index" onclick=>
+													<p class="title">
+														스크랩 공고 <strong class="count">4</strong>
+													</p>
+													<div class="tooltip mtuSpImgBefore mtuSpImgAfter">
+														<p>
+															이번주 마감 <strong>1</strong>건
+														</p>
+													</div>
+											</a></li>
+											<li class="list"><a class="box-botton"
+												href="/User/FavorCo">
+													<p class="title">
+														관심기업공고 <strong class="count">22</strong>
+													</p>
+													<div class="tooltip mtuSpImgBefore mtuSpImgAfter">
+														<p>
+															이번주 마감 <strong>8</strong>건
+														</p>
+													</div>
+											</a></li>
+										</ul>
 									</div>
+								  </div>
 								</div>
+								<div class="allcontent">
+									<div class="mtuTab devFixedTab">
+										<div class="tabs">
+											<button class="on" data-flag="AI_panel">AI추천</button>
+											<button data-flag="bookmark_panel">스크랩 공고</button>
+											<button data-flag="recent_panel">최근 본 공고</button>
+										</div>
+									</div>
 
 								<!-- 스마트매치 -->
 								<div class="tab_content">
 									<div id="AI_panel" class="tab_panel active">
-										<h2 class="skip">스마트매치 리스트</h2>
+									
 										<div class="ai-recommendations-list" id="smartMatch">
 											<input type="hidden" id="PageFlag" value="AI">
 											<ul>
@@ -374,12 +861,15 @@ margin-bottom: 20px;
 																<span>합격축하금 100만원</span>
 															</div>
 															<div class="company">
-																<a class="company" href="/SaveCookie?com_id=${item.com_id}" target="_blank">
+																<a class="company"
+																	href="/SaveCookie?com_id=${item.com_id}"
+																	target="_blank">
 																	<div class="name">${item.com_name}</div>
 																</a>
 															</div>
 															<div class="headers">
-																<a href="/SaveCookie?com_id=${item.com_id}" target="_blank" class="title">${item.po_title}
+																<a href="/SaveCookie?com_id=${item.com_id}"
+																	target="_blank" class="title">${item.po_title}
 																	Backend 개발자</a>
 																<c:choose>
 																	<c:when
@@ -391,11 +881,12 @@ margin-bottom: 20px;
 																	</c:otherwise>
 																</c:choose>
 															</div>
-															<a class="devLinkRecruit" href="/SaveCookie?com_id=${item.com_id}" target="_blank">
+															<a class="devLinkRecruit"
+																href="/SaveCookie?com_id=${item.com_id}" target="_blank">
 																<div class="recruitment">
 																	<div class="item">${item.po_grade}초대졸↑</div>
 																	<div class="item">${item.career}경력8년↑</div>
-																	<div class="item">${item.com_address}서울&gt; 강서구</div>
+																	<div class="item">${item.com_address}서울&gt;강서구</div>
 																</div>
 																<div class="job">${item.po_content}백엔드개발자</div>
 															</a>
@@ -509,19 +1000,259 @@ margin-bottom: 20px;
 										</div>
 									</div>
 								</div>
-
+                              </div>
 							</div>
+							<%@include file="/WEB-INF/include/rightAside.jsp"%>
 						</div>
 
-					</div>
+					
 				</div>
 			</section>
 		</div>
+		</main>
+		 <!-- Modal Structure -->
+       <div class="modal-background" id="modalBackground">
+           <div class="modal-container">
+               <button class="close-button" id="closeModal">&times;</button>
+               <div class="popup-section">
+                   <div class="step">
+                    
+                  </div>
+                  <div class="popup-header">
+                      <h2 class="title">원하시는 기업의 규모를 선택해주세요</h2>
+                      <p class="text">최대 5개 선택 가능</p>
+                   </div>
+                   <div class="popup-body">
+                     <ul class="category-list" id="comType">
+                       <li class="category-list-item">
+                      <input type="checkbox" data-code="대기업" data-type="com_type" >
+                      <label for="1st-list-item1" >대기업</label>
+                    </li>
+                    <li class="category-list-item q1">
+                      <input type="checkbox"  data-code="중소기업" data-type="com_type" >
+                      <label for="1st-list-item2" >중소기업</label></li>
+                    <li class="category-list-item q1">
+                      <input type="checkbox"  data-code="중견기업" data-type="com_type" >
+                      <label>중견기업</label>
+                    </li>          
+                   </ul>            
+                </div>
+                <div class="step">
+                    
+                  </div>
+                  <div class="popup-header">
+                      <h2 class="title">원하시는 연봉을 선택해주세요</h2>
+                      <p class="text">최대 5개 선택 가능</p>
+                   </div>
+                   <div class="popup-body">
+                     <ul class="category-list" id="salary">
+                       <li class="category-list-item">
+                      <input type="checkbox"  data-code="2500" data-type="com_type" >
+                      <label >2500이상</label>
+                    </li>
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="3000" data-type="com_type" >
+                      <label for="1st-list-item2" >3000이상</label></li>
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="3500" data-type="com_type" >
+                      <label >3500이상</label>
+                    </li>
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="4000" data-type="com_type" >
+                      <label  >4000이상</label>
+                    </li>  
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="4500" data-type="com_type" >
+                      <label  >4500이상</label>
+                    </li>  
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="5000" data-type="com_type" >
+                      <label  >5000이상</label>
+                    </li>          
+                   </ul>            
+                </div>
+                <div class="step">
+                    
+                  </div>
+                  <div class="popup-header">
+                      <h2 class="title">원하시는 근무 지역을 선택해주세요</h2>
+                      <p class="text">최대 5개 선택 가능</p>
+                   </div>
+                   <div class="popup-body">
+                     <ul class="category-list" id="region">
+                       <li class="category-list-item">
+                      <input type="checkbox" id="1st-list-item1" data-code="1" data-type="listPr" class="input-checkbox question-checkbox">
+                      <label for="1st-list-item1" >서울</label>
+                    </li>
+                    <li class="category-list-item">
+                      <input type="checkbox" id="1st-list-item2" data-code="2" data-type="listPr" class="input-checkbox question-checkbox">
+                      <label for="1st-list-item2" >경기</label></li>
+                    <li class="category-list-item">
+                      <input type="checkbox" id="1st-list-item3" data-code="3" data-type="listPr" class="input-checkbox question-checkbox">
+                      <label for="1st-list-item3" >인천</label>
+                    </li>
+                    <li class="category-list-item">
+                      <input type="checkbox" id="1st-list-item4" data-code="4" data-type="listPr" class="input-checkbox question-checkbox">
+                      <label for="1st-list-item4" >대구</label>
+                    </li>
+                    <li class="category-list-item">
+                      <input type="checkbox" id="1st-list-item5" data-code="5" data-type="listPr" class="input-checkbox question-checkbox">
+                      <label for="1st-list-item5" >부산</label>
+                    </li>
+                    <li class="category-list-item">
+                      <input type="checkbox" id="1st-list-item6" data-code="6" data-type="listPr" class="input-checkbox question-checkbox">
+                      <label for="1st-list-item6" >제주</label>
+                    </li>
+                   </ul>            
+                </div>
+                <div class="popup-header">
+                      <h2 class="title">순위를 정해주세요</h2>
+                      <p class="text">쉰위에 따른 점수를 부과하여 더 좋은 기업을 추천해드려요</p>
+                      
+                </div>
+                <div class="popup-body rankpup">
+                   <div class="rank-selection">
+                    <label for="priority1" class="rank-label">1순위</label>
+                    <select id="priority1" class="priority-select">
+                        <option value="company-size">기업규모</option>
+                        <option value="salary">연봉</option>
+                        <option value="location">근무지역</option>
+                    </select>
+                </div>
+                <div class="rank-selection">
+                    <label for="priority2" class="rank-label">2순위</label>
+                    <select id="priority2" class="priority-select">
+                        <option value="company-size">기업규모</option>
+                        <option value="salary">연봉</option>
+                        <option value="location">근무지역</option>
+                    </select>
+                </div>
+                <div class="rank-selection">
+                    <label for="priority3" class="rank-label">3순위</label>
+                    <select id="priority3" class="priority-select">
+                        <option value="company-size">기업규모</option>
+                        <option value="salary">연봉</option>
+                        <option value="location">근무지역</option>
+                    </select>
+                </div>
+                
+                </div>
+                <div class="popup-footer">
+                  <button type="button" class="button" id="QuestionSave" style="">저장하기</button>
+                </div> 
+                  
+                   
+            </div>
+               <!-- Modal Content can go here -->
+           </div>
+       </div>
+		<%@include file="/WEB-INF/include/Footer.jsp"%>
+		<script
+			src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script>
 		
 		document.addEventListener('DOMContentLoaded', function() {
 			
 			
+	        
+	     // Get the modal elements
+	           const openModalButton = document.getElementById('openModal');
+	           const modalBackground = document.getElementById('modalBackground');
+	           const closeModalButton = document.getElementById('closeModal');
+
+	           // Open the modal
+	           openModalButton.addEventListener('click', function(event) {
+	               event.preventDefault(); // Prevent default link behavior
+	               modalBackground.style.display = 'flex'; // Show the modal
+	               document.body.classList.add('modal-open'); // Prevent background interaction
+	           });
+
+	           // Close the modal
+	           closeModalButton.addEventListener('click', function() {
+	               modalBackground.style.display = 'none'; // Hide the modal
+	               document.body.classList.remove('modal-open'); // Allow background interaction
+	           });
+
+	           // Close the modal when clicking outside the modal container
+	           window.addEventListener('click', function(event) {
+	               if (event.target === modalBackground) {
+	                   modalBackground.style.display = 'none'; // Hide the modal
+	                   document.body.classList.remove('modal-open'); // Allow background interaction
+	               }
+	           });
+	         
+	           var firstListItems = document.querySelectorAll('#comType li');
+
+	           firstListItems.forEach(function(item) {
+	               item.addEventListener('click', function() {
+	                   // 클릭된 요소에 on 클래스를 추가합니다.
+	                   firstListItems.forEach(function(li) {
+	                       li.classList.remove('on');
+	                   });
+	                   item.classList.add('on');
+	               });
+	           });
+
+	           // 두 번째 카테고리 리스트에 대한 처리
+	           var secondListItems = document.querySelectorAll('#salary li');
+
+	           secondListItems.forEach(function(item) {
+	               item.addEventListener('click', function() {
+	                   // 클릭된 요소에 on 클래스를 추가합니다.
+	                   secondListItems.forEach(function(li) {
+	                       li.classList.remove('on');
+	                   });
+	                   item.classList.add('on');
+	               });
+	           });
+
+	           // 세 번째 카테고리 리스트에 대한 처리
+	           var thirdListItems = document.querySelectorAll('#region li');
+
+	           thirdListItems.forEach(function(item) {
+	               item.addEventListener('click', function() {
+	                   // 클릭된 요소에 on 클래스를 추가합니다.
+	                   thirdListItems.forEach(function(li) {
+	                       li.classList.remove('on');
+	                   });
+	                   item.classList.add('on');
+	               });
+	           });
+	        
+			
+			/*--------------- 스와이퍼 --------------------------------*/
+			
+			 const swiper = new Swiper('.swiper', {
+			      // Optional parameters
+			      direction: 'horizontal',
+			      loop: true,
+			      // 자동 슬라이딩 활성화
+			      autoplay: {
+			          delay: 3000, // 슬라이드 간의 시간 간격 (밀리초)
+			          disableOnInteraction: false, // 사용자 입력이 있을 때 자동 슬라이딩을 일시 중지하지 않음
+			      },
+			      // 자동 슬라이딩 활성화
+			      
+			      // Number of slides to show
+			      slidesPerView: 3,
+			      // If we need pagination
+			      pagination: {
+			        el: '.swiper-pagination',
+			      },
+
+			      // Navigation arrows
+			      navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			      },
+
+			      // And if we need scrollbar
+			     /*  scrollbar: {
+			        el: '.swiper-scrollbar',
+			      }, */
+			    });
+			
+			 /*--------------- 스와이퍼 --------------------------------*/
 			// 모든 버튼 요소를 선택합니다.
 			const tabs = document.querySelectorAll('.mtuTab .tabs button');
 			const panels = 	document.querySelectorAll('.tab_content .tab_panel');
@@ -772,7 +1503,7 @@ margin-bottom: 20px;
        
         </script>
 
-		<%@include file="/WEB-INF/include/Footer.jsp"%>
+		
 </body>
 </html>
 
@@ -781,4 +1512,3 @@ margin-bottom: 20px;
 
 
 
-				

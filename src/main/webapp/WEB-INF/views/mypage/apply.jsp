@@ -30,9 +30,12 @@
 		<div class="container-ha">
 			<section class="box align_right">
 				<!--  사이드바  -->
-				<%@include file="/WEB-INF/include/aside.jsp"%>
-
+				
+    
 				<div class="box-contents">
+				  <div class ="mtuHome">
+				    <%@include file="/WEB-INF/include/aside.jsp"%>
+				    <div class="contWrap">
 					<input type="hidden" name="po_id" value="1101" /> <input
 						type="hidden" name="user_id" value="1" />
 
@@ -74,7 +77,9 @@
 						</div>
 						<!-- /.card-header -->
 
+					  </div>
 					</div>
+				  </div>
 				</div>
 			</section>
 		</div>
