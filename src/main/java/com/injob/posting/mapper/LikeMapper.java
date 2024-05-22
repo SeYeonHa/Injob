@@ -7,12 +7,12 @@ import com.injob.posting.domain.LikeVo;
 @Mapper
 public interface LikeMapper {
 
-	LikeVo selectLike(LikeVo likeVo);
+   LikeVo selectLike(LikeVo likeVo);
 
-	LikeVo addLike(LikeVo likeVo);
+   void addLike(LikeVo likeVo);
 
-	void updateLike(LikeVo like);
+   void updateLike(LikeVo like);
 
-	void deleteLike(LikeVo like);
+   void deleteLike(LikeVo like);
 
 }

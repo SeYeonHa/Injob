@@ -15,20 +15,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
+   rel="stylesheet">
 
 <style>
 * {
-	font-family: "Nanum Gothic", sans-serif;
-	font-weight: 400;
-	font-style: normal;
+   font-family: "Nanum Gothic", sans-serif;
+   font-weight: 400;
+   font-style: normal;
 }
 
 .nanum-gothic-extrabold {
-	font-family: "Nanum Gothic", sans-serif;
-	font-weight: 800;
-	font-style: normal;
+   font-family: "Nanum Gothic", sans-serif;
+   font-weight: 800;
+   font-style: normal;
 }
 #main-list:hover {
     transform: scale(1.05); 
@@ -236,7 +236,7 @@ transition: all 0.3s ease;
 </style>
 </head>
 <body>
-	<%@include file="/WEB-INF/include/Header.jsp"%>
+   <%@include file="/WEB-INF/include/Header.jsp"%>
   <main>
     <div class="inner">
 
@@ -259,9 +259,9 @@ transition: all 0.3s ease;
          <li><button class="dev-button-item" data-department="개발">개발</button></li>
        </ul>
        <div class ="button-box">
-		<button class ="search-reset">초기화</button>
-		<button class = "search-button">적용하기</button>
-	   </div>
+      <button class ="search-reset">초기화</button>
+      <button class = "search-button">적용하기</button>
+      </div>
       </div>
       
       <div class="dropdown">
@@ -344,42 +344,42 @@ transition: all 0.3s ease;
     
    <c:forEach var="posting" items="${postingList}" varStatus="status">
       <div id ="main-list" class ="main-list">
-						<ul data-totalcount = "4" data-pageno ="1">
-							<li>
-					                <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;" class ="listCell">
-					              <!--   <a href ="/Posting/Pmain?po_id=${posting.po_id }&nowpage=1" class ="listCell">-->
-									<div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
-									<div class="listCont">
-										<div class ="pTit" style="font-weight: bold;">${posting.po_title }</div>
-										<div class ="pInfo"><span class ="pPart">${posting.hope_department }</span><br>
-										<div class ="pStackBox"><span class ="tag tag-tack">${posting.stack }</span></div>
-											<span class ="pAddress"> ${posting.com_address }</span>
-										</div>
-									</div>
-										<div class ="pAssist">
-										<!--  <span class ="pPeriod">${posting.po_end_date }</span> -->	
-											<span class ="pPeriod">${posting.stringDay }</span>
-									
-										<br />	
-									</a>
-									<div class="listFoot">
-											<span style="font-size: smaller;">💲합격축하금 100만원</span>
-										</div>
-										<div>
-									</div>
-								<!-- </a>-->
-							</li>	
-						</ul>
-					
-						<div class="card-footer" style="background-color: white;">
-						<a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
-						</div>
-						<div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<!--   <button class="like" type="button"><img src="/img/like_off.png" alt="북마크">
-					 <ul></ul></button>-->
-					 <!--<c:out value="${posting.ub_boolean}" />-->
-					 <c:choose>
+                  <ul data-totalcount = "4" data-pageno ="1">
+                     <li>
+                               <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;" class ="listCell">
+                             <!--   <a href ="/Posting/Pmain?po_id=${posting.po_id }&nowpage=1" class ="listCell">-->
+                           <div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
+                           <div class="listCont">
+                              <div class ="pTit" style="font-weight: bold;">${posting.po_title }</div>
+                              <div class ="pInfo"><span class ="pPart">${posting.hope_department }</span><br>
+                              <div class ="pStackBox"><span class ="tag tag-tack">${posting.stack }</span></div>
+                                 <span class ="pAddress"> ${posting.com_address }</span>
+                              </div>
+                           </div>
+                              <div class ="pAssist">
+                              <!--  <span class ="pPeriod">${posting.po_end_date }</span> -->   
+                                 <span class ="pPeriod">${posting.stringDay }</span>
+                           
+                              <br />   
+                           </a>
+                           <div class="listFoot">
+                                 <span style="font-size: smaller;">💲합격축하금 100만원</span>
+                              </div>
+                              <div>
+                           </div>
+                        <!-- </a>-->
+                     </li>   
+                  </ul>
+               
+                  <div class="card-footer" style="background-color: white;">
+                  <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
+                  </div>
+                  <div>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <!--   <button class="like" type="button"><img src="/img/like_off.png" alt="북마크">
+                <ul></ul></button>-->
+                <!--<c:out value="${posting.ub_boolean}" />-->
+                <c:choose>
                        <c:when test="${posting.ub_boolean == 1}">
                         <button class="like" type="button"  data-posting-id="${posting.po_id}"><img src="/img/like_on.png" alt="좋아요"></button>
                        </c:when>
@@ -387,16 +387,16 @@ transition: all 0.3s ease;
                         <button class="like" type="button"  data-posting-id="${posting.po_id}"><img src="/img/like_off.png" alt="좋아요"></button>
                        </c:otherwise>
                      </c:choose>
-					 
-					 </div>
-				</div>
-				<input type="hidden" name="user_id" id="user_id"  data-user-id="${user_id }" />
-			</c:forEach>
-			</div>
-			</div>
-			</div>
+                
+                </div>
+            </div>
+            <input type="hidden" name="user_id" id="user_id"  data-user-id="${user_id }" />
+         </c:forEach>
+         </div>
+         </div>
+         </div>
   </main>
-			
+         
 <!-- ㄴㄴ -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -416,16 +416,18 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-	   
+      
 document.addEventListener("DOMContentLoaded", function() {
     const likeButtons = document.querySelectorAll('.like');
+    const user_id = ${user.user_id};
+    console.log(user_id);
 function addLike(postingId) {
     fetch(`/Likes/addLike`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ po_id: postingId })
+        body: JSON.stringify({ po_id: postingId, user_id: user_id })
     }).then(response => {
         if (!response.ok) {
             throw new Error('Failed to toggle like');
@@ -480,7 +482,7 @@ likeButtons.forEach(function(button) {
         console.log('Button clicked');
     });
 });
-});	   
+});      
 //---------------------------------------------------------
 //---------------------------------------------------------
 //---------------------------------------------------------
@@ -500,54 +502,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //----- 직무 
 
-		document.addEventListener("DOMContentLoaded", function() {
-			  var buttons = document.querySelectorAll('.dev-button-item');
-			  var allButton = document.querySelector('.dev-button-all');
-			  var resetButton = document.querySelector('.search-reset');
+      document.addEventListener("DOMContentLoaded", function() {
+           var buttons = document.querySelectorAll('.dev-button-item');
+           var allButton = document.querySelector('.dev-button-all');
+           var resetButton = document.querySelector('.search-reset');
 
-			  buttons.forEach(function(button) {
-			    button.addEventListener('click', function(event) {
-			    	var clickedButton = event.target;
-			        var department = clickedButton.getAttribute('data-department');
+           buttons.forEach(function(button) {
+             button.addEventListener('click', function(event) {
+                var clickedButton = event.target;
+                 var department = clickedButton.getAttribute('data-department');
                   console.log(department);
-	        
-			      var isActive = button.classList.contains('active');
+           
+               var isActive = button.classList.contains('active');
 
-			      if (button !== allButton) {
-			        allButton.classList.remove('active');
-			        if (isActive) {
-			          button.classList.remove('active');
-			        } else {
-			          button.classList.add('active');
-			        }
-			      } else {
-			        if (!isActive) {
-			          allButton.classList.add('active');
-			          
-			          buttons.forEach(function(btn) {
-			            if (btn !== allButton) {
-			              btn.classList.remove('active');
-			            }
-			          });
-			        }
-			      }
-			    });
-			  });
+               if (button !== allButton) {
+                 allButton.classList.remove('active');
+                 if (isActive) {
+                   button.classList.remove('active');
+                 } else {
+                   button.classList.add('active');
+                 }
+               } else {
+                 if (!isActive) {
+                   allButton.classList.add('active');
+                   
+                   buttons.forEach(function(btn) {
+                     if (btn !== allButton) {
+                       btn.classList.remove('active');
+                     }
+                   });
+                 }
+               }
+             });
+           });
 
-			  allButton.addEventListener('click', function() {
-			    buttons.forEach(function(button) {
-			      button.classList.remove('active');
-			    });
-			    allButton.classList.add('active');
-			  });
+           allButton.addEventListener('click', function() {
+             buttons.forEach(function(button) {
+               button.classList.remove('active');
+             });
+             allButton.classList.add('active');
+           });
 
-			  resetButton.addEventListener('click', function() {
-			    buttons.forEach(function(button) {
-			      button.classList.remove('active');
-			    });
-			    allButton.classList.remove('active');
-			  });
-			});
+           resetButton.addEventListener('click', function() {
+             buttons.forEach(function(button) {
+               button.classList.remove('active');
+             });
+             allButton.classList.remove('active');
+           });
+         });
 document.addEventListener('DOMContentLoaded', function() {
     // 직무 박스 내의 초기화 버튼 처리
     var resetButtonJob = document.querySelector('.department-box .search-reset');
@@ -561,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
         allButtonJob.classList.remove('active');
     });
 });
-			
+         
 //----- 지역
 document.addEventListener('DOMContentLoaded', function() {
     var jobButton = document.querySelector('.area.dev-toggle-filter');
@@ -681,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.search-button').forEach(function(button) {
         button.addEventListener('click', function() {
-        	console.log('search-button 클릭됨');
+           console.log('search-button 클릭됨');
             const activeDepartment = document.querySelector('.department-box .dev-button-item.active');
             const activeLocal = document.querySelector('.area-box .dev-button-item.active');
             const activeCareer = document.querySelector('.career-box .dev-button-item.active');
@@ -706,7 +708,7 @@ document.addEventListener('DOMContentLoaded', function() {
             grade: grade === '학력무관' ? null : grade
             
         };
-    	console.log('requestData:', requestData);
+       console.log('requestData:', requestData);
 
         fetch('/Posting/Search', {
             method: 'POST',
@@ -717,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-        	console.log("22222222222");
+           console.log("22222222222");
             if (data.jobListings) {
                 updateJobListings(data.jobListings);
             } else {
@@ -738,7 +740,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateJobListings(jobListings) {
-    	 console.log('updateJobListings 함수 호출됨');
+        console.log('updateJobListings 함수 호출됨');
         const jobListingsContainer = document.getElementById('job-listings');
         console.log(jobListingsContainer);
         console.log(jobListingsContainer);

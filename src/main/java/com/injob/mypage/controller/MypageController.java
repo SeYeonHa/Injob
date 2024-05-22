@@ -105,11 +105,6 @@ public class MypageController {
 		
 		// 계산된 페이지 정보의 일부 (limitStart, recordSize)를 기준으로 리스트 데이터 조회 후 응답 데이터 변환
 		List<ResumeVo> list = pagingMapper.getResumePagingList(re_id, re_title, license, offset, pageSize, userId);
-		System.out.println("-----------------------");
-		System.out.println(pagination.getStartPage());
-		System.out.println(pagination.getEndPage());
-		System.out.println(pagination.getTotalPageCount());
-		System.out.println("-----------------------");
 		response = new PagingResponse<>(list, pagination);
 			 
 		// 모델에 사용자 정보를 추가하여 홈 페이지로 전달

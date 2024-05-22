@@ -17,9 +17,15 @@ body {
 	margin: 0 auto;
 }
 
-.logoimg {
-	width: 180px;
+
+.logoimg img {
+	width: 160px;
 }	
+
+.logoimg {
+	display: block;
+	margin : auto;
+}
 
 .title {
 	font-weight: bolder;
@@ -114,14 +120,15 @@ body {
   width: 90%;
 }
 
+
 .item12 {
-	border-bottom: 1px solid lightgrey;
 	text-align: left;
 }
 
 .item13 {
-	border-bottom: 1px solid lightgrey;
 	text-align: left;
+	font-size: 15px;
+	margin: 5px;
 }
 
 .item14 {
@@ -136,6 +143,7 @@ body {
 
 .item16 {
 	text-align: left;
+	font-size: 15px;
 }
 
 .item17 {
@@ -239,16 +247,49 @@ main {
   margin-top: 20px; 
 }
 
-.btn {
-	background-color: #66C069;
-	color: white;
-	font-size: 24px;
-	width: 18%;
-	padding: 15px;
-}
-
 #applyButton:hover {
 	color: green;
 	background-color: lightgreen;
-	
+
 }
+
+
+#navbar {
+  overflow: hidden;
+  background-color: darkgreen;
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: green;
+  color: white;
+}
+
+#navbar a.active {
+  background-color: lightgreen;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+

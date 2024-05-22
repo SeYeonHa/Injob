@@ -12,12 +12,12 @@ import java.util.function.Supplier;
 @Component
 public class TimerMaker {
 	
-	private static final String END_DATE_STRING = "2024-12-31 23:59:59"; // 예시로 고정된 마감 날짜
+	// private static final String END_DATE_STRING = "2024-12-31 23:59:59"; // 예시로 고정된 마감 날짜
 	
-	public RemainingTimeMessage makeTimer() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime endDate = LocalDateTime.parse(END_DATE_STRING, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Duration duration = Duration.between(now, endDate);
+	public RemainingTimeMessage makeTimer(String endDateString) {
+        LocalDateTime now 	  = LocalDateTime.now();
+        LocalDateTime endDate = LocalDateTime.parse(endDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Duration duration     = Duration.between(now, endDate);
         long secondsRemaining = duration.getSeconds();
 
         long days 	 = secondsRemaining / (60 * 60 * 24);

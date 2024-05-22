@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+* {
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.nanum-gothic-extrabold {
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 800;
+	font-style: normal;
+}
+
+body {
+	width: 80%;
+	margin: 0 auto;
+}
+
+
+
+.header-info {
+  padding: 60px;
+  text-align: left;
+  background: #53C358;
+  color: white;
+  font-size: 30px;
+  height: 200px;
+  
+}
+
+.content {
+	padding:20px;
+	margin-left: 30px;
+}
+
+
+

@@ -17,8 +17,8 @@
     <result property="com_address"      column="COM_ADDRESS"  />
     <result property="com_name"         column="COM_NAME"  />
     <result property="com_logo"         column="COM_LOGO"  />
-    <result property="com_birth"         column="COM_BIRTH"  />
-    <result property="com_salary"         column="COM_SALARY"  />
+    <result property="com_birth"        column="COM_BIRTH"  />
+    <result property="com_salary"       column="COM_SALARY"  />
     <result property="com_type"         column="COM_TYPE"  />
     
 </resultMap>
@@ -40,25 +40,25 @@
 			,	C.COM_ADDRESS AS COM_ADDRESS
 			, C.COM_NAME AS COM_NAME
 			, C.COM_LOGO AS COM_LOGO
-			, C.COM_BIRTH AS COM_BIRTH
+			, TO_CHAR(C.COM_BIRTH, 'YYYY') AS COM_BIRTH
 			, C.COM_SALARY AS COM_SALARY
 			, C.COM_TYPE AS COM_TYPE
+			, C.COM_CEO AS COM_CEO
 
 		FROM POSTING P
 			JOIN POSTING_STACK PS   ON    PS.PO_ID = P.PO_ID
 			JOIN COMPANY C          ON    P.COM_ID = C.COM_ID
-			
-		WEHRE P.COM_ID = #{com_id}
 	</select>
 	
-	<select id="getDetailList2" >
+	<select id="getDetailList2" 
+		resultType="com.injob.detail.domain.PostCompVo">
 		SELECT 
 				P.COM_ID 
 			,	P.PO_ID
 			,	P.PO_GRADE
 			,	P.HOPE_DEPARTMENT
-			,	P.PO_START_DATE
-			,	P.PO_END_DATE
+			, TO_CHAR(P.PO_START_DATE, 'YYYY-MM-dd') AS PO_START_DATE
+   		, P.PO_END_DATE AS PO_END_DATE
 			,	P.PO_PROFILE
 			,	P.PO_TITLE
 			,	P.PO_CONTENT
@@ -67,17 +67,82 @@
 			,	C.COM_ADDRESS
 			, C.COM_NAME
 			, C.COM_LOGO
-			, C.COM_BIRTH 
+			, TO_CHAR(C.COM_BIRTH, 'YYYY') AS COM_BIRTH
 			, C.COM_SALARY
 			, C.COM_TYPE
+			, C.SALES
+			, C.EMPLOYEE
+			, C.COM_CEO
 
 		FROM POSTING P
 			JOIN POSTING_STACK PS   ON    PS.PO_ID = P.PO_ID
 			JOIN COMPANY C          ON    P.COM_ID = C.COM_ID
 			
-		WHERE P.COM_ID = ${com_id}
+		WHERE P.PO_ID = #{po_id}
 	</select>
+	
+	<select id="getDetailById" parameterType="string" 
+			resultType="com.injob.detail.domain.PostCompVo">
+    SELECT * FROM POSTING 
+   	 WHERE PO_ID = #{po_id}
+	</select>
+	
+	<select id="getAllPostings" resultType="com.injob.detail.domain.PostCompVo">
+    SELECT 
+        P.COM_ID 
+      , P.PO_ID 
+      , P.PO_GRADE 
+      , P.HOPE_DEPARTMENT
+      , P.PO_START_DATE
+      , P.PO_END_DATE
+      , P.PO_PROFILE 
+      , P.PO_TITLE
+      , P.PO_CONTENT 
+      , P.CAREER 
+      , PS.STACK 
+      , C.COM_ADDRESS 
+      , C.COM_NAME 
+      , C.COM_LOGO 
+      , C.COM_BIRTH 
+      , C.COM_SALARY 
+      , C.COM_TYPE
+      , C.SALES
+			, C.EMPLOYEE
+			, C.COM_CEO
+			
+    FROM POSTING P
+    JOIN POSTING_STACK PS ON PS.PO_ID = P.PO_ID
+    JOIN COMPANY C ON P.COM_ID = C.COM_ID
+</select>
 
+
+<select id="getDetailList3" 
+		resultType="com.injob.detail.domain.PostCompVo">
+		SELECT 
+				P.COM_ID 
+			,	P.PO_ID
+			,	P.HOPE_DEPARTMENT
+			, P.PO_START_DATE AS PO_START_DATE
+   		, P.PO_END_DATE AS PO_END_DATE
+			,	P.PO_PROFILE
+			,	P.PO_TITLE
+			,	P.PO_CONTENT
+			,	P.CAREER
+			,	C.COM_ADDRESS
+			, C.COM_NAME
+			, C.COM_LOGO
+			, TO_CHAR(C.COM_BIRTH, 'YYYY')
+			, C.COM_SALARY
+			, C.COM_TYPE
+			, C.SALES
+			, C.EMPLOYEE
+			, C.COM_CEO
+
+		FROM COMPANY C
+			JOIN POSTING P ON C.COM_ID = P.COM_ID
+			
+		WHERE C.COM_ID = #{com_id}
+	</select>
 
 
 </mapper>

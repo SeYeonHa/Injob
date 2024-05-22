@@ -12,7 +12,7 @@ public interface PostingMapper {
 
 	List<PostingVo> getPostingList(JoinVo joinVo);
 
-	List<JoinVo> getPostingList();
+	List<JoinVo> getPostingList(Long user_id);
 
 	int getCount();
 

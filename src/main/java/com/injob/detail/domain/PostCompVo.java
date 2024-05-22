@@ -26,5 +26,8 @@ public class PostCompVo {
 	private String com_birth;
 	private int    com_salary;
 	private String com_type;
+	private String sales;
+	private String employee;
+	private String com_ceo;
 	
 }
