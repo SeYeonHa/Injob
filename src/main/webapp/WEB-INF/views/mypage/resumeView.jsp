@@ -21,6 +21,14 @@
 
 
 <style>
+.skill-box {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
 </style>
 </head>
 <body>
@@ -77,20 +85,38 @@
 								</div>
 								
 								<!-- 기술 스택 및 자격증 -->
-								<div class="mar-10">
-									<br> <span>기술스택 &nbsp | &nbsp </span><select
-										value="rv.skill" disabled>
-										<option value="Java">Java</option>
-										<option value="Springboot">Springboot</option>
-										<option value="C">C</option>
-										<option value="CSS">CSS</option>
-										<option value="html">Html</option>
-										<option value="Flutter">Flutter</option>
-										<option value="JavaScript">JavaScript</option>
-									</select> <span>&ensp;&ensp;</span> <span>자격증 &nbsp | &nbsp ${
+								<span>자격증 &nbsp | &nbsp ${
 										list.license }</span>
 								</div>
-								<!-- 자기소개서 제목 -->
+								
+								<!--  학력 세부사항  -->
+								<div class="mt-5">
+									<div id="inputContainer">
+									<!-- 학력 세부사항 -->
+									<div class="mt-5">
+										<h3 class="mar-10">학력 세부사항</h3>
+										<div id="inputContainer">
+											<c:forEach var="school" items="${school}">
+												<div class="input-group">
+													<span>${school.school_name}
+														(${school.school_type})</span>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+									<!-- 스킬 -->
+									<div class="mt-5">
+										<h3 class="mar-10">기술 스택</h3>
+										<div class="skill-container">
+											<c:forEach var="skill" items="${skill}">
+												<div class="skill-button">
+													${skill.stack_name}</div>
+											</c:forEach>
+										</div>
+									</div>
+
+
+									<!-- 자기소개서 제목 -->
 								<div class="mt-5">
 									<h3 class="mar-10">자기소개서 제목</h3>
 									<input type="text" class="form-control mt-2" id="floatingInput"
@@ -131,8 +157,22 @@
 
 	</main>
 	<script>
-		
+	// JSP에서 Java 변수 값을 JavaScript로 전달
+    var skillsString = '<%= request.getAttribute("skills") %>';
+    var skillsArray = skillsString.split(',');
+
+    var container = document.getElementById('skillsContainer');
+    skillsArray.forEach(function(skill) {
+        var skillBox = document.createElement('div');
+        skillBox.className = 'skill-box';
+        skillBox.innerText = skill;
+        container.appendChild(skillBox);
+    });
 	
+    function toggleSkill(element) {
+        element.classList.toggle("active");
+    }
+    
 	</script>
 
 	<%@include file="/WEB-INF/include/Footer.jsp"%>

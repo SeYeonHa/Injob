@@ -33,4 +33,14 @@ public interface MypageMapper {
 
 	List<ResumeVo> selectResumeList4(ResumeVo resumeVo);
 
+	void insertSchool(ResumeVo resumeVo);
+
+	void insertSkill(ResumeVo resumeVo);
+
+	List<ResumeVo> selectSchool(ResumeVo resumeVo);
+
+	List<ResumeVo> selectSkill(ResumeVo resumeVo);
+
+	Long selectMaxRe(ResumeVo resumeVo);
+
 }

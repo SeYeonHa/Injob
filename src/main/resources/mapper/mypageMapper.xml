@@ -50,6 +50,27 @@
 		WHERE RE.RE_ID = #{ re_id }
 
 	</select>
+	<select id="selectSchool">
+
+		SELECT
+			SCHOOL_NAME,
+			SCHOOL_TYPE
+
+		FROM SCHOOL
+
+		WHERE RE_ID = #{ re_id }
+
+	</select>
+	<select id="selectSkill">
+
+		SELECT
+			STACK_NAME
+
+		FROM RESUME_STACK
+
+		WHERE RE_ID = #{ re_id }
+
+	</select>
 
 	<select id="selectResumeList3">
 
@@ -110,6 +131,13 @@
 
 	</select>
 
+	<select id="selectMaxRe">
+	
+	SELECT MAX(RE_ID)
+	FROM   RESUME
+	
+	</select>
+
 <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
 
 	<insert id="insertResume">
@@ -133,6 +161,41 @@
 		#{ license }
 		)
 
+	</insert>
+	
+	<insert id="insertSchool">
+
+	INSERT INTO SCHOOL (
+		SCHOOL_ID,
+		RE_ID,
+		SCHOOL_NAME,
+		SCHOOL_TYPE
+	)
+	VALUES (
+		(SELECT NVL(MAX(SCHOOL_ID), 0) + 1 FROM SCHOOL),
+		(SELECT MAX(RE_ID) FROM RESUME),
+		#{ school_name },
+		#{ school_type }
+	)
+
+	</insert>
+	
+	
+	<!--  -->
+	
+	<insert id="insertSkill">
+		
+		INSERT INTO RESUME_STACK (
+			RE_ID,
+			STACK_NAME,
+			RE_STACK_ID
+	)
+	VALUES (
+	(SELECT MAX(RE_ID) FROM RESUME),
+	#{ stack_name },
+	(SELECT NVL(MAX(RE_STACK_ID), 0) + 1 FROM RESUME_STACK)
+	)
+		
 	</insert>
 	
 	<insert id="insertApply">

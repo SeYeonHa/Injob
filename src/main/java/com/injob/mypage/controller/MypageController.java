@@ -161,9 +161,15 @@ public class MypageController {
 		
 		ModelAndView mv = new ModelAndView();
 
-		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
+		List<ResumeVo> list   = mypageMapper.selectResumeList2(resumeVo);
+		List<ResumeVo> school = mypageMapper.selectSchool(resumeVo);
+		List<ResumeVo> skill  = mypageMapper.selectSkill(resumeVo);
 
+		System.out.println(skill);
+		
 		mv.addObject("list", list);
+		mv.addObject("school", school);
+		mv.addObject("skill", skill);
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
 		mv.setViewName("mypage/resumeView");
@@ -210,6 +216,17 @@ public class MypageController {
 	@RequestMapping("/ResumeSubmit")
 	public ModelAndView getResumeSubmit(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+		System.out.println("-----------11111111111-------------------");
+			System.out.println(resumeVo);
+			System.out.println("-------------11111111111-----------------");
+			
+			
+			
 		//--------------------------------------------------------------------------
 				//ㅇㄴㄹㅇㄴㄹ
 				Long userId = (Long) session.getAttribute("userId");
@@ -236,6 +253,31 @@ public class MypageController {
 		ModelAndView mv = new ModelAndView();
 
 		mypageMapper.insertResume(resumeVo);
+		Long selectLast = mypageMapper.selectMaxRe(resumeVo);
+		
+		String[] splitSchoolName = resumeVo.getSchool_name().split(",");
+		String[] splitSchoolType = resumeVo.getSchool_type().split(",");
+		
+		
+		
+		for(int i=0; i<splitSchoolName.length;i++) {
+			resumeVo.setSchool_name(splitSchoolName[i]);
+			resumeVo.setSchool_type(splitSchoolType[i]);
+			resumeVo.setRe_id(selectLast);
+			mypageMapper.insertSchool(resumeVo);
+		}
+		
+		
+		String[] splitStack = resumeVo.getStack_name().split(",");
+		
+		
+		for(String skill : splitStack) {
+			resumeVo.setStack_name(skill);
+			resumeVo.setRe_id(selectLast);
+		    
+			mypageMapper.insertSkill(resumeVo);
+		}
+		
 		
 		int nowpage =1;
 		mv.addObject("user_id", userId);
