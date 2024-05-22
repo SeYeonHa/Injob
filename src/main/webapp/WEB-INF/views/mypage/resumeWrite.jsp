@@ -58,16 +58,16 @@
 				<div class="box-contents">
 				  <div class="mtuHome"> 
 				    <%@include file="/WEB-INF/include/aside.jsp"%>
-					<div class="contWrap">
+					<div class="contWrap"  style="border : 5px ridge ;">
 						<form action="/Mypage/ResumeSubmit" method="post" var="list" items="${list}">
 							<input type="hidden" name="user_id" value="${user_id}" />
 
 							<div style="display: flex; flex-direction: column; margin:10px;">
-								<div style="margin-bottom: 20px;">
+								<div style="margin-bottom: 20px; ">
 									<h2 class="mar-10">이력서 제목 :
 									 <input type="text" name="re_title"
 											placeholder="제목을 입력하세요" required
-											style="display: inline-block; width: auto; height: 50px;" />
+											style="display: inline-block; width: 700px; height: 50px; " />
 									</h2>
 									<hr>
 								</div>
@@ -75,11 +75,11 @@
 									style="display: flex; flex-direction: row; align-items: flex-start;">
 									<div style="margin-right: 20px;">
 										<input type="file" name="re_profile" class="img-box"
-													style="width: 220px; height: 230px;">
+													style="width: 220px; height: 230px;border : 5px ridge ;">
 									</div>
 									<div>
 										<table class="jh_resume_table"
-											style="width: auto; height: 230px; table-layout: fixed;">
+											style="width: auto; height: 230px; table-layout: fixed; border : 5px ridge ;">
 											<colgroup>
 												<col style="width: 25%;">
 												<col style="width: 75%;">

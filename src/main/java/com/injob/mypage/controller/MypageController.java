@@ -211,17 +211,6 @@ public class MypageController {
 	@RequestMapping("/ResumeSubmit")
 	public ModelAndView getResumeSubmit(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-			System.out.println(resumeVo);
-			System.out.println("-------------11111111111-----------------");
-			
-			
-			
 		//--------------------------------------------------------------------------
 				//ㅇㄴㄹㅇㄴㄹ
 				Long userId = (Long) session.getAttribute("userId");
@@ -314,7 +303,12 @@ public class MypageController {
 
 		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
 
+		List<ResumeVo> school = mypageMapper.selectSchool(resumeVo);
+		List<ResumeVo> skill  = mypageMapper.selectSkill(resumeVo);
+
 		mv.addObject("list", list);
+		mv.addObject("school", school);
+		mv.addObject("skill", skill);
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
 		mv.setViewName("mypage/resumeUpdate");
@@ -352,6 +346,10 @@ public class MypageController {
 		ModelAndView mv = new ModelAndView();
 
 		mypageMapper.updateResume(resumeVo);
+		
+		
+		// mypageMapper.updateSchool(resumeVo);
+		// mypageMapper.updateSkill(resumeVo);
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
 	    return "redirect:/Mypage/Resume?nowpage=1";

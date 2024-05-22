@@ -117,7 +117,7 @@ body {
 
 			  <div class="grid-item item2">
 			  <div class="logoimg" >
-			  	<img src ="/img/${posting.com_logo}.jpg" alt="프로필img">
+			  	<img src ="/img/${posting.com_logo}" alt="프로필img">
 			  	<br><br><br>
 			  <div class="sub_title1" style="text-align: left; ">기업정보</div>
 			  <div>&nbsp;</div>
@@ -313,7 +313,7 @@ body {
 		    	<div class="grid-container3">
 			  <div class="item11">
 			  	<div class="logoimg">
-			  	<img src ="/img/${posting.com_logo}.jpg" alt="프로필img">
+			  	<img src ="/img/${posting.com_logo}" alt="프로필img">
 			  	</div>
 			  	
 			  </div>

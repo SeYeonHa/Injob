@@ -346,7 +346,7 @@ transition: all 0.3s ease;
       <div id ="main-list" class ="main-list">
                   <ul data-totalcount = "4" data-pageno ="1">
                      <li>
-                               <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;" class ="listCell">
+                               <a href ="/Detail/Detail?po_id=${posting.po_id }" style="text-decoration-line: none;" class ="listCell">
                              <!--   <a href ="/Posting/Pmain?po_id=${posting.po_id }&nowpage=1" class ="listCell">-->
                            <div class="clogo"><img src ="/img/${posting.po_profile}.jpg" alt="프로필img" id="pimg"></div>
                            <div class="listCont">
@@ -372,7 +372,7 @@ transition: all 0.3s ease;
                   </ul>
                
                   <div class="card-footer" style="background-color: white;">
-                  <a href ="/Detail/Detail?com_id=${posting.com_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
+                  <a href ="/Detail/Detail?po_id=${posting.po_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
                   </div>
                   <div>
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

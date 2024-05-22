@@ -140,7 +140,7 @@ table {
 	<div class="flex-container">
 		<div style="flex-grow: 1">
 			<div class="logo-box">
-				<img src="/img/${posting.com_logo}.jpg" alt="프로필img" class="logoimg">
+				<img src="/img/${posting.com_logo}" alt="프로필img" class="logoimg">
 			</div>
 			<div class="com-header-body">
 				<div>${posting.com_name}</div>

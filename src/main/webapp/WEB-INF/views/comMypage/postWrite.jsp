@@ -27,11 +27,15 @@
 
 		<div class="container-ha">
 			<section class="box align_right">
-		<!--  사이드바  -->
 			
-
-				<div class="box-contents">
+			<div class="box-contents">
 					<div class=" mx-2 pb-4 w-80">
+			
+		<!--  사이드바  -->
+		 <%@include file="/WEB-INF/include/comAside.jsp"%>	
+			<div class="contWrap"  style="border: 1px solid #F1F1F1;">
+				
+					
 						<form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">
 							<input type="hidden" name="com_id" value="${ com_id }" />
 
@@ -148,30 +152,7 @@
 			</section>
 		</div>
 		<script>
-            function updateResumeForm(id) {
-                console.log(id);
-                $.ajax({
-                    type: "GET",
-                    url: "/person/updateResume/" + id
-                }).done((res) => {
-                    location.href = "/person/updateResume/" + id;
-                }).fail((err) => {
-
-                });
-            }
             
-          //For Demo only
-            var links = document.getElementsByClassName('link')
-            for(var i = 0; i <= links.length; i++)
-               addClass(i)
-
-
-            function addClass(id){
-               setTimeout(function(){
-                  if(id > 0) links[id-1].classList.remove('hover')
-                  links[id].classList.add('hover')
-               }, id*750) 
-            }
             
         </script>
 
