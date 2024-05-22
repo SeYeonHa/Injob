@@ -73,7 +73,7 @@ public class MypageController {
 		  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
 		 if(recentlyViewedPosting == null) {
 			 System.out.println("쿠키가없어요~");
-			 System.out.println("쿠키가없어요~");
+			 System.out.println("쿠키가없어요22~");
 		 }else {
 			  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
 		}
