@@ -12,6 +12,18 @@ import lombok.NoArgsConstructor;
 public class MyResumeReset {
 
 	// resumeVo
-	private Long   po_id;
+	private String user_name;
+	private Long   re_id;
+	private String re_profile;
+	private String stack;
+	private String school_names;
+
+	
+	private String[] schoolNameArray;
+	private String[] schoolStackArray;
+	
+	
+	
+	
 	
 }

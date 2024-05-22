@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.injob.mypage.domain.AiRecommend;
+import com.injob.mypage.domain.MyResumeReset;
+import com.injob.mypage.domain.PowerRecommend;
 import com.injob.mypage.domain.ResumeVo;
 
 @Mapper
@@ -42,5 +44,9 @@ public interface MypageMapper {
 	List<ResumeVo> selectSkill(ResumeVo resumeVo);
 
 	Long selectMaxRe(ResumeVo resumeVo);
+
+	List<MyResumeReset> getResume(Long userId);
+
+	List<PowerRecommend> getPowerMapper(Long userId);
 
 }

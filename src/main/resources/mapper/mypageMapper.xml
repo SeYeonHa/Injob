@@ -288,6 +288,67 @@
         </foreach>
 </select>
 
+<select id ="getResume">
+	 SELECT 
+    u.user_name,
+    r.re_id,
+    r.re_profile,
+    stack,
+    school_names
+FROM 
+    users u
+
+LEFT JOIN 
+    resume r ON u.user_id = r.user_id
+LEFT JOIN 
+    (SELECT 
+         rs.re_id,
+         LISTAGG(rs.stack_name, ',') WITHIN GROUP (ORDER BY rs.stack_name) AS stack
+     FROM 
+         resume_stack rs
+     GROUP BY 
+         rs.re_id) rs_agg ON r.re_id = rs_agg.re_id
+LEFT JOIN 
+    (SELECT 
+         s.re_id,
+         LISTAGG(s.school_name, ',') WITHIN GROUP (ORDER BY s.school_name) AS school_names
+     FROM 
+         school s
+     GROUP BY 
+         s.re_id) s_agg ON r.re_id = s_agg.re_id
+     WHERE u.user_id = #{userId}  
+GROUP BY 
+    u.user_name,
+    r.re_id,
+    r.re_profile,
+    rs_agg.stack,
+    s_agg.school_names
+
+
+</select>
+<select id="getPowerMapper">
+   select
+        p.po_id,
+        p.po_title,
+        p.po_content,
+        p.po_grade,
+        p.po_profile,
+        p.career,
+        p.po_end_date,
+        c.com_name,
+        c.com_type,
+        c.com_address,
+        c.com_salary,
+        c.com_id,
+        ub.user_id,
+        ub.ub_boolean
+	    from
+	        posting p
+	    INNER JOIN company c ON p.com_id = c.com_id
+	    LEFT JOIN user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
+
+</select>
+
 </mapper>
 
 
