@@ -519,7 +519,7 @@ background-color : #fff;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-           
+            overflow-y: auto; /* 높이가 초과되면 세로 스크롤 추가 */
             justify-content: center;
             align-items: center;
             z-index: 9999; /* High z-index to ensure it is on top */
@@ -533,6 +533,8 @@ background-color : #fff;
             position: relative;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 10000; /* Ensure it is above the background */
+            overflow-y: auto; /* 높이가 초과되면 세로 스크롤 추가 */
+            
         }
 
         /* Close Button */
@@ -546,27 +548,122 @@ background-color : #fff;
             cursor: pointer;
         }
 
-        /* Prevent background interaction when modal is open */
-        body.modal-open {
-            overflow: hidden;
-        }
-        .popup-section{
-        margin: 0 auto;
-        }
-        .popup-section .step{
-          width: 100px;
-          height: 30px;
-          background: url('/img/question1.png') no-repeat center center;
-          background-size: contain; 
-          margin: 0 auto;
-         
-        }
-        .popup-header h2{
-        	width: 100%
-        }
-        .popup-header .text{
+       /* Prevent background interaction when modal is open */
+      body.modal-open {
+          overflow: hidden;
+      }
+      .popup-section{
+      margin: 0 auto;
+      }
+      .popup-section .step{
+        width: 100px;
+        height: 30px;
+        background: url('/img/question1.png') no-repeat center center;
+        background-size: contain; 
+        margin: 30px auto;
+       
+      }
+      .popup-header{
+       width: 80%;
+       margin: 0 auto;
+       text-align: center;
+      }
+      .popup-header h2{
          width: 100%;
-        }
+         margin: 5px 0;
+      }
+      .popup-header .text{
+       width: 100%;
+       margin: 5px 0;
+      }
+      .category-list {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       margin-top: 20px;
+      }
+       .category-list .category-list-item {
+          margin: 0 6px 13px 6px;
+      }
+      .category-list .category-list-item.on{
+       border: 1px solid black;
+      }
+       .category-list li {
+          display: inline-block;
+      }
+      li {
+          list-style: none;
+      }
+       .category-list .category-list-item input {
+          display: none;
+      }
+      input, select, button {
+          vertical-align: middle;
+      }
+      select, input, option, textarea {
+          vertical-align: middle;
+          font-size: 12px;
+          letter-spacing: 0px;
+          color: #666;
+}
+ .category-list .category-list-item label {
+    display: inline-block;
+    height: 42px;
+    padding: 12px 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+.rank-selection {
+    margin-bottom: 20px;
+}
+
+.rank-label {
+   
+}
+.rankpup{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+  margin: 20px 0;
+}
+
+.priority-select {
+    width: 89px;  /* 넓이 설정 */
+    height: 36px; /* 높이 설정 */
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+ .popup-footer {
+    
+    width: calc(100% - 15px);
+    height: 135px;
+    margin: 20px auto;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+ .popup-footer .button {
+   
+    bottom: 30px;
+    width: 180px;
+    height: 57px;
+    background: green;
+    font-size: 18px;
+    letter-spacing: 0px;
+    color: #fff;
+}
 </style>
 </head>
 <body>
@@ -913,52 +1010,141 @@ background-color : #fff;
 		</div>
 		</main>
 		 <!-- Modal Structure -->
-	    <div class="modal-background" id="modalBackground">
-	        <div class="modal-container">
-	            <button class="close-button" id="closeModal">&times;</button>
-	            <div class="popup-section">
+       <div class="modal-background" id="modalBackground">
+           <div class="modal-container">
+               <button class="close-button" id="closeModal">&times;</button>
+               <div class="popup-section">
                    <div class="step">
                     
                   </div>
-                <div class="popup-header">
-                    <h2 class="title">기업을 선택할 때 중요하게 생각하는 조건을 선택해 주세요.</h2>
-                    <p class="text">최대 5개 선택 가능</p>
+                  <div class="popup-header">
+                      <h2 class="title">원하시는 기업의 규모를 선택해주세요</h2>
+                      <p class="text">최대 5개 선택 가능</p>
+                   </div>
+                   <div class="popup-body">
+                     <ul class="category-list" id="comType">
+                       <li class="category-list-item">
+                      <input type="checkbox" data-code="대기업" data-type="com_type" >
+                      <label for="1st-list-item1" >대기업</label>
+                    </li>
+                    <li class="category-list-item q1">
+                      <input type="checkbox"  data-code="중소기업" data-type="com_type" >
+                      <label for="1st-list-item2" >중소기업</label></li>
+                    <li class="category-list-item q1">
+                      <input type="checkbox"  data-code="중견기업" data-type="com_type" >
+                      <label>중견기업</label>
+                    </li>          
+                   </ul>            
                 </div>
-                <div class="popup-body">
-                    <ul class="category-list" id="Questions1">
-                    <li class="category-list-item">
+                <div class="step">
+                    
+                  </div>
+                  <div class="popup-header">
+                      <h2 class="title">원하시는 연봉을 선택해주세요</h2>
+                      <p class="text">최대 5개 선택 가능</p>
+                   </div>
+                   <div class="popup-body">
+                     <ul class="category-list" id="salary">
+                       <li class="category-list-item">
+                      <input type="checkbox"  data-code="2500" data-type="com_type" >
+                      <label >2500이상</label>
+                    </li>
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="3000" data-type="com_type" >
+                      <label for="1st-list-item2" >3000이상</label></li>
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="3500" data-type="com_type" >
+                      <label >3500이상</label>
+                    </li>
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="4000" data-type="com_type" >
+                      <label  >4000이상</label>
+                    </li>  
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="4500" data-type="com_type" >
+                      <label  >4500이상</label>
+                    </li>  
+                    <li class="category-list-item q2">
+                      <input type="checkbox"  data-code="5000" data-type="com_type" >
+                      <label  >5000이상</label>
+                    </li>          
+                   </ul>            
+                </div>
+                <div class="step">
+                    
+                  </div>
+                  <div class="popup-header">
+                      <h2 class="title">원하시는 근무 지역을 선택해주세요</h2>
+                      <p class="text">최대 5개 선택 가능</p>
+                   </div>
+                   <div class="popup-body">
+                     <ul class="category-list" id="region">
+                       <li class="category-list-item">
                       <input type="checkbox" id="1st-list-item1" data-code="1" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item1" onclick="GA('1st-list-item1','기업형태')">기업형태</label>
+                      <label for="1st-list-item1" >서울</label>
                     </li>
                     <li class="category-list-item">
                       <input type="checkbox" id="1st-list-item2" data-code="2" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item2" onclick="GA('1st-list-item2','근속년수')">근속년수</label></li>
+                      <label for="1st-list-item2" >경기</label></li>
                     <li class="category-list-item">
                       <input type="checkbox" id="1st-list-item3" data-code="3" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item3" onclick="GA('1st-list-item3','복리후생')">복리후생</label>
+                      <label for="1st-list-item3" >인천</label>
                     </li>
                     <li class="category-list-item">
                       <input type="checkbox" id="1st-list-item4" data-code="4" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item4" onclick="GA('1st-list-item4','근무지역')">근무지역</label>
+                      <label for="1st-list-item4" >대구</label>
                     </li>
                     <li class="category-list-item">
                       <input type="checkbox" id="1st-list-item5" data-code="5" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item5" onclick="GA('1st-list-item5','근무환경')">근무환경</label>
+                      <label for="1st-list-item5" >부산</label>
                     </li>
                     <li class="category-list-item">
                       <input type="checkbox" id="1st-list-item6" data-code="6" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item6" onclick="GA('1st-list-item6','기업문화')">기업문화</label>
+                      <label for="1st-list-item6" >제주</label>
                     </li>
-                    <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item7" data-code="7" data-type="listPr" class="input-checkbox question-checkbox">
-                      <label for="1st-list-item7" onclick="GA('1st-list-item7','산업')">산업</label>
-                    </li>
-                 
+                   </ul>            
                 </div>
+                <div class="popup-header">
+                      <h2 class="title">순위를 정해주세요</h2>
+                      <p class="text">쉰위에 따른 점수를 부과하여 더 좋은 기업을 추천해드려요</p>
+                      
+                </div>
+                <div class="popup-body rankpup">
+                   <div class="rank-selection">
+                    <label for="priority1" class="rank-label">1순위</label>
+                    <select id="priority1" class="priority-select">
+                        <option value="company-size">기업규모</option>
+                        <option value="salary">연봉</option>
+                        <option value="location">근무지역</option>
+                    </select>
+                </div>
+                <div class="rank-selection">
+                    <label for="priority2" class="rank-label">2순위</label>
+                    <select id="priority2" class="priority-select">
+                        <option value="company-size">기업규모</option>
+                        <option value="salary">연봉</option>
+                        <option value="location">근무지역</option>
+                    </select>
+                </div>
+                <div class="rank-selection">
+                    <label for="priority3" class="rank-label">3순위</label>
+                    <select id="priority3" class="priority-select">
+                        <option value="company-size">기업규모</option>
+                        <option value="salary">연봉</option>
+                        <option value="location">근무지역</option>
+                    </select>
+                </div>
+                
+                </div>
+                <div class="popup-footer">
+                  <button type="button" class="button" id="QuestionSave" style="">저장하기</button>
+                </div> 
+                  
+                   
             </div>
-	            <!-- Modal Content can go here -->
-	        </div>
-	    </div>
+               <!-- Modal Content can go here -->
+           </div>
+       </div>
 		<%@include file="/WEB-INF/include/Footer.jsp"%>
 		<script
 			src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -966,31 +1152,72 @@ background-color : #fff;
 		
 		document.addEventListener('DOMContentLoaded', function() {
 			
-			 // Get the modal elements
-	        const openModalButton = document.getElementById('openModal');
-	        const modalBackground = document.getElementById('modalBackground');
-	        const closeModalButton = document.getElementById('closeModal');
+			
+	        
+	     // Get the modal elements
+	           const openModalButton = document.getElementById('openModal');
+	           const modalBackground = document.getElementById('modalBackground');
+	           const closeModalButton = document.getElementById('closeModal');
 
-	        // Open the modal
-	        openModalButton.addEventListener('click', function(event) {
-	            event.preventDefault(); // Prevent default link behavior
-	            modalBackground.style.display = 'flex'; // Show the modal
-	            document.body.classList.add('modal-open'); // Prevent background interaction
-	        });
+	           // Open the modal
+	           openModalButton.addEventListener('click', function(event) {
+	               event.preventDefault(); // Prevent default link behavior
+	               modalBackground.style.display = 'flex'; // Show the modal
+	               document.body.classList.add('modal-open'); // Prevent background interaction
+	           });
 
-	        // Close the modal
-	        closeModalButton.addEventListener('click', function() {
-	            modalBackground.style.display = 'none'; // Hide the modal
-	            document.body.classList.remove('modal-open'); // Allow background interaction
-	        });
+	           // Close the modal
+	           closeModalButton.addEventListener('click', function() {
+	               modalBackground.style.display = 'none'; // Hide the modal
+	               document.body.classList.remove('modal-open'); // Allow background interaction
+	           });
 
-	        // Close the modal when clicking outside the modal container
-	        window.addEventListener('click', function(event) {
-	            if (event.target === modalBackground) {
-	                modalBackground.style.display = 'none'; // Hide the modal
-	                document.body.classList.remove('modal-open'); // Allow background interaction
-	            }
-	        });
+	           // Close the modal when clicking outside the modal container
+	           window.addEventListener('click', function(event) {
+	               if (event.target === modalBackground) {
+	                   modalBackground.style.display = 'none'; // Hide the modal
+	                   document.body.classList.remove('modal-open'); // Allow background interaction
+	               }
+	           });
+	         
+	           var firstListItems = document.querySelectorAll('#comType li');
+
+	           firstListItems.forEach(function(item) {
+	               item.addEventListener('click', function() {
+	                   // 클릭된 요소에 on 클래스를 추가합니다.
+	                   firstListItems.forEach(function(li) {
+	                       li.classList.remove('on');
+	                   });
+	                   item.classList.add('on');
+	               });
+	           });
+
+	           // 두 번째 카테고리 리스트에 대한 처리
+	           var secondListItems = document.querySelectorAll('#salary li');
+
+	           secondListItems.forEach(function(item) {
+	               item.addEventListener('click', function() {
+	                   // 클릭된 요소에 on 클래스를 추가합니다.
+	                   secondListItems.forEach(function(li) {
+	                       li.classList.remove('on');
+	                   });
+	                   item.classList.add('on');
+	               });
+	           });
+
+	           // 세 번째 카테고리 리스트에 대한 처리
+	           var thirdListItems = document.querySelectorAll('#region li');
+
+	           thirdListItems.forEach(function(item) {
+	               item.addEventListener('click', function() {
+	                   // 클릭된 요소에 on 클래스를 추가합니다.
+	                   thirdListItems.forEach(function(li) {
+	                       li.classList.remove('on');
+	                   });
+	                   item.classList.add('on');
+	               });
+	           });
+	        
 			
 			/*--------------- 스와이퍼 --------------------------------*/
 			
