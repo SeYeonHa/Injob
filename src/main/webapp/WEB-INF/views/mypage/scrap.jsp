@@ -523,6 +523,7 @@ background-color : #fff;
             justify-content: center;
             align-items: center;
             z-index: 9999; /* High z-index to ensure it is on top */
+            /*  dsds*/
         }
 
         /* Modal Container */
