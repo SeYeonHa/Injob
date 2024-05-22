@@ -315,7 +315,6 @@ transition: all 0.3s ease;
          <button class="search-reset">초기화</button>
          <button class="search-button">적용하기</button>
        </div>
-       <!-- 필터링된 공고를 표시할 요소 -->
     </div> 
 </div>
     <div id="job-listings"> <!-- 필터링된 결과 --></div>
@@ -397,7 +396,7 @@ transition: all 0.3s ease;
 			</div>
   </main>
 			
-
+<!-- ㄴㄴ -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     var cards = document.querySelectorAll('.main-list'); 
@@ -703,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
             department: department === '전체' ? null : department,
             local: local === '전체' ? null : local,
             career: career === '경력무관' ? null : career,
-            grade: grade === '학력무관' ? null : grade,
+            grade: grade === '학력무관' ? null : grade
             
         };
     	console.log('requestData:', requestData);

@@ -30,7 +30,7 @@ public class PostingController {
 	
 	// http://localhost:9090
 	@RequestMapping("/PMain")
-	public  ModelAndView   pmain(JoinVo joinVo) {
+	public  ModelAndView   pmain() {
 		
 		//Long userid2 = (Long) session.getAttribute("userId");
 		
