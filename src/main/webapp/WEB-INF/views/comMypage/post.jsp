@@ -48,8 +48,8 @@
 
 						</div>
 						<!-- /.card-header -->
-						<div class="card-body table-responsive p-0">
-							<table class="table table-hover text-nowrap">
+						<div class="card-body table-responsive p-0" >
+							<table class="table table-hover text-nowrap" style="margin:10px">
 								<thead style="text-align: center;">
 									<tr>
 										<th>공고 번호</th>

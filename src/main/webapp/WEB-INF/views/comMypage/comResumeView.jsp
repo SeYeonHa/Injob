@@ -76,19 +76,36 @@
 									</div>
 								</div>
 								<!-- 기술 스택 및 자격증 -->
-								<div class="mar-10">
-									<br> <span>기술스택 &nbsp | &nbsp </span><select
-										value="rv.skill" disabled>
-										<option value="Java">Java</option>
-										<option value="Springboot">Springboot</option>
-										<option value="C">C</option>
-										<option value="CSS">CSS</option>
-										<option value="html">Html</option>
-										<option value="Flutter">Flutter</option>
-										<option value="JavaScript">JavaScript</option>
-									</select> <span>&ensp;&ensp;</span> <span>자격증 &nbsp | &nbsp ${
+								<span>자격증 &nbsp | &nbsp ${
 										list.license }</span>
 								</div>
+								
+								<!--  학력 세부사항  -->
+								<div class="mt-5">
+									<div id="inputContainer">
+									<!-- 학력 세부사항 -->
+									<div class="mt-5">
+										<h3 class="mar-10">학력 세부사항</h3>
+										<div id="inputContainer">
+											<c:forEach var="school" items="${school}">
+												<div class="input-group">
+													<span>${school.school_name}
+														(${school.school_type})</span>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+									<!-- 스킬 -->
+									<div class="mt-5">
+										<h3 class="mar-10">기술 스택</h3>
+										<div class="skill-container">
+											<c:forEach var="skill" items="${skill}">
+												<div class="skill-button">
+													${skill.stack_name}</div>
+											</c:forEach>
+										</div>
+									</div>
+
 								<!-- 자기소개서 제목 -->
 								<div class="mt-5">
 									<h3 class="mar-10">자기소개서 제목</h3>

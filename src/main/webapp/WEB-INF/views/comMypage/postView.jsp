@@ -32,11 +32,11 @@
 					<div class="mtuHome">
 					    <!--  사이드바  -->
 			           <%@include file="/WEB-INF/include/comAside.jsp"%>
-						<div class="contWrap">
+						<div class="contWrap"  style="border: 1px solid #F1F1F1;">
 						 <c:forEach var="list" items="${list}">
 							<input type="hidden" name="com_id" value="${list.com_id}" />
 
-							<div style="display: flex; flex-direction: column;">
+							<div style="display: flex; flex-direction: column; margin:10px">
 								<div style="margin-bottom: 20px;">
 									<h2 class="mar-10">공고 제목 : ${list.po_title}</h2>
 									<hr>

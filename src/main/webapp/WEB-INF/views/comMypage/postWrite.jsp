@@ -31,20 +31,9 @@
 			
 
 				<div class="box-contents">
-<<<<<<< HEAD
-					<div class="mtuHome">
-				
-					
-						 
-		                <%@include file="/WEB-INF/include/comAside.jsp"%> 
-						<div class="contWrap">
-						 <form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">
-							<input type="hidden" name="com_id" value="1" />
-=======
 					<div class=" mx-2 pb-4 w-80">
 						<form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">
 							<input type="hidden" name="com_id" value="${ com_id }" />
->>>>>>> 1a7e4c9f78492294775e59d472cb2b0c952599c2
 
 							<div style="display: flex; flex-direction: column;">
 								<div style="margin-bottom: 20px;">

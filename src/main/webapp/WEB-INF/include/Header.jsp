@@ -16,7 +16,7 @@
 			            <li><a href="/Posting/PMain">공채정보</a></li>
 			            <li><a href="/Resume/List">취업톡톡</a></li>
 			            <li><a href="/Mypage/Resume?&nowpage=1">마이페이지</a></li>
-			            <li><a href="/Board">게시판</a></li>
+			            <li><a href="/Community/List">게시판</a></li>
 			            <li><a href="/ComMypage/Post?com_id=1">기업 마이페이지</a></li>
 			        </ul>
 			    </c:when>
