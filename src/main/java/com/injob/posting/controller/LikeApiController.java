@@ -24,7 +24,8 @@ public class LikeApiController {
 	public ResponseEntity<String> AddLike(@RequestBody LikeVo likeVo) {
  
 	    LikeVo like = likeMapper.selectLike(likeVo);
-	    
+	    System.out.println("11111111111111111111111111111111");
+	    System.out.println(like);
 	    System.out.println(likeVo);
 	    
 	    if(like != null) {

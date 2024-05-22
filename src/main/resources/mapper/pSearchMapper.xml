@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.injob.posting.mapper.PSearchMapper">  
+
+<resultMap id="getPSearch" type="com.injob.posting.domain.PSearchVo">
+    <result property="po_grade"    column="PO_GRADE"   />
+    <result property="hope_department"  column="HOPE_DEPARTMENT" />
+    <result property="po_title"      column="PO_TITLE"      />
+    <result property="career"   column="CAREER"  />
+    <result property="com_address"   column="COM_ADDRESS"  /> 
+    <result property="po_id"   column="PO_ID"  /> 
+    <result property="com_id"   column="COM_ID"  /> 
+    <result property="po_profile"   column="PO_PROFILE"  /> 
+</resultMap>
+
+
+<select id="getSearchList" resultMap ="getPSearch" >
+SELECT 
+             P.COM_ID AS COM_ID 
+         ,   P.PO_ID AS PO_ID
+         ,   P.PO_GRADE AS PO_GRADE
+         ,   P.HOPE_DEPARTMENT AS HOPE_DEPARTMENT
+         ,   P.PO_START_DATE AS PO_START_DATE
+         ,   P.PO_END_DATE AS PO_END_DATE
+         ,   P.PO_PROFILE AS PO_PROFILE
+         ,   P.PO_TITLE AS PO_TITLE
+         ,   P.PO_CONTENT AS PO_CONTENT
+         ,   P.CAREER AS CAREER
+         ,   PS.STACK AS STACK
+         ,   C.COM_ADDRESS AS COM_ADDRESS
+
+      FROM POSTING P
+       INNER  JOIN POSTING_STACK PS ON PS.PO_ID = P.PO_ID
+       INNER  JOIN COMPANY C ON P.COM_ID = C.COM_ID
+    <where>
+          <if test="department != null">
+			 AND  p.hope_department LIKE '%' || #{ department } || '%'
+		  </if>
+          <if test="local != null">
+			 AND c.com_address LIKE '%' || #{local} || '%'
+		  </if>			 
+		  <if test="career != null">
+			 AND p.career LIKE '%' || #{career} || '%'
+		  </if>	
+		  <if test="grade != null">
+			 AND p.po_grade LIKE '%' || #{grade} || '%'
+		  </if>
+		 </where>
+</select>
+
+<select id="getSearchCount">
+SELECT COUNT(*) AS total_count
+FROM (
+    SELECT 
+             P.COM_ID AS COM_ID 
+         ,   P.PO_ID AS PO_ID
+         ,   P.PO_GRADE AS PO_GRADE
+         ,   P.HOPE_DEPARTMENT AS HOPE_DEPARTMENT
+         ,   P.PO_START_DATE AS PO_START_DATE
+         ,   P.PO_END_DATE AS PO_END_DATE
+         ,   P.PO_PROFILE AS PO_PROFILE
+         ,   P.PO_TITLE AS PO_TITLE
+         ,   P.PO_CONTENT AS PO_CONTENT
+         ,   P.CAREER AS CAREER
+         ,   PS.STACK AS STACK
+         ,   C.COM_ADDRESS AS COM_ADDRESS
+    FROM POSTING P
+    INNER JOIN POSTING_STACK PS ON PS.PO_ID = P.PO_ID
+    INNER JOIN COMPANY C ON P.COM_ID = C.COM_ID
+    <where>
+          <if test="department != null">
+			 AND  p.hope_department LIKE '%' || #{ department } || '%'
+		  </if>
+          <if test="local != null">
+			 AND c.com_address LIKE '%' || #{local} || '%'
+		  </if>			 
+		  <if test="career != null">
+			 AND p.career LIKE '%' || #{career} || '%'
+		  </if>	
+		  <if test="grade != null">
+			 AND p.po_grade LIKE '%' || #{grade} || '%'
+		  </if>
+		  
+		 </where>
+)
+</select>
+
+
+
+</mapper>
