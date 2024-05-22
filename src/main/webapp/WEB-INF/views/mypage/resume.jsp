@@ -62,7 +62,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-<<<<<<< HEAD
+
 						  </div>
 						  <div
 								style="display: flex; justify-content: center;">
@@ -81,24 +81,12 @@
 						
 						<!-- /.card-header -->
 						
-=======
-						</div>
 
-					<div
-						style="display: flex; justify-content: center;">
-						<div style="display: flex; justify-content: left ;"></div>
-						<!-- 왼쪽 빈 공간 -->
-						<div style="margin: 0 auto; display: flex; justify-content: center;">
-							<%@include file="/WEB-INF/include/resumePaging.jsp"%>
-						</div>
-						<div>
-							<button type="button" style="margin: 10px 10px; display: flex; justify-content: right;"
-								onclick="location.href='/Mypage/ResumeWrite'"
-								class="btn btn-block btn-success">작성</button>
-						</div>
-					</div>
+					
 
->>>>>>> 1a7e4c9f78492294775e59d472cb2b0c952599c2
+				
+
+
 
 					
                     <%@include file="/WEB-INF/include/rightAside.jsp"%>
