@@ -244,7 +244,6 @@ transition: all 0.3s ease;
     <div class="topBox">
       <div class="dropdown">
       <button class="btn_filter job dev-toggle-filter dev-part-ctgr open">
-    <!--   <span class="top_tit dev-select-text">직무</span>-->
       <span class="box_top dev_wrap-department">직무</span>
       </button>
       </div>
@@ -319,9 +318,7 @@ transition: all 0.3s ease;
        <!-- 필터링된 공고를 표시할 요소 -->
     </div> 
 </div>
-    <div id="job-listings">
-      <!-- 필터링된 결과 -->
-    </div>
+    <div id="job-listings"> <!-- 필터링된 결과 --></div>
     <p id="total-count"> 총 <em id="getSearchCount">${total_count}</em>건의 공고</p>
 
 
@@ -783,85 +780,93 @@ document.addEventListener('DOMContentLoaded', function() {
            oldUlEl.remove();
        });*/
 
-        
-        const newUlEl = document.createElement('ul');
-        jobListingsContainer.appendChild(newUlEl);
+       const pstyleEl = document.querySelector('.pstyle');
+       while (pstyleEl.firstChild) {
+           pstyleEl.removeChild(pstyleEl.firstChild);
+       }
+       const pstyleEls = document.querySelectorAll('.pstyle');
 
-        jobListings.forEach(posting => {
-            const liEl = document.createElement('li');
-            const aEl = document.createElement('a');
-            aEl.href = `/Detail/Detail?com_id=\${posting.com_id}`;
-            aEl.style.textDecorationLine = 'none';
-            aEl.classList.add('listCell');
-            liEl.appendChild(aEl);
+       pstyleEls.forEach(pstyleEl => {
+           jobListings.forEach(posting => {
+               const divEl = document.createElement('div');
+               divEl.classList.add('main');
 
-            const clogoEl = document.createElement('div');
-            clogoEl.classList.add('clogo');
-            aEl.appendChild(clogoEl);
+               const UlEl = document.createElement('ul');
+               divEl.appendChild(UlEl);
 
-           
-            const clogoImgEl = document.createElement('img');
-            clogoImgEl.src = "/img/" + posting.po_profile + ".jpg";
-            clogoImgEl.alt = '프로필img';
-            clogoImgEl.id = 'pimg';
-            clogoEl.appendChild(clogoImgEl);
+               const liEl = document.createElement('li');
+               const aEl = document.createElement('a');
+               aEl.href = `/Detail/Detail?com_id=${posting.com_id}`;
+               aEl.style.textDecorationLine = 'none';
+               aEl.classList.add('listCell');
+               UlEl.appendChild(liEl);
+               liEl.appendChild(aEl);
+               const clogoEl = document.createElement('div');
+               clogoEl.classList.add('clogo');
+               aEl.appendChild(clogoEl);
 
-            const listContEl = document.createElement('div');
-            listContEl.classList.add('listCont');
-            aEl.appendChild(listContEl);
+               const clogoImgEl = document.createElement('img');
+               clogoImgEl.src = "/img/" + posting.po_profile + ".jpg";
+               clogoImgEl.alt = '프로필img';
+               clogoImgEl.id = 'pimg';
+               clogoEl.appendChild(clogoImgEl);
 
-            const pTitEl = document.createElement('div');
-            pTitEl.classList.add('pTit');
-            pTitEl.style.fontWeight = 'bold';
-            pTitEl.textContent = posting.po_title;
-            listContEl.appendChild(pTitEl);
+               const listContEl = document.createElement('div');
+               listContEl.classList.add('listCont');
+               aEl.appendChild(listContEl);
 
-            const pInfoEl = document.createElement('div');
-            pInfoEl.classList.add('pInfo');
-            listContEl.appendChild(pInfoEl);
+               const pTitEl = document.createElement('div');
+               pTitEl.classList.add('pTit');
+               pTitEl.style.fontWeight = 'bold';
+               pTitEl.textContent = posting.po_title;
+               listContEl.appendChild(pTitEl);
 
-            const pPartSpan = document.createElement('span');
-            pPartSpan.classList.add('pPart');
-            pPartSpan.textContent = posting.hope_department;
-            pInfoEl.appendChild(pPartSpan);
-            
-            pInfoEl.appendChild(document.createElement('br'));
+               const pInfoEl = document.createElement('div');
+               pInfoEl.classList.add('pInfo');
+               listContEl.appendChild(pInfoEl);
 
-            const pStackBoxEl = document.createElement('div');
-            pStackBoxEl.classList.add('pStackBox');
-            pInfoEl.appendChild(pStackBoxEl);
+               const pPartSpan = document.createElement('span');
+               pPartSpan.classList.add('pPart');
+               pPartSpan.textContent = posting.hope_department;
+               pInfoEl.appendChild(pPartSpan);
 
-            const tagSpan = document.createElement('span');
-            tagSpan.classList.add('tag', 'tag-tack');
-            tagSpan.textContent = posting.stack;
-            pStackBoxEl.appendChild(tagSpan);
+               pInfoEl.appendChild(document.createElement('br'));
 
-            const pAddressSpan = document.createElement('span');
-            pAddressSpan.classList.add('pAddress');
-            pAddressSpan.textContent = posting.com_address;
-            pInfoEl.appendChild(pAddressSpan);
+               const pStackBoxEl = document.createElement('div');
+               pStackBoxEl.classList.add('pStackBox');
+               pInfoEl.appendChild(pStackBoxEl);
 
-            const pAssistEl = document.createElement('div');
-            pAssistEl.classList.add('pAssist');
-            listContEl.appendChild(pAssistEl);
+               const tagSpan = document.createElement('span');
+               tagSpan.classList.add('tag', 'tag-tack');
+               tagSpan.textContent = posting.stack;
+               pStackBoxEl.appendChild(tagSpan);
 
-            const pPeriodSpan = document.createElement('span');
-            pPeriodSpan.classList.add('pPeriod');
-            pPeriodSpan.textContent = posting.posting_enddate;
-            pAssistEl.appendChild(pPeriodSpan);
+               const pAddressSpan = document.createElement('span');
+               pAddressSpan.classList.add('pAddress');
+               pAddressSpan.textContent = posting.com_address;
+               pInfoEl.appendChild(pAddressSpan);
 
-            const listFootEl = document.createElement('div');
-            listFootEl.classList.add('listFoot');
-            aEl.appendChild(listFootEl);
+               const pAssistEl = document.createElement('div');
+               pAssistEl.classList.add('pAssist');
+               listContEl.appendChild(pAssistEl);
 
-            const congratSpan = document.createElement('span');
-            congratSpan.style.fontSize = 'smaller';
-            congratSpan.textContent = '💲합격축하금 100만원';
-            listFootEl.appendChild(congratSpan);
-            
-            newUlEl.appendChild(liEl);
-        });
-        document.querySelector('#main').appendChild(newUlEl);
+               const pPeriodSpan = document.createElement('span');
+               pPeriodSpan.classList.add('pPeriod');
+               pPeriodSpan.textContent = posting.posting_enddate;
+               pAssistEl.appendChild(pPeriodSpan);
+
+               const listFootEl = document.createElement('div');
+               listFootEl.classList.add('listFoot');
+               aEl.appendChild(listFootEl);
+
+               const congratSpan = document.createElement('span');
+               congratSpan.style.fontSize = 'smaller';
+               congratSpan.textContent = '💲합격축하금 100만원';
+               listFootEl.appendChild(congratSpan);
+
+               pstyleEl.appendChild(divEl);
+           });
+       });
 
     }
 /*jsp 자바 스크립트 안에 백팃 안에 문자를 넣을때에는 $앞에 \를 붙여야함*/
