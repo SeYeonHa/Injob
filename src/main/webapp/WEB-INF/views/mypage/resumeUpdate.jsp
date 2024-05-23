@@ -60,10 +60,7 @@
 				   <div class="mtuHome"> 
 				    <%@include file="/WEB-INF/include/aside.jsp"%>
 					<div class="contWrap" style="padding : 10px; border : 5px ridge; ">
-						<form
-							action="/Mypage/ResumeUpdateSubmit?nowpage=1"
-							method="post" var="list" items="${list}">
-
+						<form action="/Mypage/ResumeUpdateSubmit?nowpage=1" method="post" var="list" items="${list}">
 
 							<c:forEach var="list" items="${list}">
 
@@ -132,6 +129,7 @@
                                         <!-- 기본 학력 입력 필드 -->
                                         <c:forEach var="school" items="${school}">
                                             <div class="input-group">
+                                            <input type="hidden" name="school_id" value="${school.school_id}">
                                                 <input type="text" name="school_name" value="${school.school_name}" style="width: 33%; height: 1.5em; margin-right: 10px;">
                                                 <select name="school_type" style="height: 1.5em; margin-right: 10px;">
                                                     <option value="대학교" <c:if test="${school.school_type == '대학교'}">selected</c:if>>대학교</option>
@@ -154,6 +152,7 @@
 													<c:set var="isActive" value="false" />
 													<c:forEach var="userSkill" items="${skill}">
 														<c:if test="${userSkill.stack_name == skillName}">
+														<input type="hidden" name="re_stack_id" value="${userSkill.re_stack_id}">
 															<c:set var="isActive" value="true" />
 														</c:if>
 													</c:forEach>
@@ -205,32 +204,46 @@
 			</section>
 		</div>
 		<script>
-            function updateResumeForm(id) {
-                console.log(id);
-                $.ajax({
-                    type: "GET",
-                    url: "/person/updateResume/" + id
-                }).done((res) => {
-                    location.href = "/person/updateResume/" + id;
-                }).fail((err) => {
+			function toggleSkill(element, skillName) {
+				element.classList.toggle('active');
+				updateSkills();
+			}
 
-                });
-            }
-            
-          //For Demo only
-            var links = document.getElementsByClassName('link')
-            for(var i = 0; i <= links.length; i++)
-               addClass(i)
+			function updateSkills() {
+				const activeSkills = [];
+				document.querySelectorAll('.skill-button.active').forEach(button => {
+					activeSkills.push(button.textContent);
+				});
+				document.getElementById('skills').value = activeSkills.join(',');
+			}
 
+			// 폼 제출 시 활성화된 스킬 상태를 업데이트
+			document.getElementById('resumeForm').addEventListener('submit', function(event) {
+				updateSkills();
+			});
 
-            function addClass(id){
-               setTimeout(function(){
-                  if(id > 0) links[id-1].classList.remove('hover')
-                  links[id].classList.add('hover')
-               }, id*750) 
-            }
-            
-        </script>
+			function addInputFields() {
+				const inputContainer = document.getElementById('inputContainer');
+				const inputGroup = document.createElement('div');
+				inputGroup.classList.add('input-group');
+				inputGroup.innerHTML = `
+					<input type="text" name="school_name" style="width: 33%; height: 1.5em; margin-right: 10px;">
+					<select name="school_type" style="height: 1.5em; margin-right: 10px;">
+						<option value="대학교">대학교</option>
+						<option value="고등학교">고등학교</option>
+						<option value="중학교">중학교</option>
+						<option value="기타">기타</option>
+					</select>
+					<button type="button" onclick="removeInputField(this)">X</button>
+				`;
+				inputContainer.appendChild(inputGroup);
+			}
+
+			function removeInputField(button) {
+				const inputGroup = button.parentElement;
+				inputGroup.remove();
+			}
+		</script>
 
 		<%@include file="/WEB-INF/include/Footer.jsp"%>
 </body>

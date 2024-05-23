@@ -43,4 +43,12 @@ public interface MypageMapper {
 
 	Long selectMaxRe(ResumeVo resumeVo);
 
+	void updateSchool(ResumeVo resumeVo);
+
+	void updateSkill(ResumeVo resumeVo);
+
+	Long getNewSchoolId(Long re_id);
+
+	Long getNewReStackId(Long re_id);
+
 }

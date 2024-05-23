@@ -39,7 +39,7 @@
 		transition: background-color 0.3s;
 		font-weight: bold;
 		padding: 0 10px;
-    min-width: 100px;
+    min-width: 220px;
 	}
 
 </style>
