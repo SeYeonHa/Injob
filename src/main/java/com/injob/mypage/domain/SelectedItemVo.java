@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SelectedItemVo {
 
-	private String comType;
+	private String welfare;
 	private String location;
 	private String salary;
 	private String priority1;

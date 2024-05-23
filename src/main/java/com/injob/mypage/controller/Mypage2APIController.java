@@ -2,6 +2,8 @@ package com.injob.mypage.controller;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +61,7 @@ public class Mypage2APIController {
 	        // 1순위 조건 처리
 	        switch (request.getPriority1()) {
 	            case "comType":
-	                if (item.getCom_type().equals(request.getComType())) {
+	                if (item.getPo_content().contains(request.getWelfare())) {
 	                    score += 15;
 	                }
 	                break;
@@ -78,7 +80,7 @@ public class Mypage2APIController {
 	        // 2순위 조건 처리
 	        switch (request.getPriority2()) {
 	            case "comType":
-	                if (item.getCom_type().equals(request.getComType())) {
+	                if (item.getPo_content().contains(request.getWelfare())) {
 	                    score += 10;
 	                }
 	                break;
@@ -97,7 +99,7 @@ public class Mypage2APIController {
 	        // 3순위 조건 처리
 	        switch (request.getPriority3()) {
 	            case "comType":
-	                if (item.getCom_type().equals(request.getComType())) {
+	                if (item.getPo_content().contains(request.getWelfare())) {
 	                    score += 5;
 	                }
 	                break;
@@ -112,12 +114,26 @@ public class Mypage2APIController {
 	                }
 	                break;
 	        }
-             score +=70;
+	        if (item.getCom_type().contains("대기업")) {
+	            score += 10;
+	        } else if (item.getCom_type().contains("중견기업")) {
+	            score += 5;
+	        } else if (item.getCom_type().contains("중소기업")) {
+	            score += 0; // Explicitly adding this for clarity, though it doesn't change the score
+	        }
+             score +=60;
 	        item.setScore(score);
 	    }
+	    Collections.sort(powerList, new Comparator<PowerRecommend>() {
+	        @Override
+	        public int compare(PowerRecommend o1, PowerRecommend o2) {
+	            return Integer.compare(o2.getScore(), o1.getScore());
+	        }
+	    });
 
 	    for (PowerRecommend powerRecommend : powerList) {
 	        System.out.println(powerRecommend);
+	        
 	    }
 
 	    return ResponseEntity.ok(powerList);
