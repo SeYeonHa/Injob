@@ -163,7 +163,7 @@ body {
 				</div>
 			</div>
 			<br>
-		<div><a href="/Mypage/Apply?user_id=1&po_id=1101" id="applyButton"
+		<div><a href="/Mypage/Apply?user_id=${user_id}&po_id=${posting.po_id}&nowpage=1" id="applyButton"
 		class="btn" style="text-decoration-line: none">✅지원하기</a></div>
 		<br>
 		<div id="navbar">

@@ -428,6 +428,12 @@ public class MypageController {
 
 		ModelAndView mv = new ModelAndView();
 
+		mypageMapper.deleteSchool(resumeVo);
+		
+		mypageMapper.deleteSkill(resumeVo);
+		mypageMapper.deleteApply(resumeVo);
+		
+		
 		mypageMapper.deleteResume(resumeVo);
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
@@ -536,7 +542,7 @@ public class MypageController {
 		
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
-		mv.setViewName("redirect:ApplyHistory");
+		mv.setViewName("redirect:ApplyHistory?nowpage=1");
 
 		return mv;
 	}

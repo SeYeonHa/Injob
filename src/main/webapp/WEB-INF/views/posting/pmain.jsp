@@ -372,7 +372,7 @@ transition: all 0.3s ease;
                   </ul>
                
                   <div class="card-footer" style="background-color: white;">
-                  <a href ="/Detail/Detail?po_id=${posting.po_id }" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
+                  <a href ="/Mypage/Apply?user_id=${user_id}&po_id=${posting.po_id}&nowpage=1" style="text-decoration-line: none;"class="btn btn-primary">즉시지원하기</a>
                   </div>
                   <div>
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

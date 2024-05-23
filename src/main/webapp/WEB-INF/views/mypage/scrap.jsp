@@ -710,7 +710,7 @@ label {
 						<!-- Slides -->
 						<c:forEach var="item" items="${aiList}" begin="0" end="4">
 			                <div class="swiper-slide">
-			                    <a href="/Detail/Detail?com_id=${item.com_id} " class="listCell">
+			                    <a href="/Detail/Detail?po_id=${item.po_id} " class="listCell">
 			                        <div class="pLogo"><img src="/img/${item.po_profile}.jpg" alt="Company Logo"></div>
 			                        <div class="listCont">
 			                            <p class ="last_date">D-${item.daysRemaining}</p>
@@ -760,7 +760,7 @@ label {
 												</div>
 												<button class="profile-btn" type="button"></button>
 											</div>
-											<a id="resumePerEl" href="#">이력서 50% 완성</a>
+											<a id="resumePerEl" href="/Mypage/Resume?user_id=${user_id}">이력서 50% 완성</a>
 										</div>
 										<!-- my-profile-wrap -->
 										<div class="my-info-wrap">
@@ -781,7 +781,7 @@ label {
 												</div>
 												<div class="my-status-box">
 													<p class="status">
-														<a href="/User/Resume/Write" target="_blank"> 구덕고등학교졸업 > </a>
+														<a href="/Mypage/Resume?user_id=${user_id}" target="_blank"> 구덕고등학교졸업 > </a>
 													</p>	
 												</div>
 												<div class="my-status-list">
@@ -811,13 +811,13 @@ label {
 										<h2 class="skip">주요활동내역</h2>
 										<ul class="my-active-list">
 											<li class="list"><a class="box-botton"
-												href="/User/ApplyMng">
+												href="/Mypage/Resume?user_id=${user_id}">
 													<p class="title">
 														지원완료 <strong class="count">0</strong>
 													</p>
 											</a></li>
 											<li class="list"><a class="box-botton"
-												href="/user/PositionOffer#dev-tab-resume-read">
+												href="/Mypage/Resume?user_id=${user_id}">
 													<p class="title">
 														이력서 열람 <strong class="count">0</strong>
 													</p>
@@ -879,14 +879,14 @@ label {
 															</div>
 															<div class="company">
 																<a class="company"
-																	href="/SaveCookie?com_id=${item.com_id}"
-																	target="_blank">
+																	href="/SaveCookie?po_id=${item.po_id}"
+																	>
 																	<div class="name">${item.com_name}</div>
 																</a>
 															</div>
 															<div class="headers">
-																<a href="/SaveCookie?com_id=${item.com_id}"
-																	target="_blank" class="title">${item.po_title}
+																<a href="/SaveCookie?po_id=${item.po_id}"
+																	 class="title">${item.po_title}
 																	Backend 개발자</a>
 																<c:choose>
 																	<c:when
@@ -899,7 +899,7 @@ label {
 																</c:choose>
 															</div>
 															<a class="devLinkRecruit"
-																href="/SaveCookie?com_id=${item.com_id}" target="_blank">
+																href="/SaveCookie?po_id=${item.po_id}" >
 																<div class="recruitment">
 																	<div class="item">${item.po_grade}초대졸↑</div>
 																	<div class="item">${item.career}경력8년↑</div>
@@ -1405,15 +1405,15 @@ function displayPowerData(data) {
                     <span>합격축하금 100만원</span>
                 </div>
                 <div class="company">
-                    <a class="company" href="#" target="_blank">
+                    <a class="company" href="/SaveCookie?po_id=\${item.po_id}" >
                         <div class="name">${item.com_name}</div>
                     </a>
                 </div>
                 <div class="headers">
-                    <a href="#" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
+                    <a href="/SaveCookie?po_id=\${item.po_id}" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
                     <button type="button" class="bookmark \${item.ub_boolean ? 'On' : ''}"></button>
                 </div>
-                <a class="devLinkRecruit" href="#" target="_blank">
+                <a class="devLinkRecruit" href="/SaveCookie?po_id=\${item.po_id}" >
                     <div class="recruitment">
                         <div class="item">\${item.po_grade} 초대졸↑</div>
                         <div class="item">\${item.career} 경력8년↑</div>
@@ -1638,15 +1638,15 @@ function displayPowerData(data) {
 			                        <span>합격축하금 100만원</span>
 			                    </div>
 			                    <div class="company">
-			                        <a class="company" href="#" target="_blank">
+			                        <a class="company" href="/SaveCookie?po_id=\${item.po_id}" >
 			                            <div class="name">${item.com_name}</div>
 			                        </a>
 			                    </div>
 			                    <div class="headers">
-			                        <a href="#" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
+			                        <a href="/SaveCookie?po_id=\${item.po_id}" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
 			                        <button type="button" class="bookmark \${item.ub_boolean ? 'On' : ''}"></button>
 			                    </div>
-			                    <a class="devLinkRecruit" href="#" target="_blank">
+			                    <a class="devLinkRecruit" href="/SaveCookie?po_id=\${item.po_id}" >
 			                        <div class="recruitment">
 			                            <div class="item">\${item.po_grade} 초대졸↑</div>
 			                            <div class="item">\${item.career} 경력8년↑</div>
@@ -1684,7 +1684,7 @@ function displayPowerData(data) {
 		                        <span>합격축하금 100만원</span>
 		                    </div>
 		                    <div class="company">
-		                        <a class="company" href="#" target="_blank">
+		                        <a class="company" href="/SaveCookie?po_id=\${item.po_id}" >
 		                            <div class="name">${item.com_name}</div>
 		                        </a>
 		                    </div>
@@ -1692,7 +1692,7 @@ function displayPowerData(data) {
 		                        <a href="#" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
 		                        <button type="button" class="bookmark \${item.ub_boolean ? 'On' : ''}"></button>
 		                    </div>
-		                    <a class="devLinkRecruit" href="#" target="_blank">
+		                    <a class="devLinkRecruit" href="/SaveCookie?po_id=\${item.po_id}" >
 		                        <div class="recruitment">
 		                            <div class="item">\${item.po_grade} 초대졸↑</div>
 		                            <div class="item">\${item.career} 경력8년↑</div>

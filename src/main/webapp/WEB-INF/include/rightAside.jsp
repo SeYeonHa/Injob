@@ -12,7 +12,7 @@
 				        <c:forEach var="bookmark" items="${bookList}" varStatus="status">
 					        <c:if test="${status.index < 3}">
 					            <li class="on">
-					                <a href="#" class="item">
+					                <a href="/Detail/Detail?po_id=${item.po_id}" class="item">
 					                    <span class="info">
 					                        <c:choose>
 					                            <c:when test="${bookmark.daysRemaining <= 10}">
@@ -36,7 +36,7 @@
 				        <c:forEach var="item" items="${recentCookies}" varStatus="status">
 					        <c:if test="${status.index < 3}">
 					            <li class="on">
-					                <a href="#" class="item">
+					                <a href="/Detail/Detail?po_id=${item.po_id}" class="item">
 					                    <span class="info">
 					                                <em class="day">${item.po_title}</em>
 					                    </span>

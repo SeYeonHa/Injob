@@ -264,6 +264,24 @@
 		WHERE RE_ID = #{ re_id }
 
 	</delete>
+	<delete id="deleteSchool">
+
+		DELETE FROM SCHOOL
+		WHERE RE_ID = #{ re_id }
+
+	</delete>
+	<delete id="deleteSkill">
+
+		DELETE FROM RESUME_STACK
+		WHERE RE_ID = #{ re_id }
+
+	</delete>
+	<delete id="deleteApply">
+
+		DELETE FROM APPLY
+		WHERE RE_ID = #{ re_id }
+
+	</delete>
 	
 	<select id ="getAiList">
 		select

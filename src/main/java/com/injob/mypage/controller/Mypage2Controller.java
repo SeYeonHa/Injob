@@ -185,6 +185,7 @@ public class Mypage2Controller {
 		mv.addObject("resumeListJson", resumeListJson);
 		mv.addObject("aiList", aiList);
 		mv.addObject("user", userVo);
+		mv.addObject("user_id", userId);
 		mv.addObject("recentCookies", recentCookies);
 		mv.addObject("bookList", bookList);
 		
@@ -194,7 +195,7 @@ public class Mypage2Controller {
 	}
 	
 	@GetMapping("/SaveCookie")
-	public String saveCookie(@RequestParam("com_id") Long comId, HttpServletRequest request, HttpServletResponse response) {
+	public String saveCookie(@RequestParam("po_id") Long poId, HttpServletRequest request, HttpServletResponse response) {
 	    List<Long> recentlyViewedPosting = new ArrayList<>();
 
 	    // 쿠키에서 recentlyViewedposting 값을 읽음
@@ -223,8 +224,8 @@ public class Mypage2Controller {
 
 
 	    // 최근 본 상품 목록에 comId가 이미 있는지 확인하고 추가
-	    if (!recentlyViewedPosting.contains(comId)) {
-	    	recentlyViewedPosting.add(comId);
+	    if (!recentlyViewedPosting.contains(poId)) {
+	    	recentlyViewedPosting.add(poId);
 	    }
 	  
 	    
@@ -259,7 +260,7 @@ public class Mypage2Controller {
 	    System.out.println("쿠키에 저장된 값: " + cookie.getValue());
 
 	    // 다시 "/Detail/Detail"로 리디렉션
-	    return "redirect:/Detail/Detail?com_id=" + comId;
+	    return "redirect:/Detail/Detail?po_id=" + poId;
 	}
 	
 	@GetMapping("/Text_User/User_Info")

@@ -51,7 +51,6 @@ public interface MypageMapper {
 	List<PowerRecommend> getPowerMapper(Long userId);
 
 
- develop
 	void updateSchool(ResumeVo resumeVo);
 
 	void updateSkill(ResumeVo resumeVo);
@@ -59,5 +58,11 @@ public interface MypageMapper {
 	Long getNewSchoolId(Long re_id);
 
 	Long getNewReStackId(Long re_id);
+
+	void deleteSchool(ResumeVo resumeVo);
+
+	void deleteSkill(ResumeVo resumeVo);
+
+	void deleteApply(ResumeVo resumeVo);
 
 }

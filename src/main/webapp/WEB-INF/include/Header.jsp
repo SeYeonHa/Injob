@@ -42,8 +42,8 @@
 				                <div class="myLists">
 				                    <ul>
 				                        <li><a href="/Mypage/Resume?user_id=${user.user_id}&nowpage=1"><span class="tx">개인회원 홈</span></a></li>
-				                        <li><a href="/Mypage/ResumeWrite?user_id=${user.user_id}" ><span class="tx">이력서 관리</span></a></li>
-				                        <li><a href="/Mypage/ApplyHistory?user_id=${user.user_id}" ><span class="tx">입사지원 현황</span></a></li>
+				                        <li><a href="/Mypage/Resume?user_id=${user.user_id}&nowpage=1" ><span class="tx">이력서 관리</span></a></li>
+				                        <li><a href="/Mypage/ApplyHistory?user_id=${user.user_id}&nowpage=1" ><span class="tx">입사지원 현황</span></a></li>
 				                        <li><a href="/User/Scrap" ><span class="tx">AI추천</span></a></li>
 				                        <li><a href="/User/Scrap" ><span class="tx">스크랩 공고</span></a></li>
 				                        <li><a href="/Text_User/User_Info" >개인정보 수정</span></a></li>

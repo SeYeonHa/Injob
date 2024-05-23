@@ -51,7 +51,7 @@ public class HomeController {
          } else {
              System.out.println("유저 정보가 없음");
          }
-        return "home";
+        return "redirect:Posting/PMain";
     }
     
 }
