@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.injob.comMypage.mapper.ComMypageMapper">
+
+
+	<select id="selectPostList">
+
+		SELECT
+				PO.COM_ID,
+				PO.PO_ID,
+				PO.PO_GRADE,
+				PO.HOPE_DEPARTMENT,
+				PO.PO_START_DATE,
+				PO.PO_END_DATE,
+				PO.PO_PROFILE,
+				PO.PO_TITLE,
+				PO.PO_CONTENT,
+				PO.CAREER
+
+		FROM POSTING PO INNER JOIN COMPANY COM
+		ON PO.COM_ID = COM.COM_ID
+
+		WHERE PO.COM_ID = #{ com_id }
+		
+		ORDER BY PO.PO_ID ASC
+
+	</select>
+
+	<select id="selectPostList2">
+
+		SELECT
+				COM.COM_ID,
+				COM.COM_NAME,
+				COM.COM_EMAIL,
+				COM.COM_TYPE,
+				COM.COM_CEO,
+				COM.COM_PASSWD,
+				COM.COM_ADDRESS,
+				COM.COM_PHONE,
+				COM.COM_INDATE,
+				COM.COM_SALARY,
+				COM.COM_BIRTH,
+				COM.COM_LOGO,
+				PO.PO_ID,
+				PO.PO_GRADE,
+				PO.HOPE_DEPARTMENT,
+				PO.PO_START_DATE,
+				PO.PO_END_DATE,
+				PO.PO_PROFILE,
+				PO.PO_TITLE,
+				PO.PO_CONTENT,
+				PO.CAREER
+
+		FROM POSTING PO INNER JOIN COMPANY COM
+		ON PO.COM_ID = COM.COM_ID
+
+		WHERE PO.PO_ID = #{ po_id }
+
+	</select>
+
+	<select id="selectCompany">
+
+		SELECT
+				COM_ID,
+				COM_NAME,
+				COM_EMAIL,
+				COM_TYPE,
+				COM_CEO,
+				COM_PASSWD,
+				COM_ADDRESS,
+				COM_PHONE,
+				COM_INDATE,
+				COM_SALARY,
+				COM_BIRTH,
+				COM_LOGO
+
+		FROM  COMPANY
+
+		WHERE COM_ID = #{ com_id }
+
+	</select>
+	
+	<select id="selectHistory">
+
+		SELECT
+				AP.AP_ID,
+				AP.RE_ID,
+				US.USER_NAME,
+				RE.RE_TITLE,
+				PO.PO_TITLE,
+				PO.PO_END_DATE,
+				AP.RESULT
+				
+		FROM COMPANY COM
+		  JOIN POSTING PO ON COM.COM_ID = PO.COM_ID
+		  JOIN APPLY AP ON PO.PO_ID = AP.PO_ID
+		  JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
+		  JOIN USERS US ON RE.USER_ID = US.USER_ID
+
+		WHERE PO.COM_ID = #{ com_id }
+		
+		ORDER BY AP.AP_ID ASC
+
+	</select>
+
+	<select id="selectResult">
+	
+			SELECT
+				AP.AP_ID,
+				AP.RE_ID,
+				US.USER_NAME,
+				RE.RE_TITLE,
+				PO.PO_TITLE,
+				PO.PO_END_DATE,
+				AP.RESULT
+				
+		FROM COMPANY COM
+		  JOIN POSTING PO ON COM.COM_ID = PO.COM_ID
+		  JOIN APPLY AP ON PO.PO_ID = AP.PO_ID
+		  JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
+		  JOIN USERS US ON RE.USER_ID = US.USER_ID
+
+		WHERE PO.COM_ID = 1
+		  AND AP.AP_ID = #{ ap_id }
+		
+		ORDER BY AP.AP_ID ASC
+	
+	</select>
+	
+	<select id="getResult">
+	
+			SELECT
+				AP.AP_ID,
+				AP.RE_ID,
+				US.USER_NAME,
+				RE.RE_TITLE,
+				PO.PO_TITLE,
+				PO.PO_END_DATE,
+				AP.RESULT
+				
+		FROM COMPANY COM
+		  JOIN POSTING PO ON COM.COM_ID = PO.COM_ID
+		  JOIN APPLY AP ON PO.PO_ID = AP.PO_ID
+		  JOIN RESUME RE ON AP.RE_ID = RE.RE_ID
+		  JOIN USERS US ON RE.USER_ID = US.USER_ID
+
+		WHERE AP.COM_ID = #{ com_id }
+		
+		ORDER BY AP.AP_ID ASC
+	
+	</select>
+	
+<!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+
+	<insert id="insertPost">
+
+		INSERT INTO POSTING (
+								COM_ID,
+								PO_ID,
+								PO_GRADE,
+								HOPE_DEPARTMENT,
+								PO_END_DATE,
+								PO_PROFILE,
+								PO_TITLE,
+								PO_CONTENT,
+								CAREER
+							)
+		VALUES (
+		#{ com_id },
+		(SELECT NVL(MAX(PO_ID), 0) + 1 FROM POSTING),
+		#{ po_grade },
+		#{ hope_department },
+		#{ po_end_date },
+		#{ po_profile },
+		#{ po_title },
+		#{ po_content },
+		#{ career }
+		)
+
+	</insert>
+	
+	<insert id="insertApply">
+	
+	INSERT INTO APPLY	(
+						PO_ID,
+						RE_ID,
+						AP_ID
+						)
+				VALUES	(
+						1101,
+						#{ re_id },
+						(SELECT NVL(MAX(AP_ID), 0) + 1 FROM APPLY)
+						)
+						
+	
+	</insert>
+
+<!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+
+	<update id="updatePost">
+
+		UPDATE	POSTING
+		SET
+			COM_ID = #{ com_id },
+			PO_ID = #{ po_id },
+			PO_GRADE = #{ po_grade },
+			HOPE_DEPARTMENT = #{ hope_department },
+			PO_END_DATE = TO_DATE(#{po_end_date}, 'YYYY-MM-DD'),
+			PO_PROFILE = #{ po_profile },
+			PO_TITLE = #{ po_title },
+			PO_CONTENT = #{ po_content },
+			CAREER = #{ career }
+	WHERE PO_ID = #{ po_id }
+		
+
+	</update>
+	
+	<update id="updatePassResult">
+	
+	UPDATE  APPLY
+	   SET  RESULT = '합격'
+	 WHERE  AP_ID = #{ ap_id }
+	   
+	</update>
+	
+	<update id="updateFailResult">
+	
+	UPDATE  APPLY
+	   SET  RESULT = '불합격'
+	 WHERE  AP_ID = #{ ap_id }
+	   
+	</update>
+
+<!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+
+	<delete id="deletePost">
+
+		DELETE FROM POSTING
+		WHERE COM_ID = #{ com_id }
+		AND PO_ID = #{ po_id }
+
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

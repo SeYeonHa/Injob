@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.injob.bookmark.mapper.BookmarkMapper">
+
+
+	<select id="selectBookMark">
+		SELECT
+		    user_id,
+		    po_id,
+		    ub_boolean,
+		    ub_id
+		FROM
+		    user_bookmark
+		WHERE
+		    USER_ID =#{user_id}
+		AND 
+		    PO_ID = #{po_id}
+	
+	</select>
+	
+	<update id ="updateBookMark">
+		UPDATE user_bookmark
+		SET
+		    ub_boolean = 1
+		WHERE
+		    ub_id = #{ub_id}
+	
+	</update>
+	
+	<insert id="addBookMark">
+		INSERT INTO user_bookmark (
+		    user_id,
+		    po_id,
+		    ub_boolean,
+		    ub_id
+		) VALUES (
+		    #{user_id},
+		    #{po_id},
+		    1,
+		    NVL((SELECT MAX(ub_id) FROM USER_BOOKMARK), 0) + 1
+		)
+	</insert>
+	<update id ="deleteBookMark">
+		UPDATE user_bookmark
+		SET
+		    ub_boolean = 0
+		WHERE
+		    ub_id = #{ub_id}
+	</update>
+	
+	<select id = "getBookMarks">
+		SELECT 
+	    p.po_id,
+	    p.po_title,
+	    p.po_content,
+	    p.po_grade,
+	    p.career,
+	    p.po_end_date,
+	    c.com_name,
+	    c.com_type,
+	    c.com_address,
+	    ub.user_id,
+	    ub.ub_boolean,
+	    COUNT(*) OVER () AS total_count
+	FROM 
+	    posting p
+	INNER JOIN 
+	    company c ON p.com_id = c.com_id
+	INNER JOIN 
+	    user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
+	WHERE 
+	    ub.ub_boolean = 1
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

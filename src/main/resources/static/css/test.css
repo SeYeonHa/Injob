@@ -1,0 +1,212 @@
+.headerWrapper{
+	background-color: #fff;
+	
+}
+header {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  
+  
+  margin-bottom: 20px;
+}
+header .headerWrapper {
+	
+	position: relative;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+.inner {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+#gnb {
+  display: flex;
+}
+#gnb #logo {
+  height: 100px;
+  line-height: 100px;
+}
+#gnb #logo a {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  padding-left: 30px;
+}
+#logo a img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+#gnb .navbar {
+  display: flex;
+  margin-left: 30px;
+}
+#gnb .navbar li {
+  padding: 0 20px;
+  line-height: 100px;
+}
+#gnb .navbar li a {
+  font-size: 1.2rem;
+}
+.login-link{
+	position: absolute;
+	top: 38px;
+	right: 30px;
+	width: 200px;
+	height: 50px;
+	display: flex;
+	    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    
+}
+
+.login-link a:first-child{
+	color: inherit;
+	font-weight: bold;
+	width: 100%;
+}
+.login-link a:nth-child(2):before{
+	content: "";
+  position: absolute;
+  top: 2px;
+  left: -4px;
+  width: 1px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.login-link .logout{
+	display: flex;
+    align-items: center;
+    font-weight: 400;
+    line-height: 65px;
+    color: #6a6a6a;
+    font-size: 16px;
+    letter-spacing: 0;
+}
+.login-link .logout::before{
+	display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    content: "";
+    background-image: url(/img/person.svg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    -webkit-background-size: contain;
+    background-size: contain;
+	
+}
+.lyMyArea {
+    overflow: hidden;
+  /*   display: none; */
+  /*fsfd  */
+  /*fsfd  */
+
+    position: absolute;
+    top: 40px;
+    right: 9px;
+    z-index: 2;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 195px;
+    border: 1px solid #6a6a6a;
+    border-radius: 8px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+.myLists {
+    padding: 12px 0;
+    text-align: left;
+}
+.lyMyArea a {
+    display: block;
+    padding: 0 19px;
+    line-height: 28px;
+    color: #171717;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+.lyMyArea .lyRow {
+    border-top: 1px solid #e8e8e8;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-top: 200px;
+}
+footer .inner {
+  height: 100%;
+ 
+}
+footer .info {
+  background-color: #121212;
+  color: white;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  transform: translate(50%, 50%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .info .info_left {
+  margin-left: 50px;
+}
+footer .info .info_left p:nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+footer .info .info_right {
+  margin-right: 50px;
+}
+footer .info .info_right button {
+  width: 120px;
+  height: 44px;
+}
+
+footer .support {
+  padding-top: 70px;
+  display: flex;
+}
+footer .support li {
+  padding: 0 4px;
+  position: relative;
+  margin: 0 4px;
+}
+footer .support li:not(.first):before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: -4px;
+  width: 1px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.info_contents {
+  height: 300px;
+}
+dd,
+dt {
+  display: inline-block;
+  line-height: 14px;
+}
+
+.info_contents {
+  margin-top: 20px;
+}
+
+section {
+  width: 100%;
+ /*  height: 500px; */
+}
