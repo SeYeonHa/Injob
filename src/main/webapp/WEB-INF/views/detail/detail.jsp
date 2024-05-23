@@ -229,17 +229,12 @@ body {
 		    		<br>
 		    				<p>- 서류전형 > 1차면접 > 임원면접 > 최종합격</p>		
 		    				<p>- 면접일정은 추후 통보됩니다.</p>
-		    					
 		    		</div>
 		    		<br><br><br>
-
-
-		  
+		    		
 		  <div id="application" class="section">
 		    <div style="font-size: 17px; font-weight: bold">접수기간/방법</div>
 		    <p>
-		    
-		    
 		    	<div class="grid-container3">
 			  <div class="item11">
 			  	<div id="remainingTime"></div>
@@ -263,9 +258,7 @@ body {
 			        <div style="font-weight: bold; font-weight: left; ">${posting.po_end_date}</div>
 						</div>
 					</div>	
-		 		  
-		 		  
-		 		  
+
 			  	<br>
 			  	<div style="color:lightgrey; font-size: 15px;">채용 시 마감</div>
 			  </div>
@@ -299,7 +292,7 @@ body {
 		  </div>
 		    </p>
 		  </div>
-		  
+		  <br><br><br>
 		  
 		  <div id="company-info" class="section">
 		  	<div style="display: flex;">
@@ -308,7 +301,7 @@ body {
     			<div><a href="/Detail/ComInfo?com_id=${posting.com_id}
     				" style="font-size: 13px;">0개의 채용공고 진행중&nbsp;&nbsp;></a></div>
 		    </div>
-		    
+		 
 		    <p>
 		    	<div class="grid-container3">
 			  <div class="item11">
