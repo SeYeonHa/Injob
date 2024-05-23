@@ -426,9 +426,21 @@ border-bottom: none;
 .mtuHome .ai-recommendations-list .recruit-apply .deadline {
 	margin-top: 8px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 18px;
 	color: #6a6a6a;
+}
+.mtuHome .ai-recommendations-list .recruit-apply .deadline.score{
+	
+	color: red;
+	font-size: 16px;
+	width: 50px;
+	height: 50px;
+	border: 1px solid red;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .mtuHome .ai-recommendations-list .recruit-apply {
@@ -440,6 +452,9 @@ border-bottom: none;
 
 .mtuHome .ai-recommendations-list .recruit-apply-wrap {
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .mtuHome .tab_content .tab_panel{

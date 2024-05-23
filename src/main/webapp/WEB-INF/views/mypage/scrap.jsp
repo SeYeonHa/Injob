@@ -35,20 +35,26 @@ body{
 	position: absolute;
 	left: 15px;
 	top: 30px;
+	
 }
-
+.my-content-top .my-profile-wrap #resumePerEl{
+   text-decoration: underline;
+   color: blue;;
+   margin-top: 10px;
+   display: inline-block;
+}
 .my-profile {
 	position: relative;
 }
 
 .my-profile .pie-chart {
-	background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%,
-		rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%);
+	/* background: conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) 70%,
+		rgb(244, 244, 244) 20%, rgb(244, 244, 244) 100%); */
 	position: relative;
 	width: 110px;
 	height: 110px;
 	border-radius: 50%;
-	transition: 0.3s;
+	transition: background 3s ease;
 }
 
 .my-profile .profile-img {
@@ -122,6 +128,7 @@ body{
 .user-status-title {
 	display: flex;
 	align-items: baseline;
+	justify-content: space-between;
 }
 
 .user-status-title h1 {
@@ -147,13 +154,7 @@ body{
 	box-sizing: border-box;
 }
 
-.my-status-wrap .my-status-box .status a {
-	display: flex;
-	align-items: center;
-	font-weight: bold;
-	color: #222222;
-	padding-right: 15px;
-}
+
 
 .my-status-wrap .my-status-list {
 	display: flex;
@@ -188,11 +189,10 @@ body{
 }
 
 .my-status-wrap .my-status-box .status a {
-	display: flex;
-	align-items: center;
+	
 	font-weight: bold;
 	color: #222222;
-	padding-right: 15px;
+	padding-right: 20px;
 }
 
 .mtuHome {
@@ -665,6 +665,18 @@ label {
     letter-spacing: 0px;
     color: #fff;
 }
+#select_resume{
+ width: 140px;
+ margin-right: 8px;
+ height: 30px;
+ line-height: 40px;
+ font-size: 18px;
+ padding: 5px;
+ box-sizing: border-box;
+}
+#select_resume option{
+
+}
 </style>
 </head>
 <body>
@@ -748,6 +760,7 @@ label {
 												</div>
 												<button class="profile-btn" type="button"></button>
 											</div>
+											<a id="resumePerEl" href="#">이력서 50% 완성</a>
 										</div>
 										<!-- my-profile-wrap -->
 										<div class="my-info-wrap">
@@ -758,14 +771,18 @@ label {
 												<!-- my-status-top이력서posion -->
 												<div class="user-status-title">
 													<h1>
-														<span>구덕고등학교</span>에서 공부했어요
+														<span id="school_name">구덕고등학교</span>
 													</h1>
+													<select title="1번이력서" id="select_resume" class="select_resume">
+												        <c:forEach var="resume" items="${resumeList}" varStatus="status">
+												            <option value="${status.index + 1}">${status.index + 1}번이력서</option>
+												        </c:forEach>
+												    </select>
 												</div>
 												<div class="my-status-box">
 													<p class="status">
-														<a href="/User/Resume/Write" target="_blank"> 구덕고등학교
-															졸업 > </a>
-													</p>
+														<a href="/User/Resume/Write" target="_blank"> 구덕고등학교졸업 > </a>
+													</p>	
 												</div>
 												<div class="my-status-list">
 													<h5 class="list-title">보유스킬</h5>
@@ -1019,21 +1036,25 @@ label {
                     
                   </div>
                   <div class="popup-header">
-                      <h2 class="title">원하시는 기업의 규모를 선택해주세요</h2>
-                      <p class="text">최대 5개 선택 가능</p>
+                      <h2 class="title">원하시는 복지를 선택해주세요</h2>
+                      <p class="text">질문지를 받아 좋은 기업을 추천해 드려요</p>
                    </div>
                    <div class="popup-body">
-                     <ul class="category-list" id="comType">
+                     <ul class="category-list" id="welfare">
                        <li class="category-list-item">
-                      <input type="checkbox" data-code="대기업" data-type="com_type" >
-                      <label for="1st-list-item1" >대기업</label>
+                      <input type="checkbox" data-code="4대 보험" data-type="welfare" >
+                      <label for="1st-list-item1" >4대 보험</label>
                     </li>
                     <li class="category-list-item q1">
-                      <input type="checkbox"  data-code="중소기업" data-type="com_type" >
-                      <label for="1st-list-item2" >중소기업</label></li>
+                      <input type="checkbox"  data-code="식사 제공" data-type="welfare" >
+                      <label for="1st-list-item2" >식사 제공</label></li>
                     <li class="category-list-item q1">
-                      <input type="checkbox"  data-code="중견기업" data-type="com_type" >
-                      <label>중견기업</label>
+                      <input type="checkbox"  data-code="교통비 지원" data-type="welfare" >
+                      <label>교통비 지원</label>
+                    </li> 
+                    <li class="category-list-item q1">
+                      <input type="checkbox"  data-code="커피 제공" data-type="welfare" >
+                      <label>커피 제공</label>
                     </li>          
                    </ul>            
                 </div>
@@ -1042,31 +1063,31 @@ label {
                   </div>
                   <div class="popup-header">
                       <h2 class="title">원하시는 연봉을 선택해주세요</h2>
-                      <p class="text">최대 5개 선택 가능</p>
+                      <p class="text">눈치 보지 말고 원하시는 금액을 적어주세요</p>
                    </div>
                    <div class="popup-body">
                      <ul class="category-list" id="salary">
                        <li class="category-list-item">
-                      <input type="checkbox"  data-code="2500" data-type="com_type" >
+                      <input type="checkbox"  data-code="2500" data-type="salary" >
                       <label >2500이상</label>
                     </li>
                     <li class="category-list-item q2">
-                      <input type="checkbox"  data-code="3000" data-type="com_type" >
+                      <input type="checkbox"  data-code="3000" data-type="salary" >
                       <label for="1st-list-item2" >3000이상</label></li>
                     <li class="category-list-item q2">
-                      <input type="checkbox"  data-code="3500" data-type="com_type" >
+                      <input type="checkbox"  data-code="3500" data-type="salary" >
                       <label >3500이상</label>
                     </li>
                     <li class="category-list-item q2">
-                      <input type="checkbox"  data-code="4000" data-type="com_type" >
+                      <input type="checkbox"  data-code="4000" data-type="salary" >
                       <label  >4000이상</label>
                     </li>  
                     <li class="category-list-item q2">
-                      <input type="checkbox"  data-code="4500" data-type="com_type" >
+                      <input type="checkbox"  data-code="4500" data-type="salary" >
                       <label  >4500이상</label>
                     </li>  
                     <li class="category-list-item q2">
-                      <input type="checkbox"  data-code="5000" data-type="com_type" >
+                      <input type="checkbox"  data-code="5000" data-type="salary" >
                       <label  >5000이상</label>
                     </li>          
                    </ul>            
@@ -1075,46 +1096,46 @@ label {
                     
                   </div>
                   <div class="popup-header">
-                      <h2 class="title">원하시는 근무 지역을 선택해주세요</h2>
-                      <p class="text">최대 5개 선택 가능</p>
+                      <h2 class="title">원하시는 근무 지역을 선택해 주세요</h2>
+                      <p class="text">근무지가 가까우면 능률이 오릅니다.</p>
                    </div>
                    <div class="popup-body">
                      <ul class="category-list" id="region">
                        <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item1" data-code="1" data-type="listPr" class="input-checkbox question-checkbox">
+                      <input type="checkbox"  data-code="서울" data-type="location" >
                       <label for="1st-list-item1" >서울</label>
                     </li>
                     <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item2" data-code="2" data-type="listPr" class="input-checkbox question-checkbox">
+                      <input type="checkbox"  data-code="경기" data-type="location" >
                       <label for="1st-list-item2" >경기</label></li>
                     <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item3" data-code="3" data-type="listPr" class="input-checkbox question-checkbox">
+                      <input type="checkbox"  data-code="인천" data-type="location" >
                       <label for="1st-list-item3" >인천</label>
                     </li>
                     <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item4" data-code="4" data-type="listPr" class="input-checkbox question-checkbox">
+                      <input type="checkbox"  data-code="대구" data-type="location" >
                       <label for="1st-list-item4" >대구</label>
                     </li>
                     <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item5" data-code="5" data-type="listPr" class="input-checkbox question-checkbox">
+                      <input type="checkbox"  data-code="부산" data-type="location" >
                       <label for="1st-list-item5" >부산</label>
                     </li>
                     <li class="category-list-item">
-                      <input type="checkbox" id="1st-list-item6" data-code="6" data-type="listPr" class="input-checkbox question-checkbox">
+                      <input type="checkbox" data-code="제주" data-type="location" >
                       <label for="1st-list-item6" >제주</label>
                     </li>
                    </ul>            
                 </div>
                 <div class="popup-header">
                       <h2 class="title">순위를 정해주세요</h2>
-                      <p class="text">쉰위에 따른 점수를 부과하여 더 좋은 기업을 추천해드려요</p>
+                      <p class="text">순위에 따른 점수를 부과하여 더 좋은 기업을 추천해 드려요</p>
                       
                 </div>
                 <div class="popup-body rankpup">
                    <div class="rank-selection">
                     <label for="priority1" class="rank-label">1순위</label>
                     <select id="priority1" class="priority-select">
-                        <option value="company-size">기업규모</option>
+                        <option value="welfare">복지</option>
                         <option value="salary">연봉</option>
                         <option value="location">근무지역</option>
                     </select>
@@ -1122,7 +1143,7 @@ label {
                 <div class="rank-selection">
                     <label for="priority2" class="rank-label">2순위</label>
                     <select id="priority2" class="priority-select">
-                        <option value="company-size">기업규모</option>
+                        <option value="welfare">복지</option>
                         <option value="salary">연봉</option>
                         <option value="location">근무지역</option>
                     </select>
@@ -1130,7 +1151,7 @@ label {
                 <div class="rank-selection">
                     <label for="priority3" class="rank-label">3순위</label>
                     <select id="priority3" class="priority-select">
-                        <option value="company-size">기업규모</option>
+                        <option value="welfare">복지</option>
                         <option value="salary">연봉</option>
                         <option value="location">근무지역</option>
                     </select>
@@ -1150,9 +1171,103 @@ label {
 		<script
 			src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script>
-		
+		 // JSP에서 resumeList를 JavaScript로 전달
+        var resumeList = ${resumeListJson};
+        var resumePercent =0;
+
+        function updateResumePercent(percent) {
+            // 맨 처음에 percent 값을 resumePercent에 할당
+            var resumePercent = percent;
+
+            var persentEl = document.querySelector('#resumePerEl');
+            persentEl.textContent = "이력서 " + resumePercent + "% 완성";
+
+            // pie-chart의 배경색을 업데이트
+            var pieChart = document.querySelector('.my-profile .pie-chart');
+
+            // 변경된 값만 업데이트합니다.
+            pieChart.style.background = `conic-gradient(rgb(0, 42, 255) 0%, rgb(0, 42, 255) \${resumePercent}%, rgb(244, 244, 244) \${resumePercent}%, rgb(244, 244, 244) 100%)`;
+        }
+        
+        
+        // 학교 이름 배열을 업데이트하는 함수
+        function updateSchoolNames(selectedIndex ,qus = false) {
+        	resumePercent =0;
+        	if(qus === true){
+        		console.log("증가함");
+        		resumePercent +=20;
+        	}
+        	const profileImgElement =  document.querySelector('.my-profile .profile-img');
+        	const imageURL = resumeList[selectedIndex].re_profile;
+            if (imageURL) {
+                profileImgElement.style.backgroundImage = `url('/img/\${imageURL}')`;
+                profileImgElement.style.backgroundSize = 'cover';
+                resumePercent +=20
+            }else{
+            	 profileImgElement.style.backgroundImage = "url('/img/man-profil.png')";
+            	 profileImgElement.style.backgroundSize = 'contain';
+            }
+        	
+        	
+        	
+        	
+            const schoolNames = resumeList[selectedIndex].schoolNameArray.slice().reverse();
+            const statusElement = document.querySelector(".status");
+            const schoolNameElement = document.querySelector("#school_name");
+            
+            // 역순 배열의 마지막 값을 school_name 요소에 설정
+            if (schoolNames.length > 0) {
+                schoolNameElement.textContent = schoolNames[schoolNames.length - 1]+"에서 공부했어요";
+                resumePercent += 20; // 학교가 있을 경우 resumePercent에 20 추가
+            } else {
+            	schoolNameElement.textContent = "졸업한 학교를 등록해주세요";
+            }
+            // 학교 이름 배열을 문자열로 변환하여 <p> 요소에 설정
+            statusElement.innerHTML = '';
+            if (schoolNames  && schoolNames.length > 0) {
+            for (var i = 0; i < schoolNames.length; i++) {
+                var school = document.createElement('a');
+                school.href = "/User/Resume/Write";
+                school.target = "_blank";
+                school.textContent = schoolNames[i] + " 졸업 >";
+                statusElement.appendChild(school);
+             
+              } 
+            resumePercent += 20; // 학교가 있을 경우 resumePercent에 20 추가
+            }
+        // 기술 스택 업데이트
+        var stacks = resumeList[selectedIndex].schoolStackArray;
+        var stackListElement = document.querySelector(".skill-list");
+        if (stacks && stacks.length > 0) {
+        stackListElement.innerHTML = ''; // 기존 리스트 초기화
+        for (var i = 0; i < stacks.length; i++) {
+            var stackItem = document.createElement('li');
+            stackItem.textContent = stacks[i];
+            stackListElement.appendChild(stackItem);
+          }
+        resumePercent += 20; // 스택이 있을 경우 resumePercent에 20 추가
+        }
+        console.log(resumePercent);
+     // updateResumePercent 함수가 호출되면서 일정한 시간 간격으로 percent가 증가하도록 설정합니다.
+     // 이를 위해 setInterval 함수를 사용할 수 있습니다.
+	     var percent = 0;
+	     var interval = setInterval(function() {
+	         updateResumePercent(percent);
+	         percent += 1; // 증가하는 속도를 조절할 수 있습니다.
+	         if (percent > resumePercent) clearInterval(interval); // resumePercent에 도달하면 interval을 종료합니다.
+	     }, 20);
+    }
+       let qus = false;
+       
 		document.addEventListener('DOMContentLoaded', function() {
-			
+			    updateSchoolNames(0);
+			    let selectedIndex=0;
+	            // 선택 이벤트 리스너 추가
+	            document.getElementById("select_resume").addEventListener("change", function() {
+	                 selectedIndex = this.selectedIndex;
+	                updateSchoolNames(selectedIndex);
+	                
+	            });
 			
 	        
 	     // Get the modal elements
@@ -1181,7 +1296,7 @@ label {
 	               }
 	           });
 	         
-	           var firstListItems = document.querySelectorAll('#comType li');
+	           var firstListItems = document.querySelectorAll('#welfare li');
 
 	           firstListItems.forEach(function(item) {
 	               item.addEventListener('click', function() {
@@ -1218,7 +1333,110 @@ label {
 	                   item.classList.add('on');
 	               });
 	           });
-	        
+	           
+	           /*  */
+	        var selectedItems = {};
+
+// 저장하기 버튼 클릭 시 선택된 항목을 출력
+document.getElementById('QuestionSave').addEventListener('click', function() {
+    // 각 순위 선택에 대한 처리
+    var priority1 = document.getElementById('priority1').value;
+    var priority2 = document.getElementById('priority2').value;
+    var priority3 = document.getElementById('priority3').value;
+
+    // 각 카테고리 리스트에 대한 처리
+    var categoryLists = document.querySelectorAll('.category-list');
+    categoryLists.forEach(function(list) {
+        var selectedLi = list.querySelector('li.on'); // 선택된 LI 요소 찾기
+        if (selectedLi) {
+            var code = selectedLi.querySelector('input').getAttribute('data-code'); // 선택된 LI의 data-code 값 가져오기
+            var type = selectedLi.querySelector('input').getAttribute('data-type'); // 선택된 LI의 data-type 값 가져오기
+            selectedItems[type] = code; // 객체에 저장
+        }
+    });
+
+    // 순위에 대한 객체에 저장
+    selectedItems['priority1'] = priority1;
+    selectedItems['priority2'] = priority2;
+    selectedItems['priority3'] = priority3;
+
+    
+    console.log(selectedItems);
+    RankUpdate(selectedItems);
+    qus = true;
+    updateSchoolNames(selectedIndex, qus);
+    modalBackground.style.display = 'none'; // Hide the modal
+    document.body.classList.remove('modal-open'); // Allow background interaction
+    
+});
+function RankUpdate(){
+	fetch(`/Mypage/Rank`,{
+		method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(selectedItems)
+		
+	}).then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to toggle bookmark');
+        }
+        return response.json(); 
+        
+    }).then(data => {
+    	console.log(data);
+    	displayPowerData(data)
+    	
+    }).catch(error => console.error('Error toggling bookmark:', error));
+		
+}
+
+function displayPowerData(data) {
+    const bookmarkPanel = document.querySelector('#AI_panel .ai-recommendations-list ul');
+    console.log(bookmarkPanel);
+    bookmarkPanel.innerHTML = ''; // 기존 내용을 초기화합니다.
+
+    data.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <input type="hidden" class="posting_id" value="\${item.po_id}">
+            <div class="recruit-content">
+                <div class="congratulations-passing">
+                    <span>합격축하금 100만원</span>
+                </div>
+                <div class="company">
+                    <a class="company" href="#" target="_blank">
+                        <div class="name">${item.com_name}</div>
+                    </a>
+                </div>
+                <div class="headers">
+                    <a href="#" target="_blank" class="title">\${item.po_title} Backend 개발자</a>
+                    <button type="button" class="bookmark \${item.ub_boolean ? 'On' : ''}"></button>
+                </div>
+                <a class="devLinkRecruit" href="#" target="_blank">
+                    <div class="recruitment">
+                        <div class="item">\${item.po_grade} 초대졸↑</div>
+                        <div class="item">\${item.career} 경력8년↑</div>
+                        <div class="item">\${item.com_address} 서울 &gt; 강서구</div>
+                    </div>
+                    <div class="job">\${item.po_content} 백엔드개발자</div>
+                </a>
+            </div>
+            <div class="recruit-apply">
+                <div class="recruit-apply-wrap">
+                    <button type="button" class="tplBtn tplBtn_1">
+                        <span>즉시지원</span>
+                    </button>
+                    <div class="deadline score">
+                        <span>\${item.score}</span>
+                        
+                    </div>
+                </div>
+            </div>
+        `;
+        bookmarkPanel.appendChild(li);
+    });
+}
 			
 			/*--------------- 스와이퍼 --------------------------------*/
 			

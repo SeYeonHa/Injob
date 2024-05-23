@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.injob.bookmark.mapper.BookmarkMapper;
 import com.injob.bookmark.service.GetbookmarkService;
 
@@ -32,6 +34,7 @@ import com.injob.login.mapper.LoginMapper;
 import com.injob.login.service.LoginService;
 import com.injob.login.service.UserService;
 import com.injob.mypage.domain.AiRecommend;
+import com.injob.mypage.domain.MyResumeReset;
 import com.injob.mypage.domain.ResumeVo;
 import com.injob.mypage.mapper.MypageMapper;
 import com.injob.mypage.service.KoreanDayOfWeekConverter;
@@ -112,7 +115,7 @@ public class Mypage2Controller {
 		
 	}
 	@GetMapping("/User/Scrap") // 이거 나중에 합치고 /Mypage 압에 넣고 하기  jsp도 너무 따로따로임
-	public ModelAndView getScrap(HttpServletRequest request, HttpSession session) {
+	public ModelAndView getScrap(HttpServletRequest request, HttpSession session) throws JsonProcessingException {
 		Long userId = (Long) session.getAttribute("userId");
 		UserVo userVo = loginMapper.idLogin(userId);
 		
@@ -153,11 +156,33 @@ public class Mypage2Controller {
 		 }else {
 			  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
 		}
+		//사이드 쿠키
 		 
-	    //사이드 쿠키
+		 List<MyResumeReset> resumeList = mypageMapper.getResume(userId);
+         
+		 System.out.println(resumeList);
+		 
+		 for (MyResumeReset resume : resumeList) {
+			if(resume.getSchool_names() != null) {
+				resume.setSchoolNameArray(resume.getSchool_names().split(","));
+			}else {
+				resume.setSchoolNameArray(new String[0]);
+			}
+		
+		    if (resume.getStack() != null) {
+                resume.setSchoolStackArray(resume.getStack().split(","));
+            } else {
+                resume.setSchoolStackArray(new String[0]);
+            }
+		}
+		 ObjectMapper objectMapper = new ObjectMapper();
+		 String resumeListJson = objectMapper.writeValueAsString(resumeList);
+		    
+	    
 	   
 		ModelAndView mv = new ModelAndView();
-		
+		mv.addObject("resumeList",resumeList);
+		mv.addObject("resumeListJson", resumeListJson);
 		mv.addObject("aiList", aiList);
 		mv.addObject("user", userVo);
 		mv.addObject("recentCookies", recentCookies);
