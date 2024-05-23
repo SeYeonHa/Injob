@@ -30,4 +30,7 @@ public class PostCompVo {
 	private String employee;
 	private String com_ceo;
 	
+	private String bglogo;
+	private String stock;
+	private String page;
 }

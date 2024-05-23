@@ -211,17 +211,6 @@ public class MypageController {
 	@RequestMapping("/ResumeSubmit")
 	public ModelAndView getResumeSubmit(ResumeVo resumeVo, HttpSession session, HttpServletRequest request) {
 
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-		System.out.println("-----------11111111111-------------------");
-			System.out.println(resumeVo);
-			System.out.println("-------------11111111111-----------------");
-			
-			
-			
 		//--------------------------------------------------------------------------
 				//ㅇㄴㄹㅇㄴㄹ
 				Long userId = (Long) session.getAttribute("userId");
@@ -314,7 +303,12 @@ public class MypageController {
 
 		List<ResumeVo> list = mypageMapper.selectResumeList2(resumeVo);
 
+		List<ResumeVo> school = mypageMapper.selectSchool(resumeVo);
+		List<ResumeVo> skill  = mypageMapper.selectSkill(resumeVo);
+
 		mv.addObject("list", list);
+		mv.addObject("school", school);
+		mv.addObject("skill", skill);
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
 		mv.setViewName("mypage/resumeUpdate");
@@ -351,7 +345,54 @@ public class MypageController {
 
 		ModelAndView mv = new ModelAndView();
 
+		Long re_id = resumeVo.getRe_id();
 		mypageMapper.updateResume(resumeVo);
+		
+		/*
+
+		// SCHOOL
+		String[] splitSchoolName = resumeVo.getSchool_name().split(",");
+		String[] splitSchoolType = resumeVo.getSchool_type().split(",");
+
+		if (resumeVo.getSchool_id() == null) {
+			
+			
+		    for (int i = 0; i < splitSchoolName.length; i++) {
+		        resumeVo.setSchool_name(splitSchoolName[i]);
+		        resumeVo.setSchool_type(splitSchoolType[i]);
+		        // 새로운 school_id를 생성하여 설정합니다.
+		        Long newSchoolId = mypageMapper.getNewSchoolId(re_id);
+		        resumeVo.setSchool_id(newSchoolId);
+		        mypageMapper.insertSchool(resumeVo);
+		    }
+		} else {
+		    for (int i = 0; i < splitSchoolName.length; i++) {
+		        resumeVo.setSchool_name(splitSchoolName[i]);
+		        resumeVo.setSchool_type(splitSchoolType[i]);
+		        mypageMapper.updateSchool(resumeVo);
+		    }
+		}
+
+		// SKILL (RESUME_STACK)
+		String[] splitStack = resumeVo.getStack_name().split(",");
+
+		if (resumeVo.getRe_stack_id() == null) {
+		    for (String skill : splitStack) {
+		        resumeVo.setStack_name(skill);
+		        // 새로운 re_stack_id를 생성하여 설정합니다.
+		        Long newReStackId = mypageMapper.getNewReStackId(re_id);
+		        resumeVo.setRe_stack_id(newReStackId);
+		        mypageMapper.insertSkill(resumeVo);
+		    }
+		} else {
+		    for (String skill : splitStack) {
+		        resumeVo.setStack_name(skill);
+		        mypageMapper.updateSkill(resumeVo);
+		    }
+		}s
+		*/
+		
+		
 		mv.addObject("user_id", userId);
 		mv.addObject("user", userVo);
 	    return "redirect:/Mypage/Resume?nowpage=1";

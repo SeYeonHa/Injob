@@ -21,14 +21,27 @@
 
 
 <style>
-.skill-box {
-            display: inline-block;
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
+.skill-container {
+		display: flex;
+		width : 30px;
+		gap: 20px; /* 버튼 사이 간격 조정 */
+		margin : 10px;
+	}
+	.skill-button {
+		flex: 1 1 calc(25% - 20px);
+		height: 3em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color : white;
+		background-color: #3CC35E;
+		border: 1px solid #ccc;
+		transition: background-color 0.3s;
+		font-weight: bold;
+		padding: 0 10px;
+    min-width: 220px;
+	}
+
 </style>
 </head>
 <body>
@@ -45,22 +58,22 @@
 				<div class="box-contents">
 					<div class="mtuHome">
 					   <%@include file="/WEB-INF/include/aside.jsp"%>
-					   <div class="contWrap">
+					   <div class="contWrap" style="padding : 10px; border : 5px ridge; ">
 						<c:forEach var="list" items="${list}">
 							<div style="display: flex; flex-direction: column;">
 								<div style="margin-bottom: 20px;">
-									<h2 class="mar-10">이력서 제목 : ${ list.re_title }</h2>
+									<h4 class="mar-10">이력서 제목 : ${ list.re_title }</h4>
 									<hr>
 								</div>
 								<div
 									style="display: flex; flex-direction: row; align-items: flex-start;">
 									<div style="margin-right: 20px;">
 										<img src="/img/${list.re_profile}" class="img-box"
-											style="width: 220px; height: 230px;">
+											style="width: 220px; height: 230px;border : 5px ridge;">
 									</div>
 									<div>
 										<table class="jh_resume_table"
-											style="width: auto; height: 230px; table-layout: fixed;">
+											style="width: auto; height: 230px; table-layout: fixed; border : 5px ridge ; ">
 											<colgroup>
 												<col style="width: 25%;">
 												<col style="width: 75%;">
@@ -87,27 +100,27 @@
 								</div>
 								
 								<!-- 기술 스택 및 자격증 -->
-								<span>자격증 &nbsp | &nbsp ${
+								<span style="margin : 20px 10px; font-size: large; border : 1px dotted; padding : 10px;">자격증 &nbsp | &nbsp ${
 										list.license }</span>
 								</div>
 								
 								<!--  학력 세부사항  -->
-								<div class="mt-5">
+								
 									<div id="inputContainer">
 									<!-- 학력 세부사항 -->
-									<div class="mt-5">
+									<div >
 										<h3 class="mar-10">학력 세부사항</h3>
 										<div id="inputContainer">
 											<c:forEach var="school" items="${school}">
-												<div class="input-group">
-													<span>${school.school_name}
-														(${school.school_type})</span>
+												<div class="input-group" >
+													<span style="border : 1px dotted; padding : 10px; margin-left : 10px; font-size: large;">
+													${school.school_name}${school.school_type}</span>
 												</div>
 											</c:forEach>
 										</div>
 									</div>
 									<!-- 스킬 -->
-									<div class="mt-5">
+									<div >
 										<h3 class="mar-10">기술 스택</h3>
 										<div class="skill-container">
 											<c:forEach var="skill" items="${skill}">
@@ -119,13 +132,13 @@
 
 
 									<!-- 자기소개서 제목 -->
-								<div class="mt-5">
-									<h3 class="mar-10">자기소개서 제목</h3>
+								<div >
+									<h3 class="mar-10">지원 동기</h3>
 									<input type="text" class="form-control mt-2" id="floatingInput"
 										placeholder="제목을 입력하세요" value="${ list.re_intti }" readonly>
 								</div>
 								<!-- 자기 소개 -->
-								<div class="mt-5 w-100">
+								<div class=" w-100">
 									<h3 class="mar-10">자기소개</h3>
 								</div>
 									<textarea value="${list.re_intcon}" class="w-100 opacity-50"
@@ -150,7 +163,7 @@
 										목록으로</button>
 										
 								</div>
-                              </div>
+                              
 							</div>
 						</c:forEach>
 					</div>

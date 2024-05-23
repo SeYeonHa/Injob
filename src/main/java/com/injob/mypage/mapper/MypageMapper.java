@@ -45,10 +45,13 @@ public interface MypageMapper {
 
 	Long selectMaxRe(ResumeVo resumeVo);
 
+
 	List<MyResumeReset> getResume(Long userId);
 
 	List<PowerRecommend> getPowerMapper(Long userId);
 
+
+ develop
 	void updateSchool(ResumeVo resumeVo);
 
 	void updateSkill(ResumeVo resumeVo);

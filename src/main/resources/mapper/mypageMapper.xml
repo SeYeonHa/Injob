@@ -181,6 +181,8 @@
 	</insert>
 	
 	
+	
+	
 	<!--  -->
 	
 	<insert id="insertSkill">
@@ -230,6 +232,27 @@
 		LICENSE = #{ license }
 		WHERE USER_ID = #{ user_id }
 		AND RE_ID = #{ re_id }
+
+	</update>
+	<update id="updateSchool">
+
+		UPDATE
+		SCHOOL
+		SET
+		SCHOOL_NAME = #{ school_name },
+		SCHOOL_TYPE = #{ school_type }		
+		WHERE RE_ID = #{ re_id }
+		AND SCHOOL_ID = #{ school_id }
+
+	</update>
+	<update id="updateSkill">
+
+		UPDATE
+		RESUME_STACK
+		SET
+		STACK_NAME = #{ stack_name }	
+		WHERE RE_ID = #{ re_id }
+		AND RE_STACK_ID = #{ re_stack_id }
 
 	</update>
 
