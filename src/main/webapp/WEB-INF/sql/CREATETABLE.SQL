@@ -1,0 +1,37 @@
+CREATE TABLE "USERS" (
+   "USER_NAME" varchar2(255) NOT NULL,
+   "USER_PASSWD" varchar2(255) NOT NULL,
+   "USER_EMAIL" varchar2(255) NOT NULL,
+   "USER_ADDRESS" varchar2(255) NOT NULL,
+   "USER_PHONE" varchar2(255) NOT NULL,
+   "USER_ID" number(10,0),
+   "USER_SOCIAL_NUM" varchar2(255) NOT NULL,
+   "INDATE" date DEFAULT SYSDATE NOT NULL ,
+   "USER_GENDER" varchar2(255) NOT NULL,
+   PRIMARY KEY ("USER_ID")
+);
+ALTER TABLE USERS
+ADD role VARCHAR2(10) DEFAULT 'ROLE_USER' NOT NULL;
+
+INSERT INTO USERS (
+    USER_NAME,
+    USER_PASSWD,
+    USER_EMAIL,
+    USER_ADDRESS,
+    USER_PHONE,
+    USER_ID,
+    USER_SOCIAL_NUM,
+    USER_GENDER,
+    role
+)
+SELECT
+    '강재영',
+    'shin1234',
+    'wodud6967@naver.com',
+    '부산시 금정구',
+    '010-9498-9592',
+    NVL(MAX(USER_ID), 0) + 1,  -- 기존 최대 USER_ID 값에 1을 더합니다.
+    '971224-1121684',
+    'M',
+    'ROLE_USER'
+FROM USERS;

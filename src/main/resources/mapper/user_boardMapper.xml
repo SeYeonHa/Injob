@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.injob.community.mapper.User_boardMapper">  
+
+    <select id="getUser_boardList" resultType="com.injob.community.domain.User_boardVo">
+        SELECT
+            user_id,
+            title,
+            content,
+            hit,
+            TO_CHAR(indate, 'YYYY-MM-DD') AS indate,
+            board_id,
+            board_boolean,
+            board_like
+        FROM
+            user_board
+        ORDER BY board_id DESC
+    </select>
+
+    <update id="incHit">
+        UPDATE user_board
+        SET
+        hit = NVL((SELECT MAX(hit) FROM user_board WHERE board_id = #{board_id}), 0) + 1
+        WHERE
+        board_id = #{board_id}
+    </update>
+
+    <select id="getUser_board" resultType="com.injob.community.domain.User_boardVo">
+        SELECT
+            user_id,
+            title,
+            content,
+            hit,
+            TO_CHAR(indate, 'YYYY-MM-DD') AS indate,
+            board_id,
+            board_boolean,
+            board_like
+        FROM
+            user_board
+        WHERE board_id = #{board_id}
+    </select>
+
+    <insert id="insertUser_board" parameterType="com.injob.community.domain.User_boardVo">
+        INSERT INTO user_board (
+            board_id,
+            title,
+            content,
+            user_id,
+            indate,
+            hit
+        )
+        VALUES (
+            (SELECT NVL(MAX(board_id),0)+1 FROM user_board),
+            #{title},
+            #{content},
+            #{user_id},
+            sysdate,
+            0
+        )
+    </insert>
+    
+    <update id="updateUser_board" parameterType="com.injob.community.domain.User_boardVo">
+       
+                UPDATE user_board
+        SET
+        title = #{title},
+        content = #{content}
+        WHERE
+        board_id = #{board_id}
+    </update>
+    
+    <delete id="deleteUser_board" >
+        DELETE FROM user_board
+        WHERE board_id = #{board_id}
+    </delete>
+
+</mapper>
+        
