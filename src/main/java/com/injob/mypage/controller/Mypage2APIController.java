@@ -30,114 +30,130 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class Mypage2APIController {
-	@Autowired
-	private MypageMapper mypageMapper;
-	
-	@Autowired 
-	private GetcookieService getcookieService;
+   @Autowired
+   private MypageMapper mypageMapper;
+   
+   @Autowired 
+   private GetcookieService getcookieService;
 
-	@GetMapping("/Mypage/CookDatas/Load")
-	public ResponseEntity<List<AiRecommend>> CookLoad(HttpServletRequest request){
-		 List<Long> recentlyViewedPosting = new ArrayList<>();
-		 
-		 recentlyViewedPosting = getcookieService.getRecentCookie(request);
-		 
-		 List<AiRecommend> mypagePostingCookie = mypageMapper.getPostingCookie(recentlyViewedPosting);
-		 for (AiRecommend aiRecommend : mypagePostingCookie) {
-			System.out.println(aiRecommend);
-		}
-		
-		return new ResponseEntity<>(mypagePostingCookie, HttpStatus.OK);
-	}
-	    	    
-	@PostMapping("/Mypage/Rank")
-	public ResponseEntity<List<PowerRecommend>> RankLoad(@RequestBody SelectedItemVo request, HttpSession session) {
-	    Long userId = (Long) session.getAttribute("userId");
-	    List<PowerRecommend> powerList = mypageMapper.getPowerMapper(userId);
+   @GetMapping("/Mypage/CookDatas/Load")
+   public ResponseEntity<List<AiRecommend>> CookLoad(HttpServletRequest request){
+       List<Long> recentlyViewedPosting = new ArrayList<>();
+       
+       recentlyViewedPosting = getcookieService.getRecentCookie(request);
+       
+       List<AiRecommend> mypagePostingCookie = mypageMapper.getPostingCookie(recentlyViewedPosting);
+       for (AiRecommend aiRecommend : mypagePostingCookie) {
+         System.out.println(aiRecommend);
+      }
+      
+      return new ResponseEntity<>(mypagePostingCookie, HttpStatus.OK);
+   }
+              
+   @PostMapping("/Mypage/Rank")
+   public ResponseEntity<List<PowerRecommend>> RankLoad(@RequestBody SelectedItemVo request, HttpSession session) {
+       Long userId = (Long) session.getAttribute("userId");
+       List<PowerRecommend> powerList = mypageMapper.getPowerMapper(userId);
 
-	    for (PowerRecommend item : powerList) {
-	        int score = 0;
+       System.out.println(request);
+       System.out.println(request);
+       System.out.println(request);
+       System.out.println(request);
+       for (PowerRecommend item : powerList) {
+           int score = 0;
+           
+           // 1순위 조건 처리
+           switch (request.getPriority1()) {
+               case "welfare":
+                  
+                   if (item.getPo_content().contains(request.getWelfare())) {
+                      
+                       score += 15;
+                   }
+                   System.out.println("1순위");
+                   break;
+               case "salary":
+                   if (Integer.parseInt(item.getCom_salary()) >= Integer.parseInt(request.getSalary())) {
+                       score += 15;
+                   }
+                   System.out.println("1순위");
+                   break;
+               case "location":
+                   if (item.getCom_address().contains(request.getLocation())) {
+                       score += 15;
+                   }
+                   System.out.println("1순위");
+                   break;
+           }
 
-	        // 1순위 조건 처리
-	        switch (request.getPriority1()) {
-	            case "comType":
-	                if (item.getPo_content().contains(request.getWelfare())) {
-	                    score += 15;
-	                }
-	                break;
-	            case "salary":
-	                if (Integer.parseInt(item.getCom_salary()) >= Integer.parseInt(request.getSalary())) {
-	                    score += 15;
-	                }
-	                break;
-	            case "location":
-	                if (item.getCom_address().contains(request.getLocation())) {
-	                    score += 15;
-	                }
-	                break;
-	        }
+           // 2순위 조건 처리
+           switch (request.getPriority2()) {
+               case "welfare":
+                   if (item.getPo_content().contains(request.getWelfare())) {
+                       score += 10;
+                   }
+                   System.out.println("2순위");
+                   break;
+               case "salary":
+                   if (Integer.parseInt(item.getCom_salary()) >= Integer.parseInt(request.getSalary())) {
+                       score += 10;
+                   }
+                   System.out.println("2순위");
+                   break;
+               case "location":
+                   if (item.getCom_address().contains(request.getLocation())) {
+                       score += 10;
+                   }
+                   System.out.println("2순위");
+                   break;
+           }
 
-	        // 2순위 조건 처리
-	        switch (request.getPriority2()) {
-	            case "comType":
-	                if (item.getPo_content().contains(request.getWelfare())) {
-	                    score += 10;
-	                }
-	                break;
-	            case "salary":
-	                if (Integer.parseInt(item.getCom_salary()) >= Integer.parseInt(request.getSalary())) {
-	                    score += 10;
-	                }
-	                break;
-	            case "location":
-	                if (item.getCom_address().contains(request.getLocation())) {
-	                    score += 10;
-	                }
-	                break;
-	        }
-
-	        // 3순위 조건 처리
-	        switch (request.getPriority3()) {
-	            case "comType":
-	                if (item.getPo_content().contains(request.getWelfare())) {
-	                    score += 5;
-	                }
-	                break;
-	            case "salary":
-	                if (Integer.parseInt(item.getCom_salary()) >= Integer.parseInt(request.getSalary())) {
-	                    score += 5;
-	                }
-	                break;
-	            case "location":
-	                if (item.getCom_address().contains(request.getLocation())) {
-	                    score += 5;
-	                }
-	                break;
-	        }
-	        if (item.getCom_type().contains("대기업")) {
-	            score += 10;
-	        } else if (item.getCom_type().contains("중견기업")) {
-	            score += 5;
-	        } else if (item.getCom_type().contains("중소기업")) {
-	            score += 0; // Explicitly adding this for clarity, though it doesn't change the score
-	        }
+           // 3순위 조건 처리
+           switch (request.getPriority3()) {
+               case "comType":
+                   if (item.getPo_content().contains(request.getWelfare())) {
+                       score += 5;
+                   }
+                   System.out.println("3순위");
+                   break;
+               case "salary":
+                   if (Integer.parseInt(item.getCom_salary()) >= Integer.parseInt(request.getSalary())) {
+                       score += 5;
+                   }
+                   System.out.println("3순위");
+                   break;
+               case "location":
+                   if (item.getCom_address().contains(request.getLocation())) {
+                       score += 5;
+                   }
+                   System.out.println("3순위");
+                   break;
+           }
+           
+           if (item.getCom_type().contains("대기업")) {
+                  score += 10;
+              } else if (item.getCom_type().contains("중견")) {
+                  score += 5;
+              } else if (item.getCom_type().contains("중소")) {
+                  score += 0; // Explicitly adding this for clarity, though it doesn't change the score
+              }
              score +=60;
-	        item.setScore(score);
-	    }
-	    Collections.sort(powerList, new Comparator<PowerRecommend>() {
-	        @Override
-	        public int compare(PowerRecommend o1, PowerRecommend o2) {
-	            return Integer.compare(o2.getScore(), o1.getScore());
-	        }
-	    });
+           item.setScore(score);
+       }
+       Collections.sort(powerList, new Comparator<PowerRecommend>() {
+           @Override
+           public int compare(PowerRecommend o1, PowerRecommend o2) {
+               return Integer.compare(o2.getScore(), o1.getScore());
+           }
+       });
 
-	    for (PowerRecommend powerRecommend : powerList) {
-	        System.out.println(powerRecommend);
-	        
-	    }
+       for (PowerRecommend powerRecommend : powerList) {
+           System.out.println(powerRecommend);
+           
+       }
 
-	    return ResponseEntity.ok(powerList);
-	}
-	
-	
+       return ResponseEntity.ok(powerList);
+   }
+   
+   
 }

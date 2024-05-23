@@ -24,7 +24,7 @@ public class ClockAutoUpdate {
 	@Autowired
 	private DetailMapper detailMapper;
 	
-	@Scheduled(fixedDelay=50000)
+	@Scheduled(fixedDelay=1000)
 	public void updateTime() {
 		List<PostCompVo> postings = detailMapper.getAllPostings();
 		for(PostCompVo postCompVo : postings) {

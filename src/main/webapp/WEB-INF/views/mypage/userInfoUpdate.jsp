@@ -189,14 +189,14 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input
 						  	     <lable>아이디</lable>
 						  	  </th>
 						  	  <td>
-						  	     <strong>wodud6967@naver.com</strong>
+						  	     <strong>${user.user_email }</strong>
 						  	  </td>
 						    </tr>	
 						  <tr>
 						  	 <th scope="row">이름</th>
 						  	 <td colspan="3">
 						  	 <input type="text" class="ipText" name="user_name"
-						  	        maxlength="12" value="강재영" style="width: 130px;">
+						  	        maxlength="12" value="${user.user_name }" style="width: 130px;">
 						  	 </td>
 						  </tr> 
 						  <tr>

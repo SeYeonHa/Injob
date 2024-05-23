@@ -24,7 +24,6 @@
 			        <!-- 개인 사용자일 경우 -->
 			        <ul class="navbar" id="on_user_login">
 			            <li><a href="/Posting/PMain">공채정보</a></li>
-			            <li><a href="/Resume/List">취업톡톡</a></li>
 			            <li><a href="/Mypage/Resume?&nowpage=1">마이페이지</a></li>
 			            <li><a href="/Community/List">게시판</a></li>
 			            
@@ -36,7 +35,7 @@
           <div class="login-link">
 			    <c:choose>	        
 			       <c:when test="${not empty company}">
-				        <a class="logout" href="/Mypage/Overall">${company.com_name}</a>
+				        <a class="logout" href="/ComMypage/Post">${company.com_name}</a>
 			            <div class="lyMyArea">
 				            <div class="myInner">
 				                <div class="myLists">

@@ -263,7 +263,7 @@ body {
 			  	<div style="color:lightgrey; font-size: 15px;">채용 시 마감</div>
 			  </div>
 			  <div class="item12" style="border-bottom: 1px solid lightgrey;">
-			  	<div><a href="/Mypage/Apply?user_id=1&po_id=1101" id="applyButton"
+			  	<div><a href="/Mypage/Apply?user_id=${user_id}&po_id=${posting.po_id}&nowpage=1" id="applyButton"
 						class="btn" style="text-decoration-line: none; width: 40%; 
 						display: inline-block;">✅지원하기</a></div>
 						
