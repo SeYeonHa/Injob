@@ -1,0 +1,26 @@
+
+<update id ="deleteLike">
+		UPDATE USER_BOOKMARK
+		SET
+		   UB_BOOLEAN = 0
+		WHERE
+		   UB_ID = #{ub_id}
+</update>
+
+
+<update id="updateLike">
+		UPDATE USER_BOOKMAR
+		SET
+		    UB_BOOLEAN = 1
+		WHERE
+		    UB_ID = #{ub_id}
+
+</update>
+
+<delete id="deleteLike">
+	DELETE FROM USER_BOOKMARK
+	WHERE
+		UB_ID = #{ub_id}
+    AND
+        UB_BOOLEAN = 0
+</delete>

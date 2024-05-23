@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.injob.posting.mapper.LikeMapper">
+
+<select id="selectLike">
+SELECT
+	USER_ID
+	,PO_ID
+	,UB_BOOLEAN
+	,UB_ID
+FROM
+	USER_BOOKMARK
+WHERE
+    PO_ID = #{po_id}
+</select>
+
+<insert id="addLike">
+INSERT INTO USER_BOOKMARK (
+		    USER_ID
+	       ,PO_ID
+	       ,UB_BOOLEAN
+	       ,UB_ID) 
+VALUES (
+	  #{user_id}
+	 ,#{po_id}
+	 ,1
+	 ,NVL((SELECT MAX(ub_id) FROM USER_BOOKMARK), 0) + 1)
+</insert>
+
+<update id="updateLike">
+		UPDATE USER_BOOKMARk
+		SET
+		    UB_BOOLEAN = 1
+		WHERE
+		    UB_ID = #{ub_id}
+
+</update>
+
+<update id ="deleteLike">
+		UPDATE USER_BOOKMARK
+		SET
+		   UB_BOOLEAN = 0
+		WHERE
+		   UB_ID = #{ub_id}
+</update>
+
+
+
+</mapper>
