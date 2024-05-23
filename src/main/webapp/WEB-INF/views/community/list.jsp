@@ -10,19 +10,6 @@
     <link rel="stylesheet" href="/css/common.css" />
     <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
     <style>
-<<<<<<< HEAD
-=======
-    .img-container{
-   height: 350px; 
-   background-image: url('/img/intro.jpg');
-   background-size: cover; 
-   background-position: center; 
-   display: flex;
-   justify-content: center; 
-   align-items: center;
-}
-    
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
         table {
             border-collapse: collapse;
             width: 55%; 
@@ -71,11 +58,7 @@
         }
         footer {
             text-align: center;
-<<<<<<< HEAD
             margin-top: 150px; /* 푸터 위 여백 설정 */
-=======
-            margin-top: 400px; /* 푸터 위 여백 설정 */
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
             padding: 10px; /* 푸터 내부 여백 설정 */
             background-color: #f2f2f2; /* 푸터 배경색 설정 */
             border-top: 1px solid #ddd; /* 푸터 상단에 1px 실선 테두리 추가 */
@@ -89,14 +72,8 @@
 </head>
 <body>
 <%@include file="/WEB-INF/include/Header.jsp" %>
-<<<<<<< HEAD
 <section class="img-container"></section>
 <div class="main-wrap inner"></div>
-=======
-
-<div class="main-wrap inner"></div>
-
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
 <h2>게시물 목록</h2>
 <table>
     <thead>
@@ -106,18 +83,13 @@
         <th>작성자</th>
         <th>작성일</th>
         <th>조회수</th>
-<<<<<<< HEAD
        
-=======
-        
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
     </tr>
     </thead>
     <tbody>
     <c:forEach var="User_boardVo" items="${user_boardList}">
         <tr>
             <td>${User_boardVo.board_id}</td>
-<<<<<<< HEAD
             <td><a href="/community/View?board_id=${User_boardVo.board_id}&nowpage=1&user_id=${User_boardVo.user_id}">
                     ${User_boardVo.title}
                 </a></td>
@@ -128,21 +100,6 @@
         </tr>
     </c:forEach>
     </tbody>
-=======
-            <td>
-                <a href="/community/View?board_id=${User_boardVo.board_id}&nowpage=1&user_id=${User_boardVo.user_id}">
-                    ${User_boardVo.title}
-                </a>
-            </td>
-            <td>${User_boardVo.user_id}</td>
-            <td>${User_boardVo.indate}</td>
-            <td>${User_boardVo.hit}</td>
-            
-        </tr>
-    </c:forEach>
-</tbody>
-
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
 </table>
 <input type="button" id="goWrite" value="새 글 추가">
 <script>
@@ -150,14 +107,6 @@
     goWriteEl.addEventListener('click', function (e) {
         location.href = '/community/WriteForm';
     });
-<<<<<<< HEAD
-=======
-   
-    
-   
-
-
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
 </script>
 <%@include file="/WEB-INF/include/Footer.jsp" %>
 </body>

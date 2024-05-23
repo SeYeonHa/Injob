@@ -17,7 +17,7 @@ h2 {
 }
 
 table {
-    border-collapse: separate; /* 바깥 테두리를 제거하기 위해 separate로 변경 */
+    border-collapse: collapse; /* 바깥 테두리를 제거하기 위해 separate로 변경 */
     border-spacing: 0; /* 셀 사이의 간격을 없애기 위해 0으로 설정 */
     width: 70%;
     color: #333;
@@ -75,12 +75,7 @@ table tr:last-child td {
     color: black;
 }
 
-table {
-    border-left: 1px solid white; /* 왼쪽 테두리 설정 */
-    border-right: none; /* 오른쪽 테두리 제거 */
-    border-top: none; /* 위쪽 테두리 제거 */
-    border-bottom: none; /* 아래쪽 테두리 제거 */
-}
+
 
 footer {
     text-align: center;

@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-html
-코드 복사
-=======
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +11,8 @@ html
 <link rel="stylesheet" href="/css/start.css" />
 <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
-<<<<<<< HEAD
-=======
-    .img-container{
-   height: 350px; 
-   background-image: url('/img/intro.jpg');
-   background-size: cover; 
-   background-position: center; 
-   display: flex;
-   justify-content: center; 
-   align-items: center; /
-}
+    
 
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
     table {
         border-collapse: collapse;
         width: 70%;
@@ -84,42 +69,23 @@ html
         margin-bottom: 30px;
     }
 
-<<<<<<< HEAD
-  footer {
-   margin-top: 150px; /* 푸터 위 여백 설정 */
-    text-align: center;
-    padding: 10px;
-    background-color: #f2f2f2;
-    border-top: 1px solid #ddd;
-}
-=======
     footer {
         text-align: center;
-        margin-top: 400px;
+        margin-top: 150px;
         padding: 10px;
         background-color: #f2f2f2;
         border-top: 1px solid #ddd;
     }
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
 </style>
 </head>
 <body>
 <main>
     <%@include file="/WEB-INF/include/Header.jsp" %>
-<<<<<<< HEAD
-    <section class="img-container"></section>
-=======
-    
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
-    <div class="main-wrap inner"></div>
+   
 
     <h2>게시글 등록</h2>
     <form action="/community/Write" method="POST">
-<<<<<<< HEAD
-        <input type="hidden" name="user_id" value="${user_id}" />
-=======
         <input type="hidden" name="user_id" value="${borBoardVo.user_id}" />
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
         <table>
             <tr>
                 <th>제목</th>
@@ -127,12 +93,7 @@ html
             </tr>
             <tr>
                 <th>작성자</th>
-<<<<<<< HEAD
-                <td>${vo.user_id}</td>
-=======
                 <td>${borBoardVo.user_id}</td>
-                
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
             </tr>
             <tr>
                 <th>내용</th>

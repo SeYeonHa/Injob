@@ -51,7 +51,7 @@ public class User_boardController {
 
     @RequestMapping("/Write")
     public ModelAndView write(User_boardVo user_boardVo, HttpSession session) {
-<<<<<<< HEAD
+
     	Long user_id = (Long) session.getAttribute("userId");
     	System.out.println("fsfs" + user_id);
     	
@@ -61,7 +61,7 @@ public class User_boardController {
     	System.out.println(user_boardVo);
     	System.out.println(user_boardVo);
     	System.out.println("------------");
-=======
+
         Long user_id = (Long) session.getAttribute("user_id");
         System.out.println("fsfs" + user_id);
         
@@ -71,7 +71,7 @@ public class User_boardController {
         System.out.println(user_boardVo);
         System.out.println(user_boardVo);
         System.out.println("------------");
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
+
         user_boardMapper.insertUser_board(borBoardVo);
         
         ModelAndView mv = new ModelAndView();
@@ -110,11 +110,11 @@ public class User_boardController {
         user_boardMapper.deleteUser_board(user_boardVo);
         
         HttpSession session = request.getSession();
-<<<<<<< HEAD
+
         Long userId = (Long) session.getAttribute("userId");
-=======
+
         Long userId = (Long) session.getAttribute("user_id");
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
+
         
         // 리다이렉트 URL 구성 (사용자 ID와 페이지 번호는 동적으로 설정)
         String redirectUrl = "redirect:/community/List?user_id=" + userId + "&nowpage=1";
@@ -145,9 +145,9 @@ public class User_boardController {
         mv.setViewName("community/view");
         return mv;
     }
-<<<<<<< HEAD
-=======
+
+
     
     
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
+
 }

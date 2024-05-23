@@ -24,20 +24,9 @@
     background-color: #4DAF88; /* 마우스를 올렸을 때의 색상 변경 */
 }
 
-<<<<<<< HEAD
-=======
-.img-container{
-   height: 350px; 
-   background-image: url('/img/intro.jpg');
-   background-size: cover; 
-   background-position: center; 
-   display: flex;
-   justify-content: center; 
-   align-items: center; /
-}
 
 
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
+
 #table {
     border-collapse: collapse; /* 바깥 테두리를 제거하기 위해 separate로 변경 */
     border-spacing: 0; /* 셀 사이의 간격을 없애기 위해 0으로 설정 */
@@ -50,8 +39,8 @@
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #table td {
@@ -91,13 +80,8 @@
 }
 
 footer {
-<<<<<<< HEAD
- margin-top: 150px; /* 푸터 위 여백 설정 */
     text-align: center;
-=======
-    text-align: center;
-    margin-top: 400px;
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
+    margin-top: 150px;
     padding: 10px;
     background-color: #f2f2f2;
     border-top: 1px solid #ddd;
@@ -105,22 +89,14 @@ footer {
 
 h2 {
     text-align: center;
-<<<<<<< HEAD
-    margin: 50px 0 30px 0; /* 상단과 하단 여백을 조정 */
-=======
     margin-top: 50px;
     margin-bottom: 30px;
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
 }
 
 main {
     display: flex;
     justify-content: center;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
 .btn-custom {
     height: 35px; /* 원하는 높이값(px)으로 조절하세요 */
     line-height: 35px; /* 높이값보다 작은 값으로 설정하세요 */
@@ -132,12 +108,7 @@ main {
 
 </head>
     <%@include file="/WEB-INF/include/Header.jsp" %>
-<<<<<<< HEAD
-    <section class="img-container"></section>
-=======
-    
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
-		<div class = "main-wrap inner"></div>
+ 
 <body>
     <h2>게시글 내용 조회</h2>
   <main>
@@ -182,12 +153,8 @@ main {
      </tr>
     
     </table>  
-<<<<<<< HEAD
-
-=======
  
     
->>>>>>> 55a3ff15566daf4d66a8c7368dc550afc7baafa6
   </main>
   
   <script>
