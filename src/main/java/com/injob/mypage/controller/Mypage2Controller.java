@@ -155,10 +155,15 @@ public class Mypage2Controller {
 			 System.out.println("쿠키가없어요~");
 		 }else {
 			  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+			  System.out.println("쿠키생성됨~");
+			  System.out.println("쿠키생성됨~");
+			  System.out.println("쿠키생성됨~");
+			  System.out.println("쿠키생성됨~");
 		}
 		//사이드 쿠키
 		 
 		 List<MyResumeReset> resumeList = mypageMapper.getResume(userId);
+		 int bookCount = mypageMapper.countBook(userId);
          
 		 System.out.println(resumeList);
 		 
@@ -181,6 +186,7 @@ public class Mypage2Controller {
 	    
 	   
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("bookCount",bookCount);
 		mv.addObject("resumeList",resumeList);
 		mv.addObject("resumeListJson", resumeListJson);
 		mv.addObject("aiList", aiList);
@@ -249,7 +255,7 @@ public class Mypage2Controller {
 	 
 
 	    // 쿠키의 유효 시간 설정 (예: 1주일)
-	    cookie.setMaxAge(30 * 60); // 초 단위로 설정
+	    cookie.setMaxAge(5 * 60); // 초 단위로 설정
 
 	    // 쿠키의 경로 설정
 	    cookie.setPath("/");

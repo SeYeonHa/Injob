@@ -12,6 +12,7 @@ import com.injob.bookmark.service.GetbookmarkService;
 import com.injob.community.domain.User_boardVo;
 import com.injob.community.mapper.User_boardMapper;
 import com.injob.cookie.service.GetcookieService;
+import com.injob.login.domain.CompanyVo;
 import com.injob.login.domain.UserVo;
 import com.injob.login.mapper.LoginMapper;
 import com.injob.mypage.domain.AiRecommend;
@@ -48,8 +49,9 @@ public class User_boardController {
     	//--------------------------------------------------------------------------
     			//ㅇㄴㄹㅇㄴㄹ
     			Long userId = (Long) session.getAttribute("userId");
-    			
+    		
     			UserVo userVo = loginMapper.idLogin(userId);
+    			
     			List<AiRecommend> aiList = mypageMapper.getAiList(userId);
     			
     			//사이드 북마크 추천 
@@ -70,7 +72,7 @@ public class User_boardController {
     	          //--------------------------------------------------------------------------
 
         
-        List<User_boardVo> user_boardList = user_boardMapper.getUser_boardList(user_boardVo);
+        List<User_boardVo> user_boardList = user_boardMapper.getUser_boardList();
 
 
         
@@ -78,6 +80,52 @@ public class User_boardController {
         mv.addObject("user_boardList", user_boardList);
         mv.addObject("user_id", userId);
         mv.addObject("user", userVo);
+        
+        mv.setViewName("community/list");
+        
+        return mv;
+    }
+    @RequestMapping("/ComList")
+    public ModelAndView ComList(User_boardVo user_boardVo, HttpSession session, HttpServletRequest request){
+       
+    	//--------------------------------------------------------------------------
+    			
+		    	Long comId = (Long) session.getAttribute("companyId");
+				CompanyVo companyVo = loginMapper.idComLogin(comId);
+    	//ㅇㄴㄹㅇㄴㄹ
+    			Long userId = (long) 1;
+    			
+    			UserVo userVo = loginMapper.idLogin(userId);
+    			
+    			List<AiRecommend> aiList = mypageMapper.getAiList(userId);
+    			
+    			//사이드 북마크 추천 
+    		    List<AiRecommend> bookList = getbookmarkService.getBookmark(userId);
+    		    	    
+    		    
+    		  //사이드 쿠키
+    		     List<Long> recentlyViewedPosting = new ArrayList<>();
+    			 
+    			 recentlyViewedPosting = getcookieService.getRecentCookie(request);
+    			  List<AiRecommend> recentCookies = null; // 변수를 여기서 미리 선언해둠
+    			 if(recentlyViewedPosting == null) {
+    				 System.out.println("쿠키가없어요~");
+    				 System.out.println("쿠키가없어요22~");
+    			 }else {
+    				  recentCookies = mypageMapper.getPostingCookie(recentlyViewedPosting);
+    			}
+    	          //--------------------------------------------------------------------------
+
+        
+        List<User_boardVo> user_boardList = user_boardMapper.getUser_boardList();
+
+
+        
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("user_boardList", user_boardList);
+        mv.addObject("user_id", userId);
+        mv.addObject("user", userVo);
+        mv.addObject("company",companyVo);
         mv.setViewName("community/list");
         
         return mv;

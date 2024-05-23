@@ -323,9 +323,9 @@
     INNER JOIN company c ON p.com_id = c.com_id
     LEFT JOIN user_bookmark ub ON p.po_id = ub.po_id
     WHERE
-        c.com_id IN
-        <foreach item="comId" collection="list" open="(" separator="," close=")">
-            #{comId}
+        p.po_id IN
+        <foreach item="poId" collection="list" open="(" separator="," close=")">
+            #{poId}
         </foreach>
 </select>
 
@@ -388,6 +388,19 @@ GROUP BY
 	    INNER JOIN company c ON p.com_id = c.com_id
 	    LEFT JOIN user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
 
+</select>
+
+<select id ="countBook">
+	 SELECT 
+	    COUNT(*) AS total_count
+	FROM 
+	    posting p
+	INNER JOIN 
+	    company c ON p.com_id = c.com_id
+	INNER JOIN 
+	    user_bookmark ub ON p.po_id = ub.po_id AND ub.user_id = #{userId}
+	WHERE 
+	    ub.ub_boolean = 1
 </select>
 
 </mapper>

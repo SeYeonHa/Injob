@@ -27,13 +27,12 @@
 
 		<div class="container-ha">
 			<section class="box align_right">
-			
 			<div class="box-contents">
-					<div class=" mx-2 pb-4 w-80">
+					<div class="mtuHome">
 			
-		<!--  사이드바  -->
-		 <%@include file="/WEB-INF/include/comAside.jsp"%>	
-			<div class="contWrap"  style="border: 1px solid #F1F1F1;">
+				<!--  사이드바  -->
+				 <%@include file="/WEB-INF/include/comAside.jsp"%>	
+			     <div class="contWrap"  style="border: 1px solid #F1F1F1;">
 				
 					
 						<form action="/ComMypage/PostSubmit" method="post" var="list" items="${list}">

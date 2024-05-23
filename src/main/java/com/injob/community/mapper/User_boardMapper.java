@@ -31,6 +31,8 @@ public interface User_boardMapper {
 	User_boardVo getUser_board(long boardId);
 
 	List<User_boardVo> getUser_boardList(String user_id);
+
+	List<User_boardVo> getUser_boardList();
 }
 
 

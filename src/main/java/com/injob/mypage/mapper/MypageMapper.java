@@ -65,4 +65,6 @@ public interface MypageMapper {
 
 	void deleteApply(ResumeVo resumeVo);
 
+	int countBook(Long userId);
+
 }

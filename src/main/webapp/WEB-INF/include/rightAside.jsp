@@ -10,7 +10,7 @@
 				     <strong class="titTotal"><a href ="#" class="link">스크랩 공고</a></strong>
 				     <ul class ="scrapList">
 				        <c:forEach var="bookmark" items="${bookList}" varStatus="status">
-					        <c:if test="${status.index < 3}">
+					        <c:if test="${status.index < 5}">
 					            <li class="on">
 					                <a href="/Detail/Detail?po_id=${item.po_id}" class="item">
 					                    <span class="info">
@@ -34,7 +34,7 @@
 				     <strong class="titTotal"><a href ="#" class="link">최근 본 공고</a></strong>
 				     <ul class ="scrapList">
 				        <c:forEach var="item" items="${recentCookies}" varStatus="status">
-					        <c:if test="${status.index < 3}">
+					        <c:if test="${status.index < 5}">
 					            <li class="on">
 					                <a href="/Detail/Detail?po_id=${item.po_id}" class="item">
 					                    <span class="info">

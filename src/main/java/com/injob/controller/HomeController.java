@@ -42,16 +42,18 @@ public class HomeController {
              UserVo user = loginMapper.login(userEmail);
              model.addAttribute("user", user);
              model.addAttribute("company", null); // 기업 정보는 null로 설정
+             return "redirect:Posting/PMain";
          } else if ("ROLE_COMPANY".equals(role)) {
         	 System.out.println("home 컨트롤러까지는 오나 기업");
              String companyEmail = (String) session.getAttribute("comname");
              CompanyVo company = loginMapper.comlogin(companyEmail);
              model.addAttribute("company", company);
              model.addAttribute("user", null); // 사용자 정보는 null로 설정
+             return "redirect:Posting/PMainCompany";
          } else {
              System.out.println("유저 정보가 없음");
          }
-        return "redirect:Posting/PMain";
+        return "redirect:Posting/PMainCompany";
     }
     
 }

@@ -758,9 +758,9 @@ label {
 														</p>
 													</div>
 												</div>
-												<button class="profile-btn" type="button"></button>
+												<button class="profile-btn" onclick="location.href=`/Mypage/Resume?user_id=${user_id}&nowpage=1`" type="button"></button>
 											</div>
-											<a id="resumePerEl" href="/Mypage/Resume?user_id=${user_id}">이력서 50% 완성</a>
+											<a id="resumePerEl" href="/Mypage/Resume?user_id=${user_id}&nowpage=1">이력서 50% 완성</a>
 										</div>
 										<!-- my-profile-wrap -->
 										<div class="my-info-wrap">
@@ -831,7 +831,7 @@ label {
 											<li class="list"><a class="box-botton"
 												href="/User/Scrap/Index" onclick=>
 													<p class="title">
-														스크랩 공고 <strong class="count">4</strong>
+														스크랩 공고 <strong class="count">${bookCount}건</strong>
 													</p>
 													<div class="tooltip mtuSpImgBefore mtuSpImgAfter">
 														<p>
@@ -1003,14 +1003,12 @@ label {
 										</div>
 									</div>
 									<div id="bookmark_panel" class="tab_panel">
-										<h2>북마크</h2>
 										<div class="ai-recommendations-list">
 											<input type="hidden" id="PageFlag" value="BookMark">
 											<ul></ul>
 										</div>
 									</div>
 									<div id="recent_panel" class="tab_panel">
-										<h2>최근본 공고</h2>
 										<div class="ai-recommendations-list">
 											<input type="hidden" id="PageFlag" value="Cookie">
 											<ul></ul>
@@ -1042,19 +1040,23 @@ label {
                    <div class="popup-body">
                      <ul class="category-list" id="welfare">
                        <li class="category-list-item">
-                      <input type="checkbox" data-code="4대 보험" data-type="welfare" >
+                      <input type="checkbox" data-code="4대보험" data-type="welfare" >
                       <label for="1st-list-item1" >4대 보험</label>
                     </li>
                     <li class="category-list-item q1">
-                      <input type="checkbox"  data-code="식사 제공" data-type="welfare" >
+                      <input type="checkbox"  data-code="식대" data-type="welfare" >
                       <label for="1st-list-item2" >식사 제공</label></li>
                     <li class="category-list-item q1">
-                      <input type="checkbox"  data-code="교통비 지원" data-type="welfare" >
+                      <input type="checkbox"  data-code="교통비" data-type="welfare" >
                       <label>교통비 지원</label>
                     </li> 
                     <li class="category-list-item q1">
-                      <input type="checkbox"  data-code="커피 제공" data-type="welfare" >
+                      <input type="checkbox"  data-code="커피" data-type="welfare" >
                       <label>커피 제공</label>
+                    </li>
+                    <li class="category-list-item q1">
+                      <input type="checkbox"  data-code="헬스장" data-type="welfare" >
+                      <label>헬스장 이용</label>
                     </li>          
                    </ul>            
                 </div>
