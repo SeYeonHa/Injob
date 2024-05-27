@@ -35,69 +35,77 @@
 <h2>화면 시나리오 구성 (여기에 영상클립 삽입 예정) </h2>
 <ul>
   <li>
-    01. 회원가입 및 로그인 <hr>
+    <h3>01. 회원가입 및 로그인</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/ac4e6581-85d0-4c92-a45d-33b0a2ef77db
 
+<br>
 
   </li>
   <li>
-    02. 메인 공고 <hr>
+    <h3>02. 메인 공고</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/17007af2-c493-4a10-b533-5e20c4cd3627
 
+<br>
 
   </li>
   <li>
-    03. 기업 상세보기 <hr>
+    <h3>03. 공고 및 기업 정보 상세보기, 지원하기</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/14384b7e-3802-4c84-9078-0ce4a18d3c29
 
+<br>
 
   </li>
   <li>
-    04. 개인 이력서 관리 <hr>
+    <h3>04. 개인 이력서 관리</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/a9abb65c-c2a8-4f7a-88a7-2e1c7e1e0f05
 
+<br>
 
   </li>
   <li>
-    05. 개인 이력서 완성도 <hr>
+    <h3>05. 개인 이력서 완성도</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/a49a5ec5-ba5e-40bc-aed5-046467415e47
 
+<br>
 
   </li>
   <li>
-    06. 이력서 완성도에 따른 매칭 시스템 및 최근 본 공고 <hr>
+    <h3>06. 이력서 완성도에 따른 매칭 시스템 및 최근 본 공고</h3> <hr>
 
 https://github.com/SeYeonHa/Injob/assets/164135405/c9c16cfa-3bba-46af-80d4-c82f149e8a99
 
+<br>
     
   </li>
   <li>
-    07. 게시판 및 기업 공고 관리 <hr>
+    <h3>07. 게시판 및 기업 공고 관리</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/81a5b6da-0012-4f86-bf69-7c68402f7041
 
+<br>
 
   </li>
   <li>
-    08. 기업 합격,불합격 관리 <hr>
+    <h3>08. 기업 합격,불합격 관리</h3> <hr>
     
 
 https://github.com/SeYeonHa/Injob/assets/164135405/097e6e7e-3f8c-42df-b7ce-5f6f1894e486
 
+<br>
 
   </li>
-  <br>
+  <br><hr>
 
 <h2>ER-다이어그램 설계</h2>
 
