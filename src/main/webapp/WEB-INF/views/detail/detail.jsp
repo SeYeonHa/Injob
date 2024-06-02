@@ -358,13 +358,18 @@ body {
 <script>
 
 		function updateTimer(element, remainingTimeJson) {
-		    var days 		= remainingTimeJson.days;
-		    var hours 	= remainingTimeJson.hours;
-		    var minutes = remainingTimeJson.minutes;
-		    var seconds = remainingTimeJson.seconds;
-		
-		    var remainingTimeString = days + "일 " + hours + ":" + minutes + ":" + seconds;
-		    element.innerText = remainingTimeString;
+			var message = remainingTimeJson.message;
+			if (message) {
+					element.innerText = message;
+			} else { 
+			    var days 		= remainingTimeJson.days;
+			    var hours 	= remainingTimeJson.hours;
+			    var minutes = remainingTimeJson.minutes;
+			    var seconds = remainingTimeJson.seconds;
+			
+			    var remainingTimeString = days + "일 " + hours + ":" + minutes + ":" + seconds;
+			    element.innerText = remainingTimeString;
+			}
 		}
 		
 		function connect() {

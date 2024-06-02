@@ -19,6 +19,11 @@ public class TimerMaker {
         LocalDateTime endDate = LocalDateTime.parse(endDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         Duration duration     = Duration.between(now, endDate);
         long secondsRemaining = duration.getSeconds();
+        
+        if (secondsRemaining <= 0) {
+        	return new RemainingTimeMessage(-1, -1, -1, -1, 
+        		"채용공고가 마감되었습니다");
+        }
 
         long days 	 = secondsRemaining / (60 * 60 * 24);
         long hours 	 = (secondsRemaining % (60 * 60 * 24)) / (60 * 60);
